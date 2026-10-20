@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b2a5b"><meta name="apple-mobile-web-app-capable" content="yes">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#13335f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Dynasty '09"><link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
 <title>Gridiron Dynasty '09</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,14 @@ html, body { background: var(--bg); color: var(--ink); }
 body { font-family: var(--body); font-size: 15px; line-height: 1.4; -webkit-tap-highlight-color: transparent; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--team); }
 * { box-sizing: border-box; }
+html, body { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
+input, select, textarea { font-size: 16px !important; }
+.need { font-weight: 800; color: var(--team); margin-left: 2px; }
+.chips button.on .need { color: inherit; }
+.need.zero { color: var(--muted); font-weight: 600; }
+.cks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+.ck { display: flex; align-items: center; gap: 8px; font-size: .9rem; min-height: 36px; }
+.ck input { width: 20px; height: 20px; accent-color: var(--team); }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
 button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--team); outline-offset: 2px; }
@@ -944,8 +952,8 @@ function mapPos(s) {
 function recruitRatings(stars, rating, rank) {
   // freshman ovr and potential from stars / composite
   let base = { 5: 70, 4: 63, 3: 55, 2: 48, 1: 44 }[stars] || 52;
-  if (rating) { let r = +rating; if (r > 1.5) r = r / 100; base = 40 + (r - 0.75) * 140; }
-  if (rank && rank <= 300) base += (300 - rank) / 100;
+  if (rating) { let r = +rating; if (r > 1.5) r = r / 100; base = 42 + (r - 0.75) * 115; }
+  if (rank && rank <= 300) base += (300 - rank) / 150;
   const ovr = clamp(Math.round(base + gauss() * 3.5), 38, 82);
   const head = { 5: 22, 4: 18, 3: 15, 2: 12, 1: 10 }[stars] || 14;
   const pot = clamp(Math.round(ovr + head + gauss() * 7), ovr + 2, 99);
@@ -1030,7 +1038,7 @@ function userAct(r, act, amt) {
   if (r.lw[act] === G.week + "-" + G.phase && ["call", "unofficial"].includes(act)) return "Already done this week.";
   let gain = 0; const m = userInterestMult(r);
   if (act === "scout") { if (r.sc) return "Already scouted."; r.sc = 1; }
-  if (act === "call") gain = (35 + rnd() * 30) * m;
+  if (act === "call") gain = (55 + rnd() * 35) * m;
   if (act === "offer") { if (r.of) return "Offer already made."; r.of = 1; gain = 110 * m; }
   if (act === "unofficial" || act === "official") {
     const g = G.phase === "reg" ? userGame(G.week) : null;
@@ -1072,6 +1080,10 @@ function signingDay() {
   for (const r of G.recruits) if (r.cm >= 0) cnt[r.cm]++;
   const open = G.recruits.filter(r => r.cm < 0).sort((a, b) => a.nr - b.nr);
   for (const r of open) { const e = Object.entries(r.pts).map(([k, v]) => [+k, v]).sort((a, b) => b[1] - a[1]); for (const [tid, v] of e) if (cnt[tid] < caps[tid] && v > 200) { r.cm = tid; cnt[tid]++; break; } }
+  // your open spots: recruits who have you in their top two
+  { const u = G.userTeam; const pool = G.recruits.filter(r => r.cm < 0 && (r.pts[u] || 0) > 150).filter(r => { const e = Object.entries(r.pts).sort((a, b) => b[1] - a[1]).slice(0, 2).map(x => +x[0]); return e.includes(u); }).sort((a, b) => b.stars - a.stars || a.nr - b.nr);
+    for (const r of pool) { if (cnt[u] >= caps[u]) break; r.cm = u; cnt[u]++; }
+    if (G.autoRec && G.autoRec.on) { const lvl = autoLevel(); const rest = G.recruits.filter(r => r.cm < 0 && r.stars <= lvl).sort((a, b) => b.stars - a.stars || a.nr - b.nr); for (const r of rest) { if (cnt[u] >= caps[u]) break; r.cm = u; cnt[u]++; } } }
   // AI teams that still have space take leftover players by stars
   const left = G.recruits.filter(r => r.cm < 0).sort((a, b) => a.nr - b.nr);
   for (const t of [...G.teams].sort((a, b) => b.pres - a.pres)) { if (t.id === G.userTeam) continue; while (cnt[t.id] < Math.min(caps[t.id], 22) && left.length) { const r = left.shift(); r.cm = t.id; cnt[t.id]++; } }
@@ -1291,6 +1303,62 @@ function importRosters(text) {
   return { n, skip, teams: ids.length };
 }
 function useFictionalClass() { genClass(G.classYear); G.classSource = "fictional"; }
+
+// ---------- recruiting needs & auto recruit ----------
+function posNeeds(tid) {
+  const t = T(tid == null ? G.userTeam : tid); const out = {};
+  for (const pos of POS) {
+    const staying = t.roster.filter(id => { const p = P(id); return p.pos === pos && !(p.yr === 4 && !p.rsNow); }).length;
+    const commits = G.recruits.filter(r => r.cm === t.id && r.pos === pos).length;
+    out[pos] = Math.max(0, ROSTER_TGT[pos] - staying - commits);
+  }
+  return out;
+}
+function autoDefaults() { return { on: false, needs: true, stars: true, odds: true, local: true, minStars: "auto", call: true, offer: true, visit: true, home: true, scout: true, nil: true }; }
+function autoSettings() { if (!G.autoRec) G.autoRec = autoDefaults(); return G.autoRec; }
+function autoMinStars() { const s = autoSettings(); if (s.minStars !== "auto") return +s.minStars; const p = userT().pres; return p >= 85 ? 4 : p >= 65 ? 3 : 2; }
+function autoLevel() { const p = userT().pres; return p >= 85 ? 5 : p >= 70 ? 4 : p >= 55 ? 3 : 2; }
+function myShare(r) { const tot = Object.values(r.pts).reduce((a, b) => a + b, 0) || 1; return (r.pts[G.userTeam] || 0) / tot; }
+function autoScore(r, needs) {
+  const s = autoSettings(); let sc = 0;
+  if (s.stars) sc += r.stars * 25 - r.nr / 60;
+  if (s.needs) sc += needs[r.pos] > 0 ? 40 + needs[r.pos] * 6 : -40;
+  if (s.odds) sc += myShare(r) * 90;
+  if (s.local) sc += r.st === userT().st ? 25 : 0;
+  sc += dealMod(r, userT()) * 20;
+  const lvl = autoLevel(); if (r.stars > lvl) sc -= (r.stars - lvl) * 70 * (1 - myShare(r));
+  return sc;
+}
+function runAutoRecruit() {
+  if (!G.recruits.length || G.phase === "off") return { acts: 0 };
+  const s = autoSettings(); const u = G.userTeam; const minS = autoMinStars();
+  const needs = posNeeds(); const open = Math.max(0, classCap(u) - classCount(u));
+  // clean the board: drop signed players and ones locked elsewhere
+  G.board = G.board.filter(i => { const r = G.recruits[i]; if (r.cm === u) return true; if (r.sg) return false; if (r.cm >= 0 && myShare(r) < 0.12) return false; return true; });
+  // fill the board
+  const want = Math.min(35, Math.max(6, Math.ceil(open * 1.5) + classCount(u)));
+  if (G.board.length < want && open > 0) {
+    const cands = G.recruits.filter(r => !r.sg && r.cm !== u && !G.board.includes(r.i) && r.stars >= minS && !(r.cm >= 0 && myShare(r) < 0.12) && (!s.needs || needs[r.pos] > 0 || !Object.values(needs).some(n => n > 0)));
+    cands.sort((a, b) => autoScore(b, needs) - autoScore(a, needs));
+    for (const r of cands) { if (G.board.length >= want) break; G.board.push(r.i); }
+  }
+  const list = G.board.map(i => G.recruits[i]).filter(r => !r.sg && r.cm !== u).sort((a, b) => autoScore(b, needs) - autoScore(a, needs));
+  let acts = 0; const tryAct = (r, a, amt) => { const before = G.hours; const err = userAct(r, a, amt); if (!err) { acts++; return true; } return before !== G.hours; };
+  const home = G.phase === "reg" && (userGame(G.week) || {}).h === u;
+  // free actions first
+  if (s.offer && open > 0) for (const r of list.slice(0, open * 2 + 2)) if (!r.of) tryAct(r, "offer");
+  // visits for the top targets
+  if (s.visit && home) for (const r of list.slice(0, 6)) { if (G.hours < 5) break; if (r.pendVisit) continue; if (!r.ov && G.hours >= 8 && myShare(r) > 0.15) tryAct(r, "official"); else if (!r.pendVisit) tryAct(r, "unofficial"); }
+  // home visits for the closest battles
+  if (s.home) for (const r of list.slice(0, 3)) { if (G.hours < 14) break; if (!r.hv) tryAct(r, "home"); }
+  // scouting for top targets
+  if (s.scout) for (const r of list.slice(0, 8)) { if (G.hours < 5) break; if (!r.sc) tryAct(r, "scout"); }
+  // NIL to the top three
+  if (s.nil && G.year >= 2021) for (const r of list.slice(0, 3)) { if ((userT().nil || 0) >= 50000) tryAct(r, "nil", 50000); }
+  // calls with what's left, including keeping commits warm
+  if (s.call) { const callList = [...list, ...G.board.map(i => G.recruits[i]).filter(r => r.cm === u && !r.sg)]; for (const r of callList) { if (G.hours < 2) break; tryAct(r, "call"); } }
+  return { acts };
+}
 // ===== UI =====
 const UI = { tab: "home", teamSub: "roster", posF: "All", depthPos: "QB", recSub: "board", recPos: "All", recStars: 0, recState: "", recLimit: 50, seasonSub: "schedule", scoresWk: null, standConf: null, pollType: "ap", more: null, modal: null, ng: null, slot: 1, slots: {}, saving: "" };
 const $app = document.getElementById("app");
@@ -1324,6 +1392,7 @@ function advLabel() {
 // ---------- render ----------
 function render() {
   const y = window.scrollY;
+  UI.hs = {}; document.querySelectorAll(".chips, .seg").forEach((el, i) => { UI.hs[el.className + i] = el.scrollLeft; });
   if (!G) { $app.innerHTML = renderStart() + renderToast(); return; }
   setTeamColor();
   const u = userT();
@@ -1341,6 +1410,7 @@ function render() {
   <main class="main">${body}</main>
   <nav class="tabs">${[["home", "Home"], ["team", "Team"], ["rec", "Recruit"], ["season", "Season"], ["more", "More"]].map(([k, l]) => `<button class="tab ${UI.tab === k ? "on" : ""}" data-a="tab" data-v="${k}">${tabIcon(k)}<span>${l}</span></button>`).join("")}</nav>
   ${UI.modal ? renderModal() : ""}${renderToast()}`;
+  document.querySelectorAll(".chips, .seg").forEach((el, i) => { const k = el.className + i; if (UI.hs && UI.hs[k] != null) el.scrollLeft = UI.hs[k]; });
   if (UI.keepScroll) window.scrollTo(0, y); UI.keepScroll = false;
 }
 function blockAdvance() { return G.phase === "off" && G.off.step === "jobs" && G.off.fired; }
@@ -1537,7 +1607,9 @@ function renderRecruit() {
     let list = G.recruits.filter(r => (UI.recPos === "All" || r.pos === UI.recPos) && (!UI.recStars || r.stars === UI.recStars) && (!UI.recState || r.st === UI.recState) && !r.sg);
     list.sort((a, b) => a.nr - b.nr);
     const total = list.length; list = list.slice(0, UI.recLimit);
-    body = `<div class="chips">${["All", ...POS].map(p => `<button class="${UI.recPos === p ? "on" : ""}" data-a="set" data-k="recPos" data-v="${p}">${p}</button>`).join("")}</div>
+    const nd = posNeeds();
+    body = `<div class="chips">${["All", ...POS].map(p => `<button class="${UI.recPos === p ? "on" : ""}" data-a="set" data-k="recPos" data-v="${p}">${p}${p === "All" ? "" : ` <b class="need ${nd[p] ? "" : "zero"}">${nd[p]}</b>`}</button>`).join("")}</div>
+    <p class="dim small">Bold number: how many more at each position you need for next year's roster.</p>
     <div class="row gap"><select class="inp" id="recStars" data-ch="recStars"><option value="0">All stars</option>${[5, 4, 3, 2].map(s => `<option value="${s}" ${UI.recStars === s ? "selected" : ""}>${s} stars</option>`).join("")}</select>
     <select class="inp" id="recState" data-ch="recState"><option value="">All states</option>${[...STATES].sort().map(s => `<option ${UI.recState === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
     <p class="dim small">${total} recruits</p>
@@ -1550,7 +1622,20 @@ function renderRecruit() {
     body = `<section class="card"><div class="eyebrow">Your commits</div>${mine.map(r => `<button class="li" data-a="recruit" data-v="${r.i}"><span class="pos">${r.pos}</span><span class="grow">${esc(r.f + " " + r.l)} <span class="dim small">${r.st}</span></span><span class="small">${stars(r.stars)}</span>${r.sg ? `<span class="tag good">Signed</span>` : ""}</button>`).join("") || `<p class="dim">No commits yet.</p>`}</section>
     <section class="card"><div class="eyebrow">Class rankings so far</div>${rank.slice(0, 15).map(([id, p], i) => `<div class="li ${+id === G.userTeam ? "me" : ""}"><span class="num">${i + 1}</span><span class="grow">${esc(T(+id).name)}</span><span class="num dim">${classCount(+id)} · ${p}</span></div>`).join("")}</section>`;
   }
-  return `${head}${seg("recSub", [["board", `Board (${G.board.length})`], ["find", "Find"], ["class", "Class"]])}${body}`;
+  return `${head}${autoCard()}${seg("recSub", [["board", `Board (${G.board.length})`], ["find", "Find"], ["class", "Class"]])}${body}`;
+}
+function autoCard() {
+  const a = autoSettings();
+  const ck = (k, l) => `<label class="ck"><input type="checkbox" id="ar_${k}" data-ch="autoset" data-k="${k}" ${a[k] ? "checked" : ""}> ${l}</label>`;
+  const nd = posNeeds(); const top = POS.filter(p => nd[p] > 0).map(p => `${p} <b>${nd[p]}</b>`).join(" · ");
+  return `<section class="card">
+    <div class="row between"><div><b>Auto recruit</b><br><span class="dim small">${a.on ? "Runs every week before you sim" : "Off. Tap Run now to spend this week's hours"}</span></div><button class="switch ${a.on ? "on" : ""}" data-a="autoon" aria-pressed="${a.on}" aria-label="Auto recruit every week"><i></i></button></div>
+    <div class="row gap mt"><button class="btn pri" data-a="autorun" ${G.hours < 2 ? "disabled" : ""}>Run now</button><button class="btn" data-a="set" data-k="autoOpen" data-v="${UI.autoOpen ? 0 : 1}">${UI.autoOpen ? "Hide settings" : "Settings"}</button></div>
+    <p class="small mt">Needs: ${top || "None. Your roster is full for next year."}</p>
+    ${UI.autoOpen ? `<div class="eyebrow mt">Pick targets by</div><div class="cks">${ck("needs", "Position needs")}${ck("stars", "Highest stars")}${ck("odds", "Best chance to land")}${ck("local", "In-state first")}</div>
+      <div class="eyebrow mt">Lowest stars to chase</div><select class="inp" id="ar_min" data-ch="automin">${[["auto", `Based on my school (${autoMinStars()}★ and up)`], ["5", "5 stars"], ["4", "4 stars"], ["3", "3 stars"], ["2", "2 stars"], ["1", "Any"]].map(([v, l]) => `<option value="${v}" ${String(a.minStars) === v ? "selected" : ""}>${l}</option>`).join("")}</select>
+      <div class="eyebrow mt">Actions it can use</div><div class="cks">${ck("call", "Calls")}${ck("offer", "Offers")}${ck("visit", "Visits at home games")}${ck("home", "Home visits")}${ck("scout", "Scouting")}${ck("nil", "NIL money (2021+)")}</div>` : ""}
+  </section>`;
 }
 function recCard(r) {
   const sh = interestShares(r); const u = G.userTeam;
@@ -1842,6 +1927,8 @@ document.addEventListener("click", e => {
     case "board": if (!G.board.includes(+v) && G.board.length < 35) G.board.push(+v); UI.keepScroll = true; render(); toast("Added to your board."); return;
     case "unboard": G.board = G.board.filter(x => x !== +v); UI.keepScroll = true; render(); return;
     case "ract": { const err = userAct(G.recruits[+v], k, 50000); UI.keepScroll = true; if (err) toast(err); else { const r = G.recruits[+v]; toast(k === "scout" ? `Scouted: ${r.ovr} OVR, ${r.pot} potential.` : k === "official" || k === "unofficial" ? "Visit set for this week's home game." : "Done."); } saveSoon(); return; }
+    case "autoon": { const s2 = autoSettings(); s2.on = !s2.on; UI.keepScroll = true; render(); toast(s2.on ? "Auto recruit will run every week." : "Auto recruit is off."); saveSoon(); return; }
+    case "autorun": { const h = G.hours; const res = runAutoRecruit(); UI.keepScroll = true; render(); toast(res.acts ? `Auto recruit used ${h - G.hours} hours on ${G.board.length} recruits.` : "Nothing left to do this week."); saveSoon(); return; }
     case "moreRec": UI.recLimit += 50; UI.keepScroll = true; render(); return;
     case "autodepth": { const t = userT(); if (G.autoDepth === false) { G.autoDepth = true; autoDepth(t); } else { G.autoDepth = false; cleanDepth(t); } UI.keepScroll = true; render(); saveSoon(); return; }
     case "dmove": { const t = userT(); if (G.autoDepth !== false) { G.autoDepth = false; } const arr = t.depth[UI.depthPos]; const i = +v, j = i + +el.dataset.d; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; UI.keepScroll = true; render(); saveSoon(); return; }
@@ -1882,6 +1969,8 @@ document.addEventListener("change", e => {
     case "standConf": UI.standConf = el.value; render(); return;
     case "awY": UI.awY = +el.value; render(); return;
     case "edT": UI.edT = +el.value; render(); return;
+    case "autoset": autoSettings()[el.dataset.k] = el.checked; saveSoon(); return;
+    case "automin": autoSettings().minStars = el.value; UI.keepScroll = true; render(); saveSoon(); return;
     case "posChange": changePos(P(+el.dataset.v), el.value); saveSoon(); return;
     case "recFile": case "rosFile": case "importSave": { const f = el.files && el.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { if (k === "importSave") importSaveText(rd.result); else doImport(k === "recFile" ? "rec" : "ros", rd.result); }; rd.readAsText(f); return; }
   }
@@ -1917,10 +2006,16 @@ function doAdvance(force) {
   if (force && !G.recruits.length) useFictionalClass();
   UI.modal = null; UI.busy = true; render();
   setTimeout(() => {
-    try { advance(); } catch (e) { console.error(e); toast("Something went wrong simulating. Your last save is safe."); }
+    try { if (G.autoRec && G.autoRec.on && G.phase !== "off") runAutoRecruit(); advance(); } catch (e) { console.error(e); toast("Something went wrong simulating. Your last save is safe."); }
     UI.busy = false; UI.tab = "home"; render(); window.scrollTo(0, 0); saveGame();
   }, 40);
 }
+
+// no pinch or double-tap zoom
+document.addEventListener("gesturestart", e => e.preventDefault(), { passive: false });
+document.addEventListener("touchmove", e => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
+let lastTouch = 0;
+document.addEventListener("touchend", e => { const now = Date.now(); if (now - lastTouch < 300 && !e.target.closest("input,select,textarea")) e.preventDefault(); lastTouch = now; }, { passive: false });
 
 // boot
 (async function boot() {
@@ -1930,4 +2025,5 @@ function doAdvance(force) {
   render();
 })();
 </script>
+
 </body></html>

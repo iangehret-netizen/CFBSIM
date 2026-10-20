@@ -34,5 +34,7 @@ Roster files (`team,name,position,year,ovr`) can replace whole team rosters in t
 ## Files
 
 - `index.html` – the whole game in one file
+- `icon.svg`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, `manifest.webmanifest` – app icon for browser tabs and your phone's home screen
+- `samples/recruits-2010.csv` – the real 2010 recruiting class (1,854 signees from 82 schools, 247Sports data)
 - `samples/recruits-template.csv` – recruiting class layout
 - `samples/rosters-template.csv` – roster layout
