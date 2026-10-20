@@ -189,10 +189,17 @@ body:has(.start)::before { background: var(--bg); }
 .pickc { text-align: left; }
 .stickyfoot { position: sticky; bottom: 0; padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(transparent, var(--bg) 30%); }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 50; background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 10px; font-size: .9rem; max-width: calc(100% - 32px); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.tier { display: inline-block; font-size: .68rem; font-weight: 700; padding: 0 7px; border-radius: 999px; color: #fff; letter-spacing: .03em; vertical-align: 1px; }
+.tier.t1, .pip.t1.on b { background: #a5642e; } .tier.t2, .pip.t2.on b { background: #7d8792; } .tier.t3, .pip.t3.on b { background: #b8901a; }
+.pips { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; }
+.pip { font-size: .78rem; color: var(--muted); display: flex; gap: 6px; align-items: baseline; }
+.pip b { font-size: .64rem; min-width: 46px; text-align: center; padding: 0 5px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-weight: 700; }
+.pip.on { color: var(--ink); } .pip.on b { color: #fff; border-color: transparent; }
+.li.perk { align-items: flex-start; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
-</head><body>
 <div id="app"></div>
+
 <script>
 // ===== DATA =====
 // [abbr, name, conf, prestige, state, color]
@@ -307,13 +314,161 @@ const SCHEMES_O = {"Pro Style":{pass:.5,w:[.32,.12,.18,.08,.30]},"Spread":{pass:
 const SCHEMES_D = {"4-3":[.34,.26,.22,.18],"3-4":[.28,.34,.20,.18],"4-2-5":[.32,.18,.26,.24],"3-3-5":[.28,.26,.24,.22]};
 
 const PERKS = {
- Recruiter:[["Silver Tongue","Recruiting pitches earn 15% more interest"],["Road Warrior","+10 recruiting hours each week"],["Closer","Official visits earn 30% more interest"]],
- Developer:[["Film Room","Players gain more in the offseason"],["Strength Staff","Freshmen and sophomores develop faster"],["Position Guru","Players improve during the season"]],
- Motivator:[["Pep Talk","Team morale stays higher"],["Big Game Coach","+2 team rating in rivalry, bowl and playoff games"],["Culture","Players are less likely to transfer"]],
- Tactician:[["Play Caller","+1.5 offense rating"],["Defensive Mind","+1.5 defense rating"],["Scheme Master","Scheme fit bonus doubled"]]
+ Recruiter:[["Silver Tongue","Recruiting pitches earn more interest",["+15% interest","+30% interest","+50% interest"]],["Road Warrior","More recruiting hours each week",["+10 hours a week","+18 hours a week","+28 hours a week"]],["Closer","Official visits earn more interest",["+30% from official visits","+60% from official visits","Official visits count double"]]],
+ Developer:[["Film Room","Players gain more in the offseason",["+1 OVR each offseason","+2 OVR each offseason","+3 OVR each offseason"]],["Strength Staff","Freshmen and sophomores develop faster",["+1.5 OVR for young players","+2.5 OVR for young players","+4 OVR for young players"]],["Position Guru","Players improve during the season",["40% extra in-season growth","60% extra in-season growth","85% extra in-season growth"]]],
+ Motivator:[["Pep Talk","Team morale stays higher",["Small weekly morale boost","Medium weekly morale boost","Large weekly morale boost"]],["Big Game Coach","Better team rating in rivalry, bowl and playoff games",["+2 in big games","+3.5 in big games","+5 in big games"]],["Culture","Players are less likely to transfer",["Transfers cut in half","Transfers cut 70%","Transfers cut 85%"]]],
+ Tactician:[["Play Caller","Better offense rating",["+1.5 offense","+2.5 offense","+4 offense"]],["Defensive Mind","Better defense rating",["+1.5 defense","+2.5 defense","+4 defense"]],["Scheme Master","Bigger scheme fit bonus",["Scheme fit x2","Scheme fit x2.5","Scheme fit x3"]]]
 };
+const TIERS = ["", "Bronze", "Silver", "Gold"];
 const ARCH = {Recruiter:"Silver Tongue",Developer:"Film Room",Motivator:"Pep Talk",Tactician:"Play Caller"};
 const COACH_FIRST = ["Mike","Bill","Jim","Steve","Gary","Mark","Dave","Tom","Rich","Bob","Larry","Pat","Chris","Kirk","Bret","Dan","Paul","Kevin","Greg","Jeff"];
+
+// ---------- real head coaches, by first season at the school ----------
+// Format: "YEAR Name|YEAR Name". The year is the first full season he coached there.
+// A "?" name means the job opened that year and the game fills it from the coaches on the market.
+const HC_HIST = {
+ FLA:"2009 Urban Meyer|2011 Will Muschamp|2015 Jim McElwain|2018 Dan Mullen|2022 Billy Napier|2026 Jon Sumrall",
+ UGA:"2009 Mark Richt|2016 Kirby Smart",
+ TENN:"2009 Lane Kiffin|2010 Derek Dooley|2013 Butch Jones|2018 Jeremy Pruitt|2021 Josh Heupel",
+ SCAR:"2009 Steve Spurrier|2016 Will Muschamp|2021 Shane Beamer",
+ UK:"2009 Rich Brooks|2010 Joker Phillips|2013 Mark Stoops|2026 Will Stein",
+ VAN:"2009 Bobby Johnson|2010 Robbie Caldwell|2011 James Franklin|2014 Derek Mason|2021 Clark Lea",
+ ALA:"2009 Nick Saban|2024 Kalen DeBoer",
+ LSU:"2009 Les Miles|2016 Ed Orgeron|2022 Brian Kelly|2026 Lane Kiffin",
+ MISS:"2009 Houston Nutt|2012 Hugh Freeze|2017 Matt Luke|2020 Lane Kiffin|2026 Pete Golding",
+ AUB:"2009 Gene Chizik|2013 Gus Malzahn|2021 Bryan Harsin|2023 Hugh Freeze|2026 Alex Golesh",
+ ARK:"2009 Bobby Petrino|2012 John L. Smith|2013 Bret Bielema|2018 Chad Morris|2020 Sam Pittman|2026 Ryan Silverfield",
+ MSST:"2009 Dan Mullen|2018 Joe Moorhead|2020 Mike Leach|2023 Zach Arnett|2024 Jeff Lebby",
+ NEB:"2009 Bo Pelini|2015 Mike Riley|2018 Scott Frost|2023 Matt Rhule",
+ MIZ:"2009 Gary Pinkel|2016 Barry Odom|2020 Eli Drinkwitz",
+ KU:"2009 Mark Mangino|2010 Turner Gill|2012 Charlie Weis|2015 David Beaty|2019 Les Miles|2021 Lance Leipold",
+ KSU:"2009 Bill Snyder|2019 Chris Klieman|2026 Collin Klein",
+ COLO:"2009 Dan Hawkins|2011 Jon Embree|2013 Mike MacIntyre|2019 Mel Tucker|2020 Karl Dorrell|2023 Deion Sanders",
+ ISU:"2009 Paul Rhoads|2016 Matt Campbell|2026 Jimmy Rogers",
+ TEX:"2009 Mack Brown|2014 Charlie Strong|2017 Tom Herman|2021 Steve Sarkisian",
+ OU:"2009 Bob Stoops|2017 Lincoln Riley|2022 Brent Venables",
+ OKST:"2009 Mike Gundy|2026 Eric Morris",
+ TTU:"2009 Mike Leach|2010 Tommy Tuberville|2013 Kliff Kingsbury|2019 Matt Wells|2022 Joey McGuire",
+ TAMU:"2009 Mike Sherman|2012 Kevin Sumlin|2018 Jimbo Fisher|2024 Mike Elko",
+ BAY:"2009 Art Briles|2016 Jim Grobe|2017 Matt Rhule|2020 Dave Aranda",
+ OSU:"2009 Jim Tressel|2011 Luke Fickell|2012 Urban Meyer|2019 Ryan Day",
+ PSU:"2009 Joe Paterno|2012 Bill O'Brien|2014 James Franklin|2026 Matt Campbell",
+ IOWA:"2009 Kirk Ferentz",
+ WIS:"2009 Bret Bielema|2013 Gary Andersen|2015 Paul Chryst|2023 Luke Fickell",
+ MSU:"2009 Mark Dantonio|2020 Mel Tucker|2024 Jonathan Smith|2026 Pat Fitzgerald",
+ MICH:"2009 Rich Rodriguez|2011 Brady Hoke|2015 Jim Harbaugh|2024 Sherrone Moore|2026 Kyle Whittingham",
+ NW:"2009 Pat Fitzgerald|2023 David Braun",
+ MINN:"2009 Tim Brewster|2011 Jerry Kill|2016 Tracy Claeys|2017 P.J. Fleck",
+ PUR:"2009 Danny Hope|2013 Darrell Hazell|2017 Jeff Brohm|2023 Ryan Walters|2025 Barry Odom",
+ ILL:"2009 Ron Zook|2012 Tim Beckman|2015 Bill Cubit|2016 Lovie Smith|2021 Bret Bielema",
+ IND:"2009 Bill Lynch|2011 Kevin Wilson|2017 Tom Allen|2024 Curt Cignetti",
+ ORE:"2009 Chip Kelly|2013 Mark Helfrich|2017 Willie Taggart|2018 Mario Cristobal|2022 Dan Lanning",
+ USC:"2009 Pete Carroll|2010 Lane Kiffin|2014 Steve Sarkisian|2016 Clay Helton|2022 Lincoln Riley",
+ STAN:"2009 Jim Harbaugh|2011 David Shaw|2023 Troy Taylor|2025 Frank Reich|2026 Tavita Pritchard",
+ ORST:"2009 Mike Riley|2015 Gary Andersen|2018 Jonathan Smith|2024 Trent Bray",
+ ARIZ:"2009 Mike Stoops|2012 Rich Rodriguez|2018 Kevin Sumlin|2021 Jedd Fisch|2024 Brent Brennan",
+ CAL:"2009 Jeff Tedford|2013 Sonny Dykes|2017 Justin Wilcox|2026 Tosh Lupoi",
+ UCLA:"2009 Rick Neuheisel|2012 Jim Mora|2018 Chip Kelly|2024 DeShaun Foster|2026 Bob Chesney",
+ WASH:"2009 Steve Sarkisian|2014 Chris Petersen|2020 Jimmy Lake|2022 Kalen DeBoer|2024 Jedd Fisch",
+ ASU:"2009 Dennis Erickson|2012 Todd Graham|2018 Herm Edwards|2023 Kenny Dillingham",
+ WSU:"2009 Paul Wulff|2012 Mike Leach|2020 Nick Rolovich|2022 Jake Dickert|2025 Jimmy Rogers|2026 Kirby Moore",
+ CLEM:"2009 Dabo Swinney",
+ BC:"2009 Frank Spaziani|2013 Steve Addazio|2020 Jeff Hafley|2024 Bill O'Brien",
+ FSU:"2009 Bobby Bowden|2010 Jimbo Fisher|2018 Willie Taggart|2020 Mike Norvell",
+ WAKE:"2009 Jim Grobe|2014 Dave Clawson|2025 Jake Dickert",
+ NCST:"2009 Tom O'Brien|2013 Dave Doeren",
+ UMD:"2009 Ralph Friedgen|2011 Randy Edsall|2016 DJ Durkin|2019 Mike Locksley",
+ GT:"2009 Paul Johnson|2019 Geoff Collins|2023 Brent Key",
+ VT:"2009 Frank Beamer|2016 Justin Fuente|2022 Brent Pry|2026 James Franklin",
+ MIA:"2009 Randy Shannon|2011 Al Golden|2016 Mark Richt|2019 Manny Diaz|2022 Mario Cristobal",
+ UNC:"2009 Butch Davis|2011 Everett Withers|2012 Larry Fedora|2019 Mack Brown|2025 Bill Belichick",
+ UVA:"2009 Al Groh|2010 Mike London|2016 Bronco Mendenhall|2022 Tony Elliott",
+ DUKE:"2009 David Cutcliffe|2022 Mike Elko|2024 Manny Diaz",
+ CIN:"2009 Brian Kelly|2010 Butch Jones|2013 Tommy Tuberville|2017 Luke Fickell|2023 Scott Satterfield",
+ PITT:"2009 Dave Wannstedt|2011 Todd Graham|2012 Paul Chryst|2015 Pat Narduzzi",
+ WVU:"2009 Bill Stewart|2011 Dana Holgorsen|2019 Neal Brown|2025 Rich Rodriguez",
+ RUTG:"2009 Greg Schiano|2012 Kyle Flood|2016 Chris Ash|2020 Greg Schiano",
+ USF:"2009 Jim Leavitt|2010 Skip Holtz|2013 Willie Taggart|2017 Charlie Strong|2020 Jeff Scott|2023 Alex Golesh|2026 Brian Hartline",
+ UCONN:"2009 Randy Edsall|2011 Paul Pasqualoni|2014 Bob Diaco|2017 Randy Edsall|2022 Jim Mora",
+ LOU:"2009 Steve Kragthorpe|2010 Charlie Strong|2014 Bobby Petrino|2019 Scott Satterfield|2023 Jeff Brohm",
+ SYR:"2009 Doug Marrone|2013 Scott Shafer|2016 Dino Babers|2024 Fran Brown",
+ TCU:"2009 Gary Patterson|2022 Sonny Dykes",
+ BYU:"2009 Bronco Mendenhall|2016 Kalani Sitake",
+ UTAH:"2009 Kyle Whittingham|2026 Morgan Scalley",
+ AFA:"2009 Troy Calhoun",
+ WYO:"2009 Dave Christensen|2014 Craig Bohl|2024 Jay Sawvel",
+ SDSU:"2009 Brady Hoke|2011 Rocky Long|2020 Brady Hoke|2024 Sean Lewis",
+ CSU:"2009 Steve Fairchild|2012 Jim McElwain|2015 Mike Bobo|2020 Steve Addazio|2022 Jay Norvell",
+ UNLV:"2009 Mike Sanford|2010 Bobby Hauck|2015 Tony Sanchez|2020 Marcus Arroyo|2023 Barry Odom|2025 Dan Mullen",
+ UNM:"2009 Mike Locksley|2012 Bob Davie|2020 Danny Gonzales|2024 Bronco Mendenhall|2025 Jason Eck",
+ BSU:"2009 Chris Petersen|2014 Bryan Harsin|2021 Andy Avalos|2024 Spencer Danielson",
+ NEV:"2009 Chris Ault|2013 Brian Polian|2017 Jay Norvell|2022 Ken Wilson|2024 Jeff Choate",
+ FRES:"2009 Pat Hill|2012 Tim DeRuyter|2017 Jeff Tedford|2020 Kalen DeBoer|2022 Jeff Tedford|2024 Tim Skipper|2025 Matt Entz",
+ LT:"2009 Derek Dooley|2010 Sonny Dykes|2013 Skip Holtz|2022 Sonny Cumbie",
+ IDHO:"2009 Robb Akey|2013 Paul Petrino|2022 Jason Eck|2025 ?",
+ USU:"2009 Gary Andersen|2013 Matt Wells|2019 Gary Andersen|2021 Blake Anderson|2024 Nate Dreiling|2025 Bronco Mendenhall",
+ HAW:"2009 Greg McMackin|2012 Norm Chow|2016 Nick Rolovich|2020 Todd Graham|2022 Timmy Chang",
+ SJSU:"2009 Dick Tomey|2010 Mike MacIntyre|2013 Ron Caragher|2017 Brent Brennan|2024 Ken Niumatalolo",
+ NMSU:"2009 DeWayne Walker|2013 Doug Martin|2022 Jerry Kill|2024 Tony Sanchez",
+ ECU:"2009 Skip Holtz|2010 Ruffin McNeill|2016 Scottie Montgomery|2019 Mike Houston|2025 Blake Harrell",
+ MRSH:"2009 Mark Snyder|2010 Doc Holliday|2021 Charles Huff|2025 Tony Gibson",
+ USM:"2009 Larry Fedora|2012 Ellis Johnson|2013 Todd Monken|2016 Jay Hopson|2021 Will Hall|2025 Charles Huff|2026 ?",
+ UCF:"2009 George O'Leary|2016 Scott Frost|2018 Josh Heupel|2021 Gus Malzahn|2025 Scott Frost",
+ UAB:"2009 Neil Callaway|2012 Garrick McGee|2014 Bill Clark|2022 Bryant Vincent|2023 Trent Dilfer",
+ MEM:"2009 Tommy West|2010 Larry Porter|2012 Justin Fuente|2016 Mike Norvell|2020 Ryan Silverfield|2026 Charles Huff",
+ HOU:"2009 Kevin Sumlin|2012 Tony Levine|2015 Tom Herman|2017 Major Applewhite|2019 Dana Holgorsen|2024 Willie Fritz",
+ SMU:"2009 June Jones|2015 Chad Morris|2018 Sonny Dykes|2022 Rhett Lashlee",
+ TLSA:"2009 Todd Graham|2011 Bill Blankenship|2015 Philip Montgomery|2023 Kevin Wilson|2025 Tre Lamb",
+ UTEP:"2009 Mike Price|2013 Sean Kugler|2018 Dana Dimel|2024 Scotty Walden",
+ RICE:"2009 David Bailiff|2018 Mike Bloomgren|2025 Scott Abell",
+ TULN:"2009 Bob Toledo|2012 Curtis Johnson|2016 Willie Fritz|2024 Jon Sumrall|2026 Will Hall",
+ OHIO:"2009 Frank Solich|2021 Tim Albin|2025 Brian Smith",
+ TEM:"2009 Al Golden|2011 Steve Addazio|2013 Matt Rhule|2017 Geoff Collins|2019 Rod Carey|2022 Stan Drayton|2025 K.C. Keeler",
+ KENT:"2009 Doug Martin|2011 Darrell Hazell|2013 Paul Haynes|2018 Sean Lewis|2023 Kenni Burns|2025 Mark Carney",
+ BGSU:"2009 Dave Clawson|2014 Dino Babers|2016 Mike Jinks|2019 Scot Loeffler|2025 Eddie George",
+ BUFF:"2009 Turner Gill|2010 Jeff Quinn|2015 Lance Leipold|2021 Maurice Linguist|2024 Pete Lembo",
+ "M-OH":"2009 Michael Haywood|2011 Don Treadwell|2014 Chuck Martin",
+ AKR:"2009 J.D. Brookhart|2010 Rob Ianello|2012 Terry Bowden|2019 Tom Arth|2022 Joe Moorhead",
+ CMU:"2009 Butch Jones|2010 Dan Enos|2015 John Bonamego|2019 Jim McElwain|2025 Matt Drinkall",
+ NIU:"2009 Jerry Kill|2011 Dave Doeren|2013 Rod Carey|2019 Thomas Hammock",
+ TOL:"2009 Tim Beckman|2012 Matt Campbell|2016 Jason Candle",
+ WMU:"2009 Bill Cubit|2013 P.J. Fleck|2017 Tim Lester|2023 Lance Taylor",
+ BALL:"2009 Stan Parrish|2011 Pete Lembo|2016 Mike Neu|2025 Mike Uzelac",
+ EMU:"2009 Ron English|2014 Chris Creighton",
+ TROY:"2009 Larry Blakeney|2015 Neal Brown|2019 Chip Lindsey|2022 Jon Sumrall|2024 Gerad Parker",
+ MTSU:"2009 Rick Stockstill|2024 Derek Mason",
+ ULL:"2009 Rickey Bustle|2011 Mark Hudspeth|2018 Billy Napier|2022 Michael Desormeaux",
+ ULM:"2009 Charlie Weatherbie|2010 Todd Berry|2017 Matt Viator|2021 Terry Bowden|2024 Bryant Vincent",
+ ARST:"2009 Steve Roberts|2011 Hugh Freeze|2012 Gus Malzahn|2013 Bryan Harsin|2014 Blake Anderson|2021 Butch Jones",
+ FIU:"2009 Mario Cristobal|2013 Ron Turner|2017 Butch Davis|2022 Mike MacIntyre|2025 Willie Simmons",
+ FAU:"2009 Howard Schnellenberger|2012 Carl Pelini|2014 Charlie Partridge|2017 Lane Kiffin|2020 Willie Taggart|2023 Tom Herman|2025 Zach Kittley",
+ UNT:"2009 Todd Dodge|2011 Dan McCarney|2016 Seth Littrell|2023 Eric Morris|2026 Neal Brown",
+ WKU:"2009 David Elson|2010 Willie Taggart|2013 Bobby Petrino|2014 Jeff Brohm|2017 Mike Sanford Jr.|2019 Tyson Helton",
+ ND:"2009 Charlie Weis|2010 Brian Kelly|2022 Marcus Freeman",
+ NAVY:"2009 Ken Niumatalolo|2024 Brian Newberry",
+ ARMY:"2009 Rich Ellerson|2014 Jeff Monken"
+};
+// Coordinators and up-and-comers who were hot names on the market in a given year. They fill
+// jobs the real timeline can't (the school you left, or one you took).
+const HOT_COORDS = {
+ 2010:["Kirby Smart","Chad Morris","Gus Malzahn","Bud Foster","Dana Holgorsen"],
+ 2011:["Kirby Smart","Chad Morris","Todd Monken","Pat Narduzzi","Bud Foster"],
+ 2012:["Kirby Smart","Chad Morris","Pat Narduzzi","Doug Nussmeier","Tom Herman"],
+ 2013:["Kirby Smart","Tom Herman","Lincoln Riley","Pat Narduzzi","Kevin Steele"],
+ 2014:["Kirby Smart","Tom Herman","Lincoln Riley","Lane Kiffin","Brent Venables"],
+ 2015:["Lane Kiffin","Lincoln Riley","Mike Norvell","Brent Venables","Chip Long"],
+ 2016:["Lincoln Riley","Brent Venables","Mike Norvell","Josh Heupel","Tony Elliott"],
+ 2017:["Brent Venables","Josh Heupel","Tony Elliott","Joe Moorhead","Jeff Hafley"],
+ 2018:["Brent Venables","Tony Elliott","Joe Brady","Dan Lanning","Sonny Cumbie"],
+ 2019:["Joe Brady","Dan Lanning","Brent Venables","Tony Elliott","Kalen DeBoer"],
+ 2020:["Dan Lanning","Brent Venables","Kenny Dillingham","Garrett Riley","Marcus Freeman"],
+ 2021:["Brent Venables","Kenny Dillingham","Garrett Riley","Jeff Lebby","Bill O'Brien"],
+ 2022:["Garrett Riley","Jeff Lebby","Kenny Dillingham","Glenn Schumann","Pete Golding"],
+ 2023:["Glenn Schumann","Pete Golding","Kirby Moore","Will Stein","Tosh Lupoi"],
+ 2024:["Glenn Schumann","Pete Golding","Will Stein","Brian Hartline","Tosh Lupoi"],
+ 2025:["Brian Hartline","Will Stein","Tosh Lupoi","Pete Golding","Collin Klein"],
+ 2026:["Glenn Schumann","Andy Kotelnicki","Jim Knowles","Joe Brady","Chip Kelly"]
+};
 // ===== ENGINE =====
 let G = null;
 const rnd = Math.random;
@@ -331,7 +486,9 @@ function T(id) { return G.teams[id]; }
 function P(id) { return G.players[id]; }
 function byAbbr(a) { a = String(a).trim().toUpperCase(); return G.teams.find(t => t.abbr === a || t.name.toUpperCase() === a); }
 function userT() { return G.teams[G.userTeam]; }
-function hasPerk(n) { return !!(G.coach.perks && G.coach.perks[n]); }
+function perkLvl(n) { return clamp(+((G.coach.perks && G.coach.perks[n]) || 0), 0, 3); }
+function hasPerk(n) { return perkLvl(n) > 0; }
+function pv(n, vals) { return vals[perkLvl(n)]; }
 
 // ---------- players ----------
 function genName() { return [pick(FIRST), pick(LAST)]; }
@@ -364,7 +521,7 @@ function newGame(o) {
   G = { v: 1, nid: 1, year: 2009, phase: "pre", week: 0, teams: [], players: {}, sched: [], recruits: [], classYear: 2010, classSource: null, board: [], hours: 0, news: [], history: [], careers: [], awards: {}, draftLog: [], portal: [], offers: [], off: null, post: null, name: o.saveName || "Dynasty", created: Date.now() };
   TEAM_DATA.forEach((d, i) => {
     const pres = d[3];
-    G.teams.push({ id: i, abbr: d[0], name: d[1], conf: d[2], pres, st: d[4], color: d[5], fac: clamp(Math.round(pres + gauss() * 7), 25, 99), acad: HIGH_ACAD[d[0]] || clamp(Math.round(58 + gauss() * 8), 40, 79), hf: 2 + pres / 45 + (LOUD.includes(d[0]) ? 1 : 0), roster: [], depth: {}, so: pick(Object.keys(SCHEMES_O)), sd: pick(Object.keys(SCHEMES_D)), oc: genCoord(pres), dc: genCoord(pres), hc: pick(COACH_FIRST) + " " + pick(LAST), elo: 0, w: 0, l: 0, cw: 0, cl: 0, pf: 0, pa: 0, rk: 0, crk: 0, champ: 0, nil: 0 });
+    G.teams.push({ id: i, abbr: d[0], name: d[1], conf: d[2], pres, st: d[4], color: d[5], fac: clamp(Math.round(pres + gauss() * 7), 25, 99), acad: HIGH_ACAD[d[0]] || clamp(Math.round(58 + gauss() * 8), 40, 79), hf: 2 + pres / 45 + (LOUD.includes(d[0]) ? 1 : 0), roster: [], depth: {}, so: pick(Object.keys(SCHEMES_O)), sd: pick(Object.keys(SCHEMES_D)), oc: genCoord(pres), dc: genCoord(pres), hc: realHC(d[0], 2009) || fakeCoach(), elo: 0, w: 0, l: 0, cw: 0, cl: 0, pf: 0, pa: 0, rk: 0, crk: 0, champ: 0, nil: 0 });
   });
   if (G.teams.find(t => t.abbr === "NAVY")) { for (const a of ["NAVY", "ARMY", "AFA", "GT"]) { const t = byAbbr(a); if (t) t.so = "Option"; } }
   for (const t of G.teams) buildRoster(t);
@@ -378,7 +535,7 @@ function newGame(o) {
   startSeason(true);
   addNews(`${o.coachName} named head coach at ${ut.name}.`);
 }
-function genCoord(pres) { const r = clamp(Math.round(55 + pres * 0.25 + gauss() * 6), 45, 92); return { n: pick(COACH_FIRST) + " " + pick(LAST), r, sal: Math.round((r - 45) * 0.04 * 10) / 10 }; }
+function genCoord(pres) { const r = clamp(Math.round(55 + pres * 0.25 + gauss() * 6), 45, 92); return { n: fakeCoach(), r, sal: Math.round((r - 45) * 0.04 * 10) / 10 }; }
 function buildRoster(t, keep) {
   const real = keep ? [] : (REAL_2009[t.abbr] || "").split(";").filter(Boolean).map(s => { const [n, pos, yr, ovr] = s.split("|"); const sp = n.indexOf(" "); return { f: n.slice(0, sp), l: n.slice(sp + 1), pos, yr: +yr, ovr: +ovr }; });
   const have = {};
@@ -430,12 +587,12 @@ function teamRating(t, ctx) {
   else if (t.so === "Power Run" || t.so === "Option") fit = (ov(rb) + pad(ol, 5) - 2 * pad(wr, 3)) / 12;
   fit = clamp(fit, -1.5, 1.5);
   const user = t.id === G.userTeam;
-  if (user && hasPerk("Scheme Master")) fit *= 2;
+  if (user) fit *= pv("Scheme Master", [1, 2, 2.5, 3]);
   off += fit + (t.oc.r - 70) * 0.08; def += (t.dc.r - 70) * 0.08;
-  if (user) { if (hasPerk("Play Caller")) off += 1.5; if (hasPerk("Defensive Mind")) def += 1.5; }
+  if (user) { off += pv("Play Caller", [0, 1.5, 2.5, 4]); def += pv("Defensive Mind", [0, 1.5, 2.5, 4]); }
   const mor = avg(t.roster.slice(0, 40).map(id => P(id).mor));
   off += (mor - 60) / 30; def += (mor - 60) / 30;
-  if (user && ctx && ctx.big && hasPerk("Big Game Coach")) { off += 2; def += 2; }
+  if (user && ctx && ctx.big) { const b = pv("Big Game Coach", [0, 2, 3.5, 5]); off += b; def += b; }
   return { off, def, k: ov(k), p: ov(pp), ovr: (off + def) / 2, qb, rb, wr, te, ol, dl, lb, cb, s, kk: k[0], pass: o.pass };
 }
 function teamOvr(t) { const r = teamRating(t); return Math.round(r.ovr); }
@@ -542,7 +699,7 @@ function applyRealign(year) {
   for (const [k, v] of Object.entries(r)) { if (k === "_rename") continue; const t = G.teams.find(t => t.abbr === k); if (t) { if (t.id === G.userTeam && t.conf !== v) addNews(`${t.name} moves from the ${t.conf} to the ${v}.`); t.conf = v; } }
   if (r._rename) for (const [a, b] of Object.entries(r._rename)) G.teams.forEach(t => { if (t.conf === a) t.conf = b; });
 }
-function weeklyHours() { let h = 40 + (G.coach.arch === "Recruiter" ? 10 : 0) + (hasPerk("Road Warrior") ? 10 : 0) + (G.budget.travel || 0) * 8; return Math.round(h); }
+function weeklyHours() { let h = 40 + (G.coach.arch === "Recruiter" ? 10 : 0) + pv("Road Warrior", [0, 10, 18, 28]) + (G.budget.travel || 0) * 8; return Math.round(h); }
 
 // ---------- game sim ----------
 function weatherFor(t, wk) {
@@ -623,7 +780,7 @@ function simGame(g) {
   // injuries
   for (const t of [ht, at]) if (t) injuriesFor(t, g);
   // morale
-  for (const t of [ht, at]) if (t) { const won = (t === ht) === hw; t.roster.forEach(id => { const p = P(id); p.mor = clamp(p.mor + (won ? 1.5 : -1.5) + (playedIds.has(id) ? 1 : -0.6) + (t.id === G.userTeam && hasPerk("Pep Talk") ? 0.8 : 0) + (p.pers === "Hothead" ? gauss() * 2 : 0), 5, 100); }); }
+  for (const t of [ht, at]) if (t) { const won = (t === ht) === hw; t.roster.forEach(id => { const p = P(id); p.mor = clamp(p.mor + (won ? 1.5 : -1.5) + (playedIds.has(id) ? 1 : -0.6) + (t.id === G.userTeam ? pv("Pep Talk", [0, 0.8, 1.5, 2.5]) : 0) + (p.pers === "Hothead" ? gauss() * 2 : 0), 5, 100); }); }
   return g;
 }
 function share(arr, ws) { return wpick(arr, ws); }
@@ -691,7 +848,7 @@ function weeklyUpkeep() {
   }
   // in-season development
   if (G.week % 3 === 0) for (const p of Object.values(G.players)) {
-    if (p.pot - p.ovr > 6 && p.yr <= 2) { let d = rnd() < 0.35 ? 1 : 0; if (p.t === G.userTeam && hasPerk("Position Guru") && rnd() < 0.4) d++; if (d) { p.ovr = Math.min(p.pot, p.ovr + d); recalcAttrs(p, d); } }
+    if (p.pot - p.ovr > 6 && p.yr <= 2) { let d = rnd() < 0.35 ? 1 : 0; if (p.t === G.userTeam && rnd() < pv("Position Guru", [0, 0.4, 0.6, 0.85])) d++; if (d) { p.ovr = Math.min(p.pot, p.ovr + d); recalcAttrs(p, d); } }
   }
   // non-starter morale drift
   for (const t of G.teams) for (const pos of POS) { const st = new Set(starters(t, pos, START[pos]).map(p => p.id)); for (const id of t.depth[pos] || []) { const p = P(id); if (!st.has(id) && p.ovr >= 70 && p.yr >= 2) p.mor = clamp(p.mor - 1.2, 5, 100); } }
@@ -909,7 +1066,7 @@ function awardWeekXP(g) {
   if (won) { G.coach.xp += 100; if (opp >= 0 && T(opp).prk) G.coach.xp += 100; if (g.rv) G.coach.xp += 100; G.coach.w++; } else G.coach.l++;
   levelCheck();
 }
-function levelCheck() { const lv = Math.floor(G.coach.xp / 1000); const spent = Object.keys(G.coach.perks).length - 1; G.coach.lvl = lv; G.coach.pts = Math.max(0, lv - spent); }
+function levelCheck() { const lv = Math.floor(G.coach.xp / 1000); const spent = Object.values(G.coach.perks).reduce((a, b) => a + (+b || 0), 0) - 1; G.coach.lvl = lv; G.coach.pts = Math.max(0, lv - spent); }
 function expectedWins(t) { return Math.round(3 + t.pres / 12); }
 
 function finishSeason() {
@@ -938,6 +1095,11 @@ function finishSeason() {
 
 // ---------- recruiting ----------
 const STAR_PRES = { 5: 90, 4: 78, 3: 60, 2: 44, 1: 35 };
+const REAL_SIGN = 0.98;  // real recruits who sign where they really did, when you aren't recruiting them
+const USER_LOCK = 0.99;  // recruits you offer who end up signing with you
+const USER_SWAY = 2.5;   // your recruiting counts this many times more than an AI school's
+function aiDest(r) { return r.dest >= 0 && r.dest !== G.userTeam ? r.dest : -1; }
+function soldOnYou(r) { return !!(r.of && r.lock); }
 const DEALS = ["Proximity", "Prestige", "Playing Time", "Contender", "Academics", "Facilities"];
 function mapPos(s) {
   s = String(s || "").toUpperCase().trim();
@@ -972,7 +1134,12 @@ function newRecruit(o) {
   const ws = cands.map(t => Math.exp(-Math.pow((t.pres - tgt) / 13, 2)) * (t.st === st ? 3 : 1) + 0.002);
   const sui = new Set();
   let guard = 0; while (sui.size < 5 && guard++ < 50) { const t = wpick(cands, ws); if (t.id !== G.userTeam) sui.add(t.id); }
+  // real recruits: 98% end up at the school they really signed with (unless you land them)
+  const rt = o.real && o.school ? byAbbr(o.school) : null;
+  r.rt = rt ? rt.id : -1; r.dest = r.rt >= 0 && rnd() < REAL_SIGN ? r.rt : -1;
+  if (r.dest >= 0 && r.dest !== G.userTeam) { sui.delete(r.dest); while (sui.size > 4) sui.delete([...sui][sui.size - 1]); sui.add(r.dest); }
   r.sui = [...sui]; r.sui.forEach(id => r.pts[id] = R(0, 120));
+  if (r.dest >= 0 && r.dest !== G.userTeam) r.pts[r.dest] = R(150, 320);
   G.recruits.push(r);
   return r;
 }
@@ -1015,24 +1182,42 @@ function recruitTick(wk) {
   const caps = {}; const cnt = {};
   for (const t of G.teams) { caps[t.id] = classCap(t.id); cnt[t.id] = 0; }
   for (const r of G.recruits) if (r.cm >= 0) cnt[r.cm]++;
+  const u = G.userTeam;
   for (const r of G.recruits) {
     if (r.sg) continue;
     for (const id of r.sui) { if (cnt[id] >= caps[id] && r.cm !== id) continue; const t = T(id); r.pts[id] = (r.pts[id] || 0) + (18 + t.pres * 0.55 + rnd() * 45) * dealMod(r, t); }
-    // commitment
+    const d = aiDest(r);
+    if (d >= 0) r.pts[d] = (r.pts[d] || 0) + (45 + rnd() * 60) * (1 + T(d).pres / 100);
+    const thr = r.stars >= 5 ? 1250 : r.stars === 4 ? 1050 : 850;
+    // you offered him and he's sold: he commits to you soon and stays put
+    if (soldOnYou(r)) {
+      if (r.cm !== u && cnt[u] < caps[u] && rnd() < 0.6) {
+        const old = r.cm; if (old >= 0) cnt[old]--; r.cm = u; cnt[u]++;
+        addNews(old >= 0 ? `You flipped ${r.stars}★ ${r.pos} ${r.f} ${r.l} from ${T(old).name}!` : `${r.stars}★ ${r.pos} ${r.f} ${r.l} commits to ${T(u).name}!`, "win");
+      }
+      continue;
+    }
+    // real recruits only commit to their real school
+    if (d >= 0) {
+      if (r.cm === u) continue;
+      if (r.cm < 0 && r.pts[d] >= thr * 0.6 && rnd() < 0.3) { r.cm = d; cnt[d]++; }
+      else if (r.cm >= 0 && r.cm !== d) { cnt[r.cm]--; r.cm = d; cnt[d]++; }
+      continue;
+    }
+    // everyone else: whoever leads
     const entries = Object.entries(r.pts).map(([k, v]) => [+k, v]).sort((a, b) => b[1] - a[1]);
     const [lead, lp] = entries[0] || [-1, 0]; const second = entries[1] ? entries[1][1] : 0;
-    const thr = r.stars >= 5 ? 1250 : r.stars === 4 ? 1050 : 850;
     if (r.cm < 0) {
-      if (lp >= thr && lp > second * 1.15 && rnd() < 0.35 && cnt[lead] < caps[lead]) { r.cm = lead; cnt[lead]++; if (lead === G.userTeam) addNews(`${r.stars}★ ${r.pos} ${r.f} ${r.l} commits to ${T(lead).name}!`, "win"); }
+      if (lp >= thr && lp > second * 1.15 && rnd() < 0.35 && cnt[lead] < caps[lead]) { r.cm = lead; cnt[lead]++; if (lead === u) addNews(`${r.stars}★ ${r.pos} ${r.f} ${r.l} commits to ${T(lead).name}!`, "win"); }
     } else if (lead !== r.cm && lp > (r.pts[r.cm] || 0) * 1.3 && rnd() < 0.25 && cnt[lead] < caps[lead]) {
       const old = r.cm; cnt[old]--; r.cm = lead; cnt[lead]++;
-      if (old === G.userTeam) addNews(`${r.stars}★ ${r.pos} ${r.f} ${r.l} decommits and flips to ${T(lead).name}.`, "loss");
-      if (lead === G.userTeam) addNews(`You flipped ${r.stars}★ ${r.pos} ${r.f} ${r.l} from ${T(old).name}!`, "win");
+      if (old === u) addNews(`${r.stars}★ ${r.pos} ${r.f} ${r.l} decommits and flips to ${T(lead).name}.`, "loss");
+      if (lead === u) addNews(`You flipped ${r.stars}★ ${r.pos} ${r.f} ${r.l} from ${T(old).name}!`, "win");
     }
   }
   // user visits scheduled for this week resolve after the game
 }
-function userInterestMult(r) { let m = dealMod(r, userT()); if (hasPerk("Silver Tongue")) m *= 1.15; return m; }
+function userInterestMult(r) { let m = dealMod(r, userT()) * USER_SWAY; m *= pv("Silver Tongue", [1, 1.15, 1.3, 1.5]); return m; }
 function userAct(r, act, amt) {
   const u = G.userTeam; const t = userT();
   const cost = { scout: 3, call: 2, offer: 0, unofficial: 5, official: 8, home: 10, nil: 1 }[act];
@@ -1042,7 +1227,7 @@ function userAct(r, act, amt) {
   let gain = 0; const m = userInterestMult(r);
   if (act === "scout") { if (r.sc) return "Already scouted."; r.sc = 1; }
   if (act === "call") gain = (55 + rnd() * 35) * m;
-  if (act === "offer") { if (r.of) return "Offer already made."; r.of = 1; gain = 110 * m; }
+  if (act === "offer") { if (r.of) return "Offer already made."; r.of = 1; if (r.lock == null) r.lock = rnd() < USER_LOCK; gain = 110 * m; }
   if (act === "unofficial" || act === "official") {
     const g = G.phase === "reg" ? userGame(G.week) : null;
     if (!g || g.h !== u) return "Visits happen at home games. Next week isn't a home game.";
@@ -1064,7 +1249,7 @@ function resolveVisits(g) {
   for (const id of G.board) {
     const r = G.recruits[id]; if (!r.pendVisit || r.pendVisit.wk !== g.wk) continue;
     let m = userInterestMult(r);
-    const base = r.pendVisit.act === "official" ? (won ? 230 : 90) * (hasPerk("Closer") ? 1.3 : 1) : (won ? 90 : 35);
+    const base = r.pendVisit.act === "official" ? (won ? 230 : 90) * pv("Closer", [1, 1.3, 1.6, 2]) : (won ? 90 : 35);
     r.pts[G.userTeam] = (r.pts[G.userTeam] || 0) + base * m * (g.rv && won ? 1.25 : 1);
     r.pendVisit = null;
   }
@@ -1081,6 +1266,11 @@ function signingDay() {
   const caps = {}; const cnt = {};
   for (const t of G.teams) { caps[t.id] = classCap(t.id); cnt[t.id] = 0; }
   for (const r of G.recruits) if (r.cm >= 0) cnt[r.cm]++;
+  // recruits you offered who are sold on you sign with you, while you have scholarships
+  { const u = G.userTeam; const sold = G.recruits.filter(r => r.cm !== u && soldOnYou(r)).sort((a, b) => a.nr - b.nr);
+    for (const r of sold) { if (cnt[u] >= caps[u]) break; if (r.cm >= 0) cnt[r.cm]--; r.cm = u; cnt[u]++; } }
+  // real recruits nobody stole sign where they really did
+  for (const r of G.recruits) if (r.cm < 0 && aiDest(r) >= 0) { r.cm = r.dest; cnt[r.dest]++; }
   const open = G.recruits.filter(r => r.cm < 0).sort((a, b) => a.nr - b.nr);
   for (const r of open) { const e = Object.entries(r.pts).map(([k, v]) => [+k, v]).sort((a, b) => b[1] - a[1]); for (const [tid, v] of e) if (cnt[tid] < caps[tid] && v > 200) { r.cm = tid; cnt[tid]++; break; } }
   // your open spots: recruits who have you in their top two
@@ -1105,11 +1295,61 @@ function signingDay() {
   G.recruits = []; G.board = []; G.classSource = null; G.classYear++;
 }
 
+
+// ---------- real coaching carousel ----------
+const DEF_COORDS = ["Kirby Smart", "Bud Foster", "Pat Narduzzi", "Kevin Steele", "Brent Venables", "Jeff Hafley", "Dan Lanning", "Marcus Freeman", "Glenn Schumann", "Pete Golding", "Tosh Lupoi", "Jim Knowles"];
+let _HC = null;
+function hcTable() { if (_HC) return _HC; _HC = {}; for (const [a, str] of Object.entries(HC_HIST)) _HC[a] = str.split("|").map(x => { const i = x.indexOf(" "); return [+x.slice(0, i), x.slice(i + 1).trim()]; }); return _HC; }
+function realHC(abbr, y) { const l = hcTable()[abbr]; if (!l) return null; let n = null; for (const [yy, nm] of l) if (yy <= y) n = nm; return n; }
+const HC_LAST = 2026;
+function fakeCoach() { return pick(COACH_FIRST) + " " + pick(LAST); }
+function hotCoords(y) { const ys = Object.keys(HOT_COORDS).map(Number); const k = ys.filter(x => x <= y).pop() || ys[0]; return HOT_COORDS[k] || []; }
+// coaches on the market in year y: real coaches who just lost or left a job, coaches let go in your dynasty, then hot coordinators
+function coachMarket(y, taken) {
+  const out = []; const add = n => { if (n && n !== "?" && !taken.has(n) && n !== G.coach.name && !out.includes(n)) out.push(n); };
+  for (const n of (G.freeCoaches || []).slice().reverse()) add(n);
+  if (y <= HC_LAST + 1) for (let back = 1; back <= 3; back++) for (const [a, l] of Object.entries(hcTable())) for (let i = 0; i < l.length; i++) { const end = i + 1 < l.length ? l[i + 1][0] - 1 : 9999; if (end === y - back) add(l[i][1]); }
+  for (const n of hotCoords(y)) add(n);
+  return out;
+}
+function marketCoach(y, taken) { const m = coachMarket(y, taken); const n = m.length ? m[0] : fakeCoach(); taken.add(n); G.freeCoaches = (G.freeCoaches || []).filter(x => x !== n); return n; }
+// runs in the offseason. Real hires happen at the real schools; after the real data runs out, bad seasons get coaches fired.
+function runCarousel() {
+  const u = userT(); const Y = G.year + 1; const moves = [];
+  for (const t of G.teams) {
+    if (t.id === u.id) continue;
+    const real = realHC(t.abbr, Y), prev = realHC(t.abbr, Y - 1);
+    let open = false, target = null;
+    if (Y <= HC_LAST && real !== prev) { open = true; target = real; }
+    else if (Y > HC_LAST && t.w < expectedWins(t) - 3 && rnd() < 0.5) open = true;
+    else if (Y > HC_LAST && rnd() < 0.03) open = true;
+    if (open) moves.push({ t, target, from: t.hc });
+  }
+  const taken = new Set(G.teams.map(t => t.hc)); taken.add(G.coach.name);
+  for (const m of moves) taken.delete(m.from);
+  // real hires first, then everyone else from the market
+  for (const m of moves) if (m.target && m.target !== "?" && !taken.has(m.target)) { m.to = m.target; taken.add(m.to); }
+  for (const m of moves) if (!m.to) m.to = marketCoach(Y, taken);
+  G.freeCoaches = G.freeCoaches || [];
+  G.carousel = [];
+  for (const m of moves) {
+    const t = m.t; t.hc = m.to; t.oc = genCoord(t.pres); t.dc = genCoord(t.pres);
+    if (m.from && !G.teams.some(x => x.hc === m.from) && m.from !== G.coach.name) G.freeCoaches.push(m.from);
+    G.freeCoaches = G.freeCoaches.filter(n => n !== m.to);
+    // a real hire who's on your staff leaves for the job
+    for (const k of ["oc", "dc"]) if (u[k].n === m.to) { G.poached = G.poached || []; G.poached.push([k, m.to, t.name]); u[k] = { n: "Vacant", r: 55, vac: 1 }; }
+    G.carousel.push({ id: t.id, from: m.from, to: m.to });
+    addNews(`${t.name} hires ${m.to}${m.from ? ` to replace ${m.from}` : ""}.`);
+  }
+  if (G.freeCoaches.length > 60) G.freeCoaches = G.freeCoaches.slice(-60);
+  return moves.map(m => m.t.id);
+}
+
 // ---------- offseason ----------
 const OFF_STEPS = ["recap", "draft", "jobs", "portal", "signing", "train"];
 function offseasonNext() {
   const s = G.off.step;
-  if (s === "recap") { if (G.coach.sec < 15) { G.off.fired = true; buildOffers(true); } doDepartures(); G.off.step = "draft"; return; }
+  if (s === "recap") { G.poached = []; G.carousel = []; if (G.coach.sec < 15) { G.off.fired = true; buildOffers(true); } doDepartures(); G.off.step = "draft"; return; }
   if (s === "draft") { if (!G.off.fired) buildOffers(false); poachStaff(); G.off.step = "jobs"; return; }
   if (s === "jobs") { buildPortal(); G.off.step = "portal"; return; }
   if (s === "portal") { finishPortal(); if (!G.recruits.length) genClass(G.classYear); signingDay(); fillAll(); G.off.step = "signing"; return; }
@@ -1142,9 +1382,7 @@ function removePlayer(p) { const t = T(p.t); t.roster = t.roster.filter(x => x !
 function movePlayer(p, toTid) { const t = T(p.t); t.roster = t.roster.filter(x => x !== p.id); for (const k in t.depth) t.depth[k] = t.depth[k].filter(x => x !== p.id); p.t = toTid; T(toTid).roster.push(p.id); }
 function buildOffers(fired) {
   const u = userT(); const c = G.coach;
-  // AI coaching changes
-  const openings = [];
-  for (const t of G.teams) { if (t.id === u.id) continue; if (t.w < expectedWins(t) - 3 && rnd() < 0.6) { openings.push(t.id); t.hc = pick(COACH_FIRST) + " " + pick(LAST); t.oc = genCoord(t.pres); t.dc = genCoord(t.pres); } else if (rnd() < 0.05) openings.push(t.id); }
+  const openings = runCarousel();
   const cap = fired ? u.pres - 8 : c.rep + 22;
   let offers = openings.filter(id => T(id).pres <= cap && (fired || T(id).pres > u.pres - 5)).sort((a, b) => T(b).pres - T(a).pres).slice(0, 3);
   if (fired && !offers.length) offers = [...G.teams].filter(t => t.id !== u.id).sort((a, b) => a.pres - b.pres).slice(0, 25).map(t => t.id).sort(() => rnd() - 0.5).slice(0, 2);
@@ -1153,19 +1391,33 @@ function buildOffers(fired) {
 }
 function takeJob(tid) {
   const old = userT(); const t = T(tid);
-  old.hc = pick(COACH_FIRST) + " " + pick(LAST);
+  const Y = G.year + 1, bumped = t.hc;
   G.userTeam = tid; t.hc = G.coach.name;
+  // the school you left gets its real hire if he's free, otherwise the coach you just bumped
+  const taken = new Set(G.teams.filter(x => x.id !== old.id).map(x => x.hc));
+  const real = realHC(old.abbr, Y);
+  old.hc = real && real !== "?" && !taken.has(real) ? real : bumped && bumped !== G.coach.name && !taken.has(bumped) ? bumped : marketCoach(Y, taken);
+  G.carousel = (G.carousel || []).filter(x => x.id !== tid && x.id !== old.id);
+  G.carousel.unshift({ id: tid, from: bumped, to: G.coach.name }, { id: old.id, from: G.coach.name, to: old.hc });
+  addNews(`${old.name} hires ${old.hc} to replace ${G.coach.name}.`);
   G.coach.contract = { yrs: 5, sal: Math.round(t.pres * 25 + 400) * 1000 };
   G.coach.sec = 60; G.offers = []; G.off.fired = false;
   G.board = []; for (const r of G.recruits) { delete r.pts[old.id]; }
   addNews(`${G.coach.name} leaves ${old.name} to become head coach at ${t.name}.`);
 }
 function poachStaff() {
-  const u = userT(); G.poached = [];
+  const u = userT(); G.poached = G.poached || [];
   for (const k of ["oc", "dc"]) if (u.w >= 10 && u[k].r >= 74 && rnd() < 0.35) { const dest = pick(G.teams.filter(t => t.id !== u.id && t.pres < u.pres)); G.poached.push([k, u[k].n, dest.name]); addNews(`${k === "oc" ? "Offensive" : "Defensive"} coordinator ${u[k].n} leaves to become head coach at ${dest.name}.`); u[k] = { n: "Vacant", r: 55, vac: 1 }; }
-  G.staffMarket = { oc: Array.from({ length: 5 }, () => mkCand()), dc: Array.from({ length: 5 }, () => mkCand()) };
+  G.staffMarket = { oc: staffMarketFor("oc"), dc: staffMarketFor("dc") };
 }
-function mkCand() { const r = clamp(Math.round(62 + gauss() * 9), 50, 92); return { n: pick(COACH_FIRST) + " " + pick(LAST), r, sal: Math.round((r - 45) * 0.04 * 10) / 10 }; }
+function mkCand() { const r = clamp(Math.round(62 + gauss() * 9), 50, 92); return { n: fakeCoach(), r, sal: Math.round((r - 45) * 0.04 * 10) / 10 }; }
+// staff market: a couple of the real hot coordinators of that era, plus the usual names
+function staffMarketFor(k) {
+  const Y = G.year + 1; const busy = new Set(G.teams.flatMap(t => [t.hc, t.oc.n, t.dc.n]));
+  const real = hotCoords(Y).filter(n => (DEF_COORDS.includes(n) ? "dc" : "oc") === k && !busy.has(n)).slice(0, 2)
+    .map(n => { const r = clamp(Math.round(80 + gauss() * 4), 74, 92); return { n, r, sal: Math.round((r - 45) * 0.045 * 10) / 10, real: 1 }; });
+  return [...real, ...Array.from({ length: 5 - real.length }, () => mkCand())];
+}
 function staffCost() { const u = userT(); return Math.round(((u.oc.sal || 0) + (u.dc.sal || 0)) * 10) / 10; }
 function budgetLeft() { const b = G.budget; return Math.round((b.total - staffCost() - b.fac * 1.5 - b.travel * 0.5 - (b.nilBuy || 0)) * 10) / 10; }
 function hireCoord(k, idx) { const c = G.staffMarket[k][idx]; const u = userT(); const oldSal = u[k].sal || 0; if (budgetLeft() + oldSal < c.sal) return "Not enough budget for that salary."; u[k] = { n: c.n, r: c.r, sal: c.sal }; G.staffMarket[k].splice(idx, 1); return null; }
@@ -1177,7 +1429,7 @@ function buildPortal() {
     for (const id of [...t.roster]) {
       const p = P(id); if (p.yr >= 4 || p.wo) continue;
       let ch = p.mor < 30 ? 0.4 : p.mor < 45 && p.ovr >= 68 ? 0.08 : 0;
-      if (t.id === u.id && hasPerk("Culture")) ch *= 0.5;
+      if (t.id === u.id) ch *= pv("Culture", [1, 0.5, 0.3, 0.15]);
       if (G.year >= 2021) ch *= 1.5;
       if (rnd() < ch) { if (t.id === u.id) G.leftUser.push({ n: playerName(p), pos: p.pos, ovr: p.ovr }); G.portal.push({ id: p.id, from: t.id, pitched: 0, ok: null }); }
     }
@@ -1219,7 +1471,7 @@ function progression() {
     if (p.yr <= 2) d *= 1.15;
     if (p.pers === "Hard Worker") d += 1.3; if (p.pers === "Lazy") d -= 1.3;
     if ((p.s.g || 0) >= 6) d += 0.8;
-    if (p.t === u) { if (hasPerk("Film Room")) d += 1; if (hasPerk("Strength Staff") && p.yr <= 2) d += 1.5; if (G.coach.arch === "Developer") d += 0.5; }
+    if (p.t === u) { d += pv("Film Room", [0, 1, 2, 3]); if (p.yr <= 2) d += pv("Strength Staff", [0, 1.5, 2.5, 4]); if (G.coach.arch === "Developer") d += 0.5; }
     d = Math.round(clamp(d, -3, 12));
     const old = p.ovr; p.ovr = clamp(p.ovr + d, 30, 99); if (p.ovr > p.pot) p.pot = p.ovr;
     recalcAttrs(p, p.ovr - old);
@@ -1234,8 +1486,9 @@ function renewContract() {
 }
 
 // ---------- coach perks ----------
-function canTakePerk(branch, idx) { const list = PERKS[branch]; if (hasPerk(list[idx][0])) return false; if (idx > 0 && !hasPerk(list[idx - 1][0])) return false; return G.coach.pts > 0; }
-function takePerk(branch, idx) { if (!canTakePerk(branch, idx)) return; G.coach.perks[PERKS[branch][idx][0]] = 1; levelCheck(); }
+// each skill has Bronze, Silver and Gold. A skill can only go as high as the one above it in its branch.
+function canTakePerk(branch, idx) { const list = PERKS[branch]; const next = perkLvl(list[idx][0]) + 1; if (next > 3) return false; if (idx > 0 && perkLvl(list[idx - 1][0]) < next) return false; return G.coach.pts > 0; }
+function takePerk(branch, idx) { if (!canTakePerk(branch, idx)) return; const n = PERKS[branch][idx][0]; G.coach.perks[n] = perkLvl(n) + 1; levelCheck(); }
 
 // ---------- imports ----------
 function parseCSV(text) {
@@ -1306,6 +1559,12 @@ function importRosters(text) {
   return { n, skip, teams: ids.length };
 }
 function useFictionalClass() { genClass(G.classYear); G.classSource = "fictional"; }
+
+// ---------- historic class ----------
+// the recruits who really signed with your school this year
+function historicClass(tid) { const id = tid == null ? G.userTeam : tid; return G.recruits.filter(r => r.rt === id).sort((a, b) => a.nr - b.nr); }
+function recruitOne(r) { if (r.sg && r.cm !== G.userTeam) return "He already signed with " + T(r.cm).name + "."; if (!G.board.includes(r.i)) G.board.push(r.i); if (r.of) return null; return userAct(r, "offer"); }
+function recruitHistoric() { let n = 0; for (const r of historicClass()) if (!r.of && !recruitOne(r)) n++; return n; }
 
 // ---------- recruiting needs & auto recruit ----------
 function posNeeds(tid) {
@@ -1528,6 +1787,7 @@ function renderOffseason() {
       ${G.off.fired ? `<section class="card accent"><div class="eyebrow">You were fired</div><p>Pick a new job to keep your career going.</p></section>` : ""}
       <section class="card"><div class="eyebrow">Job offers</div>${offers.length ? offers.map(t => `<div class="li">${chip(t)}<span class="grow"><b>${esc(t.name)}</b> <span class="dim small">${esc(t.conf)} · ${recStr(t)}</span></span><button class="btn sm pri" data-a="takejob" data-v="${t.id}">Accept</button></div>`).join("") : `<p class="dim">No offers this year.</p>`}
       <p class="dim small">Contract: ${c.contract.yrs} year${c.contract.yrs === 1 ? "" : "s"} left at $${fmt(c.contract.sal)}. Reputation ${Math.round(c.rep)}.</p></section>
+      ${(G.carousel || []).length ? `<section class="card"><div class="eyebrow">Coaching carousel · ${G.year + 1}</div>${G.carousel.map(m => `<div class="li">${chip(T(m.id))}<span class="grow"><b>${esc(T(m.id).name)}</b><br><span class="small">${esc(m.to)}</span>${m.from ? ` <span class="dim small">replaces ${esc(m.from)}</span>` : ""}</span>${G.offers.includes(m.id) && m.id !== G.userTeam ? `<span class="tag">Offer</span>` : ""}</div>`).join("")}</section>` : ""}
       ${G.poached.length ? `<section class="card"><div class="eyebrow">Staff departures</div>${G.poached.map(p => `<p>${esc(p[1])} (${p[0].toUpperCase()}) left for the head job at ${esc(p[2])}.</p>`).join("")}</section>` : ""}
       ${staffCard(true)}
       <section class="card"><div class="eyebrow">Budget · $${b.total}M</div>
@@ -1557,7 +1817,7 @@ function staffCard(hire) {
   const u = userT();
   const row = (k, l) => `<div class="li"><span class="pos">${k.toUpperCase()}</span><span class="grow">${esc(u[k].n)} <span class="dim small">${l}</span></span>${ovrPill(u[k].r)}<span class="dim small">$${u[k].sal || 0}M</span></div>`;
   let mk = "";
-  if (hire && G.staffMarket) mk = ["oc", "dc"].map(k => `<div class="eyebrow mt">Available ${k === "oc" ? "offensive" : "defensive"} coordinators</div>${G.staffMarket[k].map((cnd, i) => `<div class="li"><span class="grow">${esc(cnd.n)}</span>${ovrPill(cnd.r)}<span class="dim small">$${cnd.sal}M</span><button class="btn sm" data-a="hire" data-k="${k}" data-v="${i}">Hire</button></div>`).join("")}`).join("");
+  if (hire && G.staffMarket) mk = ["oc", "dc"].map(k => `<div class="eyebrow mt">Available ${k === "oc" ? "offensive" : "defensive"} coordinators</div>${G.staffMarket[k].map((cnd, i) => `<div class="li"><span class="grow">${esc(cnd.n)}${cnd.real ? ` <span class="tag good">Hot name</span>` : ""}</span>${ovrPill(cnd.r)}<span class="dim small">$${cnd.sal}M</span><button class="btn sm" data-a="hire" data-k="${k}" data-v="${i}">Hire</button></div>`).join("")}`).join("");
   return `<section class="card"><div class="eyebrow">Coordinators</div>${row("oc", "Offense")}${row("dc", "Defense")}${mk}</section>`;
 }
 
@@ -1605,7 +1865,7 @@ function renderRecruit() {
   let body = "";
   if (UI.recSub === "board") {
     const list = G.board.map(i => G.recruits[i]);
-    body = list.length ? list.map(recCard).join("") : `<section class="card"><p>Your board is empty. Find recruits and add them, then call, offer and bring them to home games.</p><button class="btn pri" data-a="set" data-k="recSub" data-v="find">Find recruits</button></section>`;
+    body = list.length ? list.map(recCard).join("") : `<section class="card"><p>Your board is empty. Find recruits and add them, then call, offer and bring them to home games.</p><div class="row gap"><button class="btn pri" data-a="set" data-k="recSub" data-v="find">Find recruits</button>${historicClass().length ? `<button class="btn" data-a="hrecall">Recruit historical class</button>` : ""}</div></section>`;
   } else if (UI.recSub === "find") {
     const q = (UI.recQ || "").trim().toLowerCase();
     let list = G.recruits.filter(r => (q ? (r.f + " " + r.l).toLowerCase().includes(q) : true) && (UI.recPos === "All" || r.pos === UI.recPos) && (!UI.recStars || r.stars === UI.recStars) && (!UI.recState || r.st === UI.recState) && (q || !r.sg));
@@ -1618,8 +1878,10 @@ function renderRecruit() {
     <div class="row gap"><select class="inp" id="recStars" data-ch="recStars"><option value="0">All stars</option>${[5, 4, 3, 2].map(s => `<option value="${s}" ${UI.recStars === s ? "selected" : ""}>${s} stars</option>`).join("")}</select>
     <select class="inp" id="recState" data-ch="recState"><option value="">All states</option>${[...STATES].sort().map(s => `<option ${UI.recState === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
     <p class="dim small">${total} recruit${total === 1 ? "" : "s"}${q ? ` matching "${esc(UI.recQ.trim())}"` : ""}</p>
-    <div class="list card flush">${list.map(r => `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span> ${r.cm >= 0 ? `<span class="tag ${r.cm === G.userTeam ? "good" : ""}">${esc(T(r.cm).abbr)}${r.sg ? " · signed" : ""}</span>` : ""}</span>${r.sg ? "" : G.board.includes(r.i) ? `<span class="tag">On board</span>` : `<button class="btn sm" data-a="board" data-v="${r.i}" ${G.board.length >= 35 ? "disabled" : ""}>+ Board</button>`}</div>`).join("") || `<p class="dim pad">No recruits match. Check the spelling or clear the position and star filters.</p>`}</div>
+    <div class="list card flush">${list.map(r => `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span> ${r.cm >= 0 ? `<span class="tag ${r.cm === G.userTeam ? "good" : ""}">${esc(T(r.cm).abbr)}${r.sg ? " · signed" : ""}</span>` : ""}</span>${r.sg ? "" : G.board.includes(r.i) ? `<span class="tag">On board</span>` : `<button class="btn sm" data-a="board" data-v="${r.i}" ${G.board.length >= 60 ? "disabled" : ""}>+ Board</button>`}</div>`).join("") || `<p class="dim pad">No recruits match. Check the spelling or clear the position and star filters.</p>`}</div>
     ${total > UI.recLimit ? `<button class="btn wide" data-a="moreRec">Show more</button>` : ""}`;
+  } else if (UI.recSub === "hist") {
+    body = historicTab();
   } else {
     const mine = G.recruits.filter(r => r.cm === G.userTeam).sort((a, b) => a.nr - b.nr);
     const pts = {}; for (const r of G.recruits) if (r.cm >= 0) pts[r.cm] = (pts[r.cm] || 0) + ({ 5: 200, 4: 100, 3: 40, 2: 12, 1: 5 }[r.stars] || 5);
@@ -1627,7 +1889,22 @@ function renderRecruit() {
     body = `<section class="card"><div class="eyebrow">Your commits</div>${mine.map(r => `<button class="li" data-a="recruit" data-v="${r.i}"><span class="pos">${r.pos}</span><span class="grow">${esc(r.f + " " + r.l)} <span class="dim small">${r.st}</span></span><span class="small">${stars(r.stars)}</span>${r.sg ? `<span class="tag good">Signed</span>` : ""}</button>`).join("") || `<p class="dim">No commits yet.</p>`}</section>
     <section class="card"><div class="eyebrow">Class rankings so far</div>${rank.slice(0, 15).map(([id, p], i) => `<div class="li ${+id === G.userTeam ? "me" : ""}"><span class="num">${i + 1}</span><span class="grow">${esc(T(+id).name)}</span><span class="num dim">${classCount(+id)} · ${p}</span></div>`).join("")}</section>`;
   }
-  return `${head}${autoCard()}${seg("recSub", [["board", `Board (${G.board.length})`], ["find", "Find"], ["class", "Class"]])}${body}`;
+  return `${head}${autoCard()}${seg("recSub", [["board", `Board (${G.board.length})`], ["find", "Find"], ["hist", "Historic"], ["class", "Class"]])}${body}`;
+}
+function historicTab() {
+  const u = userT(), list = historicClass();
+  if (!list.length) return `<section class="card"><div class="eyebrow">${G.classYear} · ${esc(u.name)} real signing class</div><p>${G.classSource === "upload" ? `Nobody in this uploaded class is listed as signing with ${esc(u.name)}.` : `This is a generated class, so there's no real one to show.`} Upload the real ${G.classYear} class (it needs a college column) to see who actually signed here.</p><button class="btn" data-a="more" data-v="upload">Upload class</button></section>`;
+  const open = Math.max(0, classCap(u.id) - classCount(u.id));
+  const left = list.filter(r => !r.of && !(r.sg && r.cm !== u.id)).length;
+  const row = r => {
+    const st = r.cm === u.id ? `<span class="tag good">${r.sg ? "Signed" : "Committed"}</span>` : r.sg ? `<span class="tag bad">Signed · ${esc(T(r.cm).abbr)}</span>` : r.of ? `<span class="tag">Offered</span>` : `<button class="btn sm pri" data-a="hrec" data-v="${r.i}">Recruit</button>`;
+    return `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${esc(r.city)}, ${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span>${r.cm >= 0 && r.cm !== u.id && !r.sg ? ` <span class="tag">Committed · ${esc(T(r.cm).abbr)}</span>` : ""}</span>${st}</div>`;
+  };
+  return `<section class="card"><div class="eyebrow">${G.classYear} · ${esc(u.name)} real signing class</div>
+    <p>${list.length} player${list.length === 1 ? "" : "s"} really signed here. Recruit them one at a time, or all at once. Players you offer sign with you 99% of the time.</p>
+    <p class="small">${open} scholarship${open === 1 ? "" : "s"} open${list.length > open ? ` · <b>more players than open scholarships</b>, so the top-ranked ones sign first` : ""}</p>
+    <button class="btn pri wide" data-a="hrecall" ${left ? "" : "disabled"}>${left ? `Recruit historical class (${left})` : "Whole class recruited"}</button></section>
+    <div class="list card flush">${list.map(row).join("")}</div>`;
 }
 function autoCard() {
   const a = autoSettings();
@@ -1716,7 +1993,8 @@ function renderMore() {
     <div class="meter"><span class="small">Reputation</span>${bar(c.rep, 100)}<span class="num small">${Math.round(c.rep)}</span></div>
     <p class="small">Contract: ${c.contract.yrs} year${c.contract.yrs === 1 ? "" : "s"} left · $${fmt(c.contract.sal)} a year · ${expectedWins(userT())} wins expected</p>
     <p class="small"><b>${c.pts || 0}</b> skill point${c.pts === 1 ? "" : "s"} to spend. Earn XP by winning, beating ranked teams and rivals, titles and top recruiting classes.</p></section>
-    ${Object.entries(PERKS).map(([br, list]) => `<section class="card"><div class="eyebrow">${br}</div>${list.map(([n, d], i) => `<div class="li"><span class="grow"><b>${n}</b><br><span class="dim small">${d}</span></span>${hasPerk(n) ? `<span class="tag good">Unlocked</span>` : `<button class="btn sm" data-a="perk" data-k="${br}" data-v="${i}" ${canTakePerk(br, i) ? "" : "disabled"}>Unlock</button>`}</div>`).join("")}</section>`).join("")}
+    ${Object.entries(PERKS).map(([br, list]) => `<section class="card"><div class="eyebrow">${br}</div>${list.map(([n, d, tiers], i) => { const lv = perkLvl(n); return `<div class="li perk"><span class="grow"><b>${n}</b>${lv ? ` <span class="tier t${lv}">${TIERS[lv]}</span>` : ""}<br><span class="dim small">${d}</span><span class="pips">${tiers.map((tx, k) => `<span class="pip t${k + 1} ${lv > k ? "on" : ""}"><b>${TIERS[k + 1]}</b> ${tx}</span>`).join("")}</span></span>${lv >= 3 ? `<span class="tag good">Maxed</span>` : `<button class="btn sm" data-a="perk" data-k="${br}" data-v="${i}" ${canTakePerk(br, i) ? "" : "disabled"}>${TIERS[lv + 1]}</button>`}</div>`; }).join("")}</section>`).join("")}
+    <p class="dim small pad">Each skill goes Bronze, Silver, Gold for one point each. A skill can only be as high as the one above it in its branch.</p>
     <section class="card"><div class="eyebrow">Coaching history</div>${c.seasons.slice().reverse().map(s => `<div class="li"><span class="num">${s.y}</span><span class="grow">${esc(s.tn)}${s.nc ? ` <span class="tag good">National champs</span>` : s.cc ? ` <span class="tag good">Conf. champs</span>` : ""}</span><span class="num">${s.w}-${s.l}</span><span class="dim small">${s.rk ? "#" + s.rk : "NR"}</span></div>`).join("") || `<p class="dim">First season underway.</p>`}</section>`;
   }
   if (v === "staff") return `${back}${staffCard(G.phase === "off" && G.off.step === "jobs")}<section class="card"><div class="eyebrow">Budget</div><p>$${G.budget.total}M this year. Staff salaries take $${staffCost()}M. You set spending for next season in the offseason, on the Staff & Jobs step.</p>${G.year >= 2021 ? `<p>NIL money left this season: $${fmt(userT().nil || 0)}</p>` : `<p class="dim small">NIL arrives in 2021.</p>`}</section>`;
@@ -1831,7 +2109,7 @@ function recruitSheet(r) {
   ${r.real && r.rs ? `<p class="dim small">In real life he signed with ${esc(r.rs)}.</p>` : ""}
   <div class="eyebrow mt">Leaders</div>${sh.map(([id, pc]) => `<div class="ib ${id === G.userTeam ? "me" : ""}"><span class="small">${esc(T(id).name)}</span>${bar(pc, 100)}<span class="num small">${pc}%</span></div>`).join("")}
   ${r.cm >= 0 ? `<p>Committed to <b>${esc(T(r.cm).name)}</b>${r.sg ? " and signed" : ""}.</p>` : ""}
-  ${G.board.includes(r.i) ? "" : `<button class="btn pri" data-a="board" data-v="${r.i}" ${G.board.length >= 35 ? "disabled" : ""}>Add to board</button>`}`;
+  ${G.board.includes(r.i) ? "" : `<button class="btn pri" data-a="board" data-v="${r.i}" ${G.board.length >= 60 ? "disabled" : ""}>Add to board</button>`}`;
 }
 // ===== CONTROLLER, SAVES, BOOT =====
 let DB = null, UID = null, DL = null, saving = false, saveAgain = false, saveTimer = null;
@@ -1929,7 +2207,9 @@ document.addEventListener("click", e => {
     case "game": UI.modal = { type: "game", id: +v }; UI.keepScroll = true; render(); return;
     case "player": UI.modal = { type: "player", id: +v, edit: !!el.dataset.edit }; UI.keepScroll = true; render(); return;
     case "recruit": UI.modal = { type: "recruit", id: +v }; UI.keepScroll = true; render(); return;
-    case "board": if (!G.board.includes(+v) && G.board.length < 35) G.board.push(+v); UI.keepScroll = true; render(); toast("Added to your board."); return;
+    case "hrec": { const err = recruitOne(G.recruits[+v]); UI.keepScroll = true; render(); toast(err || "Offered. He's on your board."); saveSoon(); return; }
+    case "hrecall": { const n = recruitHistoric(); UI.keepScroll = true; render(); toast(n ? `Offered ${n} player${n === 1 ? "" : "s"} from the real class. They'll commit over the next few weeks.` : "Nobody left to recruit from the real class."); saveSoon(); return; }
+    case "board": if (!G.board.includes(+v) && G.board.length < 60) G.board.push(+v); UI.keepScroll = true; render(); toast("Added to your board."); return;
     case "unboard": G.board = G.board.filter(x => x !== +v); UI.keepScroll = true; render(); return;
     case "ract": { const err = userAct(G.recruits[+v], k, 50000); UI.keepScroll = true; if (err) toast(err); else { const r = G.recruits[+v]; toast(k === "scout" ? `Scouted: ${r.ovr} OVR, ${r.pot} potential.` : k === "official" || k === "unofficial" ? "Visit set for this week's home game." : "Done."); } saveSoon(); return; }
     case "autoon": { const s2 = autoSettings(); s2.on = !s2.on; UI.keepScroll = true; render(); toast(s2.on ? "Auto recruit will run every week." : "Auto recruit is off."); saveSoon(); return; }
