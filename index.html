@@ -21,6 +21,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 * { box-sizing: border-box; }
 html, body { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
 input, select, textarea { font-size: 16px !important; }
+.search { display: flex; gap: 6px; align-items: center; }
+.search .inp { flex: 1; min-width: 0; }
+.pad { padding: 12px 14px; }
 .need { font-weight: 800; color: var(--team); margin-left: 2px; }
 .chips button.on .need { color: inherit; }
 .need.zero { color: var(--muted); font-weight: 600; }
@@ -1604,16 +1607,18 @@ function renderRecruit() {
     const list = G.board.map(i => G.recruits[i]);
     body = list.length ? list.map(recCard).join("") : `<section class="card"><p>Your board is empty. Find recruits and add them, then call, offer and bring them to home games.</p><button class="btn pri" data-a="set" data-k="recSub" data-v="find">Find recruits</button></section>`;
   } else if (UI.recSub === "find") {
-    let list = G.recruits.filter(r => (UI.recPos === "All" || r.pos === UI.recPos) && (!UI.recStars || r.stars === UI.recStars) && (!UI.recState || r.st === UI.recState) && !r.sg);
+    const q = (UI.recQ || "").trim().toLowerCase();
+    let list = G.recruits.filter(r => (q ? (r.f + " " + r.l).toLowerCase().includes(q) : true) && (UI.recPos === "All" || r.pos === UI.recPos) && (!UI.recStars || r.stars === UI.recStars) && (!UI.recState || r.st === UI.recState) && (q || !r.sg));
     list.sort((a, b) => a.nr - b.nr);
     const total = list.length; list = list.slice(0, UI.recLimit);
     const nd = posNeeds();
-    body = `<div class="chips">${["All", ...POS].map(p => `<button class="${UI.recPos === p ? "on" : ""}" data-a="set" data-k="recPos" data-v="${p}">${p}${p === "All" ? "" : ` <b class="need ${nd[p] ? "" : "zero"}">${nd[p]}</b>`}</button>`).join("")}</div>
+    body = `<div class="search"><input type="text" class="inp" id="recQ" data-in="recQ" placeholder="Search recruits by name" value="${esc(UI.recQ || "")}" autocomplete="off" enterkeyhint="search">${UI.recQ ? `<button class="btn sm ghost" data-a="clearQ" aria-label="Clear search">✕</button>` : ""}</div>
+    <div class="chips">${["All", ...POS].map(p => `<button class="${UI.recPos === p ? "on" : ""}" data-a="set" data-k="recPos" data-v="${p}">${p}${p === "All" ? "" : ` <b class="need ${nd[p] ? "" : "zero"}">${nd[p]}</b>`}</button>`).join("")}</div>
     <p class="dim small">Bold number: how many more at each position you need for next year's roster.</p>
     <div class="row gap"><select class="inp" id="recStars" data-ch="recStars"><option value="0">All stars</option>${[5, 4, 3, 2].map(s => `<option value="${s}" ${UI.recStars === s ? "selected" : ""}>${s} stars</option>`).join("")}</select>
     <select class="inp" id="recState" data-ch="recState"><option value="">All states</option>${[...STATES].sort().map(s => `<option ${UI.recState === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
-    <p class="dim small">${total} recruits</p>
-    <div class="list card flush">${list.map(r => `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span> ${r.cm >= 0 ? `<span class="tag ${r.cm === G.userTeam ? "good" : ""}">${esc(T(r.cm).abbr)}</span>` : ""}</span>${G.board.includes(r.i) ? `<span class="tag">On board</span>` : `<button class="btn sm" data-a="board" data-v="${r.i}" ${G.board.length >= 35 ? "disabled" : ""}>+ Board</button>`}</div>`).join("")}</div>
+    <p class="dim small">${total} recruit${total === 1 ? "" : "s"}${q ? ` matching "${esc(UI.recQ.trim())}"` : ""}</p>
+    <div class="list card flush">${list.map(r => `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span> ${r.cm >= 0 ? `<span class="tag ${r.cm === G.userTeam ? "good" : ""}">${esc(T(r.cm).abbr)}${r.sg ? " · signed" : ""}</span>` : ""}</span>${r.sg ? "" : G.board.includes(r.i) ? `<span class="tag">On board</span>` : `<button class="btn sm" data-a="board" data-v="${r.i}" ${G.board.length >= 35 ? "disabled" : ""}>+ Board</button>`}</div>`).join("") || `<p class="dim pad">No recruits match. Check the spelling or clear the position and star filters.</p>`}</div>
     ${total > UI.recLimit ? `<button class="btn wide" data-a="moreRec">Show more</button>` : ""}`;
   } else {
     const mine = G.recruits.filter(r => r.cm === G.userTeam).sort((a, b) => a.nr - b.nr);
@@ -1929,6 +1934,7 @@ document.addEventListener("click", e => {
     case "ract": { const err = userAct(G.recruits[+v], k, 50000); UI.keepScroll = true; if (err) toast(err); else { const r = G.recruits[+v]; toast(k === "scout" ? `Scouted: ${r.ovr} OVR, ${r.pot} potential.` : k === "official" || k === "unofficial" ? "Visit set for this week's home game." : "Done."); } saveSoon(); return; }
     case "autoon": { const s2 = autoSettings(); s2.on = !s2.on; UI.keepScroll = true; render(); toast(s2.on ? "Auto recruit will run every week." : "Auto recruit is off."); saveSoon(); return; }
     case "autorun": { const h = G.hours; const res = runAutoRecruit(); UI.keepScroll = true; render(); toast(res.acts ? `Auto recruit used ${h - G.hours} hours on ${G.board.length} recruits.` : "Nothing left to do this week."); saveSoon(); return; }
+    case "clearQ": UI.recQ = ""; UI.keepScroll = true; render(); return;
     case "moreRec": UI.recLimit += 50; UI.keepScroll = true; render(); return;
     case "autodepth": { const t = userT(); if (G.autoDepth === false) { G.autoDepth = true; autoDepth(t); } else { G.autoDepth = false; cleanDepth(t); } UI.keepScroll = true; render(); saveSoon(); return; }
     case "dmove": { const t = userT(); if (G.autoDepth !== false) { G.autoDepth = false; } const arr = t.depth[UI.depthPos]; const i = +v, j = i + +el.dataset.d; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; UI.keepScroll = true; render(); saveSoon(); return; }
@@ -1956,7 +1962,8 @@ document.addEventListener("click", e => {
     case "ngstart": { const ng = UI.ng; $app.innerHTML = `<div class="start"><div class="hero"><div class="eyebrow">Building 2009</div><h1>Setting up 120 programs…</h1></div></div>`; setTimeout(() => { newGame({ team: ng.team, coachName: ng.name.trim(), arch: ng.arch }); UI.ng = null; UI.tab = "home"; render(); window.scrollTo(0, 0); saveGame(); }, 30); return; }
   }
 });
-document.addEventListener("input", e => { const el = e.target; if (el.dataset.ch === "ngname") { UI.ng.name = el.value; const b = document.querySelector('[data-a="ngnext"]'); if (b) b.disabled = !el.value.trim(); } });
+document.addEventListener("input", e => { const el = e.target;
+  if (el.dataset.in === "recQ") { UI.recQ = el.value; UI.recLimit = 50; const pos = el.selectionStart; UI.keepScroll = true; render(); const n = document.getElementById("recQ"); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) { } } return; } if (el.dataset.ch === "ngname") { UI.ng.name = el.value; const b = document.querySelector('[data-a="ngnext"]'); if (b) b.disabled = !el.value.trim(); } });
 document.addEventListener("change", e => {
   const el = e.target, k = el.dataset.ch; if (!k) return;
   const t = G ? userT() : null;
