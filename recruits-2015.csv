@@ -1,0 +1,927 @@
+name,position,stars,rating,rank,state,city,high_school,height,weight,juco,college
+Byron Cowart,SDE,5,0.9990,1,FL,Seffner,Armwood,6-4,250,no,Auburn
+Martez Ivey,OT,5,0.9990,2,FL,Apopka,Apopka,6-6,275,no,Florida
+Trenton Thompson,DT,5,0.9990,3,GA,Albany,Westover,6-3,313,no,Georgia
+Iman Marshall,CB,5,0.9990,4,CA,Long Beach,Long Beach Poly,6-1,190,no,USC
+Derwin James,S,5,0.9980,5,FL,Auburndale,Haines City,6-2,201,no,Florida State
+Kahlil McKenzie,DT,5,0.9970,6,CA,Concord,Clayton Valley,6-3,339,no,Tennessee
+CeCe Jefferson,SDE,5,0.9950,7,FL,Glen St. Mary,Baker County,6-2,275,no,Florida
+Josh Sweat,WDE,5,0.9950,8,VA,Chesapeake,Oscar Smith,6-5,240,no,Florida State
+Kevin Toliver II,CB,5,0.9950,9,FL,Jacksonville,Trinity Christian Academy,6-2,185,no,LSU
+Calvin Ridley,WR,5,0.9930,10,FL,Pompano Beach,Monarch,6-0,170,no,Alabama
+Malik Jefferson,OLB,5,0.9930,11,TX,Mesquite,Poteet,6-3,215,no,Texas
+Josh Rosen,PRO,5,0.9930,12,CA,Bellflower,St. John Bosco,6-4,205,no,UCLA
+Tarvarus McFadden,CB,5,0.9920,13,FL,Fort Lauderdale,American Heritage,6-2,198,no,Florida State
+Terry Beckner Jr.,DT,5,0.9920,14,IL,East St. Louis,East St. Louis,6-4,293,no,Missouri
+Daylon Mack,DT,5,0.9920,15,TX,Gladewater,Gladewater,6-1,330,no,Texas A&M
+Deon Cain,WR,5,0.9910,16,FL,Tampa,Tampa Bay Tech,6-2,194,no,Clemson
+Canton Kaumatule,SDE,5,0.9910,17,HI,Honolulu,Punahou,6-7,290,no,Oregon
+Keisean Lucier-South,WDE,5,0.9910,18,CA,Orange,Orange Lutheran,6-4,208,no,UCLA
+Kendall Sheffield,CB,5,0.9900,19,TX,Missouri City,Fort Bend Marshall,6-0,181,no,Alabama
+Blake Barnett,PRO,5,0.9900,20,CA,Corona,Santiago,6-5,200,no,Alabama
+Mitch Hyatt,OT,5,0.9900,21,GA,Suwanee,North Gwinnett,6-5,272,no,Clemson
+George Campbell,WR,5,0.9900,22,FL,Tarpon Springs,East Lake,6-3,184,no,Florida State
+Rasheem Green,DT,5,0.9900,23,CA,Gardena,Junipero Serra,6-5,275,no,USC
+Christian Wilkins,DT,5,0.9890,24,CT,Suffield,Suffield Academy,6-4,290,no,Clemson
+Christian Kirk,WR,5,0.9890,25,AZ,Scottsdale,Saguaro,5-10,191,no,Texas A&M
+Daron Payne,DT,5,0.9880,26,AL,Birmingham,Shades Valley,6-2,325,no,Alabama
+Tyron Johnson,WR,5,0.9880,27,LA,New Orleans,Warren Easton,6-1,191,no,LSU
+Terry Godwin,ATH,5,0.9880,28,GA,Hogansville,Callaway,6-0,168,no,Georgia
+Chuma Edoga,OG,5,0.9880,29,GA,Powder Springs,McEachern,6-3,280,no,USC
+Minkah Fitzpatrick,CB,5,0.9870,30,NJ,Jersey City,St. Peter's Prep,6-1,198,no,Alabama
+Damien Harris,RB,5,0.9870,31,KY,Berea,Madison Southern,5-11,205,no,Alabama
+Soso Jamabo,RB,5,0.9860,32,TX,Plano,Plano West,6-3,210,no,UCLA
+Osa Masina,OLB,5,0.9860,33,UT,Salt Lake City,Brighton,6-4,230,no,USC
+Justin Hilliard,OLB,5,0.9850,34,OH,Cincinnati,St. Xavier,6-0,225,no,Ohio State
+Kyler Murray,DUAL,5,0.9850,35,TX,Allen,Allen,5-10,180,no,Texas A&M
+Maea Teuhema,OG,5,0.9840,36,TX,Keller,Keller,6-5,340,no,LSU
+Kyle Phillips,SDE,5,0.9840,37,TN,Nashville,Hillsboro,6-4,250,no,Tennessee
+Jarrett Stidham,DUAL,4,0.9830,38,TX,Stephenville,Stephenville,6-4,195,no,Baylor
+Jacques Patrick,RB,4,0.9830,39,FL,Orlando,Timber Creek,6-2,230,no,Florida State
+Porter Gustin,OLB,4,0.9830,40,UT,Salem,Salem Hills,6-5,245,no,USC
+Ronald Jones II,RB,4,0.9830,41,TX,McKinney,McKinney North,6-0,185,no,USC
+Damarkus Lodge,WR,4,0.9820,42,TX,Cedar Hill,Cedar Hill,6-3,190,no,Ole Miss
+Deionte Thompson,S,4,0.9810,43,TX,Orange,West Orange-Stark,6-2,181,no,Alabama
+Kerryon Johnson,ATH,4,0.9810,44,AL,Madison,Madison Academy,6-0,200,no,Auburn
+Derrius Guice,RB,4,0.9790,45,LA,Baton Rouge,Baton Rouge Catholic,5-11,213,no,LSU
+Brandon Wimbush,DUAL,4,0.9790,46,NJ,Jersey City,St. Peter's Prep,6-2,205,no,Notre Dame
+Preston Williams,WR,4,0.9770,47,GA,Hampton,Lovejoy,6-4,191,no,Tennessee
+Roquan Smith,OLB,4,0.9770,48,GA,Montezuma,Macon County,6-2,207,no,Georgia
+John Houston Jr.,OLB,4,0.9770,49,CA,Gardena,Junipero Serra,6-3,211,no,USC
+Donte Jackson,ATH,4,0.9760,50,LA,New Orleans,Riverdale,5-11,164,no,LSU
+Lester Cotton,OG,4,0.9750,51,AL,Tuscaloosa,Central,6-4,325,no,Alabama
+Javon Patterson,OG,4,0.9750,52,MS,Petal,Petal,6-3,317,no,Ole Miss
+Taj Griffin,APB,4,0.9750,53,GA,Powder Springs,McEachern,5-10,175,no,Oregon
+Breiden Fehoko,DT,4,0.9750,54,HI,Honolulu,Farrington,6-3,290,no,Texas Tech
+Shy Tuttle,DT,4,0.9740,55,NC,Lexington,North Davidson,6-3,320,no,Tennessee
+Drew Richmond,OT,4,0.9740,56,TN,Memphis,Memphis University School,6-5,310,no,Tennessee
+Jalen Dalton,WDE,4,0.9740,57,NC,Clemmons,West Forsyth,6-5,235,no,North Carolina
+Jamal Peters,S,4,0.9730,58,MS,Bassfield,Bassfield,6-2,206,no,Mississippi State
+Marvell Tell III,S,4,0.9730,59,CA,Encino,Crespi,6-2,188,no,USC
+Richie Petitbon,OG,4,0.9700,60,DC,Washington,Gonzaga,6-4,301,no,Alabama
+Jerome Baker,ATH,4,0.9700,61,OH,Cleveland,Benedictine,6-2,203,no,Ohio State
+Alize Mack,TE,4,0.9690,62,NV,Las Vegas,Bishop Gorman,6-5,218,no,Notre Dame
+Deondre Francois,PRO,4,0.9680,63,FL,Orlando,IMG Academy,6-1,195,no,Florida State
+Leo Lewis,ILB,4,0.9680,64,MS,Brookhaven,Brookhaven,6-3,225,no,Mississippi State
+DeChaun Holiday,CB,4,0.9680,65,CA,San Marcos,Mission Hills,6-3,195,no,UCLA
+Jonathan Ledbetter,SDE,4,0.9680,66,GA,Tucker,Tucker,6-4,265,no,Georgia
+Brady White,PRO,4,0.9670,67,CA,Santa Clarita,Hart,6-1,180,no,Arizona State
+Jacob Daniel,DT,4,0.9670,68,CA,Clovis,Clovis North,6-4,310,no,USC
+Trent Irwin,WR,4,0.9650,69,CA,Newhall,Hart,6-2,189,no,Stanford
+Brian Cole,ATH,4,0.9640,70,MI,Saginaw,Heritage,6-2,190,no,Michigan
+Neville Gallimore,DT,4,0.9640,71,,St. Catharines,Canada Prep Football Academy,6-2,330,no,Oklahoma
+Mike Weber,RB,4,0.9630,72,MI,Detroit,Cass Technical,5-10,219,no,Ohio State
+Holton Hill,CB,4,0.9630,73,TX,Houston,Lamar,6-2,184,no,Texas
+Ykili Ross,CB,4,0.9630,74,CA,Riverside,Polytechnic,6-1,175,no,USC
+Jake Browning,PRO,4,0.9630,75,CA,Folsom,Folsom,6-2,185,no,Washington
+Ray-Ray McCloud,ATH,4,0.9620,76,FL,Tampa,Sickles,5-9,175,no,Clemson
+Johnny Frasier,RB,4,0.9620,77,NC,Princeton,Princeton,5-10,229,no,NC State
+Anthony Wheeler,OLB,4,0.9620,78,TX,Dallas,Skyline,6-2,225,no,Texas
+Chris Warren III,RB,4,0.9620,79,TX,Rockwall,Rockwall,6-2,240,no,Texas
+Ricky Town,PRO,4,0.9620,80,CA,Ventura,St. Bonaventure,6-3,206,no,USC
+Mark Walton,RB,4,0.9610,81,FL,Miami,Booker T. Washington,5-10,179,no,Miami
+Torrance Gibson,ATH,4,0.9610,82,FL,Fort Lauderdale,American Heritage,6-4,204,no,Ohio State
+JoJo Wicker,SDE,4,0.9600,83,CA,Long Beach,Long Beach Poly,6-2,278,no,Arizona State
+Ricky DeBerry,ILB,4,0.9600,84,VA,Mechanicsville,Atlee,6-3,240,no,Oklahoma
+Chris Clark,TE,4,0.9600,85,CT,Avon,Avon Old Farms,6-6,247,no,UCLA
+Arden Key,WDE,4,0.9590,86,GA,Lithonia,Hapeville Charter,6-5,230,no,LSU
+Tristen Hoge,OC,4,0.9590,87,ID,Pocatello,Highland,6-4,276,no,Notre Dame
+Natrez Patrick,WDE,4,0.9590,88,GA,Atlanta,Mays,6-3,259,no,Georgia
+Albert Huggins,DT,4,0.9580,89,SC,Orangeburg,Orangeburg-Wilkinson,6-3,283,no,Clemson
+Daylon Charlot,WR,4,0.9570,90,LA,Patterson,Patterson,6-0,193,no,Alabama
+Kris Boyd,CB,4,0.9570,91,TX,Gilmer,Gilmer,6-0,185,no,Texas
+Mark Fields,CB,4,0.9560,92,NC,Cornelius,Hough,5-11,190,no,Clemson
+Abdul Bello,OT,4,0.9560,93,FL,Montverde,Montverde Academy,6-6,295,no,Florida State
+Dexter Williams,RB,4,0.9560,94,FL,Winter Garden,West Orange,6-0,192,no,Notre Dame
+Jashon Cornell,SDE,4,0.9560,95,MN,Saint Paul,Cretin Derham Hall,6-4,260,no,Ohio State
+Isaiah Langley,CB,4,0.9560,96,CA,Pleasanton,Foothill,6-0,161,no,USC
+Drew Lock,PRO,4,0.9550,97,MO,Lee's Summit,Lee's Summit,6-4,205,no,Missouri
+Eric Glover-Williams,CB,4,0.9540,98,OH,Canton,McKinley,5-11,165,no,Ohio State
+Da'Vante Phillips,WR,4,0.9530,99,FL,Miami,Miami Central,6-2,204,no,Florida State
+Travis Jonsen,DUAL,4,0.9530,100,CA,Anaheim,Servite,6-2,189,no,Oregon
+Isaiah Prince,OT,4,0.9530,101,MD,Greenbelt,Eleanor Roosevelt,6-6,272,no,Ohio State
+Toby Weathersby,OT,4,0.9520,102,TX,Houston,Westfield,6-5,295,no,LSU
+Chidi Okeke,OT,4,0.9520,103,GA,Ludowici,Faith Baptist Christian Academy,6-6,305,no,LSU
+Van Jefferson,WR,4,0.9520,104,TN,Brentwood,Ravenwood,6-2,183,no,Ole Miss
+Jordan Whitehead,CB,4,0.9520,105,PA,Monaca,Central Valley,5-11,185,no,Pittsburgh
+Josh Wariboko-Alali,OG,4,0.9520,106,OK,Oklahoma City,Casady School,6-4,315,no,UCLA
+Darian Roseboro,SDE,4,0.9510,107,NC,Lincolnton,Lincolnton,6-4,285,no,NC State
+Matthew Burrell,OG,4,0.9510,108,VA,Woodbridge,C. D. Hylton,6-4,321,no,Ohio State
+Tim Settle,DT,4,0.9510,109,VA,Manassas,Unity Reed,6-2,361,no,Virginia Tech
+Nyheim Hines,APB,4,0.9490,110,NC,Garner,Garner,5-9,187,no,NC State
+Prince Tega Wanogho Jr.,SDE,4,0.9480,111,AL,Elmore,Edgewood Academy,6-8,250,no,Auburn
+Shaun Crawford,CB,4,0.9480,112,OH,Lakewood,St. Edward,5-10,170,no,Notre Dame
+Mekhi Brown,WDE,4,0.9470,113,GA,Columbus,Carver,6-5,222,no,Alabama
+Clelin Ferrell,WDE,4,0.9470,114,VA,Richmond,Benedictine,6-5,225,no,Clemson
+D'Andre Walker,WDE,4,0.9470,115,GA,Fairburn,Langston Hughes,6-3,209,no,Georgia
+Jordan Scarlett,RB,4,0.9460,116,FL,Fort Lauderdale,St. Thomas Aquinas,5-11,202,no,Florida
+Saquon Barkley,RB,4,0.9460,117,PA,Whitehall,Whitehall,5-11,190,no,Penn State
+Frank Buncom IV,CB,4,0.9460,118,CA,San Diego,St Augustine,6-2,190,no,Stanford
+Jeff Holland,OLB,4,0.9450,119,FL,Jacksonville,Trinity Christian Academy,6-2,230,no,Auburn
+Jake Fruhmorgen,OT,4,0.9450,120,FL,Tampa,Plant,6-5,280,no,Clemson
+Eric Swinney,RB,4,0.9450,121,GA,Tyrone,Sandy Creek,5-10,188,no,Ole Miss
+Alex Ofodile,WR,4,0.9450,122,MO,Columbia,Rock Bridge,6-2,185,no,Oregon
+John Reid,CB,4,0.9450,123,PA,Philadelphia,St. Joseph's,5-10,180,no,Penn State
+Eric Lee,CB,4,0.9440,124,CO,Littleton,Valor Christian,6-0,175,no,Nebraska
+Garrett Taylor,CB,4,0.9440,125,VA,Richmond,St. Christopher's School,6-1,195,no,Penn State
+Juwan Johnson,WR,4,0.9430,126,NJ,Glassboro,Glassboro,6-4,216,no,Penn State
+Justin Dunning,S,4,0.9430,127,TX,Whitehouse,Whitehouse,6-4,204,no,Texas A&M
+Patrick Vahe,OC,4,0.9430,128,TX,Euless,Trinity,6-3,300,no,Texas
+Adam McLean,DT,4,0.9430,129,MD,Bethesda,Quince Orchard,6-2,290,no,Maryland
+Malik Lovette,APB,4,0.9420,130,CA,Redlands,Redlands East Valley,5-11,180,no,Oregon
+Jack Jones,OT,4,0.9420,131,TN,Murfreesboro,Oakland,6-5,290,no,Tennessee
+Josh Barajas,OLB,4,0.9410,132,IN,Merrillville,Andrean,6-3,215,no,Notre Dame
+Dre'Mont Jones,SDE,4,0.9410,133,OH,Cleveland,St. Ignatius,6-3,266,no,Ohio State
+P.J. Mbanasor,CB,4,0.9400,134,TX,Pflugerville,Hendrickson,6-1,176,no,Oklahoma
+James Lockhart,SDE,4,0.9400,135,TX,Ennis,Ennis,6-2,251,no,Texas A&M
+Rashad Roundtree,S,4,0.9400,136,GA,Evans,Lakeside,6-1,195,no,Georgia
+John Burt,WR,4,0.9390,137,FL,Tallahassee,Lincoln,6-3,180,no,Texas
+Darius Slayton,WR,4,0.9380,138,GA,Norcross,Greater Atlanta Christian School,6-1,182,no,Auburn
+Marcus Lewis,ATH,4,0.9380,139,DC,Washington,Gonzaga,6-1,187,no,Florida State
+Keenan Walker,OT,4,0.9360,140,AZ,Paradise Valley,Chaparral,6-6,280,no,Arizona
+Hjalte Froholdt,DT,4,0.9360,141,FL,Bradenton,IMG Academy,6-4,282,no,Arkansas
+Rico McGraw,CB,4,0.9360,142,TN,Nashville,Ensworth,6-0,190,no,Georgia
+Hale Hentges,TE,4,0.9350,143,MO,Jefferson City,Helias,6-5,230,no,Alabama
+Desherrius Flowers,RB,4,0.9350,144,AL,Mobile,Vigor,6-1,204,no,Alabama
+Shameik Blackshear,WDE,4,0.9340,145,SC,Bluffton,Bluffton,6-5,240,no,South Carolina
+Sam Darnold,DUAL,4,0.9340,146,CA,San Clemente,San Clemente,6-4,208,no,USC
+Jahvoni Simmons,ILB,4,0.9340,147,VA,Virginia Beach,Ocean Lakes,6-1,225,no,Virginia
+Stanley Norman,ATH,4,0.9330,148,CA,Gardena,Junipero Serra,6-0,180,no,Arizona State
+Jerry Tillery,OT,4,0.9330,149,LA,Shreveport,Evangel Christian Academy,6-6,308,no,Notre Dame
+K.J. Hill,WR,4,0.9330,150,AR,North Little Rock,North Little Rock,6-0,188,no,Ohio State
+Rodney Anderson,APB,4,0.9330,151,TX,Katy,Katy,6-1,204,no,Oklahoma
+Will Sunderland,S,4,0.9330,152,OK,Oklahoma City,Midwest City,6-3,195,no,Oklahoma
+Fred Ulu-Perry,OC,4,0.9330,153,HI,Honolulu,St. Louis,6-2,300,no,UCLA
+Chauncey Rivers,WDE,4,0.9330,154,GA,Stone Mountain,Stephenson,6-3,247,no,Georgia
+Larry Pryor,S,4,0.9320,155,TX,Sulphur Springs,Sulphur Springs,6-0,196,no,Texas A&M
+Tyrek Cole,CB,4,0.9320,156,FL,Hollywood,Miramar,6-0,170,no,West Virginia
+Darrin Kirkland Jr.,ILB,4,0.9310,157,IN,Indianapolis,Lawrence Central,6-1,223,no,Tennessee
+Jovon Durante,WR,4,0.9310,158,FL,Miami,Miramar,6-0,162,no,West Virginia
+Ben Humphreys,OLB,4,0.9300,159,CA,Santa Ana,Mater Dei,6-1,200,no,Duke
+Equanimeous St. Brown,WR,4,0.9300,160,CA,Anaheim,Servite,6-5,205,no,Notre Dame
+Ryan Bates,OT,4,0.9300,161,PA,Warminster,Archbishop Wood,6-5,275,no,Penn State
+Carlos Strickland,WR,4,0.9290,162,TX,Dallas,Skyline,6-5,194,no,California
+Jauan Jennings,DUAL,4,0.9290,163,TN,Murfreesboro,Blackman,6-4,188,no,Tennessee
+Shawn Burgess-Becker,ATH,4,0.9280,164,FL,Pompano Beach,Monarch,6-1,185,no,Alabama
+Anfernee Jennings,WDE,4,0.9270,165,AL,Dadeville,Dadeville,6-3,256,no,Alabama
+Jordan Colbert,S,4,0.9270,166,GA,Griffin,Griffin,6-2,205,no,Auburn
+Derrick Dillon,WR,4,0.9270,167,LA,Franklinton,Pine,5-11,173,no,LSU
+Fletcher Adams,SDE,4,0.9270,168,MS,Brandon,Brandon,6-3,260,no,Mississippi State
+Kirk Merritt,APB,4,0.9270,169,LA,Destrehan,Destrehan,5-11,206,no,Oregon
+Darrell Williams,OLB,4,0.9260,170,AL,Hoover,Hoover,6-3,226,no,Auburn
+Bobby Evans,OT,4,0.9260,171,TX,Allen,Allen,6-4,280,no,Oklahoma
+Adonis Thomas,OLB,4,0.9250,172,GA,Lawrenceville,Central Gwinnett,6-4,229,no,Alabama
+Zach Gentry,PRO,4,0.9250,173,NM,Albuquerque,Eldorado,6-7,230,no,Michigan
+JF Thomas,WR,4,0.9250,174,TX,Dallas,South Oak Cliff,6-4,185,no,Texas Tech
+Xavier Lewis,CB,4,0.9240,175,LA,Reserve,East St. John,5-11,188,no,LSU
+Tommy Hatton,OC,4,0.9240,176,NJ,Montvale,St. Joseph Regional,6-3,280,no,North Carolina
+Ryan Davis,WR,4,0.9230,177,FL,St. Petersburg,Lakewood,5-11,172,no,Auburn
+Blake Lynch,WR,4,0.9230,178,TX,Gilmer,Gilmer,6-3,195,no,Baylor
+Kyonta Stallworth,OG,4,0.9230,179,MI,Detroit,Martin Luther King,6-4,275,no,Michigan State
+Asmar Bilal,ILB,4,0.9230,180,IN,Indianapolis,Ben Davis,6-2,205,no,Notre Dame
+Keaton Sutherland,OT,4,0.9230,181,TX,Flower Mound,Marcus,6-5,293,no,Texas A&M
+Jason Lewis,ATH,4,0.9220,182,VA,Virginia Beach,Ocean Lakes,6-2,247,no,Arizona State
+Garrett Williams,TE,4,0.9220,183,FL,Orlando,The First Academy,6-4,220,no,Clemson
+Gabe Megginson,OT,4,0.9220,184,IL,Jacksonville,Jacksonville,6-5,295,no,Illinois
+Nick Brossette,RB,4,0.9220,185,LA,Baton Rouge,University Lab,6-0,207,no,LSU
+Jalin Barnett,OG,4,0.9220,186,OK,Lawton,Lawton,6-4,315,no,Nebraska
+Connor Lanfear,OT,4,0.9220,187,TX,Buda,Hays,6-6,295,no,Texas A&M
+DeShon Elliott,S,4,0.9220,188,TX,Rockwall,Rockwall-Heath,6-1,200,no,Texas
+Jackson Harris,TE,4,0.9220,189,TN,Columbia,Columbia Central,6-6,250,no,Georgia
+Cameron Smith,ILB,4,0.9220,190,CA,Granite Bay,Granite Bay,6-3,225,no,USC
+Ronnie Harrison,S,4,0.9210,191,FL,Tallahassee,Florida State University School,6-3,205,no,Alabama
+Tyree Kinnel,S,4,0.9210,192,OH,Dayton,Wayne,6-0,205,no,Michigan
+Miles Boykin,WR,4,0.9210,193,IL,New Lenox,Providence Catholic,6-4,220,no,Notre Dame
+Cheyenne O'Grady,TE,4,0.9200,194,AR,Fayetteville,Fayetteville,6-4,230,no,Arkansas
+Will Gragg,TE,4,0.9200,195,AR,Dumas,Dumas,6-4,245,no,Arkansas
+Darvin Taylor II,DT,4,0.9200,196,VA,Chester,Thomas Dale,6-2,295,no,Florida State
+Marquise Overton,DT,4,0.9200,197,OK,Jenks,Jenks,6-1,301,no,Oklahoma
+Jalen Christian,ATH,4,0.9200,198,MD,Damascus,Damascus,5-10,165,no,South Carolina
+Roney Elam,CB,4,0.9200,199,TX,Newton,Newton,6-2,173,no,Texas A&M
+Richard McBryde,OLB,4,0.9190,200,AL,Troy,Charles Henderson,6-2,210,no,Auburn
+Austin Bryant,WDE,4,0.9190,201,GA,Thomasville,Thomas County Central,6-5,250,no,Clemson
+David Ducre,FB,4,0.9190,202,LA,Mandeville,Lakeshore,5-11,238,no,LSU
+Jordan Stevenson,RB,4,0.9190,203,TX,Dallas,South Oak Cliff,5-8,210,no,Nebraska
+Raequan Williams,DT,4,0.9180,204,IL,Chicago,DePaul College Prep,6-4,280,no,Michigan State
+Devonaire Clarington,TE,4,0.9180,205,FL,Miami,Booker T. Washington,6-5,238,no,Texas
+Corey Dauphine,RB,4,0.9170,206,TX,Port Arthur,Memorial,6-0,185,no,Texas Tech
+Pat Allen,OT,4,0.9170,207,MD,Reisterstown,Franklin,6-5,286,no,Georgia
+Jaquan Johnson,S,4,0.9160,208,FL,Miami,Killian,5-10,182,no,Miami
+Sterling Jenkins,OT,4,0.9160,209,PA,Pittsburgh,Baldwin,6-8,305,no,Penn State
+Nick Conner,ILB,4,0.9150,210,OH,Dublin,Dublin Scioto,6-3,225,no,Ohio State
+Tyler Petite,TE,4,0.9150,211,CA,Moraga,Campolindo,6-5,225,no,USC
+Jamario Bell,SDE,4,0.9140,212,AR,Junction City,Junction City,6-6,225,no,Arkansas
+Bar Milo,OT,4,0.9140,213,CA,West Hills,Chaminade,6-6,270,no,Miami
+Emanuel McGirt,OT,4,0.9140,214,NC,Durham,Hillside,6-6,275,no,NC State
+Andre James,OT,4,0.9140,215,UT,Herriman,Herriman,6-5,275,no,UCLA
+Grant Newsome,OT,4,0.9130,216,NJ,Trenton,The Lawrenceville School,6-6,290,no,Michigan
+Malik Dear,ATH,4,0.9130,217,MS,Jackson,Murrah,5-10,226,no,Mississippi State
+Benning Potoa'e,WDE,4,0.9130,218,WA,Lakewood,Lakes,6-4,270,no,Washington
+Dallas Warmack,OG,4,0.9120,219,GA,Atlanta,Mays,6-2,306,no,Alabama
+Ty Storey,PRO,4,0.9120,220,AR,Charleston,Charleston,6-3,216,no,Arkansas
+Tyler Carr,OG,4,0.9120,221,AL,Gadsden,Southside,6-5,311,no,Auburn
+Marquel Harrell,OG,4,0.9120,222,GA,Fairburn,Creekside,6-3,295,no,Auburn
+Jordan Davis,TE,4,0.9120,223,TX,Houston,Clear Lake,6-5,255,no,Texas A&M
+Ryan Newsome,WR,4,0.9120,224,TX,Aledo,Aledo,5-8,170,no,Texas
+Cordell Broadus,WR,4,0.9120,225,NV,Las Vegas,Bishop Gorman,6-2,195,no,UCLA
+Josh Woods,ILB,4,0.9120,226,CA,Upland,Upland,6-0,220,no,UCLA
+JaMycal Hasty,APB,4,0.9110,227,TX,Longview,Longview,5-8,185,no,Baylor
+Bryce Love,APB,4,0.9110,228,NC,Wake Forest,Wake Forest,5-10,180,no,Stanford
+Quart'e Sapp,OLB,4,0.9110,229,GA,Alpharetta,Milton,6-2,200,no,Tennessee
+Tevita Halalilo,OG,4,0.9110,230,CA,Moreno Valley,Rancho Verde,6-4,315,no,UCLA
+Austin Joyner,CB,4,0.9110,231,WA,Marysville,Marysville Pilchuck,5-11,186,no,Washington
+Jalen Merrick,OG,4,0.9100,232,FL,New Smyrna Beach,New Smyrna Beach,6-5,295,no,Arkansas
+Chad Smith,OLB,4,0.9100,233,VA,Sterling,Dominion,6-4,213,no,Clemson
+Armani Linton,S,4,0.9100,234,MS,Walnut,Walnut Attendance Center,6-3,203,no,Ole Miss
+Micah Abernathy,CB,4,0.9100,235,GA,Atlanta,Greater Atlanta Christian School,6-1,187,no,Tennessee
+William Sweet,OT,4,0.9100,236,FL,Jacksonville,First Coast,6-5,280,no,North Carolina
+Zach Robertson,OG,4,0.9090,237,CA,Bellflower,St. John Bosco,6-5,322,no,Arizona State
+Zach Okun,OG,4,0.9090,238,CA,Newbury Park,Newbury Park,6-3,340,no,Oregon
+Kamonte Carter,ATH,4,0.9090,239,MD,Gaithersburg,Gaithersburg,6-4,243,no,Penn State
+Trevor Elbert,OT,4,0.9090,240,TX,Rockwall,Rockwall-Heath,6-5,290,no,Texas A&M
+Michael Barnett,SDE,4,0.9090,241,SC,Dorchester,Woodland,6-5,258,no,Georgia
+Joshua McMillon,OLB,4,0.9080,242,TN,Memphis,Whitehaven,6-3,239,no,Alabama
+Brett Rypien,PRO,4,0.9080,243,WA,Spokane,Shadle Park,6-2,185,no,Boise State
+Ryan Buchholz,SDE,4,0.9080,244,PA,Malvern,Great Valley,6-6,240,no,Penn State
+Zack Bailey,OG,4,0.9080,245,SC,Summerville,Summerville,6-5,315,no,South Carolina
+Sheriron Jones,DUAL,4,0.9080,246,CA,Moreno Valley,Rancho Verde,6-3,191,no,Tennessee
+Cameron Townsend,OLB,4,0.9080,247,TX,Missouri City,Ridge Point,6-1,195,no,Texas
+Jayson Stanley,WR,4,0.9080,248,GA,Fairburn,Creekside,6-2,198,no,Georgia
+Henry Roberts,OT,4,0.9080,249,WA,Bellevue,Bellevue,6-6,274,no,Washington
+Thomas Toki,DT,4,0.9080,250,CA,Mountain View,St. Francis,5-11,308,no,Washington State
+Manny Bowen,OLB,4,0.9070,251,NJ,Barnegat,Barnegat,6-2,206,no,Penn State
+Andre Robinson,RB,4,0.9070,252,PA,Harrisburg,Bishop McDevitt,5-9,205,no,Penn State
+Cameron Scarlett,ATH,4,0.9070,253,OR,Portland,Central Catholic,6-1,210,no,Stanford
+Conner Dyer,OT,4,0.9070,254,TX,Mesquite,Horn,6-4,276,no,Texas Tech
+Quarvez Boulware,OG,4,0.9070,255,DC,Washington,Friendship Academy,6-3,283,no,Maryland
+Noah Jefferson,SDE,4,0.9070,256,NV,Las Vegas,Desert Oasis,6-5,271,no,USC
+Darrion Daniels,DT,4,0.9060,257,TX,Dallas,Bishop Dunne,6-4,290,no,Oklahoma State
+Denzel Ward,CB,4,0.9060,258,OH,Macedonia,Nordonia,5-11,165,no,Ohio State
+Quinten Dormady,PRO,4,0.9060,259,TX,Boerne,Boerne,6-4,200,no,Tennessee
+Tristan Payton,WR,4,0.9060,260,FL,Jacksonville,First Coast,6-0,182,no,UCF
+Kaleb Kim,OC,4,0.9050,261,GA,Hoschton,Mill Creek,6-3,280,no,Auburn
+Jaylinn Hawkins,WR,4,0.9050,262,CA,Buena Park,Buena Park,6-1,180,no,California
+D'Anfernee McGriff,RB,4,0.9050,263,FL,Tallahassee,Tallahassee Leon,6-1,230,no,Florida
+Auden Tate,WR,4,0.9050,264,FL,Tampa,Wharton,6-5,215,no,Florida State
+Marques Ford,SDE,4,0.9050,265,FL,Gibsonton,East Bay,6-4,230,no,Rutgers
+Jay Bradford,RB,4,0.9050,266,TX,Splendora,Splendora,5-10,190,no,Texas A&M
+Eli Brown,OLB,4,0.9050,267,KY,Bowling Green,Warren East,6-2,190,no,Kentucky
+Montavious Atkinson,ILB,4,0.9040,268,GA,Fairburn,Langston Hughes,6-1,200,no,Auburn
+Andrew Butcher,SDE,4,0.9040,269,GA,Alpharetta,Alpharetta,6-2,242,no,Tennessee
+Madison Akamnonu,OT,4,0.9040,270,TX,Arlington,Bowie,6-5,278,no,Texas Tech
+Arrington Farrar,S,4,0.9040,271,GA,Atlanta,Woodward Academy,6-2,195,no,Wisconsin
+Tim Irvin,ATH,4,0.9030,272,FL,Miami,Westminster Christian School,5-9,194,no,Auburn
+CJ Sanders,WR,4,0.9030,273,CA,Sherman Oaks,Notre Dame,5-9,177,no,Notre Dame
+Kemah Siverand,WR,4,0.9030,274,TX,Houston,Cy Ridge,6-0,187,no,Texas A&M
+Deshawn Raymond,CB,4,0.9030,275,LA,Metairie,East Jefferson,6-1,190,no,TCU
+Darrell Taylor,WDE,4,0.9030,276,VA,Hopewell,Hopewell,6-4,230,no,Tennessee
+Stephen Johnson,ATH,4,0.9030,277,CA,San Leandro,San Leandro,5-11,180,no,UCLA
+Austin Clark,OT,4,0.9030,278,VA,Lexington,Rockbridge County,6-6,297,no,Virginia Tech
+Javaris Davis,RB,4,0.9020,279,FL,Jacksonville,Ed White,5-10,173,no,Auburn
+Sh'mar Kilby-Lane,OLB,4,0.9020,280,FL,Hallandale,Hallandale,6-1,209,no,Florida State
+CJ Conrad,TE,4,0.9020,281,OH,LaGrange,Keystone,6-5,225,no,Kentucky
+Ty'Son Williams,RB,4,0.9020,282,SC,Sumter,Crestwood,5-11,200,no,North Carolina
+Khaylan Kearse-Thomas,OLB,4,0.9010,283,CA,Rancho Cucamonga,Etiwanda,6-2,210,no,Arizona State
+Jazz Ferguson,WR,4,0.9010,284,LA,Saint Francisville,West Feliciana,6-5,205,no,LSU
+Alex Malzone,PRO,4,0.9010,285,MI,Bloomfield Hills,Brother Rice,6-2,200,no,Michigan
+Dru Samia,OT,4,0.9010,286,CA,Danville,San Ramon Valley,6-5,296,no,Oklahoma
+Davante Davis,CB,4,0.9010,287,FL,Homestead,Booker T. Washington,6-3,200,no,Texas
+Tyree St. Louis,OT,4,0.9000,288,FL,Bradenton,IMG Academy,6-5,300,no,Miami
+Josh Adams,RB,4,0.9000,289,PA,Warrington,Central Bucks South,6-2,208,no,Notre Dame
+Te'von Coney,ILB,4,0.9000,290,FL,Palm Beach Gardens,Palm Beach Gardens,6-1,222,no,Notre Dame
+John Kolar,DUAL,4,0.9000,291,OK,Norman,Norman North,6-3,195,no,Oklahoma State
+Joe Burrow,DUAL,4,0.9000,292,OH,The Plains,Athens,6-4,200,no,Ohio State
+Alex Stump,WR,4,0.9000,293,OH,Lakewood,St. Edward,6-4,195,no,Ohio State
+Kahlil Haughton,S,4,0.9000,294,TX,Waco,Midway,6-2,175,no,Oklahoma
+Darrin Hall,RB,4,0.9000,295,OH,Youngstown,Fitch,6-0,205,no,Pittsburgh
+Irvin Charles,WR,4,0.9000,296,NJ,Haddonfield,Paul VI,6-4,212,no,Penn State
+Octavis Johnson,ATH,4,0.9000,297,GA,Homerville,Clinch County,6-1,181,no,South Carolina
+DeAndre McNeal,ATH,4,0.9000,298,TX,Mesquite,Poteet,6-2,228,no,Texas
+Brandon Kennedy,OG,4,0.8990,299,AL,Wetumpka,Wetumpka,6-3,295,no,Alabama
+Calvin Brewton,S,4,0.8990,300,FL,Miami,Miami Central,6-0,172,no,Florida State
+Dwayne Lawson,PRO,4,0.8990,,FL,Tampa,Hillsborough,6-6,207,no,Virginia Tech
+Kyle Shurmur,PRO,4,0.8990,,PA,Glenside,La Salle College,6-4,215,yes,Vanderbilt
+Sherrod Pittman,OLB,4,0.8990,,FL,Jacksonville,First Coast,6-1,224,no,South Carolina
+Brandon Polk,WR,4,0.8980,,VA,Ashburn,Briar Woods,5-9,163,no,Penn State
+Dee Smith,OLB,4,0.8980,,AL,Florence,Florence,6-2,198,no,Louisville
+Elijah Taylor,DT,4,0.8980,,OH,Cincinnati,Archbishop Moeller,6-3,285,no,Notre Dame
+Ke'Shawn Vaughn,RB,4,0.8980,,TN,Nashville,Pearl-Cohn,5-11,210,no,Illinois
+Tyrone Wheatley Jr.,TE,4,0.8980,,NY,Manlius,Canisius,6-6,260,no,Michigan
+Avery Anderson,ATH,4,0.8970,,CO,Colorado Springs,Pine Creek,6-0,170,no,Nebraska
+Gary McCrae,OLB,4,0.8970,,GA,Cuthbert,Randolph Clay,6-4,220,no,Georgia
+Trey Adams,OT,4,0.8970,,WA,Wenatchee,Wenatchee,6-7,270,no,Washington
+Van Smith,ATH,4,0.8970,,NC,Charlotte,Hough,5-11,180,no,Clemson
+David Dowell,S,4,0.8960,,OH,Lakewood,St. Edward,6-1,180,no,Michigan State
+Kai Locksley,ATH,4,0.8950,,MD,Baltimore,Gilman,6-3,188,no,Texas
+Nick Gibson,RB,4,0.8950,,AL,Pinson,Pinson Valley,5-11,197,no,Mississippi State
+AJ Harris,OG,4,0.8940,,KS,Stilwell,Blue Valley,6-4,297,no,Missouri
+Chandler Cox,FB,4,0.8940,,FL,Apopka,Apopka,6-1,222,no,Auburn
+Clayton Bradley,OT,4,0.8940,,CA,Anaheim,Servite,6-6,281,no,USC
+Colin Samuel,CB,4,0.8940,,CA,Mission Hills,Long Beach Poly,6-3,186,no,UCLA
+James Daniels,OC,4,0.8940,,OH,Warren,Warren G Harding,6-4,304,no,Iowa
+Josh Butler,CB,4,0.8940,,TX,Mesquite,West Mesquite,5-11,175,no,Michigan State
+Semisi Uluave,OG,4,0.8940,,HI,Honolulu,Punahou,6-5,315,no,California
+Tim Lynott,OG,4,0.8940,,CO,Aurora,Regis Jesuit,6-4,290,no,Colorado
+Ben Edwards,S,4,0.8930,,FL,Jacksonville,Trinity Christian Academy,6-0,196,no,Stanford
+Carlton Davis,CB,4,0.8930,,FL,Miami,Norland,6-2,184,no,Auburn
+Du'Vonta Lampkin,DT,4,0.8930,,TX,Houston,Cy Falls,6-3,291,no,Texas
+Isaiah Renfro,WR,4,0.8930,,CA,Chatsworth,Sierra Canyon,6-2,185,no,Washington
+Jamel Dean,CB,4,0.8930,,FL,Cocoa,Cocoa,6-2,195,no,Ohio State
+Jay Jay Wilson,ATH,4,0.8930,,CA,Valencia,Valencia,6-3,228,no,Arizona State
+Jon Dietzen,OT,4,0.8930,,WI,Seymour,Seymour,6-5,345,no,Wisconsin
+Kyle Penniston,TE,4,0.8930,,CA,Santa Ana,Mater Dei,6-5,232,no,Wisconsin
+Lawrence Cager,WR,4,0.8930,,MD,Towson,Calvert Hall College,6-5,195,no,Miami
+Andrew Dowell,RB,4,0.8920,,OH,Lakewood,St. Edward,6-1,211,no,Michigan State
+Carlos Davis,SDE,4,0.8920,,MO,Blue Springs,Blue Springs,6-2,260,no,Nebraska
+Devante Peete,WR,4,0.8920,,FL,Pompano Beach,St. Thomas Aquinas,6-6,195,no,Louisville
+Marshall Wallace,OLB,4,0.8920,,LA,New Orleans,John Curtis,6-5,213,no,Arizona State
+Steven Gonzalez,OG,4,0.8910,,NJ,Union City,Union City,6-3,328,no,Penn State
+Antonio Callaway,WR,4,0.8900,,FL,Miami,Booker T. Washington,5-11,185,no,Florida
+D.J. Moore,WR,3,0.8900,,PA,Philadelphia,Imhotep Institute,6-0,180,no,Maryland
+Kirk Johnson,ATH,3,0.8900,,CA,San Jose,Valley Christian,6-0,205,no,Texas
+Roy Hemsley,OT,3,0.8900,,CA,Los Angeles,Windward School,6-6,280,no,USC
+Shelton Johnson,SDE,3,0.8900,,FL,Delray Beach,Atlantic,6-5,220,no,Michigan
+Anthony McKee,OLB,3,0.8890,,OH,Columbus,Marion-Franklin,6-2,190,no,Pittsburgh
+Brandon Martin,WR,3,0.8890,,TX,Dallas,Prime Prep Academy,6-5,200,no,LSU
+Dominic Davis,RB,3,0.8890,,CA,Mission Hills,Bishop Alemany,5-10,175,no,USC
+E.J. Donahue,OG,3,0.8890,,MD,Frederick,Linganore,6-5,315,no,Maryland
+Kendall Bussey,RB,3,0.8890,,LA,New Orleans,Isidore Newman,5-8,205,no,Texas A&M
+Kendrick Norton,OG,3,0.8890,,FL,Jacksonville,Trinity Christian Academy,6-3,305,no,Miami
+Tyriq Thompson,OLB,3,0.8890,,MI,Detroit,Martin Luther King,6-1,220,no,Michigan State
+Willie Hibbler,ATH,3,0.8890,,MS,Sardis,North Panola,6-5,233,no,Ole Miss
+Zach Rogers,OG,3,0.8890,,TX,Carrollton,Hebron,6-2,297,no,Arkansas
+Jordan Cronkrite,ATH,3,0.8880,,FL,Miami,Westminster Christian School,5-11,198,no,Florida
+Justin Reid,S,3,0.8880,,LA,Geismar,Dutchtown,6-0,193,no,Stanford
+Kieffer Longson,OG,3,0.8880,,CA,San Ramon,Dougherty Valley,6-7,300,no,BYU
+Rick Wade,SDE,3,0.8880,,CA,Rancho Santa Margarita,Santa Margarita Catholic,6-6,225,no,UCLA
+A.J. Turner,RB,3,0.8870,,VA,Clifton,Centreville,5-11,180,no,South Carolina
+Jalen Guyton,WR,3,0.8870,,TX,Allen,Allen,6-1,190,no,Notre Dame
+Michael Chigbu,WR,3,0.8870,,LA,New Orleans,Holy Cross,6-2,211,no,Georgia
+Tim Washington,OLB,3,0.8870,,MS,Yazoo City,Yazoo City,6-3,200,no,Mississippi State
+Venzell Boulware,OT,3,0.8870,,GA,Union City,Creekside,6-4,290,no,Tennessee
+Christian Folau,ILB,3,0.8860,,UT,Salt Lake City,East,6-1,240,no,Oregon State
+Christian Pellage,OT,3,0.8860,,FL,Brooksville,Nature Coast Tech,6-7,282,no,South Carolina
+Elijah Sullivan,OLB,3,0.8860,,GA,Tucker,Tucker,6-1,215,no,Kansas State
+Lavan Alston,WR,3,0.8860,,CA,Ventura,St. Bonaventure,6-0,170,no,Nebraska
+Lonny Powell,RB,3,0.8860,,CA,Sacramento,Sacramento,6-1,230,no,California
+Quenton Meeks,CB,3,0.8860,,CA,Crescent City,Del Norte,6-2,195,no,Stanford
+Richard Moore,OLB,3,0.8860,,TX,Cedar Hill,Cedar Hill,6-1,210,no,Texas A&M
+Tyler Queen,PRO,3,0.8860,,GA,Kennesaw,North Cobb,6-2,229,no,Auburn
+Donovan Sheffield,CB,3,0.8850,,TN,Nashville,Ensworth,5-11,170,no,Vanderbilt
+Kevin Estes,OT,3,0.8850,,CA,San Marcos,San Marcos,6-6,275,no,Wisconsin
+Terrell Chatman,WR,3,0.8850,,LA,Baton Rouge,Central,6-3,180,no,Arizona State
+John Humphrey,ATH,3,0.8840,,TX,League City,Clear Falls,5-10,165,no,Oklahoma
+David Moorman,OT,3,0.8830,,MI,Pinckney,Northville,6-5,275,no,Wisconsin
+Noah Green,OT,3,0.8830,,SC,Boiling Springs,Boiling Springs,6-5,275,no,Clemson
+Pooh Stricklin,WR,3,0.8830,,TX,Waco,Midway,6-3,180,no,Baylor
+Tyreik Gray,RB,3,0.8830,,TX,Houston,Lamar,5-11,187,no,Houston
+Tyson Smith,CB,3,0.8830,,MI,Orchard Lake,St. Mary's,5-11,175,no,Michigan State
+A.J. Westbrook,S,3,0.8820,,FL,Daytona Beach,Mainland,6-0,173,no,Florida State
+Anthony Ratliff-Williams,DUAL,3,0.8820,,NC,Matthews,Butler,6-1,205,no,North Carolina
+Brian Lewerke,PRO,3,0.8820,,AZ,Phoenix,Pinnacle,6-3,180,no,Michigan State
+Cassius Peat,OLB,3,0.8820,,AZ,Scottsdale,Corona del Sol,6-4,235,no,Michigan State
+Daiquan Kelly,ATH,3,0.8820,,NJ,Union City,Union City,6-2,206,no,Penn State
+David Robbins,OG,3,0.8820,,MD,Glenelg,Glenelg,6-5,305,no,Florida State
+Lamar Jackson,DUAL,3,0.8820,,FL,Boynton Beach,Boynton Beach Community,6-3,185,no,Louisville
+Myles Gaskin,RB,3,0.8820,,WA,Seattle,O'Dea,5-9,185,no,Washington
+Tyler Jordan,OC,3,0.8820,,FL,Jacksonville,Bishop Kenny,6-4,280,no,Florida
+Bailey Sharp,OT,3,0.8780,,GA,Marietta,Sprayberry,6-5,280,no,Auburn
+Kevin Henry,S,3,0.8780,,LA,Baton Rouge,Central,6-1,205,no,Oklahoma State
+Kingsley KeKe,DT,3,0.8780,,TX,Rosenberg,George Ranch,6-3,290,no,Texas A&M
+Amonte Caban,ILB,3,0.8770,,AL,Smiths Station,Smiths Station,6-2,210,no,Louisville
+Dre Brown,RB,3,0.8770,,IL,Dekalb,De Kalb,6-0,195,no,Illinois
+Kenneth Edison-McGruder,S,3,0.8770,,TX,Houston,Alief Taylor,6-2,203,no,Oklahoma State
+Levi Paulsen,OT,3,0.8770,,IA,Moville,Woodbury Central,6-5,285,no,Iowa
+Reggie Gallaspy,RB,3,0.8770,,NC,Greensboro,Southern Guilford,5-11,205,no,NC State
+Aaron Crawford,DT,3,0.8760,,VA,Ashburn,Stone Bridge,6-1,311,no,North Carolina
+Christian Owens,WR,3,0.8760,,GA,Griffin,Griffin,6-5,207,no,South Carolina
+D.J. Neal,WR,3,0.8760,,GA,Stone Mountain,Stephenson,6-4,200,no,South Carolina
+Dayan Lake,CB,3,0.8760,,UT,Layton,Northridge,5-10,185,no,BYU
+Dontae Strickland,ATH,3,0.8760,,NJ,Monmouth Junction,South Brunswick,5-11,180,no,Syracuse
+Grant Schmidt,OT,3,0.8760,,SD,Sioux Falls,Roosevelt - 03,6-6,275,no,Ohio State
+Jalen Wilkerson,TE,3,0.8760,,GA,Douglas,Coffee,6-4,227,no,Florida State
+Juval Mollette,WR,3,0.8760,,NC,Randleman,Randleman,6-4,187,no,North Carolina
+Kaleb Chalmers,CB,3,0.8760,,SC,Greenwood,Greenwood,5-11,171,no,Clemson
+Khalil Davis,DT,3,0.8760,,MO,Blue Springs,Blue Springs,6-2,260,no,Nebraska
+TD Moton,DT,3,0.8760,,LA,Shreveport,Woodlawn,6-3,310,no,Texas A&M
+Deshawn Capers-Smith,ATH,3,0.8750,,LA,New Orleans,Warren Easton,6-0,173,no,Texas A&M
+George Brown,OT,3,0.8750,,OH,Cincinnati,Winton Woods,6-6,290,no,LSU
+Louis Brown,ATH,3,0.8750,,TX,Burton,Burton,6-5,215,no,Oklahoma State
+Mykelti Williams,S,3,0.8750,,IN,Indianapolis,Warren Central,6-0,198,no,Notre Dame
+Paul Lucas,APB,3,0.8750,,AZ,Phoenix,Mountain Pointe,5-10,165,no,Oregon State
+Russell Ude,SDE,3,0.8750,,GA,Atlanta,Westminster School,6-3,252,no,California
+Shadell Bell,WR,3,0.8750,,GA,Decatur,Columbia,6-3,190,no,Clemson
+Aca'Cedric Ware,RB,3,0.8740,,TX,Cedar Hill,Cedar Hill,6-0,196,no,USC
+Christian Gaylord,OT,3,0.8740,,KS,Baldwin City,Baldwin,6-6,275,no,Nebraska
+Darius Fullwood,WDE,3,0.8740,,MD,Olney,Our Lady of Good Counsel,6-4,240,no,Virginia Tech
+David Sills V,PRO,3,0.8740,,MD,Elkton,Eastern Christian,6-3,180,no,West Virginia
+Deddrick Thomas,ATH,3,0.8740,,TN,Memphis,Memphis Central,5-9,170,no,Mississippi State
+Deshawn McClease,RB,3,0.8740,,VA,Chesapeake,Oscar Smith,5-9,175,no,Virginia Tech
+Felton Davis III,WR,3,0.8740,,VA,Highland Springs,Highland Springs,6-3,175,no,Michigan State
+Isaiah Washington,WDE,3,0.8740,,LA,New Orleans,Edna Karr,6-4,240,no,LSU
+Karan Higdon,RB,3,0.8740,,FL,Sarasota,Riverview,5-10,190,no,Michigan
+Matt Jones,OT,3,0.8740,,OH,Hubbard,Hubbard,6-4,290,no,West Virginia
+Montrell Custis,CB,3,0.8740,,GA,Hampton,Lovejoy,6-0,175,no,Ole Miss
+Quay Picou,DT,3,0.8740,,GA,Buford,Buford,6-2,275,no,Tennessee
+Rasool Clemons,WDE,3,0.8740,,SC,Aiken,South Aiken,6-6,212,no,Ole Miss
+Robert Landers,DT,3,0.8740,,OH,Dayton,Wayne,6-2,295,no,Ohio State
+Sam Awolope,OT,3,0.8740,,TX,Missouri City,Fort Bend Marshall,6-5,270,no,TCU
+Shane Lemieux,OG,3,0.8740,,WA,Yakima,West Valley,6-6,310,no,Oregon
+Trevor Ruhland,OG,3,0.8740,,IL,Cary,Cary-Grove Community,6-4,270,no,Notre Dame
+Christian Philpott,WR,3,0.8730,,FL,Tallahassee,North Florida Christian,6-3,203,no,Georgia Tech
+Jason Strowbridge,SDE,3,0.8730,,FL,Deerfield Beach,Deerfield Beach,6-4,247,no,North Carolina
+Jauntavius Johnson,DT,3,0.8730,,AL,Lincoln,Lincoln Sch,6-2,330,no,Auburn
+Stone Wolfley,SDE,3,0.8730,,WV,Morgantown,Morgantown,6-4,235,no,West Virginia
+Alex Paulina,OG,3,0.8630,,PA,Canonsburg,Canon-McMillan,6-4,292,no,Pittsburgh
+Kengera Daniel,WDE,3,0.8610,,NC,Raleigh,Millbrook,6-6,250,no,Kentucky
+Nyqwan Murray,WR,3,0.8610,,FL,Orlando,Oak Ridge,5-11,163,no,Florida State
+Bryce English,DT,3,0.8590,,TX,DeSoto,DeSoto,5-11,315,no,Kansas State
+Cade Cote,OG,3,0.8580,,AZ,Gilbert,Williams Field,6-4,275,no,Arizona State
+David Long,ILB,3,0.8580,,OH,Cincinnati,Winton Woods,6-0,218,no,West Virginia
+Deon Stewart,WR,3,0.8580,,AR,Hardy,Highland,6-1,165,no,Arkansas
+Josh Moore,TE,3,0.8580,,KS,Olathe,Olathe North,6-5,250,no,Missouri
+Justin Johnson,WR,3,0.8580,,AL,Hoover,Hoover,6-4,205,no,Mississippi State
+Kaleel Gaines,WR,3,0.8580,,FL,Frostproof,Frostproof,6-0,175,no,Michigan State
+Nu'umotu Falo,OLB,3,0.8580,,CA,Sacramento,Inderkum,6-2,220,no,Colorado
+Quinn Oseland,OT,3,0.8580,,IL,Springfield,Sacred Heart Griffin,6-6,301,no,Minnesota
+Saleem Brightwell,OLB,3,0.8580,,NJ,Paramus,Paramus Catholic,6-3,205,no,Pittsburgh
+Akilian Butler,WR,3,0.8570,,TX,Mesquite,West Mesquite,5-11,172,no,Boise State
+Blake Camper,OT,3,0.8570,,VA,Virginia Beach,Frank W. Cox,6-7,280,no,South Carolina
+Camrin Knight,TE,3,0.8570,,FL,Tallahassee,Lincoln,6-4,225,no,Florida
+Danny Thomas,WDE,3,0.8570,,FL,Fort Lauderdale,Amos P. Godby,6-2,220,no,South Florida
+Dare Odeyingbo,ILB,3,0.8570,,TX,Irving,Cistercian Prep,6-1,243,no,Vanderbilt
+Darrien Molton,CB,3,0.8570,,CA,Temecula,Chaparral,5-10,165,no,Washington State
+David Eldridge,WR,3,0.8570,,VA,Nokesville,Kettle Run,6-1,165,no,Virginia
+Daytrieon Dean,DT,3,0.8570,,AR,Fort Smith,Northside,6-3,260,no,Arkansas
+Drew Berger,ILB,3,0.8570,,ID,Coeur d'Alene,Coeur d'Alene,6-1,220,no,Boise State
+George Lea,DT,3,0.8570,,LA,New Orleans,Landry-Walker,6-3,240,no,Arizona State
+Jamie Gordinier,SDE,3,0.8570,,NJ,Red Bank,Red Bank Catholic,6-4,235,no,Miami
+John Moten,RB,3,0.8570,,MO,St. Louis,John Burroughs School,6-0,188,no,Northwestern
+Levon Livingston,OT,3,0.8570,,DC,Washington,Ballou,6-7,232,no,Kentucky
+Michael Decker,OG,3,0.8570,,NE,Omaha,Omaha North,6-4,285,no,Nebraska
+RJ McIntosh,SDE,3,0.8570,,FL,Fort Lauderdale,Cardinal Gibbons,6-5,275,no,Miami
+Reuben Jones,SDE,3,0.8570,,FL,Lakeland,Lake Gibson,6-3,223,no,Michigan
+Ryan Gibson,OG,3,0.8570,,MS,Bay St. Louis,St Stanislaus,6-3,270,no,California
+Scott Washington,WR,3,0.8570,,DC,Washington,St. John's College,6-5,203,no,Wake Forest
+Simba Short,S,3,0.8570,,CA,Concord,De La Salle,6-2,210,no,Northwestern
+Trevon Sands,ATH,3,0.8570,,FL,Miami,Southwest Miami,5-11,181,no,South Florida
+Tucker Israel,DUAL,3,0.8570,,FL,Orlando,Lake Nona,6-1,200,no,Clemson
+Tyler Moore,OC,3,0.8570,,TX,Houston,North Shore,6-4,310,no,Minnesota
+Tyrone Riley,WDE,3,0.8570,,GA,Savannah,Calvary Day School,6-6,230,no,NC State
+Darick Holmes Jr.,APB,3,0.8540,,CA,Thousand Oaks,Newbury Park,5-7,175,no,Arizona
+Freddie Simmons,WR,3,0.8540,,PA,Bethlehem,Bethlehem Catholic,6-3,175,no,NC State
+Hunter Littlejohn,OG,3,0.8540,,OH,Powell,Olentangy Liberty,6-4,267,no,Indiana
+Jeremiah Ieremia,ILB,3,0.8540,,UT,Hurricane,Hurricane,6-1,228,no,BYU
+Julian Good-Jones,OT,3,0.8540,,IA,Cedar Rapids,George Washington,6-5,270,no,Iowa State
+KaVontae Turpin,WR,3,0.8540,,LA,Monroe,Neville,5-9,165,no,TCU
+Marlon Gonzalez,SDE,3,0.8540,,FL,Cape Coral,North Fort Myers,6-4,260,no,South Florida
+Nick Carman,OT,3,0.8540,,AZ,Phoenix,Mountain Pointe,6-4,275,no,Utah
+Ronnie Hoggins,CB,3,0.8540,,FL,Pompano Beach,Monarch,5-10,175,no,South Florida
+Will Lockett,CB,3,0.8540,,TX,Manvel,Manvel,6-0,182,no,UCLA
+Andre Baccellia,WR,3,0.8530,,CA,Thousand Oaks,Westlake,5-11,170,no,Washington
+Brandon Scott,S,3,0.8530,,LA,Destrehan,Destrehan,6-0,190,no,UCF
+Brandon Singleton,WR,3,0.8530,,LA,Boutte,Hahnville,6-0,170,no,California
+Darreyl Patterson,ATH,3,0.8530,,OK,Lawton,Lawton,6-2,185,no,Kansas State
+Elijah Robinson,DUAL,3,0.8530,,NJ,Montclair,Montclair,6-2,185,no,Boston College
+Emanuel Hall,WR,3,0.8530,,TN,Franklin,Centennial,6-2,190,no,Missouri
+Gabe Reid,WDE,3,0.8530,,UT,Provo,Timpview,6-2,225,no,Stanford
+Gage Cervenka,DT,3,0.8530,,SC,Greenwood,Emerald,6-1,275,no,Clemson
+Gary Jennings Jr.,WR,3,0.8530,,VA,Stafford,Colonial Forge,6-2,205,no,West Virginia
+Grant Perry,WR,3,0.8530,,MI,Bloomfield Hills,Brother Rice,6-0,185,no,Michigan
+Harry Lewis,DT,3,0.8530,,VA,Hampton,Phoebus,6-1,263,no,Virginia Tech
+Kalin Heath,ATH,3,0.8530,,GA,Cartersville,Cartersville,6-3,180,no,Kansas State
+Kameron Eloph,OG,3,0.8530,,LA,Bossier City,Parkway,6-3,277,no,Houston
+Kevin Givens,WDE,3,0.8530,,PA,Altoona,Altoona,6-2,245,no,Penn State
+Matt Pistone,TE,3,0.8530,,AZ,Yuma,Yuma Catholic,6-4,230,no,Boise State
+Shawn Wilson,ATH,3,0.8530,,CA,Pomona,Pomona,5-10,165,no,Oregon State
+Steven Miller,OT,3,0.8530,,AZ,Gilbert,Gilbert,6-5,290,no,Arizona State
+T.J. Fehoko,SDE,3,0.8530,,UT,Salt Lake City,Cottonwood,6-1,245,no,Washington State
+Tim Bonner,WDE,3,0.8530,,AL,Demopolis,Demopolis,6-5,225,no,Louisville
+Tommy Vitale,OLB,3,0.8530,,IL,Wheaton,Wheaton Warrenville South,6-2,220,no,Northwestern
+Wyatt Cook,ILB,3,0.8530,,MD,Owings Mills,McDonogh School,6-3,225,no,Purdue
+Dorian Walker,ATH,3,0.8520,,GA,Kennesaw,Mount Paran Christian School,6-0,175,no,Georgia Tech
+Hayden Mahoney,OT,3,0.8520,,PA,Malvern,Malvern Prep,6-5,285,no,Miami
+Jamal Milan,DT,3,0.8520,,IL,Chicago,Raby,6-3,267,no,Illinois
+Joshuwa Holloman,RB,3,0.8520,,MI,Auburn Hills,Avondale,5-11,180,no,Cincinnati
+Terry Mark,WR,3,0.8520,,TX,Lufkin,Lufkin,6-2,185,no,Houston
+Aaron Cochran,SDE,3,0.8400,,GA,Atlanta,Mays,6-3,250,no,UCF
+Darion DeBrossard,OG,3,0.8400,,GA,Snellville,Shiloh,6-5,320,no,Vanderbilt
+Evan Rambo,ATH,3,0.8400,,CA,Pasadena,La Salle,6-3,180,no,California
+Jeremiah Dinson,CB,3,0.8400,,FL,Miami,American,6-0,180,no,Auburn
+Jordan Hayes,S,3,0.8400,,GA,Loganville,Grayson,5-11,165,no,Duke
+Noah Osur-Myers,OG,3,0.8400,,CA,Walnut Creek,Las Lomas,6-4,318,no,Washington State
+Taylor Thomas,APB,3,0.8400,,FL,Jacksonville,Ed White,5-8,175,no,Oregon State
+Antonio Parks,CB,3,0.8390,,LA,Reserve,East St. John,5-10,177,no,Arizona
+Broderick Washington,OC,3,0.8390,,TX,Longview,Longview,6-2,290,no,Texas Tech
+Bryce Jenkinson,OLB,3,0.8390,,OH,Greenville,Greenville Senior,6-1,220,no,Cincinnati
+Caleb Repp,WR,3,0.8390,,CA,Rancho Cucamonga,Los Osos,6-5,205,no,Utah
+Dwaine Thomas,OLB,3,0.8390,,LA,Boutte,Hahnville,6-2,218,no,Texas A&M
+Elu Aydon,DT,3,0.8390,,,Pago Pago,Samoana,6-2,315,no,Oregon State
+Hanner Shipley,TE,3,0.8390,,TX,Marble Falls,Marble Falls,6-5,283,no,LSU
+Jaylen Waters,ILB,3,0.8390,,TX,Copperas Cove,Copperas Cove,6-3,228,no,Minnesota
+Kenny Thomas,OT,3,0.8390,,AL,Prattville,Prattville,6-6,330,no,Louisville
+Nick Thomas,ILB,3,0.8390,,FL,Bradenton,IMG Academy,6-2,230,no,Wisconsin
+Quintin Hampton,OLB,3,0.8390,,GA,Moultrie,Colquitt County,6-1,235,no,UCF
+Sean Harper Jr.,WR,3,0.8390,,GA,Hartwell,Hart County,6-1,170,no,Washington State
+Ted Stieber,OT,3,0.8390,,OH,Akron,Archbishop Hoban,6-6,290,no,Minnesota
+Billy Atterbury,OT,3,0.8360,,FL,Clearwater,Clearwater Central Catholic,6-4,285,no,South Florida
+Caleb Reams,TE,3,0.8360,,IL,Gurnee,Warren Township,6-3,220,no,Illinois
+Charles Snorweah,RB,3,0.8360,,PA,Fairless Hills,Pennsbury,5-10,175,no,Rutgers
+Chase Johnston,ILB,3,0.8360,,MO,Carl Junction,Carl Junction,6-3,226,no,Kansas State
+Corey Bell Jr.,CB,3,0.8360,,NC,Cornelius,Hough,5-10,165,no,North Carolina
+Jack Hockaday,S,3,0.8360,,IL,Maroa,Maroa-Forsyth,6-1,205,no,Iowa
+Lloyd Yates,DUAL,3,0.8360,,IL,Oak Park,River Forest,6-1,180,no,Northwestern
+Markell Jones,RB,3,0.8360,,IN,Columbus,Columbus East,5-11,205,no,Purdue
+Neal Nelson,OLB,3,0.8360,,NJ,Buena,Timber Creek,6-2,225,no,UCF
+Riley Daniel,OG,3,0.8360,,OK,Ringling,Ringling,6-6,310,no,Baylor
+Sammy Morrison,CB,3,0.8360,,DC,Washington,Gonzaga,5-11,165,no,Arizona
+Coleman Fox,RB,3,0.8350,,VA,Salem,Salem,5-11,190,no,Virginia Tech
+Devonte Williams,RB,3,0.8350,,MD,Potomac,The Bullis School,5-9,170,no,Indiana
+Fred Johnson,OT,3,0.8350,,FL,West Palm Beach,Royal Palm Beach,6-7,301,no,Florida
+Jameel Cook Jr.,S,3,0.8350,,TX,Missouri City,Ridge Point,6-0,181,no,Indiana
+James Johannesson,RB,3,0.8350,,ND,Fargo,South,6-1,221,no,Minnesota
+Kevrin Justice,RB,3,0.8350,,TX,Kilgore,Kilgore,5-11,175,no,Houston
+Raymond Sheard,RB,3,0.8350,,TX,Arlington,Arlington,6-2,185,no,Boise State
+Ryan Pulley,CB,3,0.8350,,FL,Fort Myers,Island Coast,6-1,190,no,Arkansas
+Tre Tipton,WR,3,0.8350,,PA,Spring Church,Apollo-Ridge,6-1,170,no,Pittsburgh
+Tyrone Miller,CB,3,0.8350,,MI,Ann Arbor,Saline,6-0,178,no,Kansas
+Winston DeLattiboudere,WDE,3,0.8350,,MD,Ellicott City,Howard,6-3,216,no,Minnesota
+Austin Dorris,TE,3,0.8340,,OH,Shadyside,Shadyside,6-5,220,no,Indiana
+David Pfaff,SDE,3,0.8340,,WI,Thiensville,Homestead,6-3,253,no,Wisconsin
+Drew Cook,ATH,3,0.8340,,IA,Iowa City,Regina,6-5,205,no,Iowa
+Jahrvis Davenport,WR,3,0.8340,,FL,Tampa,Robinson,5-10,180,no,Maryland
+Joe Belden,WDE,3,0.8340,,IN,Avon,Avon,6-3,250,no,Indiana
+Mason Zimmerman,OC,3,0.8340,,OH,Whitehouse,Anthony Wayne,6-5,275,no,Maryland
+Michael Story,OT,3,0.8340,,MS,Ripley,Ripley,6-4,290,no,Mississippi State
+RJ Proctor,OT,3,0.8340,,VA,Bealeton,Liberty,6-4,308,no,Virginia
+Steven Clark,DT,3,0.8340,,AL,Guntersville,Brindlee Mountain,6-3,290,no,Syracuse
+Tanner Cowley,WDE,3,0.8340,,NJ,Manasquan,Manasquan,6-5,210,no,Virginia
+Tyrin Ferguson,OLB,3,0.8340,,LA,New Orleans,Edna Karr,6-3,205,no,Nebraska
+Warren Craft,WR,3,0.8340,,VA,Roanoke,William Fleming,6-2,170,no,Virginia
+Alec Shriner,OC,3,0.8330,,FL,Oviedo,Oviedo,6-4,285,no,West Virginia
+Andrew James,WR,3,0.8330,,FL,Fort Lauderdale,Westminster Academy,5-11,162,no,Wisconsin
+Denzel Johnson,S,3,0.8330,,SC,Columbia,A.C. Flora,6-2,187,no,Clemson
+Jimmy Martin,ILB,3,0.8330,,FL,Maitland,Orangewood Christian School,5-11,215,no,Boston College
+Nick Connelly,OT,3,0.8330,,MN,Red Wing,Red Wing Senior,6-7,277,no,Minnesota
+Omahri Jarrett,APB,3,0.8330,,GA,Douglasville,New Manchester,5-10,168,no,Georgia Tech
+Taj McGowan,RB,3,0.8330,,FL,Hallandale,Hallandale,6-1,192,no,UCF
+Aaron Wiltz,OG,3,0.8320,,LA,Baton Rouge,Baton Rouge Catholic,6-5,280,no,NC State
+Brett Waechter,OT,3,0.8320,,IA,Hartley,Hartley-Melvin-Sanborn,6-5,265,no,Iowa
+Donta Thompson,WR,3,0.8320,,TX,Ennis,Ennis,6-4,205,no,Texas Tech
+Eurndraus Bryant,DT,3,0.8320,,SC,North Charleston,Fort Dorchester,6-2,320,no,NC State
+Jarius Adams,CB,3,0.8320,,FL,Palm Beach Gardens,Dwyer,5-11,180,no,Rutgers
+Jon Bateky,SDE,3,0.8320,,MD,Poolesville,Poolesville,6-4,235,no,Rutgers
+Qaadir Sheppard,OLB,3,0.8320,,NY,New Rochelle,Iona Preparatory School,6-3,222,no,Syracuse
+Quan Shorts,WR,3,0.8320,,TX,Humble,Atascocita,6-1,195,no,Texas Tech
+Will McClain,OT,3,0.8320,,MD,Middletown,Middletown,6-5,290,no,Maryland
+Zeke Martin,OT,3,0.8320,,OH,Medina,Medina,6-5,280,no,Illinois
+Adam Holtorf,DT,3,0.8310,,NE,Seward,Seward,6-5,255,no,Kansas State
+Alex Kinney,P,3,0.8310,,CO,Fort Collins,Rocky Mountain,6-0,199,no,Colorado
+Andre Brown Jr.,DUAL,3,0.8310,,GA,Decatur,Columbia,6-0,187,no,Indiana
+Antonio Shenault,CB,3,0.8310,,IL,Roselle,Lake Park,5-11,185,no,Minnesota
+Austin Seibert,K,3,0.8310,,IL,Belleville,Belleville West,5-10,195,no,Oklahoma
+Dontae Owens,WR,3,0.8310,,PA,Reading,Reading,6-0,180,no,Rutgers
+Evan Adams,OT,3,0.8310,,CT,Norwalk,Norwalk,6-6,300,no,Syracuse
+Jared Pinkney,WR,3,0.8310,,GA,Norcross,Norcross,6-5,224,no,Vanderbilt
+Jared Southers,OT,3,0.8310,,NJ,West Orange,Seton Hall Prep,6-5,285,no,Vanderbilt
+Jordan Fredericks,RB,3,0.8310,,NY,Inwood,Lawrence,5-11,195,no,Syracuse
+Kirby Choates,S,3,0.8310,,GA,Atlanta,Tri-Cities,6-0,191,no,Georgia
+Andrew Ruzek,SDE,3,0.8300,,WI,Stevens Point,Stevens Point Area Senior,6-6,240,no,Wisconsin
+Cedric Bigge-Duren,OG,3,0.8300,,CA,Oceanside,Oceanside,6-6,307,no,Washington State
+Franklin Agbasimere,OLB,3,0.8300,,FL,Montverde,Montverde Academy,6-2,220,no,Missouri
+Jonathan Femi-Cole,RB,3,0.8300,,,Aurora,St. Andrew's College,6-0,218,yes,Minnesota
+Nick Buchanan,OT,3,0.8300,,GA,Atlanta,Dunwoody,6-4,280,no,Florida
+Omari Stringer,S,3,0.8300,,IL,Crete,Crete-Monee,6-4,208,no,Indiana
+Robert Knowles,S,3,0.8300,,FL,Miami,Edison,6-1,185,no,Miami
+Sharrieff Grice,RB,3,0.8300,,CT,West Hartford,Kingswood Oxford,6-1,195,no,Boston College
+Tyler Cross,DT,3,0.8300,,GA,Douglasville,Chapel Hill,6-2,275,no,Syracuse
+Vernon Grier,WR,3,0.8300,,NC,Charlotte,Mallard Creek,5-11,175,no,NC State
+William Harris,ATH,3,0.8300,,CT,Wallingford,Choate Rosemary Hall,6-2,190,no,Boston College
+Beau Hoge,DUAL,3,0.8290,,KY,Fort Thomas,Highlands,6-1,205,no,BYU
+Darrell Clark,WR,3,0.8290,,LA,New Orleans,Warren Easton,5-10,175,no,Arizona
+Doug Bates,TE,3,0.8290,,OH,Cincinnati,Archbishop Moeller,6-4,230,no,Cincinnati
+Ian Shannon,P,3,0.8290,,GA,Marietta,Marietta,6-4,190,no,Auburn
+James Smith-Williams,OLB,3,0.8290,,NC,Raleigh,Millbrook,6-4,210,no,NC State
+Jordan Reed,WR,3,0.8290,,FL,Tampa,Plant,5-9,168,no,South Florida
+Justin McMillan,DUAL,3,0.8290,,TX,Cedar Hill,Cedar Hill,6-2,170,no,LSU
+Kareem Gibson,CB,3,0.8290,,PA,Johnstown,Greater Johnstown,5-10,157,no,Virginia
+Mbi Tanyi,SDE,3,0.8290,,TX,Richmond,Fort Bend Bush,6-3,247,no,Maryland
+Mitchell Wilcox,TE,3,0.8290,,FL,Tarpon Springs,Tarpon Springs,6-4,230,no,South Florida
+Nick Ralston,RB,3,0.8290,,TX,Argyle,Argyle,6-0,215,no,Arizona State
+Tyler Horton,CB,3,0.8290,,CA,Fresno,Edison,6-0,180,no,Boise State
+Zach Lucas,OT,3,0.8290,,TX,Katy,Taylor,6-5,280,no,Oregon State
+Zayne Anderson,S,3,0.8290,,UT,Tooele,Stansbury,6-3,190,no,BYU
+Amari Henderson,S,3,0.8280,,NC,Charlotte,Mallard Creek,6-1,182,no,Wake Forest
+Bryan Jefferson,ATH,3,0.8280,,FL,Leesburg,Leesburg,6-0,187,no,Boise State
+Bryce Balous,S,3,0.8280,,TX,McKinney,McKinney North,5-11,180,no,Oklahoma State
+Charles Wade Jr.,ATH,3,0.8280,,FL,Jacksonville,Bishop Kenny,5-11,190,no,Wake Forest
+Houston Heimuli,FB,3,0.8280,,UT,Bountiful,Bountiful,5-11,220,no,Stanford
+Jake Burt,TE,3,0.8280,,MA,Danvers,St. John's Prep,6-5,230,no,Boston College
+Jameson Houston,ATH,3,0.8280,,TX,Austin,St. Michael's Catholic,6-1,190,no,Baylor
+Nate Vejvoda,TE,3,0.8280,,IL,New Lenox,Providence Catholic,6-5,210,no,Iowa
+Nathan Cottrell,RB,3,0.8280,,TN,Knoxville,Knoxville West,5-11,185,no,Georgia Tech
+Alex Kosinski,OG,3,0.8270,,CA,Larkspur,Redwood,6-5,290,no,Arizona
+Eric Quevedo,OT,3,0.8270,,CA,West Covina,West Covina,6-5,285,no,Boise State
+Kirk Livingstone,SDE,3,0.8270,,FL,Fort Lauderdale,Stranahan,6-4,235,no,South Florida
+Luc Bequette,WDE,3,0.8270,,AR,Little Rock,Catholic For Boys,6-2,270,no,California
+Lukas Denis,CB,3,0.8270,,MA,Everett,Everett,5-11,170,no,Boston College
+Reggie Corbin,RB,3,0.8270,,DC,Washington,Gonzaga,5-10,190,no,Illinois
+Taylor Boose,FB,3,0.8270,,VA,Clifton,Centreville,6-0,200,no,Cincinnati
+Trent Sellers,WDE,3,0.8270,,GA,Tyrone,Sandy Creek,6-3,230,no,Georgia Tech
+Breckyn Hager,WDE,3,0.8260,,TX,Austin,Westlake,6-4,220,no,Texas
+Chase Harrell,WR,3,0.8260,,TX,Huffman,Hargrave,6-4,205,no,Kansas
+Chazmyn Turner,SDE,3,0.8260,,NC,Mooresville,Mooresville,6-5,240,no,Purdue
+Chris Orr,ILB,3,0.8260,,TX,DeSoto,DeSoto,6-0,215,no,Wisconsin
+Jake Bailey,P,3,0.8260,,CA,Solana Beach,Santa Fe Christian Schools,6-2,185,no,Stanford
+Jeff Gladney,ATH,3,0.8260,,TX,New Boston,New Boston,6-0,174,no,TCU
+John Phillips,OG,3,0.8260,,NY,Syracuse,Christian Brothers Academy,6-6,245,no,Boston College
+Justin Strnad,OLB,3,0.8260,,FL,Tarpon Springs,East Lake,6-3,205,no,Wake Forest
+Meiko Dotson,CB,3,0.8260,,FL,Daytona Beach,Mainland,5-10,175,no,Georgia Tech
+Taylor Martin,RB,3,0.8260,,TX,Fort Worth,Dunbar,5-9,185,no,Kansas
+Donavan Hale,WR,3,0.8250,,FL,Largo,Largo,6-4,205,no,Indiana
+Emmanuel Moore,WR,3,0.8250,,TX,Justin,Northwest,6-0,185,no,Kansas
+Frank Umu,DT,3,0.8250,,CO,Littleton,Heritage,6-5,280,no,Colorado
+Oseh Saine,SDE,3,0.8250,,MA,Worcester,Worcester Academy,6-4,265,no,Maryland
+Willington Previlon,SDE,3,0.8250,,NJ,Orange,Orange,6-5,230,no,Rutgers
+Andrew Otterman,OG,3,0.8240,,NJ,Morristown,Delbarton School,6-4,285,no,Northwestern
+Bryce Sterk,OLB,3,0.8240,,WA,Lynden,Lynden,6-5,230,no,Washington
+Bryce Witham,TE,3,0.8240,,MI,Grand Rapids,West Catholic,6-4,240,no,Minnesota
+David Lui,DT,3,0.8240,,CA,Pittsburg,Pittsburg,6-3,262,no,BYU
+Eric Ogor,OLB,3,0.8240,,TX,Richmond,Foster,6-0,215,no,Baylor
+Harper Sherman,OT,3,0.8240,,,Victoria,WJ Mouat Secondary,6-5,260,no,Arizona
+Julius Lewis,ATH,3,0.8240,,TX,Mansfield,Mansfield,5-11,170,no,TCU
+Justin Jinning,OLB,3,0.8240,,TX,The Colony,The Colony,6-2,200,no,Iowa
+Norman Oglesby,DT,3,0.8240,,IN,Indianapolis,Ben Davis,6-0,265,no,Cincinnati
+Ronnie James,S,3,0.8240,,NJ,Glassboro,Glassboro,6-0,180,no,Rutgers
+Ryan Bischoff,OG,3,0.8240,,PA,Plymouth Meeting,Plymouth-Whitemarsh,6-4,290,no,Virginia
+Ryan Brand,DUAL,3,0.8240,,MI,Detroit,University Of Detroit Jesuit,5-10,192,no,Maryland
+Seth Nerness,ATH,3,0.8240,,IA,Murray,Southlake Christian Academy,6-4,230,no,Iowa State
+Shyheim Cullen,ILB,3,0.8240,,MA,Lowell,Lowell,6-1,210,no,Syracuse
+Clyde McCauley,OT,3,0.8230,,TX,Arlington,Bowie,6-4,275,no,Kansas
+Daniel Cobb,ATH,3,0.8230,,FL,Fort Myers,Dunbar,5-9,165,no,Cincinnati
+Daniel LaCamera,K,3,0.8230,,FL,Tarpon Springs,East Lake,6-4,210,no,Texas A&M
+Julian Jones,ATH,3,0.8230,,GA,Atlanta,Westlake,6-3,205,no,Illinois
+T.J. McCoy,OC,3,0.8230,,FL,Groveland,South Lake,6-2,305,no,NC State
+Terence Steele,OT,3,0.8230,,TX,Cibolo,Steele,6-5,280,no,Texas Tech
+Cole Chewins,TE,3,0.8220,,MI,Clarkston,Clarkston,6-8,255,no,Michigan State
+Colin Byrne,OG,3,0.8220,,FL,Fort Lauderdale,St. Thomas Aquinas,6-5,300,no,Syracuse
+D'erren Wilson,WR,3,0.8220,,TX,Greenville,Greenville,6-3,187,no,UCF
+Deamonte Lindsay,ATH,3,0.8220,,WV,Martinsburg,Martinsburg,6-2,190,no,West Virginia
+Eric Gallon,OLB,3,0.8220,,FL,Lakeland,Lakeland Christian School,6-2,220,no,Virginia
+Jake Whalen,ILB,3,0.8220,,WI,Wausau,West,6-2,220,no,Wisconsin
+Lopini Katoa,RB,3,0.8220,,UT,American Fork,American Fork,6-0,200,no,Oregon State
+Matt Locher,SDE,3,0.8220,,CA,Los Alamitos,Los Alamitos,6-3,250,no,Boise State
+Tyrell Thompson,SDE,3,0.8220,,TX,Athens,Copperas Cove,6-3,255,no,Houston
+Brett Kean,PRO,3,0.8210,,OH,Lakewood,St. Edward,6-2,190,no,South Florida
+Eli Hanback,OG,3,0.8210,,VA,Ashland,Patrick Henry,6-4,275,no,Virginia
+Frank Sumpter,CB,3,0.8210,,OH,Cleveland,Glenville,6-1,180,no,Illinois
+Jelani Roberts,WR,3,0.8210,,MD,Baltimore,Gilman,5-8,153,no,Northwestern
+Jhavonte Dean,CB,3,0.8210,,FL,Homestead,South Dade,6-1,168,no,Cincinnati
+Nazir Williams,OLB,3,0.8210,,NJ,Bridgeton,Bridgeton,6-3,205,no,Connecticut
+Tanner Owen,OT,3,0.8210,,MO,Kearney,Kearney,6-5,265,no,Missouri
+Tario Fuller,RB,3,0.8210,,GA,Buford,Lanier,6-0,190,no,Purdue
+Demetrius Flannigan-Fowles,S,3,0.8200,,AZ,Tucson,Tucson Magnet,6-3,180,no,Arizona
+Emmanuel Ogwo,WR,3,0.8200,,TX,Mesquite,Horn,6-0,170,no,Iowa
+John Molchon,SDE,3,0.8200,,NV,Las Vegas,Faith Lutheran,6-5,270,no,Boise State
+Logan Tago,OLB,3,0.8200,,,Pago Pago,Samoana,6-3,230,no,Washington State
+Twazanga Mugala,WDE,3,0.8200,,NC,Charlotte,Ardrey Kell,6-3,238,no,Duke
+Akile Davis,WR,3,0.8190,,TX,DeSoto,DeSoto,6-1,186,no,BYU
+Britain Covey,APB,3,0.8190,,UT,Provo,Timpview,5-9,170,no,Utah
+Cameron Saffle,WDE,3,0.8190,,WA,Sammamish,Skyline,6-3,218,no,California
+Davon Jones,CB,3,0.8190,,MA,Danvers,St. John's Prep,6-0,180,no,Boston College
+Lonzell Gilmore,WDE,3,0.8190,,TX,Spring,Spring High,6-3,220,no,Texas Tech
+Mose Hall,SDE,3,0.8190,,AL,Mobile,Murphy,6-4,255,no,Minnesota
+Richard Burney,TE,3,0.8190,,VA,Chesapeake,Hickory,6-5,235,no,Virginia
+Riley Burt,ATH,3,0.8190,,UT,Brigham City,Box Elder,6-1,190,no,BYU
+Sheldon Croney,RB,3,0.8190,,CA,Bakersfield,Garces Memorial,5-11,207,no,Iowa State
+Ben DiNucci,PRO,3,0.8180,,PA,Gibsonia,Pine-Richland,6-3,198,no,Pittsburgh
+Jacob Huff,S,3,0.8180,,IL,Bolingbrook,Bolingbrook,5-10,205,no,Minnesota
+Kevin Murphy,DT,3,0.8180,,PA,West Chester,West Chester East,6-3,265,no,Connecticut
+Mason Wolfe,OG,3,0.8180,,KY,Henderson,Henderson County,6-7,280,no,Kentucky
+Steven Reese,WR,3,0.8180,,GA,Buford,Buford,6-2,185,no,Northwestern
+Aaron Garland,S,3,0.8170,,IL,Oak Park,Fenwick,6-0,190,no,Connecticut
+Adrian Falconer,WR,3,0.8170,,FL,Leesburg,Leesburg,6-1,189,no,Iowa
+Chad Hekking,PRO,3,0.8170,,CA,Vacaville,Vacaville,6-4,215,no,Utah
+Drew Galitz,P,3,0.8170,,TX,Rowlett,Rowlett,5-11,180,no,Baylor
+Jay Tyler,ATH,3,0.8170,,LA,New Orleans,Isidore Newman,5-8,165,no,Stanford
+Kyle Anderton,TE,3,0.8170,,TN,Gallatin,Station Camp,6-4,260,no,Vanderbilt
+Quaide Weimerskirch,RB,3,0.8170,,FL,Milton,Pace,6-1,201,no,Georgia Tech
+Rayshad Jackson,OLB,3,0.8170,,FL,Miami,Norland,6-2,215,no,Florida
+Tyler Phillips,S,3,0.8170,,AR,North Little Rock,North Little Rock,6-2,208,no,Arkansas
+Zeandae Johnson,SDE,3,0.8170,,CA,Fresno,Central East,6-4,240,no,California
+Zo Craighton,S,3,0.8170,,LA,Geismar,Dutchtown,6-1,189,no,Minnesota
+Jonah Jackson,OT,3,0.8160,,PA,Media,Penncrest,6-4,285,no,Rutgers
+Lenoy Jones Jr.,ILB,3,0.8160,,TX,Waco,Midway,5-11,210,no,Baylor
+Zachariah Hoyt,OC,3,0.8160,,VA,Salem,Salem,6-5,275,no,Virginia Tech
+David Ryslik,SDE,3,0.8150,,NJ,Hightstown,The Peddie School,6-4,295,no,Connecticut
+Gladimir Paul,WDE,3,0.8150,,PA,Philadelphia,Delaware Valley-Northeast,6-3,210,no,Virginia
+Jessie Bates III,S,3,0.8150,,IN,Fort Wayne,R Nelson Snider,6-3,185,no,Wake Forest
+KirVonte Benson,RB,3,0.8150,,GA,Marietta,Marietta,5-8,190,no,Georgia Tech
+Nate Ferguson,CB,3,0.8150,,FL,Tampa,Freedom,5-9,160,no,South Florida
+Braxton Neal,WR,3,0.8140,,OH,West Chester,Lakota West,6-4,168,no,Cincinnati
+Cody Wheeler,OG,3,0.8140,,TX,Allen,Allen,6-4,292,no,Texas Tech
+Da'cuan Jenkins,DT,3,0.8140,,TX,Huntsville,Huntsville,6-2,230,no,Houston
+Dane Jackson,S,3,0.8140,,PA,Leetsdale,Quaker Valley,6-1,170,no,Pittsburgh
+Deangelo Antoine,CB,3,0.8140,,FL,Orlando,Oak Ridge,5-9,165,no,South Florida
+Deonte Roberts,ATH,3,0.8140,,NY,Brooklyn,Erasmus Hall,6-2,210,no,Rutgers
+Jace Sternberger,TE,3,0.8140,,OK,Kingfisher,Kingfisher,6-4,212,no,Kansas
+Jalen Moore,S,3,0.8140,,CA,Upland,Upland,6-1,190,no,Oregon State
+Luke Ancrum,SDE,3,0.8140,,FL,Sebring,Sebring,6-5,230,no,Florida
+Pat Jasinski,OLB,3,0.8140,,GA,Roswell,Blessed Trinity Catholic,6-2,203,no,UCF
+Philippe Okounam,SDE,3,0.8140,,NH,Concord,St. Paul's School,6-5,265,no,Connecticut
+Seth Collins,DUAL,3,0.8140,,CA,El Cajon,Granite Hills,6-3,171,no,Oregon State
+Sio Kautai,S,3,0.8140,,TX,Euless,Trinity,5-10,205,no,Utah
+Blake Johnson,P,3,0.8130,,CA,Los Alamitos,Los Alamitos,6-1,190,no,Arkansas
+Brad Morgan,OG,3,0.8130,,GA,Woodstock,Etowah,6-5,266,no,Georgia Tech
+Donovan Welch,OT,3,0.8130,,FL,Montverde,Montverde Academy,6-5,275,no,Florida
+Hergy Mayala,ATH,3,0.8130,,,Montreal,Trinity-Pawling School,6-2,190,no,Connecticut
+Michael Walker,ATH,3,0.8130,,FL,Naples,Naples,5-11,178,no,Boston College
+Rodrigo Blankenship,K,3,0.8130,,GA,Marietta,Sprayberry,6-1,188,no,Georgia
+Tommy Townsend,P,3,0.8130,,FL,Orlando,Boone,6-1,168,no,Tennessee
+Trevon Story,WR,3,0.8130,,OH,Cleveland,Glenville,5-9,165,no,Cincinnati
+Alec Ingold,DUAL,3,0.8120,,WI,Green Bay,Bay Port,6-2,220,no,Wisconsin
+Brandon Ginnetti,WDE,3,0.8120,,CT,Hamden,Hamden Hall,6-3,240,no,Syracuse
+DaVondre Love,OT,3,0.8120,,MO,St. Louis,Affton,6-7,290,no,Indiana
+Jordan Gowins,RB,3,0.8120,,NY,Long Island City,St. Anthony's,5-11,210,no,Boston College
+Leroy Godfrey,OLB,3,0.8120,,TX,Missouri City,Elkins,6-3,213,no,Houston
+Marquis Hendrix,OLB,3,0.8120,,FL,Ocala,Trinity Catholic,6-0,219,no,Boise State
+Nico Sawtelle,OLB,3,0.8120,,FL,Jensen Beach,Jensen Beach,6-1,215,no,South Florida
+Ron'Dell Carter,WDE,3,0.8120,,MD,Columbia,Long Reach,6-3,227,no,Rutgers
+Connor McGinnis,DUAL,3,0.8110,,OK,Oklahoma City,Heritage Hall,6-4,181,no,Oklahoma
+Kiante Hardin,CB,3,0.8110,,MO,Webb City,Webb City,5-10,160,no,Minnesota
+Matt Abramo,K,3,0.8110,,CA,Petaluma,Casa Grande,6-2,170,no,Washington State
+Michael Ojemudia,OLB,3,0.8110,,MI,Farmington,Harrison,6-2,190,no,Iowa
+Sterling Hofrichter,K,3,0.8110,,FL,Seffner,Armwood,5-9,160,no,Syracuse
+Amir Trapp,CB,3,0.8100,,SC,Central,D.W. Daniel,5-8,160,no,Clemson
+Andrew David,K,3,0.8100,,OH,Massillon,Washington,5-9,165,no,Michigan
+Frank Battle,WR,3,0.8100,,FL,Miami,Belen Jesuit Prep,6-5,180,no,Connecticut
+Klint Harvey,OT,3,0.8100,,AR,Corning,Corning,6-6,320,no,Arkansas
+Marcus Keyes,DT,3,0.8100,,LA,Port Allen,Port Allen,6-5,260,no,Oklahoma State
+Rashad Still,WR,3,0.8100,,TX,El Paso,Andress,6-5,200,no,Minnesota
+Tim Faison,OLB,3,0.8100,,FL,Tallahassee,Amos P. Godby,6-2,200,no,Purdue
+Tyler Hudanick,OG,3,0.8100,,PA,Harmony,Seneca Valley,6-4,285,no,UCF
+Xavian Marks,APB,3,0.8100,,TX,Rosenberg,George Ranch,5-8,155,no,Alabama
+Caleb Ashworth,WDE,3,0.8090,,VA,Dry Fork,Tunstall Sr.,6-3,235,no,Cincinnati
+Dominic DeLira,PRO,3,0.8090,,TX,Austin,Lake Travis,6-1,174,no,Iowa State
+Jay Hockaday,ILB,3,0.8090,,TN,Nashville,CPA,6-3,215,no,Vanderbilt
+Jeremiah Booker,WR,3,0.8090,,TX,College Station,College Station,6-3,181,yes,Kansas
+Jordan Wallace,S,3,0.8090,,TX,Denton,Guyer,6-0,180,no,Iowa State
+Tyler Burns,RB,3,0.8090,,KS,Wichita,Trinity Academy,5-11,190,no,Kansas State
+Alonzo Mayo,CB,3,0.8080,,MD,Baltimore,Gilman,5-10,172,no,Northwestern
+Anthony Giudice,DT,3,0.8080,,CT,Avon,Avon Old Farms,6-3,255,no,Syracuse
+Chris Bounds,TE,3,0.8080,,CA,West Hills,Chaminade,6-4,260,no,Colorado
+Garret Jansen,WDE,3,0.8080,,IA,Pella,Pella,6-1,250,no,Iowa
+Garrett Larson,OT,3,0.8080,,ID,Fruitland,Fruitland,6-5,250,no,Boise State
+Myles Rice,WDE,3,0.8080,,TX,Richmond,Fort Bend Bush,6-4,245,no,Washington
+Reakwon Jones,S,3,0.8080,,FL,Lynn Haven,Mosley,6-2,210,no,Indiana
+Sam Whitney,WDE,3,0.8080,,CA,Folsom,Folsom,6-3,225,no,Boise State
+Tyler McGarr,OG,3,0.8080,,GA,Hamilton,Harris County,6-4,275,no,Cincinnati
+Brandon Feamster,S,3,0.8070,,PA,Exton,Cheshire Academy,6-3,203,no,Duke
+Gentry Ivery,WR,3,0.8070,,TX,Mansfield,Mansfield Legacy,6-1,205,no,Pittsburgh
+Tae Crowder,WR,3,0.8070,,GA,Hamilton,Harris County,6-3,220,no,Georgia
+Alex Bachman,WR,3,0.8060,,CA,Thousand Oaks,Oaks Christian,5-11,175,no,Wake Forest
+Alex Davis,WDE,3,0.8060,,FL,Palm Beach Gardens,Dwyer,6-5,220,no,Nebraska
+Carter Stanley,PRO,3,0.8060,,FL,Vero Beach,Vero Beach,6-2,188,no,Kansas
+Jakobi Meyers,DUAL,3,0.8060,,GA,Lithonia,Arabia Mountain,6-2,172,no,NC State
+Julian Huff,ILB,3,0.8060,,IL,Bolingbrook,Bolingbrook,6-0,225,no,Minnesota
+Brendon Hayes,SDE,3,0.8050,,LA,New Orleans,Brother Martin,6-4,240,no,UCF
+Brycen Hopkins,TE,3,0.8050,,TN,Nashville,Ensworth,6-5,225,no,Purdue
+Elontae Bateman,DT,3,0.8050,,TN,Memphis,Ridgeway,6-3,260,no,Wake Forest
+Eric Graham,RB,3,0.8050,,AL,Prattville,Autauga Academy,5-10,200,no,Iowa
+Naji Abdullah,WDE,3,0.8050,,FL,Jacksonville,Sandalwood,6-5,220,no,Virginia
+Nate Mays,OLB,3,0.8050,,GA,Calhoun,Dalton,6-2,215,no,Wake Forest
+Stephon Brown,CB,3,0.8050,,FL,Kissimmee,Osceola,5-11,175,no,Iowa State
+Andy Chelf,S,3,0.8040,,TX,Southlake,Southlake Carroll,6-0,185,no,Purdue
+Byron Keaton,CB,3,0.8040,,AR,Camden,Camden Fairview,5-10,175,no,Arkansas
+Carson Epps,WR,3,0.8040,,OK,Jenks,Jenks,6-2,190,no,Iowa State
+Evan Curl,OT,3,0.8040,,TX,Flower Mound,Flower Mound,6-5,285,no,Kansas State
+James King,OLB,3,0.8040,,FL,Miami,Booker T. Washington,6-1,200,no,Miami
+Omar Hicks Onu,S,3,0.8040,,TX,Carrollton,Hebron,6-1,172,no,Oregon State
+Robert Muschamp,OLB,3,0.8040,,GA,Rome,Darlington School,6-2,225,no,Auburn
+Antonio Reed,S,3,0.8030,,MS,Southaven,Southaven,6-2,210,no,Nebraska
+David Rose,CB,3,0.8030,,MD,Oxon Hill,Potomac,6-0,170,no,Purdue
+Evan Shirreffs,PRO,3,0.8030,,GA,Jefferson,Jefferson,6-5,195,no,Miami
+Foster Moreau,TE,3,0.8030,,LA,New Orleans,Jesuit,6-5,225,no,LSU
+Jawuan Harris,WR,3,0.8030,,FL,Fort Lauderdale,St. Thomas Aquinas,5-10,185,no,Rutgers
+Riley Whimpey,OLB,3,0.8030,,CA,San Clemente,San Clemente,6-2,210,no,Boise State
+Tyler Bell,RB,3,0.8030,,AL,Mobile,Faith Academy,6-0,200,no,Wake Forest
+Tyler Davis,PRO,3,0.8030,,NY,Bellmore,Wellington C Mepham,6-4,195,no,Connecticut
+Baylor Romney,DUAL,3,0.8020,,TX,El Paso,Franklin,6-2,185,no,BYU
+Colton Beebe,FB,3,0.8020,,KS,Kansas City,Piper,6-3,252,no,Minnesota
+Trey Dishon,DT,3,0.8020,,KS,Horton,Horton,6-3,295,no,Kansas State
+Jacob Murray,S,3,0.8010,,TX,Coppell,Coppell,6-1,194,no,Northwestern
+Marshe Terry,S,3,0.8010,,NJ,Burlington,Northern Burlington,6-4,190,no,Connecticut
+William Richardson,WDE,3,0.8010,,DC,Washington,Ballou,6-4,215,no,Connecticut
+Connor Freeborn,SDE,3,0.8000,,DE,Wilmington,Salesianum,6-5,225,no,Connecticut
+Steven Sims Jr.,WR,3,0.8000,,TX,Richmond,Fort Bend Travis,5-10,165,no,Kansas
+Isaiah Davis,ATH,3,0.7990,,DC,Washington,St. Stephen's & St. Agnes,6-1,210,no,Maryland
+Peyton Truitt,OT,3,0.7990,,IN,West Lafayette,West Lafayette,6-5,280,no,Purdue
+Austin Parker,P,3,0.7980,,NC,Mount Pleasant,Mount Pleasant,6-1,170,no,Duke
+Denzel Feaster,S,3,0.7980,,TX,Manor,Manor,6-2,190,no,Kansas
+Patrick Mekari,OC,3,0.7980,,CA,Thousand Oaks,Westlake,6-5,300,no,California
+John Robinson,CB,3,0.7970,,NJ,Englewood,Dwight Morrow,6-1,170,no,Connecticut
+Manny Taylor,OT,3,0.7970,,PA,Philadelphia,Roman Catholic,6-6,270,no,Rutgers
+Shola Ayinde,CB,3,0.7970,,TX,Richmond,George Ranch,5-11,161,no,Kansas
+Josh Hines-Allen,WDE,2,0.7970,,NJ,Montclair,Montclair,6-4,210,no,Kentucky
+Tyler Mitchell,OG,2,0.7970,,AL,Montgomery,The Montgomery Academy,6-5,280,no,Kansas State
+Cameron Campbell,OC,2,0.7960,,FL,Hollywood,Flanagan,6-3,270,no,South Florida
+Joe Schopper,P,2,0.7960,,IN,Indianapolis,Cathedral,5-11,185,no,Purdue
+Marcus Foster,OLB,2,0.7960,,TX,League City,Clear Falls,6-2,210,no,UCF
+Montre Hartage,CB,2,0.7960,,GA,Cordele,Crisp County,6-0,180,no,Northwestern
+JJ Nwigwe,OG,2,0.7950,,TX,Rockwall,Rockwall-Heath,6-4,260,no,BYU
+Jacob Jimenez,SDE,2,0.7950,,TX,Pflugerville,Pflugerville,6-4,265,no,BYU
+Josiah Deguara,TE,2,0.7950,,CA,Folsom,Folsom,6-2,190,no,Cincinnati
+Taj-Amir Torres,CB,2,0.7950,,MA,Amherst,Amherst Regional,5-10,170,no,Boston College
+Trevor Morris,OLB,2,0.7950,,PA,Malvern,Malvern Prep,6-2,200,no,Rutgers
+Corey Fatony,P,2,0.7940,,TN,Franklin,Franklin,5-11,190,no,Missouri
+Camden Ross,OLB,2,0.7930,,TX,Keller,Timber Creek,6-2,210,no,Houston
+Chris Lee,OT,2,0.7930,,MD,Severna Park,Severna Park,6-7,260,no,Connecticut
+Jeff Carr,APB,2,0.7930,,TX,Temple,Temple,5-8,170,no,Oklahoma State
+Joe Young,RB,2,0.7930,,SC,Winnsboro,Fairfield Central,6-0,192,no,Tennessee
+Tyraiq Beals,WR,2,0.7930,,NJ,East Orange,East Orange Campus,6-0,180,no,Connecticut
+Felton Blackwell,DT,2,0.7910,,NJ,Egg Harbor City,Cedar Creek,6-1,310,no,Connecticut
+Daniel Jones,DUAL,2,0.7900,,NC,Charlotte,Charlotte Latin School,6-5,190,no,Duke
+Jess Trussell,TE,2,0.7900,,TX,Arlington,Martin,6-6,225,no,Purdue
+Christian Angulo,CB,2,0.7890,,FL,Gibsonton,East Bay,6-2,175,no,Cincinnati
+Hakeem Butler,WR,2,0.7890,,TX,Richmond,Fort Bend Travis,6-6,205,no,Iowa State
+Kahlil Welsh,DT,2,0.7890,,FL,Jacksonville,Sandalwood,6-3,275,no,Wake Forest
+MaLeik Gatewood,CB,2,0.7890,,TN,Memphis,Memphis University School,5-10,180,no,Tennessee
+Will Hastings,WR,2,0.7890,,AR,Little Rock,Pulaski Academy,5-10,155,no,Auburn
+Amosa Sakaria,OG,2,0.7880,,,Pago Pago,Tafuna,6-3,280,no,Washington State
+Terrance Henley,CB,2,0.7880,,FL,Pompano Beach,Blanche Ely,6-0,165,no,Miami
+Brett Tonz,DT,2,0.7860,,AZ,Peoria,Centennial,6-3,270,no,Colorado
+Jaymon Thomas,S,2,0.7860,,FL,Immokalee,Immokalee,6-1,190,no,South Florida
+Jordan Milburn,OLB,2,0.7860,,TX,Galveston,Ball,6-1,210,no,Houston
+Kyle Ball,WDE,2,0.7860,,KS,Prairie Village,Shawnee Mission East,6-2,228,no,Kansas State
+Aaron McLean,WR,2,0.7850,,MA,Southborough,St Mark's School,6-6,215,no,Connecticut
+Cameron Watkins,CB,2,0.7830,,TN,Nashville,Pearl-Cohn,6-1,180,no,Illinois
+Emeke Egbule,OLB,2,0.7830,,TX,Houston,North Shore,6-2,200,no,Houston
+Jacob Herbers,P,2,0.7830,,MI,Battle Creek,Lakeview,6-2,195,no,Minnesota
+Jaire George,ATH,2,0.7830,,MD,Hyattsville,DeMatha Catholic,6-2,226,no,Vanderbilt
+Landen Akers,WR,2,0.7830,,IA,Cedar Rapids,Washington,6-1,175,no,Iowa State
+Lyle Tuiloma,DT,2,0.7830,,HI,Waianae,Nanakuli & Intermediate School,6-2,283,no,Colorado
+Brady Christensen,OG,2,0.7820,,UT,Bountiful,Bountiful,6-5,245,no,BYU
+Jake Benzinger,OT,2,0.7820,,MA,Williamstown,Mount Greylock Regional,6-7,275,no,Wake Forest
+Reed Armagost,OT,2,0.7810,,FL,Gainesville,Gainesville,6-6,230,no,Cincinnati
+Ian Campbell,TE,2,0.7800,,NJ,Pompton Plains,Pequannock Township,6-5,225,no,Connecticut
+Fred Brown,DT,2,0.7790,,LA,Boutte,Hahnville,6-2,255,no,Purdue
+Kielan Whitner,CB,2,0.7790,,GA,Lawrenceville,Mountain View,6-1,185,no,Syracuse
+Dallas Parker,WDE,2,0.7780,,FL,Ponte Vedra Beach,Ponte Vedra,6-5,230,no,Connecticut
+Eli Wolf,TE,2,0.7780,,OH,Minster,Minster,6-4,205,no,Tennessee
+Jason Money,DUAL,2,0.7780,,UT,Spanish Fork,Spanish Fork,6-1,194,no,BYU
+Nnamdi Oguayo,WDE,2,0.7780,,MD,Beltsville,High Point,6-4,208,no,Washington State
+Ben Hartwick,TE,2,0.7770,,NJ,Mahwah,Mahwah,6-5,215,no,Connecticut
+Michael Lacey,CB,2,0.7760,,TN,Nashville,Montgomery Bell Academy,5-8,165,no,Tennessee
+Darius Gilbert,S,2,0.7750,,LA,Springhill,North Webster,6-3,190,no,Houston
+Micah Simon,ATH,2,0.7750,,TX,Dallas,Bishop Dunne,6-0,175,no,BYU
+Osaze Ogbebor,OLB,2,0.7750,,TX,Frisco,Heritage,6-0,195,no,Kansas
+Josh Growden,P,2,0.7740,,NA,NA,ProKick Australia,6-2,190,no,LSU
+Motekiai Langi,OT,2,0.7740,,NA,Liahona,Liahona,6-7,410,no,BYU
+Josh Coleman,DT,2,0.7720,,FL,Jacksonville,University Christian,6-2,270,no,Iowa State
+Tyrone Hunt,SDE,2,0.7720,,TX,Arp,Arp,6-5,245,no,Baylor
+Cameron Durley,OT,2,0.7710,,TX,Houston,Houston Christian,6-6,285,no,Kansas
+Kenny Carter,OG,2,0.7710,,NJ,Plainfield,Plainfield,6-5,260,no,Syracuse
+Will Jackson,ATH,2,0.7710,,DC,Washington,St. John's College,6-3,190,no,Kentucky
+Michael Tarbutt,K,2,0.7690,,NY,Buffalo,Canisius,6-0,180,no,Connecticut
+Alassane Niang,CB,2,0.7680,,UT,Salt Lake City,Highland,6-1,180,no,Utah
+Brian Cespedes,OT,2,0.7680,,CT,New London,New London,6-7,260,no,Connecticut
+Dennis Daley,OT,2,0.7680,,SC,Columbia,Ridge View,6-6,280,no,South Carolina
+Matt Peart,OT,2,0.7680,,MA,Byfield,The Governors Academy,6-8,270,no,Connecticut
+Trevor Brent,CB,2,0.7680,,TX,Mesquite,West Mesquite,5-10,165,no,BYU
+Will Noble,OC,2,0.7680,,TX,Lago Vista,Rouse,6-4,260,no,Houston
+Alex Badine,CB,2,0.7670,,NY,Brooklyn,Grand Street,5-11,185,no,Ohio State
+Blair Ewers,OLB,2,0.7670,,CA,San Jose,Valley Christian,6-2,210,no,Boise State
+Dwon Walker,CB,2,0.7670,,NJ,Jersey City,St. Peter's Prep,6-0,180,no,Rutgers
+Elijah Strong,CB,2,0.7670,,WI,Oak Creek,Oak Creek,6-0,170,no,Wisconsin
+Hamilton Hunt,OLB,2,0.7670,,OR,Salem,West Salem,6-1,205,no,Oregon State
+Hudson Hall,OLB,2,0.7670,,TX,Austin,Westlake,6-2,220,no,Kansas
+J.D. Davis,ILB,2,0.7670,,SC,Central,D.W. Daniel,6-2,215,no,Clemson
+Jack Trainor,DT,2,0.7670,,GA,Atlanta,Marist School,6-3,295,no,Indiana
+Judah Davis,ILB,2,0.7670,,SC,Central,D.W. Daniel,6-2,215,no,Clemson
+Lawrence Stevens,CB,2,0.7670,,NJ,Ramsey,Don Bosco Prep,5-10,186,no,Rutgers
+Robert Charlton,CB,2,0.7670,,OK,Edmond,Memorial,5-10,171,no,Oklahoma
+Sebastian Sock,TE,2,0.7670,,CO,Littleton,Valor Christian,6-4,220,no,Kansas
+Weston Barlow,RB,2,0.7670,,AZ,Queen Creek,Queen Creek,5-8,176,no,Arizona
+Johnathan Durham,CB,2,0.7650,,TX,Aledo,Aledo,6-0,180,no,Kansas State
+Michael Mendez,OT,2,0.7650,,TX,Los Fresnos,Los Fresnos,6-4,286,no,Purdue
+Demetrius Davis,OG,2,0.7630,,CA,Elk Grove,Pleasant Grove,6-4,265,no,BYU
+Zordan Holman,TE,2,0.7630,,ME,Portland,Cheverus,6-6,235,no,Connecticut
+Nick Rubinowicz,P,2,0.7620,,FL,Delray Beach,American Heritage Boca/Delray,6-3,210,no,Maryland
+Deven Hammond,CB,2,0.7600,,LA,Port Allen,Port Allen,5-10,195,no,LSU
+Joe Critchlow,PRO,2,0.7600,,TN,Franklin,Franklin,6-4,190,no,BYU
+Landon Knoll,OLB,2,0.7600,,TN,Nashville,Father Ryan,6-3,210,no,Tennessee
+Harris LaChance,SDE,2,0.7580,,UT,Herriman,Herriman,6-7,280,no,BYU
+Jarrid Williams,OT,2,0.7580,,TX,Cedar Hill,Cedar Hill,6-4,285,no,Houston
+Devin Smith,WR,2,0.7530,,LA,New Orleans,John Curtis,6-3,180,no,Houston
+Kobe Idumwonyi,TE,2,0.7530,,TX,Cedar Hill,Cedar Hill,6-2,221,no,Houston
+Ryan Deshotel,TE,2,0.7530,,TX,Pearland,Pearland,6-3,235,no,Houston
+Nick Wilson,OLB,2,0.7510,,IA,West Des Moines,Dowling Catholic,6-2,205,no,Iowa
+Michael Eke,S,2,0.7430,,TX,Houston,Cy Falls,6-1,190,no,Houston
+Zac Jancek,PRO,2,0.7400,,TN,Knoxville,Knoxville Catholic,6-5,195,no,Tennessee
+Sawyer Shields,ILB,2,0.7330,,ID,Eagle,Eagle,6-3,225,no,Boise State
+Taylor Stine,DT,2,0.7200,,TX,Dallas,Jesuit,6-0,300,no,Kansas
+Henry Houden,S,2,0.7000,,WI,Madison,James Madison Memorial,6-4,190,no,Wisconsin
+Joey Mydra,OLB,2,0.7000,,MN,Hopkins,Hopkins,6-3,205,no,Minnesota
+Matt Morse,ATH,2,0.7000,,MN,Saint Paul,Apple Valley,6-1,185,no,Minnesota
+Noah Kuehn,OT,2,0.7000,,MN,Saint Paul,Eagan Senior,6-6,295,no,Minnesota
+Noah Stengel,WR,2,0.7000,,WI,Sheboygan,North,6-1,190,no,Wisconsin

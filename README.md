@@ -1,4 +1,4 @@
-# Gridiron Dynasty '09
+# CFB Dynasty
 
 A college football dynasty simulator that starts with the 2009 FBS season. Pick any of the 120 programs, recruit every week, set the depth chart, and sim through the BCS era, the four-team playoff (2014) and the twelve-team playoff (2024).
 
