@@ -45,7 +45,15 @@ p { margin: 6px 0; }
 .mt { margin-top: 14px; }
 .row { display: flex; align-items: center; } .gap { gap: 8px; } .wrap { flex-wrap: wrap; } .between { justify-content: space-between; gap: 10px; }
 .grow { flex: 1; min-width: 0; }
-.stack { display: grid; gap: 12px; }
+.stack { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+.stack > *, .start > *, .main > * { min-width: 0; max-width: 100%; }
+.start { grid-template-columns: minmax(0, 1fr); }
+.row > *, .li > .grow, .cmp > *, .vs > * { min-width: 0; }
+.li > .grow, .news, .head, .bubble, p { overflow-wrap: anywhere; }
+.main, .start { overflow-x: clip; }
+.sheet { overflow-x: hidden; }
+.sheet b, .sheet h3, .vs b { overflow-wrap: anywhere; min-width: 0; }
+.sheet > * { min-width: 0; max-width: 100%; }
 
 /* header */
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--team); color: var(--on-team); }
@@ -168,7 +176,20 @@ textarea.inp { font-family: ui-monospace, Menlo, monospace; font-size: .8rem; }
 .score2 .num { margin-left: 4px; }
 
 /* tables */
-.tbl-wrap { overflow-x: auto; }
+.tbl-wrap { overflow-x: auto; max-width: 100%; }
+input[type=file], select.inp, .inp { max-width: 100%; min-width: 0; }
+@media (max-width: 440px) {
+  .tbl th, .tbl td { padding: 8px 5px; }
+  .tbl th:first-child, .tbl td:first-child { padding-left: 10px; }
+  .tbl td:first-child, .tbl .tlink { white-space: normal; }
+  .tbl .tlink { gap: 4px; flex-wrap: wrap; }
+  .card.flush.tbl-wrap { overflow-x: auto; }
+  .tbl.fit { table-layout: fixed; }
+  .tbl.fit th:not(:first-child), .tbl.fit td:not(:first-child) { width: 13%; }
+  .tbl.fit th:nth-child(2), .tbl.fit td:nth-child(2) { width: 15%; }
+  .tbl.fit td:first-child { overflow-wrap: anywhere; }
+  .tbl td .tchip { min-width: 34px; }
+}
 .tbl { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .tbl th, .tbl td { padding: 8px 10px; border-top: 1px solid var(--line); text-align: left; white-space: nowrap; }
 .tbl th { font-family: var(--display); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border-top: 0; }
@@ -362,8 +383,43 @@ const ROSTER_TGT = {QB:4,RB:5,WR:8,TE:4,OL:14,DL:11,LB:9,CB:8,S:6,K:2,P:2};
 const ATTR = {QB:["SPD","STR","AWR","THP","THA","ELU"],RB:["SPD","STR","AGI","AWR","CAR","ELU"],WR:["SPD","AGI","AWR","CTH","RTE","JMP"],TE:["SPD","STR","AWR","CTH","RBK","PBK"],OL:["STR","AGI","AWR","RBK","PBK","IMP"],DL:["SPD","STR","AWR","PMV","FMV","TAK"],LB:["SPD","STR","AWR","TAK","PUR","COV"],CB:["SPD","AGI","AWR","MCV","ZCV","JMP"],S:["SPD","AGI","AWR","TAK","ZCV","HIT"],K:["KPW","KAC","AWR","STR","SPD","AGI"],P:["KPW","KAC","AWR","STR","SPD","AGI"]};
 const YR = ["","FR","SO","JR","SR"];
 
-const SCHEMES_O = {"Pro Style":{pass:.5,w:[.32,.12,.18,.08,.30]},"Spread":{pass:.56,w:[.34,.10,.24,.04,.28]},"Air Raid":{pass:.66,w:[.38,.06,.28,.03,.25]},"Power Run":{pass:.38,w:[.24,.20,.12,.08,.36]},"Option":{pass:.24,w:[.36,.20,.08,.04,.32]}};
-const SCHEMES_D = {"4-3":[.34,.26,.22,.18],"3-4":[.28,.34,.20,.18],"4-2-5":[.32,.18,.26,.24],"3-3-5":[.28,.26,.24,.22]};
+// offense weights: [QB, RB, WR, TE, OL]. fit: what the roster needs to run it
+const SCHEMES_O = {
+  "Pro Style": { pass: .5, w: [.32, .12, .18, .08, .30], fit: "bal", d: "Balanced. Leans on the quarterback and line." },
+  "West Coast": { pass: .55, w: [.36, .12, .22, .08, .22], fit: "qb", d: "Short, timed throws. Needs an accurate quarterback." },
+  "Spread": { pass: .56, w: [.34, .10, .24, .04, .28], fit: "wr", d: "More throws, receivers matter more." },
+  "Air Raid": { pass: .66, w: [.38, .06, .28, .03, .25], fit: "wr", d: "Throws two of every three plays. Needs a QB and wideouts." },
+  "Run and Shoot": { pass: .63, w: [.34, .10, .34, .00, .22], fit: "wr", d: "Four receivers who read the coverage on the fly. No tight end." },
+  "Veer and Shoot": { pass: .55, w: [.34, .14, .28, .02, .22], fit: "wr", d: "Ultra-wide splits, deep shots and a downhill run game. Fast receivers win." },
+  "RPO Spread": { pass: .52, w: [.36, .14, .22, .04, .24], fit: "qbrun", qbRun: .03, d: "Run-pass options on almost every snap. The QB's reads drive it." },
+  "Spread Option": { pass: .45, w: [.34, .18, .20, .03, .25], fit: "qbrun", qbRun: .05, d: "Zone read at tempo. Needs a quarterback who can run." },
+  "Pistol": { pass: .48, w: [.32, .18, .18, .08, .24], fit: "qbrun", qbRun: .03, d: "QB a few yards back, back behind him. Downhill runs with read options." },
+  "Multiple TE": { pass: .44, w: [.30, .16, .12, .16, .26], fit: "te", d: "Two and three tight ends. Physical, play-action heavy." },
+  "Power Run": { pass: .38, w: [.24, .20, .12, .08, .36], fit: "run", d: "Downhill running behind a big line." },
+  "Wing-T": { pass: .30, w: [.26, .22, .10, .10, .32], fit: "run", d: "Misdirection, pulling guards and wingbacks. Old school, hard to prepare for." },
+  "Option": { pass: .24, w: [.36, .20, .08, .04, .32], fit: "qbrun", qbRun: .06, d: "Triple option. Quarterback speed drives it. Few passes." },
+};
+// how real programs lined up in 2009 (everyone else gets a random scheme)
+const SCHEME_2009 = [["ORE", "Spread Option", ""], ["FLA", "Spread Option", ""], ["MICH", "Spread Option", "3-3-5"], ["WVU", "Spread Option", "3-3-5"], ["AUB", "Spread Option", ""],
+  ["TTU", "Air Raid", ""], ["HOU", "Air Raid", ""], ["HAW", "Run and Shoot", ""], ["BAY", "Veer and Shoot", ""], ["NEV", "Pistol", ""], ["CIN", "Spread", ""], ["OKST", "Spread", ""], ["TEX", "Spread", "4-3"],
+  ["OU", "Spread", "4-3"], ["MIZ", "Spread", ""], ["STAN", "Power Run", ""], ["WIS", "Power Run", ""], ["IOWA", "Pro Style", "4-3"], ["ALA", "Pro Style", "Multiple 3-4"], ["USC", "Pro Style", "4-3 Under"],
+  ["LSU", "Pro Style", "4-3"], ["ARK", "Pro Style", ""], ["ND", "Pro Style", ""], ["BYU", "West Coast", ""], ["TCU", "Spread", "4-2-5"], ["VT", "Pro Style", "4-4"], ["SDSU", "", "3-3-5"], ["AFA", "", "3-4"],
+  ["NAVY", "", "3-4"], ["OSU", "", "4-3"], ["PSU", "", "4-3"], ["NEB", "", "4-3"], ["PITT", "", "4-3"]];
+// defense weights: [DL, LB, CB, S]. tilt: + stops the run better, - covers the pass better
+const SCHEMES_D = {
+  "4-3": { w: [.34, .26, .22, .18], tilt: 0, fit: "dl", d: "Built around the defensive line." },
+  "4-3 Under": { w: [.36, .26, .20, .18], tilt: .4, fit: "dl", d: "Shifted line, an edge rusher at linebacker. Strong against the run." },
+  "Tampa 2": { w: [.32, .26, .22, .20], tilt: -.3, fit: "lb", d: "Two deep safeties, a middle linebacker who runs the seam. Keeps everything in front." },
+  "46 Bear": { w: [.38, .28, .18, .16], tilt: 1, fit: "dl", d: "Eight in the box and pressure everywhere. Crushes the run, gambles against the pass." },
+  "3-4": { w: [.28, .34, .20, .18], tilt: .1, fit: "lb", d: "Linebackers carry the load." },
+  "Multiple 3-4": { w: [.30, .30, .22, .18], tilt: 0, fit: "lb", d: "Changes fronts every week. Pattern-match coverage behind it." },
+  "4-4": { w: [.34, .32, .18, .16], tilt: .6, fit: "lb", d: "Quarters coverage with eight in the box. Built to stop the run." },
+  "4-2-5": { w: [.32, .18, .26, .24], tilt: -.4, fit: "db", d: "Extra defensive back against spread teams." },
+  "3-3-5": { w: [.28, .26, .24, .22], tilt: -.3, fit: "db", d: "Speed and coverage over size." },
+  "3-3-5 Tite": { w: [.32, .24, .23, .21], tilt: .2, fit: "dl", d: "Three big linemen squeezed inside the tackles, five DBs behind. Built for the spread." },
+  "Dime": { w: [.26, .16, .30, .28], tilt: -1, fit: "db", d: "Six defensive backs. Shuts down passing teams, gets pushed around by runners." },
+  "Bend Don't Break": { w: [.30, .24, .24, .22], tilt: -.2, fit: "bal", d: "Soft zones, no big plays allowed. Tightens up in the red zone." },
+};
 
 const PERKS = {
  Recruiter:[["Silver Tongue","Recruiting pitches earn more interest",["+15% interest","+30% interest","+50% interest"]],["Road Warrior","More recruiting hours each week",["+10 hours a week","+18 hours a week","+28 hours a week"]],["Closer","Official visits earn more interest",["+30% from official visits","+60% from official visits","Official visits count double"]]],
@@ -548,7 +604,7 @@ const REAL_CLS = {"AFA":"Jake Morin|OL|1|3|82.1|287;Jordan Padgett|S|1|3|81.7|19
 "ECU":"Justin Jones|TE|1|3|87.1|234;Damonte Terry|RB|1|3|84.7|188;Zico Pasut|TE|1|3|84.3|235;Will Simmons|OL|1|3|84.1|322;Rio Johnson|QB|1|3|83.6|177;Reese Wiggins|WR|1|3|82.5|181;Matt Milner|DL|1|3|81.6|240;Torrance Hunt|CB|1|3|79.8|152;Kyle Tudor|S|1|2|76.7|195;Jimmy Booth|DL|1|2|70.0|285;Jordan Davis|OL|1|2|70.0|290;Lamar McLendon|LB|1|2|70.0|210;Marke Powell|LB|1|2|70.0|198;Michael Brooks|DL|1|2|70.0|295;Mike Price|WR|1|2|70.0|160;Ty Holmes|S|1|2|70.0|207;Dalton Faulds|OL|2|3|84.6|258;Marquan Brown|RB|2|3|84.4|160;Dayon Arrington|WR|2|3|81.9|200;Rahkeem Morgan|CB|2|3|81.1|174;Josh Jordan|QB|2|3|80.9|202;Anthony Garner|DL|2|3|80.6|295;Allen Crowder|DL|2|2|78.9|255;Leonard Paulk|CB|2|2|78.8|180;Justin Venable|S|2|2|78.0|183;C.J. Brown|OL|2|2|76.7|290;Jacobi Jenkins|WR|2|2|76.7|170|CB;Joseph Womack|CB|2|2|76.7|185|WR;Joshua Clark|OL|2|2|76.7|250;Robert Jones|DL|2|2|73.3|235;Max Joyner|S|2|2|72.2|180;Grant Harner|OL|2|2|70.0|300;Logan Kudlinski|OL|2|2|70.0|265;Mike Brown|TE|2|2|70.0|240;Rodney Cox|QB|3|3|86.8|228;Tyrell Worthington|CB|3|3|83.4|180;Linval Joseph|OL|3|3|83.3|308;Jonathan Williams|CB|3|3|82.2|190|WR;Ben Herlocker|RB|3|2|79.4|206;D.J. McFadden|QB|3|2|79.2|210;Derek Blacknall|CB|3|2|78.8|168|WR;Devon Wallace|S|3|2|78.7|195;Antonio Allison|DL|3|2|74.4|300;Nick Adams|WR|3|2|74.4|184;Steven Baker|DL|3|2|74.4|250;Antwan Jones|DL|3|2|72.2|320;DeAndre Jones|CB|3|2|72.2|180;Julian Carter|S|3|2|72.2|180;Will Towery|TE|3|2|72.2|255;Austin Haynes|LB|3|2|70.0|199;Cliff Perryman|LB|3|2|70.0|218;Darryl Freeney|WR|3|2|70.0|184;Matt Thompson|S|3|2|70.0|195;Maurice Mercer|TE|3|2|70.0|240;Michael Byrd|TE|3|2|70.0|226;Steve Spence|LB|3|2|70.0|211;Norman Whitley|RB|4|3|83.3|177;D.J. Scott|OL|4|3|82.1|280;Dekota Marshall|RB|4|2|78.8|180;Davion Holman|DL|4|2|76.7|265;Doug Polochak|OL|4|2|76.7|238;Javon Brumsey|WR|4|2|76.7|190;Daryl Reynolds|WR|4|2|74.4|195;Lorenzo Osborne|LB|4|2|74.4|200;Sean Allen|OL|4|2|74.4|285;Willie Smith|TE|4|2|74.4|225;Dan Wideman|QB|4|2|72.2|210;Joe Council|DL|4|2|72.2|235;Nick Johnson|LB|4|2|72.2|225;Travis Melvin|DL|4|2|72.2|265;A.J. Johnson|LB|4|2|70.0|225;Cory Dowless|OL|4|2|70.0|300;DeMorio Waymon|WR|4|2|70.0|175;Travis Simmons|CB|4|2|70.0|175",
 "EMU":"Kinsman Thomas|WR|1|3|84.0|193;Devontae Payne|QB|1|3|83.9|220;Willie Hickman|CB|1|3|83.6;Devon Davis|DL|1|3|81.8|220;Nick Olds|WR|1|2|79.3|185;Orlando McCord|DL|1|2|77.9|231;Andrew Sorgatz|OL|1|2|76.7|252;Garrett Hoskins|TE|1|2|76.7|235;Matthew Boyd|LB|1|2|76.7|210;Aaron Tanguma|TE|1|2|74.4|265;Alex Gillett|QB|1|2|74.4|183;Javon Gillespie|S|1|2|74.4|180;Garrett Gronowski|S|1|2|72.2|202;Eric T. Morrison|CB|2|3|83.3|195;Marvon Sanders|WR|2|3|81.3|165;Marcell Rose|CB|2|3|80.8|180|WR;Juandez Brown|QB|2|2|78.0|180;Dominique Sherrer|RB|2|2|76.7|193;Jon Pryor|WR|2|2|76.7|170;Mike Zupancic|OL|2|2|76.7|244;Tyler Thomas|RB|2|2|75.3|185;Corey Brown|RB|2|2|75.0|180;Alex Beierwalter|QB|2|2|74.4|195;Darrion Brown|WR|2|2|74.4|170;David Dick|DL|2|2|74.4|290;Drew Serruto|DL|2|2|74.4|250;Steve Brown|LB|2|2|73.3|210;Scott MacLeod|OL|2|2|72.3|295;Nate Hardy|WR|2|2|72.2|164|CB;Josh Williams|LB|2|2|70.0|210|S;Kyle DeMaster|LB|2|2|70.0|200;L'shane Bynum|LB|2|2|70.0|210;Mark VanDenburgh|OL|2|2|70.0|290;Ryan Kuhlman|DL|2|2|70.0|235;Marcus English|CB|3|3|80.2|187;Jason Williams|QB|3|2|78.1|179;Tyler Palsrok|DL|3|2|77.1|230;Javon Reese|LB|3|2|76.7|201;Kyle McMahon|QB|3|2|75.4|184;Adam Brockman|DL|3|2|72.2|230;Aeric Clay|RB|3|2|72.2|217;Arrington Hicks|CB|3|2|72.2|170;Brad Ohrman|TE|3|2|72.2|206;Brandon Slater|DL|3|2|72.2|240;Bridger Buche|OL|3|2|72.2|260;Chris Bittner|DL|3|2|72.2|200;Dan Youssif|TE|3|2|72.2|240;Derek Gotham|OL|3|2|72.2|280;Jayson Jones|RB|3|2|72.2|157;Jeremy Shrieves|OL|3|2|72.2|248;Kevin Long|S|3|2|72.2|195;Marty Cardwell|S|3|2|72.2|190;Maurice Goodrum|RB|3|2|72.2|173;Shawn Knight|S|3|2|72.2|170;Trey Hunter|WR|3|2|72.2|181;Andre Hatchet|LB|4|3|81.1|202;Terrence Blevins|RB|4|2|78.9|230;Eric Young|DL|4|2|76.7|250;Clint Allen|CB|4|2|74.4|195;L.J. Robertson|RB|4|2|74.4|198;Dudley LaPorte|TE|4|2|73.3|235;Mark Mitchell|CB|4|2|72.2|165;Richard Franklin|RB|4|2|72.2|195;Antawn Weeden|WR|4|2|70.0|185;Brandon Pratt|LB|4|2|70.0|190;DeAnthony White|RB|4|2|70.0|165;Derrick Hunter|WR|4|2|70.0|180;Josh LeDuc|TE|4|2|70.0|209;Michael Almond|CB|4|2|70.0|175;Paul Johnson|OL|4|2|70.0|280;Ryan Downard|S|4|2|70.0|230;Sam Emedobi|DL|4|2|70.0|240;Stephen Johnson|DL|4|2|70.0|260;T.J. Lang|DL|4|2|70.0|255;Tyrone Burke|S|4|2|70.0|185",
 "FAU":"",
-"FIU":"Wayne Times|CB|1|3|87.1|164;Kenneth Dillard|LB|1|3|85.4|188;Larvez Mars|LB|1|3|85.4|205;Rupert Bryan|OL|1|3|85.3|255;Cedric McCloud|QB|1|3|84.7|201;Gian Carlo Revilla|OL|1|3|84.2|265;Darian Mallary|RB|1|3|83.6|175;Jack Griffin|K|1|3|82.4|187;Terrance Taylor|S|1|3|82.3|173;Giancarlo Revilla|OL|1|3|81.7|267;Derrick Jones Jr.|CB|1|3|81.1|180;Thatcher Starling|DL|1|3|81.1|261;Joshua Forney|DL|1|3|80.2|240;Markeith Russell|RB|1|2|78.9|195;Dave Istanich|OL|1|2|77.8|287;Jairus Williams|WR|1|2|76.7|187;Rockey Vann|WR|1|2|76.7|160;Tourek Williams|LB|1|2|76.7|210;Austin Tottle|OL|1|2|74.4|315;Cain Elliot|S|1|2|74.4|210;Johnathan Cyprien|S|1|2|74.4|185;A.J. Grant|S|2|3|87.6|190;Darriet Perry|RB|2|3|84.2|187;James Jones|DL|2|3|83.4|218;Kambriel Willis|LB|2|3|83.3|181;Derrick Clark|CB|2|3|82.3|195;Junior Mertile|CB|2|3|82.1|179|WR;Troy Dannehower|QB|2|3|81.1|213;Marcelus Manear|S|2|2|78.9|190;Johnathan Jackson|DL|2|2|77.3|235;Chuck Grace|S|2|2|76.7|185;Donnell Wilson|DL|2|2|76.7|275;Emmanuel Souarin|CB|2|2|76.7|158;Kasey Smith|DL|2|2|76.7|250;Winston Fraser|LB|2|2|76.7|212;Franklin Brown|RB|2|2|76.0|170|WR;Chris Charles|S|2|2|74.4|180;Aaron Davis|DL|2|2|70.0|246;Andre Pound|OL|2|2|70.0|280;Jercorey Quarterman|S|2|2|70.0|185;Joey Harris|TE|2|2|70.0|230;Kenneth White|DL|2|2|70.0|240;Stephen Bailey|OL|2|2|70.0|265;Marquis Rolle|RB|3|3|83.3|181|WR;Ricky Booker|DL|3|3|81.7|245;Bryan Mann|QB|3|3|80.8|195;Darold Hughes|QB|3|2|79.0|185;Curtis Bryant|DL|3|2|78.9|270;Shaquan Hicks|OL|3|2|78.9|324;Cody Pellicer|DL|3|2|77.4|235;Colt Anderson|QB|3|2|76.7|195;Chris Cawthon|OL|3|2|75.6|230;Jarvis Wilson|LB|3|2|74.4|195;Jermaine Malcolm|S|3|2|74.4|190;Anthony Gaitor|CB|3|2|72.2|175;Ernest Goodley|OL|3|2|72.2|260;Greg Ellington|WR|3|2|72.2|200;James Rucker|WR|3|2|72.2|190;Jason Frierson|WR|3|2|72.2|160;Kendall Berry|WR|3|2|72.2|185|CB;Javon Hill|OL|4|3|82.3|331;Mannie Wellington|S|4|2|78.4|196;Andy Leavine|OL|4|2|76.7|282;Brandon Ellison|CB|4|2|76.7|175;Chance Attaway|S|4|2|76.7|193;Chris Adingupu|S|4|2|76.7|185;Chris Cook|K|4|2|76.7|200;Daunte Owens|RB|4|2|76.7|185;Dezaree Johnson|CB|4|2|76.7|180;Elliott Dix|WR|4|2|76.7|190;Frantz Placide|CB|4|2|76.7|185|WR;Jeremy Dickens|WR|4|2|76.7|180;Joe Alajajian|OL|4|2|76.7|285;Joey Myers|DL|4|2|76.7|220;John Houston Whiddon|WR|4|2|76.7|185;John Paul Fraites|QB|4|2|76.7|185;Justin West|DL|4|2|76.7|285;Scott Bryant|LB|4|2|76.7|205;Sheldon Jacques|DL|4|2|76.7|265;Torrelt Solomon|WR|4|2|76.7|175;Matt Garris|LB|4|2|74.4|212;Michael Dominguez|LB|4|2|72.2|210",
+"FIU":"Wayne Times|CB|1|3|87.1|164;Kenneth Dillard|LB|1|3|85.4|188;Larvez Mars|LB|1|3|85.4|205;Rupert Bryan|OL|1|3|85.3|255;Cedric McCloud|QB|1|3|84.7|201;Gian Carlo Revilla|OL|1|3|84.2|265;Darian Mallary|RB|1|3|83.6|175;Jack Griffin|K|1|3|82.4|187;Terrance Taylor|S|1|3|82.3|173;Derrick Jones Jr.|CB|1|3|81.1|180;Thatcher Starling|DL|1|3|81.1|261;Joshua Forney|DL|1|3|80.2|240;Markeith Russell|RB|1|2|78.9|195;Dave Istanich|OL|1|2|77.8|287;Jairus Williams|WR|1|2|76.7|187;Rockey Vann|WR|1|2|76.7|160;Tourek Williams|LB|1|2|76.7|210;Austin Tottle|OL|1|2|74.4|315;Cain Elliot|S|1|2|74.4|210;Johnathan Cyprien|S|1|2|74.4|185;A.J. Grant|S|2|3|87.6|190;Darriet Perry|RB|2|3|84.2|187;James Jones|DL|2|3|83.4|218;Kambriel Willis|LB|2|3|83.3|181;Derrick Clark|CB|2|3|82.3|195;Junior Mertile|CB|2|3|82.1|179|WR;Troy Dannehower|QB|2|3|81.1|213;Marcelus Manear|S|2|2|78.9|190;Johnathan Jackson|DL|2|2|77.3|235;Chuck Grace|S|2|2|76.7|185;Donnell Wilson|DL|2|2|76.7|275;Emmanuel Souarin|CB|2|2|76.7|158;Kasey Smith|DL|2|2|76.7|250;Winston Fraser|LB|2|2|76.7|212;Franklin Brown|RB|2|2|76.0|170|WR;Chris Charles|S|2|2|74.4|180;Aaron Davis|DL|2|2|70.0|246;Andre Pound|OL|2|2|70.0|280;Jercorey Quarterman|S|2|2|70.0|185;Joey Harris|TE|2|2|70.0|230;Kenneth White|DL|2|2|70.0|240;Stephen Bailey|OL|2|2|70.0|265;Marquis Rolle|RB|3|3|83.3|181|WR;Ricky Booker|DL|3|3|81.7|245;Bryan Mann|QB|3|3|80.8|195;Darold Hughes|QB|3|2|79.0|185;Curtis Bryant|DL|3|2|78.9|270;Shaquan Hicks|OL|3|2|78.9|324;Cody Pellicer|DL|3|2|77.4|235;Colt Anderson|QB|3|2|76.7|195;Chris Cawthon|OL|3|2|75.6|230;Jarvis Wilson|LB|3|2|74.4|195;Jermaine Malcolm|S|3|2|74.4|190;Anthony Gaitor|CB|3|2|72.2|175;Ernest Goodley|OL|3|2|72.2|260;Greg Ellington|WR|3|2|72.2|200;James Rucker|WR|3|2|72.2|190;Jason Frierson|WR|3|2|72.2|160;Kendall Berry|WR|3|2|72.2|185|CB;Javon Hill|OL|4|3|82.3|331;Mannie Wellington|S|4|2|78.4|196;Andy Leavine|OL|4|2|76.7|282;Brandon Ellison|CB|4|2|76.7|175;Chance Attaway|S|4|2|76.7|193;Chris Adingupu|S|4|2|76.7|185;Chris Cook|K|4|2|76.7|200;Daunte Owens|RB|4|2|76.7|185;Dezaree Johnson|CB|4|2|76.7|180;Elliott Dix|WR|4|2|76.7|190;Frantz Placide|CB|4|2|76.7|185|WR;Jeremy Dickens|WR|4|2|76.7|180;Joe Alajajian|OL|4|2|76.7|285;Joey Myers|DL|4|2|76.7|220;John Houston Whiddon|WR|4|2|76.7|185;John Paul Fraites|QB|4|2|76.7|185;Justin West|DL|4|2|76.7|285;Scott Bryant|LB|4|2|76.7|205;Sheldon Jacques|DL|4|2|76.7|265;Torrelt Solomon|WR|4|2|76.7|175;Matt Garris|LB|4|2|74.4|212;Michael Dominguez|LB|4|2|72.2|210",
 "FLA":"Jelani Jenkins|LB|1|5|99.7|230;Gary Brown|DL|1|5|99.4|275;Andre Debose|WR|1|5|99.2|188;Xavier Nixon|OL|1|5|98.9|295;Jon Bostic|LB|1|4|97.2|244;Nick Alajajian|OL|1|4|96.5|295;Mike Gillislee|RB|1|4|93.1|205;Jordan Reed|TE|1|4|92.7|240;Jon Harrison|OL|1|4|89.5|300;Jon Halapio|OL|1|3|85.4|315;Will Hill|S|2|5|99.8|207;Omar Hunter|DL|2|5|99.0|300;Matt Patchan|OL|2|4|98.3|295;Dee Finley|S|2|4|97.2|222;William Green|DL|2|4|96.8|255;Brendan Beal|LB|2|4|96.2|235;T.J. Lawrence|WR|2|4|95.9|185;Lerentee McCray|LB|2|4|95.2|252;Jeremy Brown|CB|2|4|92.6|185;Adrian Bushell|CB|2|4|91.5|184;Omarius Hines|WR|2|4|91.2|220;Frankie Hammond Jr.|WR|2|4|90.8|178;Earl Okine|DL|2|4|89.6|290;Byran Jones|DL|2|3|85.2|325;James Wilson|OL|3|5|99.0|325;Torrey Davis|DL|3|5|98.8|285;John Brantley|QB|3|5|98.4|220;Chris Rainey|RB|3|4|97.9|183;Jerimy Finch|S|3|4|97.8|205;John Brown|DL|3|4|96.5|285;Justin Trattou|DL|3|4|94.7|255;Jaye Howard|DL|3|4|93.8|295;Bo Williams|RB|3|4|93.2|205;Lorenzo Edwards|LB|3|4|93.1|220;John Jones|LB|3|3|87.6|210;Paul Wilson|WR|3|3|84.4|175;Carl Johnson|OL|4|5|98.9|355;Jim Barrie|OL|4|4|96.6|310;Mon Williams|RB|4|4|96.2|195;Chevon Walker|RB|4|4|96.0|185;Jarred Fayson|CB|4|4|95.3|195|WR;Marcus Gilbert|OL|4|4|95.3|320;Justin Williams|WR|4|4|95.2|205;Brandon Antwine|DL|4|4|94.5|290;Jacques Rickerson|CB|4|4|94.2|175;Dustin Doe|LB|4|4|94.0|210;A.J. Jones|LB|4|4|92.1|226;Corey Hobbs|DL|4|4|91.6|310;Trent Pupello|TE|4|3|89.0|245;Wondy Pierre-Louis|CB|4|2|72.2|176",
 "FRES":"Derek Carr|QB|1|4|89.5|200;Lars Bramer|OL|1|3|84.6|255;J.B. Dock|CB|1|3|83.3|159;Ibe Nduka|LB|1|3|81.1|220;Pat Su'a|LB|1|3|81.1|220;Robbie Rouse|RB|1|3|81.0|170;Daniel Salinas|LB|1|2|79.0|205;Terrance Kindle|DL|1|2|78.9|210;Erik Brown|CB|1|2|78.2|181;Alex Jefferies|WR|1|2|76.7|180;Ben Letcher|LB|1|2|76.7|214;Nat Harrison|DL|1|2|76.7|200;Nikko Motta|DL|1|2|74.4|265;Andy Jennings|DL|1|2|70.0|250;Jeremiah Toma|LB|1|2|70.0|220;Ebahn Feathers|QB|2|3|84.3|189;Logan Harrell|DL|2|3|84.3|250;Matt Akers|DL|2|3|84.0|240;L.J. Jones|CB|2|3|83.3|160;Trevor Richter|OL|2|3|83.3|275;Damion Whittington|LB|2|3|82.8|225;Douglas Spacht|OL|2|3|82.7|285;Mike Harris|RB|2|3|81.1|195;David Gory|TE|2|2|79.3|250;Anthony Johnson|WR|2|2|78.9|175;A.J. Ellis|RB|2|2|76.7|180;Anthony Williams|DL|2|2|76.7|285;Austin Wentworth|OL|2|2|76.7|295;James Robinson|OL|2|2|76.7|315;Kulitapa Taumoepeau|TE|2|2|76.7|215;Max Devlin|OL|2|2|76.7|280;Michael Butler|TE|2|2|76.7|220;Chase McEntee|DL|2|2|74.4|252;Richard Helepiko|OL|2|2|74.4|275;Devan Cunningham|OL|3|3|86.9|305;Chris Carter|LB|3|3|83.3|205;Tim Lang|S|3|3|83.3|184;Matt Faulkner|QB|3|3|81.1|185;Porter Hill|DL|3|3|81.1|264;Devon Wylie|WR|3|2|78.9|175;Matt Lindsey|WR|3|2|78.9|180;Ryan Skidmore|TE|3|2|78.9|226;Terrance Dennis|S|3|2|78.9|172;Austin Raphael|LB|3|2|77.3|230;Isaiah Green|S|3|2|76.7|180;Ken Borg|DL|3|2|76.7|230;Bryce Harris|DL|3|2|74.4|240;Bryson Hodges|RB|3|2|74.4|200;Phillip Thomas|S|3|2|74.4|184;Eric Sproal|OL|3|2|72.2|259;Jevon Stallworth|CB|3|2|72.2|185;Kyle Knox|DL|3|2|72.2|235;Leslie Cooper|OL|3|2|72.2|265;Zak Hill|CB|3|2|72.2|175;Anthony Harding|RB|4|3|83.3|202;Damion Owens|CB|4|3|83.3|180;Nico Herron|LB|4|3|83.3|222;Robert Schenck|LB|4|3|83.3|215;Taylor Smith|DL|4|3|83.3|224;Charley Robbins|OL|4|3|81.1|265;Jamel Hamler|WR|4|2|78.9|184;Ken Wiggins|OL|4|2|76.7|265;A.J. Jefferson|S|4|2|70.0|180|CB;Barry Wilson|WR|4|2|70.0|170;Ben Jacobs|LB|4|2|70.0|225;Ken Hedrington|WR|4|2|70.0|175|CB;Lorne Bell|RB|4|2|70.0|195;Mark Roberts|DL|4|2|70.0|275;Robert Malone|K|4|2|70.0|215;Will Smith|LB|4|2|70.0|205",
 "FSU":"Jacobbi McDaniel|DL|1|5|99.7|267;Greg Reid|CB|1|5|98.8|175;Demonte McAllister|DL|1|4|97.4|285;Willie Downs|CB|1|4|96.7|190|WR;Rodney Smith|WR|1|4|92.5|200;Lonnie Pryor|RB|1|4|92.2|195;Jajuan Harley|S|1|4|90.7|210;Gerald Demps|S|1|4|89.6|190;Chris Thompson|RB|1|4|89.5|175;Xavier Rhodes|WR|1|3|85.6|187;Dustin Hopkins|K|1|3|85.6|175;Bryan Stork|OL|1|3|85.4|260;John Prior|OL|1|3|85.4|285;Justin Bright|S|1|3|85.2|185;Will Secord|QB|1|3|85.2|200;Dan Hicks|DL|1|3|83.9|265;Nigel Bradham|LB|2|5|98.9|230;EJ Manuel|QB|2|5|98.5|220;Nigel Carr|LB|2|4|96.8|220;Jarmon Fortson|RB|2|4|93.1|220|WR;Terrance Parks|S|2|4|92.2|200;Zebrie Sanders|OL|2|4|91.4|275;A.J. Alexander|CB|2|4|91.3|180|WR;Vince Williams|LB|2|4|90.4|210;Nick Moody|S|2|4|90.1|215;Everett Dawkins|DL|2|4|89.8|281;Moses McCray|DL|2|4|89.7|280;Ed Imeokparia|S|2|3|83.3|194;Garrett Faircloth|OL|2|3|82.4|260;Carlton Jones|RB|2|3|81.1|215;Josh Gehres|WR|2|3|81.0|190;Bo Reliford|TE|2|2|78.9|235;Rhonne Sanderson|OL|2|2|78.9|281;Anthony McCloud|DL|2|2|76.7|300;Blake Snider|OL|2|2|74.4|283;Dionte Allen|CB|3|4|97.8|175;Kendall Smith|LB|3|4|93.8|210;Brandon Paul|RB|3|4|93.7|185|WR;Antwane Greenlee|OL|3|4|93.0|300;Bernard Brinson|CB|3|3|85.6|169;Anthony Grosso|OL|3|3|84.4|290;Aaron Gresham|LB|3|3|84.2|222;Taiwan Easterling|WR|3|3|83.3|192|CB;A.J. Ganguzza|OL|3|3|80.8|260;Shawn Powell|P|3|2|74.4|235;Myron Rolle|S|4|5|99.8|210;Marcus Ball|LB|4|5|98.5|205;Damon McDaniel|WR|4|4|98.1|192;Marcus Sims|LB|4|4|97.6|220;Daron Rose|OL|4|4|97.0|310;Caz Piurowski|TE|4|4|95.1|240;D'Vontrey Richardson|WR|4|4|92.1|200|CB;Anthony Leon|S|4|4|90.5|210;Recardo Wright|LB|4|4|89.6|215;Preston Parker|WR|4|4|89.1|175;Ryan McMahon|DL|4|3|88.9|280;Doug Thacker|DL|4|3|88.7|245;Kevin McNeil|DL|4|3|88.3|240;Ochuko Jenije|CB|4|3|88.0|177;Tim Rawlinson|LB|4|3|86.9|215;Tyler Graves|OL|4|3|82.3|272",
@@ -749,9 +805,10 @@ function newGame(o) {
   G = { v: 1, nid: 1, year: 2009, phase: "pre", week: 0, teams: [], players: {}, sched: [], recruits: [], classYear: 2010, classSource: null, board: [], hours: 0, news: [], history: [], careers: [], awards: {}, draftLog: [], portal: [], offers: [], off: null, post: null, name: o.saveName || "Dynasty", created: Date.now() };
   TEAM_DATA.forEach((d, i) => {
     const pres = d[3];
-    G.teams.push({ id: i, abbr: d[0], name: d[1], conf: d[2], pres, st: d[4], color: d[5], fac: clamp(Math.round(pres + gauss() * 7), 25, 99), acad: HIGH_ACAD[d[0]] || clamp(Math.round(58 + gauss() * 8), 40, 79), hf: 2 + pres / 45 + (LOUD.includes(d[0]) ? 1 : 0), roster: [], depth: {}, so: pick(Object.keys(SCHEMES_O)), sd: pick(Object.keys(SCHEMES_D)), oc: genCoord(pres), dc: genCoord(pres), hc: realHC(d[0], 2009) || fakeCoach(), elo: 0, w: 0, l: 0, cw: 0, cl: 0, pf: 0, pa: 0, rk: 0, crk: 0, champ: 0, nil: 0 });
+    G.teams.push({ id: i, abbr: d[0], name: d[1], conf: d[2], pres, st: d[4], color: d[5], fac: clamp(Math.round(pres + gauss() * 7), 25, 99), acad: HIGH_ACAD[d[0]] || clamp(Math.round(58 + gauss() * 8), 40, 79), hf: 2 + pres / 45 + (LOUD.includes(d[0]) ? 1 : 0), roster: [], depth: {}, so: randScheme("o"), sd: randScheme("d"), oc: genCoord(pres), dc: genCoord(pres), hc: realHC(d[0], 2009) || fakeCoach(), elo: 0, w: 0, l: 0, cw: 0, cl: 0, pf: 0, pa: 0, rk: 0, crk: 0, champ: 0, nil: 0 });
   });
   if (G.teams.find(t => t.abbr === "NAVY")) { for (const a of ["NAVY", "ARMY", "AFA", "GT"]) { const t = byAbbr(a); if (t) t.so = "Option"; } }
+  for (const [ab, so, sd] of SCHEME_2009) { const t = byAbbr(ab); if (t) { if (so) t.so = so; if (sd) t.sd = sd; } }
   for (const t of G.teams) { ensureStaff(t); buildRoster(t); }
   buildLow();
   if (o.low != null) o.team = materializeLow(o.low).id;
@@ -852,6 +909,10 @@ function starters(t, pos, n) {
   for (const id of t.depth[pos] || []) { const p = P(id); if (p && available(p)) { out.push(p.pos === pos ? p : asPos(p, pos)); if (out.length >= n) break; } }
   return out;
 }
+// common schemes come up more often than rare ones
+const SCHEME_W_O = { "Pro Style": 10, "West Coast": 5, "Spread": 10, "Air Raid": 4, "Run and Shoot": 1, "Veer and Shoot": 1, "RPO Spread": 4, "Spread Option": 6, "Pistol": 4, "Multiple TE": 3, "Power Run": 6, "Wing-T": 1, "Option": 1 };
+const SCHEME_W_D = { "4-3": 12, "4-3 Under": 5, "Tampa 2": 4, "46 Bear": 1, "3-4": 8, "Multiple 3-4": 4, "4-4": 2, "4-2-5": 4, "3-3-5": 4, "3-3-5 Tite": 2, "Dime": 1, "Bend Don't Break": 3 };
+function randScheme(k) { const W = k === "o" ? SCHEME_W_O : SCHEME_W_D; const ks = Object.keys(k === "o" ? SCHEMES_O : SCHEMES_D); return wpick(ks, ks.map(x => W[x] || 1)); }
 function teamRating(t, ctx) {
   if (t.id === G.userTeam && G.autoDepth === false) cleanDepth(t); else autoDepth(t);
   const o = SCHEMES_O[t.so], dW = SCHEMES_D[t.sd];
@@ -860,22 +921,33 @@ function teamRating(t, ctx) {
   const ov = a => a.length ? avg(a.map(p => p.ovr)) : 40;
   const pad = (a, n) => a.length >= n ? ov(a) : (ov(a) * a.length + 40 * (n - a.length)) / n;
   let off = o.w[0] * ov(qb) + o.w[1] * ov(rb.slice(0, 1)) + o.w[2] * pad(wr, 3) + o.w[3] * ov(te) + o.w[4] * pad(ol, 5);
-  let def = dW[0] * pad(dl, 4) + dW[1] * pad(lb, 3) + dW[2] * pad(cb, 2) + dW[3] * pad(s, 2);
-  if (t.so === "Option" && qb[0]) off += (qb[0].at[0] - 70) * 0.06;
+  const dw = Array.isArray(dW) ? dW : dW.w;
+  let def = dw[0] * pad(dl, 4) + dw[1] * pad(lb, 3) + dw[2] * pad(cb, 2) + dw[3] * pad(s, 2);
+  if (o.qbRun && qb[0]) off += (qb[0].at[0] - 70) * o.qbRun;
   // scheme fit: does the roster suit it
   let fit = 0;
-  if (t.so === "Air Raid" || t.so === "Spread") fit = (pad(wr, 3) - ov(rb)) / 8;
-  else if (t.so === "Power Run" || t.so === "Option") fit = (ov(rb) + pad(ol, 5) - 2 * pad(wr, 3)) / 12;
+  const f = o.fit;
+  if (f === "wr") fit = (pad(wr, 3) - ov(rb)) / 8;
+  else if (f === "run") fit = (ov(rb) + pad(ol, 5) - 2 * pad(wr, 3)) / 12;
+  else if (f === "qbrun") fit = (qb[0] ? (qb[0].at[0] - 72) / 10 : -1) + (ov(rb) - pad(wr, 3)) / 16;
+  else if (f === "te") fit = (ov(te) + pad(ol, 5) - pad(wr, 3) - ov(rb)) / 10;
+  else if (f === "qb") fit = qb[0] ? ((qb[0].at[4] || qb[0].ovr) - 74) / 10 : -1;
   fit = clamp(fit, -1.5, 1.5);
+  let dfit = 0; const df = dW.fit;
+  if (df === "dl") dfit = (pad(dl, 4) - pad(cb, 2)) / 10;
+  else if (df === "lb") dfit = (pad(lb, 3) - pad(dl, 4)) / 10;
+  else if (df === "db") dfit = (pad(cb, 2) + pad(s, 2) - pad(dl, 4) - pad(lb, 3)) / 12;
+  dfit = clamp(dfit, -1.2, 1.2);
   const user = t.id === G.userTeam;
-  if (user) fit *= pv("Scheme Master", [1, 2, 2.5, 3]);
+  if (user) { fit *= pv("Scheme Master", [1, 2, 2.5, 3]); dfit *= pv("Scheme Master", [1, 2, 2.5, 3]); }
+  def += dfit;
   const cRef = coachRef(t), cw = real() ? 0.13 : 0.08; off += fit + (t.oc.r - cRef) * cw; def += (t.dc.r - cRef) * cw;
   if (user) { off += pv("Play Caller", [0, 1.5, 2.5, 4]) + diffRating() + budLvl("an") * 0.4; def += pv("Defensive Mind", [0, 1.5, 2.5, 4]) + diffRating() + budLvl("an") * 0.4; }
   { const pc = posCoachBonus(t); off += pc.off; def += pc.def; }
   const mor = avg(t.roster.slice(0, 40).map(id => P(id).mor));
   off += (mor - 60) / 30; def += (mor - 60) / 30;
   if (user && ctx && ctx.big) { const b = pv("Big Game Coach", [0, 2, 3.5, 5]); off += b; def += b; }
-  return { off, def, k: ov(k), p: ov(pp), ovr: (off + def) / 2, qb, rb, wr, te, ol, dl, lb, cb, s, kk: k[0], pass: o.pass };
+  return { off, def, k: ov(k), p: ov(pp), ovr: (off + def) / 2, qb, rb, wr, te, ol, dl, lb, cb, s, kk: k[0], pass: o.pass, so: t.so, sd: t.sd, tilt: dW.tilt || 0, fitO: fit, fitD: dfit };
 }
 function teamOvr(t) { const r = teamRating(t); return Math.round(r.ovr); }
 
@@ -2697,7 +2769,7 @@ function materializeLow(lowId) {
   const lt = LT(lowId);
   let t = G.teams.find(x => x.div && x.lowId === lowId);
   if (t) { t.pres = lt.pres; return t; }
-  t = { id: G.teams.length, abbr: lt.abbr, name: lt.name, conf: lt.conf, pres: lt.pres, st: lt.st, color: lt.color, div: lt.div, lowId, fac: clamp(Math.round(20 + lt.pres + gauss() * 6), 5, 70), acad: clamp(Math.round(58 + gauss() * 10), 35, 90), hf: 1.5 + lt.pres / 45, roster: [], depth: {}, so: pick(Object.keys(SCHEMES_O)), sd: pick(Object.keys(SCHEMES_D)), oc: genCoord(lt.pres - 30), dc: genCoord(lt.pres - 30), hc: lt.hc, elo: 1200, w: 0, l: 0, cw: 0, cl: 0, pf: 0, pa: 0, rk: 0, crk: 0, champ: 0, nil: 0 };
+  t = { id: G.teams.length, abbr: lt.abbr, name: lt.name, conf: lt.conf, pres: lt.pres, st: lt.st, color: lt.color, div: lt.div, lowId, fac: clamp(Math.round(20 + lt.pres + gauss() * 6), 5, 70), acad: clamp(Math.round(58 + gauss() * 10), 35, 90), hf: 1.5 + lt.pres / 45, roster: [], depth: {}, so: randScheme("o"), sd: randScheme("d"), oc: genCoord(lt.pres - 30), dc: genCoord(lt.pres - 30), hc: lt.hc, elo: 1200, w: 0, l: 0, cw: 0, cl: 0, pf: 0, pa: 0, rk: 0, crk: 0, champ: 0, nil: 0 };
   G.teams.push(t); ensureStaff(t);
   for (const k of ["oc", "dc", ...Object.keys(POSC)]) { t[k].r = clamp(Math.round(coachRef(t) + (k.length === 2 ? 0 : -2) + lt.pres * 0.15 - 3 + gauss() * 5), 35, 80); t[k].sal = Math.round((t[k].sal || 0.2) * 0.25 * 100) / 100; }
   buildRoster(t, true);
@@ -2796,8 +2868,10 @@ function aiOffPlay(L, plan, R) {
   if (L.q === 4 && L.clock < 100 && L.sc[L.poss] > L.sc[1 - L.poss] && L.down < 4) return { f: "", p: "KNEEL" };
   if (L.dist <= 1 && rnd() < 0.5) { const p = pick(["QB Sneak", "FB Dive", "Power O", "Iso"]); return { f: p === "Iso" ? "I-Form" : "Goal Line", p }; }
   let p = pick(ARCH_PLAY[a] || ARCH_PLAY.SP);
-  if (R.pass <= 0.35 && a === "IR" && rnd() < 0.5) p = "Zone Read";
-  if (rnd() < 0.08 && (a === "IR" || a === "SP")) p = pick(["RPO Bubble", "RPO Slant"]);
+  const so = R.so || "";
+  if ((R.pass <= 0.35 || ["Spread Option", "Pistol", "Option"].includes(so)) && a === "IR" && rnd() < 0.5) p = "Zone Read";
+  if (rnd() < (so === "RPO Spread" ? 0.3 : ["Spread Option", "Veer and Shoot"].includes(so) ? 0.14 : 0.08) && (a === "IR" || a === "SP")) p = pick(["RPO Bubble", "RPO Slant"]);
+  if (so === "Multiple TE" && a === "SP" && rnd() < 0.4 && PLAYS["PA Boot"]) p = "PA Boot";
   if (rnd() < 0.015) p = "Flea Flicker";
   return { f: formOf(p), p };
 }
@@ -3169,7 +3243,12 @@ function ptFactor(r, t) {
 }
 
 // ranked teams get everyone's best shot
+// defensive scheme vs the offense it faces: run-stopping fronts beat run teams, coverage beats passing teams
+function schemeMatchup(H, A) {
+  for (const [D, O] of [[H, A], [A, H]]) { const t = D.tilt || 0; if (!t) continue; const adj = t * (0.5 - (O.pass || 0.5)) * 8; D.def += adj; D.ovr += adj / 2; }
+}
 function targetOnBack(g, H, A) {
+  schemeMatchup(H, A);
   weekFx(g, H, A);
   if (!real()) return;
   const u = G.userTeam; const me = g.h === u ? H : g.a === u ? A : null; if (!me) return;
@@ -4249,9 +4328,9 @@ function renderTeam() {
     const r = teamRating(t);
     body = `<div class="stack"><section class="card"><div class="eyebrow">Team ratings</div><div class="kv3"><div><span class="num big">${Math.round(r.off)}</span><span class="dim small">offense</span></div><div><span class="num big">${Math.round(r.def)}</span><span class="dim small">defense</span></div><div><span class="num big">${Math.round(r.k)}</span><span class="dim small">kicking</span></div></div></section>
     <section class="card"><label class="lbl" for="so">Offensive scheme</label><select id="so" class="inp" data-ch="so">${Object.keys(SCHEMES_O).map(k => `<option ${t.so === k ? "selected" : ""}>${k}</option>`).join("")}</select>
-    <p class="dim small">${({ "Pro Style": "Balanced. Leans on the quarterback and line.", Spread: "More throws, receivers matter more.", "Air Raid": "Throws two of every three plays. Needs a QB and wideouts.", "Power Run": "Downhill running behind a big line.", Option: "Quarterback speed drives it. Few passes." })[t.so]}</p>
+    <p class="dim small">${esc((SCHEMES_O[t.so] || {}).d || "")} ${schemeFitText(t, "o")}</p>
     <label class="lbl" for="sd">Defensive scheme</label><select id="sd" class="inp" data-ch="sd">${Object.keys(SCHEMES_D).map(k => `<option ${t.sd === k ? "selected" : ""}>${k}</option>`).join("")}</select>
-    <p class="dim small">${({ "4-3": "Built around the defensive line.", "3-4": "Linebackers carry the load.", "4-2-5": "Extra defensive back against spread teams.", "3-3-5": "Speed and coverage over size." })[t.sd]}</p></section>
+    <p class="dim small">${esc((SCHEMES_D[t.sd] || {}).d || "")} ${schemeFitText(t, "d")}</p></section>
     <section class="card"><div class="eyebrow">Program</div>${[["Prestige", t.pres], ["Facilities", t.fac], ["Academics", t.acad], ["Home field", Math.round(t.hf * 15)]].map(([l, v]) => `<div class="meter"><span class="small">${l}</span>${bar(v, 100)}<span class="num small">${Math.round(v)}</span></div>`).join("")}</section></div>`;
   } else {
     const ps = t.roster.map(P);
@@ -4380,7 +4459,7 @@ function renderSeason() {
     const c = confs.includes(UI.standConf) ? UI.standConf : userT().conf;
     const st = c === "Independent" ? confTeams(c).sort((a, b) => b.w - a.w) : confStandings(c);
     body = `${G.low ? divSeg() : ""}<p class="dim small pad">Tap a team to see its roster and coaches.</p><select class="inp" id="standConf" data-ch="standConf">${confs.map(x => `<option ${x === c ? "selected" : ""}>${x}</option>`).join("")}</select>
-    <div class="card flush tbl-wrap"><table class="tbl"><thead><tr><th>Team</th><th>Conf</th><th>All</th><th>PF</th><th>PA</th></tr></thead><tbody>${st.map(t => `<tr class="${t.id === u ? "me" : ""}"><td><button class="link tlink" data-a="teamv" data-v="${t.id}">${chip(t)} ${tname(t.id)}</button>${t.champ && G.phase !== "reg" && G.phase !== "pre" ? " 🏆".replace("🏆", "<span class='tag good'>Champ</span>") : ""}</td><td class="num">${t.cw}-${t.cl}</td><td class="num">${t.w}-${t.l}</td><td class="num">${t.pf}</td><td class="num">${t.pa}</td></tr>`).join("")}</tbody></table></div>`;
+    <div class="card flush tbl-wrap"><table class="tbl fit"><thead><tr><th>Team</th><th>Conf</th><th>All</th><th>PF</th><th>PA</th></tr></thead><tbody>${st.map(t => `<tr class="${t.id === u ? "me" : ""}"><td><button class="link tlink" data-a="teamv" data-v="${t.id}">${chip(t)} ${tname(t.id)}</button>${t.champ && G.phase !== "reg" && G.phase !== "pre" ? " 🏆".replace("🏆", "<span class='tag good'>Champ</span>") : ""}</td><td class="num">${t.cw}-${t.cl}</td><td class="num">${t.w}-${t.l}</td><td class="num">${t.pf}</td><td class="num">${t.pa}</td></tr>`).join("")}</tbody></table></div>`;
   } else if (UI.seasonSub === "polls" && G.low && ["2", "3"].includes(String(UI.pollType))) {
     body = lowPolls2();
   } else if (UI.seasonSub === "polls") {
@@ -4838,7 +4917,7 @@ function lowStandings() {
   const st = c.includes("Independent") ? G.low.teams.filter(t => t.conf === c).sort((a, b) => b.w - a.w) : lowConfStandings(c, div);
   const po = G.low.po[div];
   return `${divSeg()}<select class="inp mt" id="standLow" data-ch="standLow" aria-label="Conference">${confs.map(x => `<option ${x === c ? "selected" : ""}>${esc(x)}</option>`).join("")}</select>
-    <div class="card flush tbl-wrap mt"><table class="tbl"><thead><tr><th>Team</th><th>Conf</th><th>All</th><th>PF</th><th>PA</th></tr></thead><tbody>${st.map(t => `<tr class="${t.id === me ? "me" : ""}"><td><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span> ${esc(t.name)}${t.champ ? " <span class='tag good'>Champ</span>" : ""}${po && po.seeds.includes(t.id) ? ` <span class="tag">#${po.seeds.indexOf(t.id) + 1} seed</span>` : ""}</td><td class="num">${t.cw}-${t.cl}</td><td class="num">${t.w}-${t.l}</td><td class="num">${t.pf}</td><td class="num">${t.pa}</td></tr>`).join("")}</tbody></table></div>
+    <div class="card flush tbl-wrap mt"><table class="tbl fit"><thead><tr><th>Team</th><th>Conf</th><th>All</th><th>PF</th><th>PA</th></tr></thead><tbody>${st.map(t => `<tr class="${t.id === me ? "me" : ""}"><td><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span> ${esc(t.name)}${t.champ ? " <span class='tag good'>Champ</span>" : ""}${po && po.seeds.includes(t.id) ? ` <span class="tag">#${po.seeds.indexOf(t.id) + 1} seed</span>` : ""}</td><td class="num">${t.cw}-${t.cl}</td><td class="num">${t.w}-${t.l}</td><td class="num">${t.pf}</td><td class="num">${t.pa}</td></tr>`).join("")}</tbody></table></div>
     ${G.low.champ[div] != null ? `<section class="card mt"><div class="eyebrow">${DIV_N[div]} national champion</div><p><b>${esc(LT(G.low.champ[div]).name)}</b></p></section>` : ""}`;
 }
 function lowPolls2() {
@@ -5036,6 +5115,14 @@ function renderRivalries() {
   ${r.tr ? `<p class="small">Trophy: <b>${esc(r.tr)}</b>${r.holder ? ` · held by ${esc(r.holder)}` : ""}</p>` : ""}
   <p class="small">Series since 2009: <b>${r.w}-${r.l}</b>${r.streak > 1 ? ` · ${esc(r.sw)} has won ${r.streak} straight` : ""}</p>
   ${r.games.slice(-6).reverse().map(x => `<div class="li"><span class="num small">${x.y}</span><span class="grow" style="padding-left:12px">${esc(x.w)} won</span><span class="num small">${esc(x.s)}</span></div>`).join("") || `<p class="dim small">They haven't played yet in this dynasty.</p>`}</section>`).join("") : `<section class="card"><p class="dim">No tracked rivalries for ${esc(t.name)}.</p></section>`}`;
+}
+
+// scheme fit for the team page
+function schemeFitText(t, side) {
+  const r = teamRating(t); const v = side === "o" ? r.fitO : r.fitD;
+  if (v == null) return "";
+  const lbl = v >= 0.8 ? "Great fit" : v >= 0.25 ? "Good fit" : v > -0.25 ? "OK fit" : v > -0.8 ? "Poor fit" : "Bad fit";
+  return `<b>${lbl} for your roster (${v >= 0 ? "+" : ""}${v.toFixed(1)})</b>`;
 }
 // ===== CONTROLLER, SAVES, BOOT =====
 let DB = null, UID = null, DL = null, saving = false, saveAgain = false, saveTimer = null;
