@@ -3182,6 +3182,24 @@ function liveAuto(L, stopAtDecision) {
   }
   L.autoPat = false;
 }
+// sim the rest of the current quarter (overtime sims to the end)
+function liveSimQuarter(L) {
+  if (!L || L.over) return;
+  if (L.half) { startSecondHalf(L); }
+  const q0 = L.q;
+  if (q0 > 4 || L.ot) { liveAuto(L, false); return; }
+  let n = 0; L.autoPat = true;
+  while (!L.over && n++ < 400) {
+    if (L.half) break;
+    if (L.pat) { doPat(L, L.pat.side, aiGoesForTwo(L, L.pat.side)); continue; }
+    if (L.ko) { afterScoreAuto(L); continue; }
+    if (L.q !== q0) break;
+    livePlay(L, null);
+  }
+  L.autoPat = false;
+  if (!L.over) logLive(L, L.half ? "End of the first half." : `End of the ${["", "first", "second", "third", "fourth"][q0]} quarter.`, "big");
+  if (!L.over && L.mode === "key") liveAuto(L, true);
+}
 function afterScoreAuto(L) { const side = L.ko.side; L.ko = null; const trail = L.sc[1 - side] - L.sc[side]; doKick(L, side, L.q === 4 && L.clock < 200 && trail > 0 && trail <= 16); }
 
 // ---------- Realistic mode ----------
@@ -4791,7 +4809,7 @@ function renderLive() {
     <div class="row between small dim"><span>Drive: ${L.drv.plays} play${L.drv.plays === 1 ? "" : "s"}, ${L.drv.yds} yds</span><span>Your D: ${defFatigueLabel(L, L.me)}</span></div>
     ${last ? `<p class="last ${last.k}">${esc(last.s)}</p>` : ""}</section>
     ${calls}
-    <div class="row gap wrap">${canTimeout(L) && !["half", "pat", "ko"].includes(need) ? `<button class="btn sm grow" data-a="liveto">Timeout (${L.tos[L.me]})</button>` : ""}<button class="btn sm grow" data-a="livesim">Sim to the end</button><button class="btn sm grow" data-a="livemode">${L.mode === "all" ? "Key plays only" : "Every play"}</button></div>
+    <div class="row gap wrap">${canTimeout(L) && !["half", "pat", "ko"].includes(need) ? `<button class="btn sm grow" data-a="liveto">Timeout (${L.tos[L.me]})</button>` : ""}${L.q <= 4 && !L.ot ? `<button class="btn sm grow" data-a="liveq">${L.half ? "Sim 3rd quarter" : `Sim ${["", "1st", "2nd", "3rd", "4th"][L.q]} quarter`}</button>` : ""}<button class="btn sm grow" data-a="livesim">Sim to the end</button><button class="btn sm grow" data-a="livemode">${L.mode === "all" ? "Key plays only" : "Every play"}</button></div>
     <section class="card"><div class="eyebrow">Play by play</div>${L.log.slice(1, UI.logAll ? 160 : 12).map(logRow).join("")}${L.log.length > 12 ? `<button class="link small" data-a="logall">${UI.logAll ? "Show less" : "Show the whole game"}</button>` : ""}</section>
     <p class="dim small pad">Each result shows your call and theirs. The AI remembers what you like to run, this game and from season to season.</p></div>`;
 }
@@ -5230,6 +5248,7 @@ document.addEventListener("click", e => {
     case "half2": { const L = G.live; if (!L) return; startSecondHalf(L); if (L.mode === "key") liveAuto(L, true); render(); window.scrollTo(0, 0); saveSoon(); return; }
     case "liveto": { const L = G.live; if (!L) return; callTimeout(L, L.me); UI.keepScroll = true; render(); saveSoon(); return; }
     case "livenext": if (G.live) { liveAuto(G.live, true); if (!liveNeeds(G.live) && !G.live.over) liveAuto(G.live, true); } render(); saveSoon(); return;
+    case "liveq": if (G.live) liveSimQuarter(G.live); UI.keepScroll = true; render(); saveSoon(); return;
     case "livesim": if (G.live) liveAuto(G.live, false); render(); window.scrollTo(0, 0); saveSoon(); return;
     case "livemode": if (G.live) { G.live.mode = G.live.mode === "all" ? "key" : "all"; if (G.live.mode === "key") liveAuto(G.live, true); } UI.keepScroll = true; render(); saveSoon(); return;
     case "logall": UI.logAll = !UI.logAll; UI.keepScroll = true; render(); return;
