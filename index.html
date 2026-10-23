@@ -19,6 +19,7 @@ html, body { background: var(--bg); color: var(--ink); }
 body { font-family: var(--body); font-size: 15px; line-height: 1.4; -webkit-tap-highlight-color: transparent; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--team); }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html, body { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
 input, select, textarea { font-size: 16px !important; }
 .search { display: flex; gap: 6px; align-items: center; }
@@ -155,6 +156,34 @@ textarea.inp { font-family: ui-monospace, Menlo, monospace; font-size: .8rem; }
 .mail.unread b { font-weight: 700; }
 .mail .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--team); flex: none; align-self: center; }
 .scout { padding: 8px 10px; border-radius: 10px; background: var(--surface2); display: grid; gap: 2px; }
+.card.foldable { position: relative; }
+.card.foldable > :first-child { padding-right: 36px; }
+.card.folded > :not(:first-child):not(.foldbtn) { display: none !important; }
+.card.folded > :first-child { margin-bottom: 0; }
+.foldbtn { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border: 0; border-radius: 8px; background: var(--surface2); color: var(--muted); display: grid; place-items: center; font-size: 14px; line-height: 1; }
+.foldbtn::before { content: "▾"; transition: transform .15s; }
+.card.folded .foldbtn::before { transform: rotate(-90deg); }
+.foldbar { display: flex; justify-content: flex-end; gap: 12px; }
+.gdbtns { display: flex; gap: 4px; flex: none; }
+.gdbtns .btn { padding: 6px 8px; min-width: 0; }
+.rotrow { display: grid; grid-template-columns: 40px minmax(0, 1fr) 44px; gap: 10px; align-items: center; padding: 4px 0; }
+.rotrow input[type=range] { width: 100%; accent-color: var(--team); }
+.tbl.stat { table-layout: fixed; }
+.tbl.stat th:first-child, .tbl.stat td:first-child { width: 38%; white-space: normal; overflow-wrap: anywhere; }
+.tbl.stat th, .tbl.stat td { padding: 8px 4px; }
+.tbl.stat th:first-child, .tbl.stat td:first-child { padding-left: 10px; }
+.link.th { font: inherit; text-transform: inherit; letter-spacing: inherit; color: inherit; text-decoration: none; }
+.link.th.on { color: var(--ink); }
+.case { background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%); }
+.shelf-h { font-family: var(--display); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 3px solid var(--line); }
+.plate { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.plate .pi { width: 30px; height: 30px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; flex: none; }
+.plate .grow { min-width: 0; }
+.rfpanel { display: grid; gap: 10px; margin-top: 8px; }
+.rfgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.rfgrid label { display: grid; gap: 4px; min-width: 0; }
+.edrow { display: grid; grid-template-columns: 56px minmax(0, 1fr) 68px; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); }
+.edrow .inp.num { text-align: center; }
 .battle { display: grid; gap: 6px; padding: 8px 0; border-top: 1px solid var(--line); }
 .mailacts { display: flex; gap: 8px; padding: 0 14px 10px; }
 .pitchrow { display: grid; gap: 6px; margin-top: 8px; }
@@ -779,7 +808,7 @@ function potFor(ovr, yr) { const head = [0, 16, 11, 6, 2][yr] || 2; return clamp
 function newPlayer(o) {
   const id = G.nid++;
   const [f, l] = o.f ? [o.f, o.l] : genName();
-  const p = { id, f, l, pos: o.pos, yr: o.yr || 1, rs: !!o.rs, rsNow: false, ovr: Math.round(o.ovr), pot: o.pot || potFor(o.ovr, o.yr || 1), at: genAttrs(o.pos, o.ovr), st: o.st || wpick(STATES, STATE_W), pers: pick(PERS), mor: 65, inj: 0, sus: 0, sit: 0, t: o.t, real: !!o.real, stars: o.stars || 0, wo: !!o.wo, s: {}, c: {}, ht: o.ht || "", wt: o.wt || "", nw: G.phase === "off" ? 1 : 0 };
+  const p = { id, f, l, pos: o.pos, yr: o.yr || 1, rs: !!o.rs, rsNow: false, ovr: Math.round(o.ovr), pot: o.pot || potFor(o.ovr, o.yr || 1), at: o.at && o.at.length === ATTR[o.pos].length ? o.at.slice() : genAttrs(o.pos, o.ovr), st: o.st || wpick(STATES, STATE_W), pers: pick(PERS), mor: 65, inj: 0, sus: 0, sit: 0, t: o.t, real: !!o.real, stars: o.stars || 0, wo: !!o.wo, s: {}, c: {}, ht: o.ht || "", wt: o.wt || "", nw: G.phase === "off" ? 1 : 0 };
   G.players[id] = p;
   return p;
 }
@@ -946,6 +975,7 @@ function teamRating(t, ctx) {
   { const pc = posCoachBonus(t); off += pc.off; def += pc.def; }
   const mor = avg(t.roster.slice(0, 40).map(id => P(id).mor));
   off += (mor - 60) / 30; def += (mor - 60) / 30;
+  if (user) { const ra = rotAdjust(t); off += ra.off; def += ra.def; }
   if (user && ctx && ctx.big) { const b = pv("Big Game Coach", [0, 2, 3.5, 5]); off += b; def += b; }
   return { off, def, k: ov(k), p: ov(pp), ovr: (off + def) / 2, qb, rb, wr, te, ol, dl, lb, cb, s, kk: k[0], pass: o.pass, so: t.so, sd: t.sd, tilt: dW.tilt || 0, fitO: fit, fitD: dfit };
 }
@@ -1511,7 +1541,7 @@ function recruitRatings(stars, rating, rank) {
 function newRecruit(o) {
   const st = o.st || wpick(STATES, STATE_W);
   const { ovr, pot } = recruitRatings(o.stars, o.rating, o.rk);
-  const r = { i: G.recruits.length, f: o.f, l: o.l, pos: o.pos, st, city: o.city || pick(CITIES[st] || ["—"]), hs: o.hs || "", stars: o.stars, rk: o.rk || 0, ovr: o.juco ? ovr + 6 : ovr, pot: o.juco ? Math.max(ovr + 7, pot - 6) : pot, ht: o.ht || "", wt: o.wt || "", real: !!o.real, rs: o.school || "", juco: !!o.juco, pts: {}, cm: -1, sg: 0, sc: 0, db: pick(DEALS), ov: 0, hv: 0, of: 0, uv: 0, nil: 0, lw: {} };
+  const r = { i: G.recruits.length, f: o.f, l: o.l, pos: o.pos, st, city: o.city || pick(CITIES[st] || ["—"]), hs: o.hs || "", stars: o.stars, rk: o.rk || 0, ovr: o.juco ? ovr + 6 : ovr, pot: o.juco ? Math.max(ovr + 7, pot - 6) : pot, ht: o.ht || "", wt: o.wt || "", raw: o.raw || "", real: !!o.real, rs: o.school || "", juco: !!o.juco, pts: {}, cm: -1, sg: 0, sc: 0, db: pick(DEALS), ov: 0, hv: 0, of: 0, uv: 0, nil: 0, lw: {} };
   // suitors
   const tgt = STAR_PRES[o.stars] || 55;
   const cands = FBS();
@@ -1677,9 +1707,10 @@ function signingDay() {
   const signed = G.recruits.filter(r => r.cm >= 0);
   for (const r of signed) {
     const ath = r.pos === "ATH"; const guess = ath ? athGuess(r.cm) : null;
-    const p = newPlayer({ f: r.f, l: r.l, pos: ath ? guess[0] : r.pos, yr: r.juco ? 3 : 1, ovr: r.ovr, pot: r.pot, t: r.cm, st: r.st, stars: r.stars, real: r.real, ht: r.ht, wt: r.wt });
+    ensureRecAttrs(r);
+    const p = newPlayer({ f: r.f, l: r.l, pos: ath ? guess[0] : r.pos, at: ath ? null : r.at, yr: r.juco ? 3 : 1, ovr: r.ovr, pot: r.pot, t: r.cm, st: r.st, stars: r.stars, real: r.real, ht: r.ht, wt: r.wt });
     if (ath) { p.ath = 1; setSecondPos(p, guess[1]); if (r.cm === G.userTeam) p.athPick = 1; }
-    p.city = r.city; p.hs = r.hs; if (r.cm === G.userTeam) signedHook(r, p);
+    p.city = r.city; p.hs = r.hs; if (r.arch && !ath) p.arch = r.arch; if (r.cm === G.userTeam) signedHook(r, p);
     T(r.cm).roster.push(p.id);
   }
   const ur = G.classRank.find(x => x[0] === G.userTeam);
@@ -1759,6 +1790,7 @@ function offseasonCore() {
     if (isHC()) { u.fac = clamp(u.fac + (ob.fac || 0) * 4, 0, 99); u.pres = clamp(u.pres + (ob.mk || 0) * 0.5, 0, 99); u.acad = clamp(u.acad + (ob.acs || 0), 0, 99); }
     G.year++; renewContract();
     G.budget = { ...budgetFor(userT()), nilPool: G.year >= 2021 ? Math.round(userT().pres * 18000 + (ob.nilBuy || 0) * 1e6) : 0 };
+    applyBudBonus();
     // yearly spends carry over to the new budget, trimmed if it shrank
     if (isHC()) { for (const [k] of BUD) G.budget[k] = ob[k] || 0; for (const [k] of BUD.slice().reverse()) while (budgetLeft() < 0 && G.budget[k] > 0) G.budget[k]--; }
     G.cuts = 0; startSeason(false); return;
@@ -1986,7 +2018,7 @@ function importRecruits(text) {
     if (!f || !pos) { skip++; continue; }
     const stars = clamp(parseInt(field(o, "stars", "star")) || 3, 1, 5);
     const st = String(field(o, "state", "st")).toUpperCase().slice(0, 2) || undefined;
-    newRecruit({ f, l, pos, stars, rating: parseFloat(field(o, "rating", "composite", "score")) || 0, rk: parseInt(field(o, "rank", "nationalrank", "natrank", "overallrank")) || 0, st: STATES.includes(st) ? st : undefined, city: field(o, "city", "hometown"), hs: field(o, "highschool", "school_hs", "hs"), ht: field(o, "height", "ht"), wt: field(o, "weight", "wt"), school: field(o, "college", "committed", "school", "realschool"), juco: /^(y|yes|true|1|juco)$/i.test(field(o, "juco")), real: true });
+    newRecruit({ f, l, pos, raw: String(field(o, "position", "pos") || "").toUpperCase().trim(), stars, rating: parseFloat(field(o, "rating", "composite", "score")) || 0, rk: parseInt(field(o, "rank", "nationalrank", "natrank", "overallrank")) || 0, st: STATES.includes(st) ? st : undefined, city: field(o, "city", "hometown"), hs: field(o, "highschool", "school_hs", "hs"), ht: field(o, "height", "ht"), wt: field(o, "weight", "wt"), school: field(o, "college", "committed", "school", "realschool"), juco: /^(y|yes|true|1|juco)$/i.test(field(o, "juco")), real: true });
     n++;
   }
   if (!n) return { n, skip, err: "No recruits found. The file needs at least name and position columns." };
@@ -2947,23 +2979,29 @@ function startLive(g, mode) {
 function liveNeeds(L) {
   if (L.over) return null;
   if (L.half) return "half";
-  if (L.pat) return "pat";
-  if (L.ko) return "ko";
+  if (L.pat) return liveSide(L) === "def" ? null : "pat";
+  if (L.ko) return liveSide(L) === "def" ? null : "ko";
   const off = L.poss === L.me;
   if (off && !callsOffense()) return null;
   if (!off && !callsDefense()) return null;
+  const side = liveSide(L);
+  if (off && side === "def") return null;
+  if (!off && side === "off") return null;
   if (L.mode === "all") return off ? "off" : "def";
   const late = (L.q === 2 || L.q === 4) && L.clock <= 240;
   const key = L.down >= 3 || L.los >= 80 || late || L.q > 4;
   return key ? (off ? "off" : "def") : null;
 }
 function momFx(L, side) { const m = (L.mom || 0) / 100 * 0.35; return side === L.me ? m : -m; }
-function fatFx(L, defSide) { return clamp(((L.fat || [0, 0])[defSide] - 12) * 0.03, 0, 0.8); }
+function fatFx(L, defSide) { return clamp(((L.fat || [0, 0])[defSide] - 12) * 0.03 * fatMult(L, defSide), 0, 0.8); }
 function swing(L, side, amt) { L.mom = clamp((L.mom || 0) + (side === L.me ? amt : -amt), -100, 100); }
 function defFatigueLabel(L, side) { const f = (L.fat || [0, 0])[side]; return f < 10 ? "Fresh" : f < 18 ? "Winded" : "Gassed"; }
 
+// how much a talent gap moves each play (tuned so live games score like simmed games)
+const LIVE_EDGE = { d: 22, m: 1.6, n: 0.7 };
 function livePlay(L, userCall) {
   if (L.over || L.half || L.pat || L.ko) return;
+  blowCheck(L);
   const g = G.sched[L.gi];
   const RS = liveRatings(L);
   const o = RS[L.poss], d = RS[1 - L.poss];
@@ -3016,9 +3054,9 @@ function livePlay(L, userCall) {
   const dx = DP0.x;
   const qb = o.qb[0];
   const mf = momFx(L, L.poss) + fatFx(L, 1 - L.poss);
-  let runEdge = Math.tanh(((U.runO - V.runD) + (o.off - d.def) * 0.5 + hfa) / 22) * 1.6;
-  let passEdge = Math.tanh(((U.passO - V.cov) + (o.off - d.def) * 0.5 + hfa) / 22) * 1.6;
-  if (runEdge < 0) runEdge *= 0.7; if (passEdge < 0) passEdge *= 0.7;
+  let runEdge = Math.tanh(((U.runO - V.runD) + (o.off - d.def) * 0.5 + hfa) / LIVE_EDGE.d) * LIVE_EDGE.m;
+  let passEdge = Math.tanh(((U.passO - V.cov) + (o.off - d.def) * 0.5 + hfa) / LIVE_EDGE.d) * LIVE_EDGE.m;
+  if (runEdge < 0) runEdge *= LIVE_EDGE.n; if (passEdge < 0) passEdge *= LIVE_EDGE.n;
   runEdge += mf + pbEdge(L, P0); passEdge += mf + pbEdge(L, P0);
   const shortYd = L.dist <= 2 ? (P0.short || 0) : 0;
   if (oc === "IR" || oc === "OR") {
@@ -3175,30 +3213,12 @@ function liveAuto(L, stopAtDecision) {
   if (!stopAtDecision) L.autoPat = true;
   while (!L.over && n++ < 500) {
     if (L.half) { if (stopAtDecision) return; startSecondHalf(L); continue; }
-    if (L.pat) { if (stopAtDecision) return; doPat(L, L.pat.side, aiGoesForTwo(L, L.pat.side)); continue; }
-    if (L.ko) { if (stopAtDecision) return; afterScoreAuto(L); continue; }
+    if (L.pat) { if (stopAtDecision && liveNeeds(L)) return; doPat(L, L.pat.side, aiGoesForTwo(L, L.pat.side)); continue; }
+    if (L.ko) { if (stopAtDecision && liveNeeds(L)) return; afterScoreAuto(L); continue; }
     if (stopAtDecision && liveNeeds(L)) return;
     livePlay(L, null);
   }
   L.autoPat = false;
-}
-// sim the rest of the current quarter (overtime sims to the end)
-function liveSimQuarter(L) {
-  if (!L || L.over) return;
-  if (L.half) { startSecondHalf(L); }
-  const q0 = L.q;
-  if (q0 > 4 || L.ot) { liveAuto(L, false); return; }
-  let n = 0; L.autoPat = true;
-  while (!L.over && n++ < 400) {
-    if (L.half) break;
-    if (L.pat) { doPat(L, L.pat.side, aiGoesForTwo(L, L.pat.side)); continue; }
-    if (L.ko) { afterScoreAuto(L); continue; }
-    if (L.q !== q0) break;
-    livePlay(L, null);
-  }
-  L.autoPat = false;
-  if (!L.over) logLive(L, L.half ? "End of the first half." : `End of the ${["", "first", "second", "third", "fourth"][q0]} quarter.`, "big");
-  if (!L.over && L.mode === "key") liveAuto(L, true);
 }
 function afterScoreAuto(L) { const side = L.ko.side; L.ko = null; const trail = L.sc[1 - side] - L.sc[side]; doKick(L, side, L.q === 4 && L.clock < 200 && trail > 0 && trail <= 16); }
 
@@ -3508,7 +3528,8 @@ function advance() {
   if (g && !g.d) stampWeek(g);
   if (playing && (G.phase === "reg")) { disciplineWeek(); }
   advanceCore();
-  if (g && g.d && !g.wp) { g.wp = 1; if (!g.stamped) stampWeek(g); adNote(g); practiceWeek(g); pressResult(g); }
+  if (g && g.d && !g.wp) { g.wp = 1; if (!g.stamped) stampWeek(g); adNote(g); practiceWeek(g); pressResult(g); homeGameMoney(g);
+    { const me = g.h === G.userTeam ? g.hs - g.as : g.as - g.hs, b = rot().blow; rotWeekly(g, b !== "off" && me >= +b); } }
   else if (playing && G.phase === "reg" && !g) practiceWeek(null);
   if (playing) { weekEnd(ph === "pre" ? "reg" : ph, ph === "pre" ? 1 : wk); G.pressPick = null; }
   if (ph === "pre" && !captains().length) autoCaptains();
@@ -3758,10 +3779,11 @@ const BOOST = {
   fac: { t: "Facility gift", give: "+4 facilities right now", need: "win at least {w} games" },
   jet: { t: "Recruiting jet", give: "+8 recruiting hours every week this season", need: "{rv}" },
   tv: { t: "Marketing push", give: "+2 prestige right now", need: "finish in the AP top 25" },
+  staff: { t: "Staff fund", give: "+$1M for staff salaries next year", need: "win at least {w} games" },
 };
 function boosterOffer() {
   if (!isHC() || G.nfl || rnd() >= 0.45) return;
-  const u = userT(); const kinds = u.div ? ["fac", "jet"] : ["fac", "jet", "tv"];
+  const u = userT(); const kinds = u.div ? ["fac", "jet", "staff"] : ["fac", "jet", "tv", "staff"];
   const k = pick(kinds), w = Math.min(12, expectedWins(u) + 1);
   const rv = G.sched.find(g => g.rv && g.k === "reg" && (g.h === u.id || g.a === u.id));
   const need = BOOST[k].need.replace("{w}", w).replace("{rv}", rv ? `beat ${T(rv.h === u.id ? rv.a : rv.h).name}` : `win at least ${w} games`);
@@ -3963,7 +3985,7 @@ function programStart() { makeGoals(); boosterOffer(); campBattles(); }
 function programEnd() {
   worldSeasonEnd();
   if (G.nfl) { nflSeasonResult(); nflAlumniTick(); return; }
-  judgeGoals(); judgeBooster(); nflAlumniTick();
+  judgeGoals(); judgeBooster(); seasonMoney(); nflAlumniTick(); trophyNotes();
 }
 function offseasonNext() {
   const s = G.off.step;
@@ -3977,6 +3999,24 @@ function offseasonNext() {
   }
   if (s === "draft" && G.nfl) nflReturnOffers();
   if (s === "train") pbGrow();
+}
+
+// ---------- trophy case records ----------
+function coachTeamIn(y) { if (y === G.year) return G.nfl ? -1 : G.userTeam; const s = G.coach.seasons.filter(x => x.y === y && !x.nfl).slice(-1)[0]; return s ? s.t : -1; }
+function trophyNotes() {
+  const c = G.coach, u = userT(); c.awards = c.awards || []; c.bowlLog = c.bowlLog || [];
+  for (const g of G.sched.filter(g => g.d && (g.k === "bowl" || g.k === "po") && (g.h === u.id || g.a === u.id))) {
+    const won = g.h === u.id ? g.hs > g.as : g.as > g.hs, opp = g.h === u.id ? g.a : g.h;
+    if (!c.bowlLog.some(b => b.y === G.year && b.nm === g.nm)) c.bowlLog.push({ y: G.year, nm: g.nm || "Bowl", opp: opp >= 0 ? T(opp).name : "", won, s: `${Math.max(g.hs, g.as)}-${Math.min(g.hs, g.as)}`, t: u.name, po: g.k === "po" ? 1 : 0 });
+  }
+  const aw = G.awards[G.year] || {};
+  if (isHC() && aw.coy && aw.coy[0] === u.id) c.awards.push({ y: G.year, nm: "National Coach of the Year", t: u.name });
+  if (isHC() && !u.div) {
+    const conf = FBS().filter(t => t.conf === u.conf).sort((a, b) => (b.w - expectedWins(b)) - (a.w - expectedWins(a)))[0];
+    if (conf && conf.id === u.id) c.awards.push({ y: G.year, nm: `${u.conf} Coach of the Year`, t: u.name });
+  }
+  if (!isHC() && ["oc", "dc"].includes(role()) && u.w >= 11 && rnd() < 0.4) c.awards.push({ y: G.year, nm: "Broyles Award (top assistant)", t: u.name });
+  if (u.div && G.low && G.low.champ && G.low.champ[u.div] === u.lowId) c.awards.push({ y: G.year, nm: `${DIV_N[u.div]} national championship`, t: u.name, title: 1 });
 }
 
 // ---------- world: bowl tie-ins, record books, rivalry trophies ----------
@@ -4120,6 +4160,391 @@ function worldSeasonEnd() {
     for (const [s, label] of keys) { const v = (p.c[s] || 0); if (!v) continue; const c = cr[s]; if (!c || v > c.v) cr[s] = { v, n: playerName(p), y: G.year, label }; }
   }
 }
+
+// ---------- simming part of a live game: same drive model as a full simulated game ----------
+function simDriveSetup(L) {
+  if (L.sd) return L.sd;
+  const g = G.sched[L.gi], [H, A] = liveRatings(L);
+  const ht = T(g.h);
+  const hfa = g.n || (g.po && g.nm && g.nm.includes("Championship")) ? 0 : g.away ? -(1.5 + (g.low != null ? LT(g.low).pres : 40) / 45) : ht.hf * crowdFactor(g);
+  const hfaR = real() && g.a === G.userTeam ? hfa * 1.15 : hfa;
+  const fxH = planFx(H, A, L.plans[0], L.plans[1]), fxA = planFx(A, H, L.plans[1], L.plans[0]);
+  if (g.wx === "Heat") { fxH.def -= 0.5; fxA.def -= 0.5; }
+  const form = [gauss() * 4.2 * (g.rv ? 1.2 : 1), gauss() * 4.2 * (g.rv ? 1.2 : 1)];
+  L.sd = {
+    diff: [H.off + form[0] + hfaR / 2 + fxH.off - (A.def - hfaR / 2 + fxA.def), A.off + form[1] - hfaR / 2 + fxA.off - (H.def + hfaR / 2 + fxH.def)],
+    to: [fxH.to + fxA.to * 0.5, fxA.to + fxH.to * 0.5], pass: [fxH.pass, fxA.pass],
+  };
+  return L.sd;
+}
+function simOneDrive(L) {
+  blowCheck(L);
+  const g = G.sched[L.gi], RS = liveRatings(L), sd = simDriveSetup(L);
+  const i = L.poss, o = RS[i], d = RS[1 - i], bad = ["Rain", "Snow", "Wind"].includes(g.wx);
+  const diff = sd.diff[i] + momFx(L, i) * 2;
+  const pTD = clamp(0.235 + diff * 0.011 - (bad ? 0.025 : 0), 0.04, 0.58), pFG = 0.13;
+  const pTO = clamp(0.11 - diff * 0.003 + (bad ? 0.012 : 0) + sd.to[i], 0.03, 0.2);
+  const r = rnd(); let out = r < pTD ? "td" : r < pTD + pFG ? "fg" : r < pTD + pFG + pTO ? "to" : "punt";
+  const time = Math.round({ td: R(95, 230), fg: R(110, 250), to: R(30, 150), punt: R(55, 190) }[out] * 1.16);
+  // not enough clock left in the quarter: the drive may not finish before the buzzer
+  if (time > L.clock && L.q !== 2 && L.q !== 4 && rnd() > L.clock / time) {
+    const gain = Math.max(0, Math.round((out === "punt" || out === "to" ? R(0, 25) : R(15, 45)) * L.clock / time));
+    L.los = clamp(L.los + gain, 1, 95); L.down = 1; L.dist = Math.min(10, 100 - L.los);
+    simDriveStats(L, o, d, gain, false);
+    advClock(L, L.clock); return;
+  }
+  if ((L.q === 2 || L.q === 4) && time > L.clock && (out === "td" || out === "fg") && rnd() > L.clock / time + 0.25) out = L.los >= 55 ? "fg" : "punt";
+  const who = teamNm(L, i), start = L.los;
+  if (out === "td") {
+    const yds = 100 - start; simDriveStats(L, o, d, yds, true);
+    L.sc[i] += 6; swing(L, i, 14);
+    logLive(L, `${who} drive: ${Math.max(3, Math.round(time / 28))} plays, ${yds} yards, touchdown.`, "score");
+    L.clock = Math.max(1, L.clock - time);
+    doPat(L, i, aiGoesForTwo(L, i)); return;
+  }
+  if (out === "fg") {
+    const spot = clamp(start + R(15, 50), start, 90), fd = 100 - spot + 17, kk = o.kk;
+    simDriveStats(L, o, d, spot - start, false);
+    const make = clamp(0.62 + (((kk && kk.ovr) || 55) - 65) * 0.012 - (bad ? 0.06 : 0) + (fd < 30 ? 0.2 : fd > 45 ? -0.12 : 0), 0.3, 0.97);
+    if (kk) liveLine(L, kk).fga++;
+    if (rnd() < make) {
+      L.sc[i] += 3; if (kk) liveLine(L, kk).fgm++; swing(L, i, 6);
+      logLive(L, `${who} drive ends in a ${fd}-yard field goal.`, "score");
+      L.clock = Math.max(1, L.clock - time); afterScore(L, i); return;
+    }
+    logLive(L, `${who} drive stalls, ${fd}-yard field goal no good.`, "to"); swing(L, i, -8);
+    flip(L, Math.max(20, 100 - (spot - 7))); advClock(L, time); return;
+  }
+  if (out === "to") {
+    const gain = R(0, 40), spot = clamp(start + gain, 1, 95);
+    simDriveStats(L, o, d, gain, false);
+    const pick6 = rnd() < (o.pass || 0.5) + 0.1;
+    if (pick6 && o.qb && o.qb[0]) { liveLine(L, o.qb[0]).int++; const db = pick([...(d.cb || []), ...(d.s || []), ...(d.lb || [])]); if (db) liveLine(L, db).di++; }
+    L.st[i].to++; swing(L, i, -10);
+    logLive(L, `${who} turn it over (${pick6 ? "interception" : "fumble"}).`, "to");
+    flip(L, 100 - spot); advClock(L, time); return;
+  }
+  const gain = R(4, 38), spot = clamp(start + gain, 1, 80), net = R(32, 46);
+  simDriveStats(L, o, d, gain, false);
+  logLive(L, `${who} drive: ${gain} yards, then a punt.`);
+  let land = spot + net; if (land >= 100) land = 80;
+  flip(L, 100 - land); advClock(L, time);
+}
+// spread the drive's yards over the players like a simulated game does
+function simDriveStats(L, o, d, yds, td) {
+  const i = L.poss; if (yds <= 0) return;
+  const ps = clamp((o.pass || 0.5) + (L.sd ? L.sd.pass[i] : 0) + (rnd() - 0.5) * 0.2, 0.15, 0.85);
+  const py = Math.round(yds * ps), ry = yds - py;
+  const qb = o.qb && o.qb[0], rb = o.rb && o.rb[0];
+  const tgts = [...(o.wr || []), ...(o.wr || []).slice(0, 2), ...(o.te || []), ...(o.rb || []).slice(0, 1)];
+  if (py > 0 && qb) {
+    const n = Math.max(1, Math.round(py / 11)), cmp = n, att = Math.round(n * (1.4 + rnd() * 0.4));
+    const ql = liveLine(L, qb); ql.att += att; ql.cmp += cmp; ql.py += py;
+    let left = py; for (let k = 0; k < cmp; k++) { const t = pick(tgts); if (!t) break; const y = k === cmp - 1 ? left : Math.round(left / (cmp - k) * (0.5 + rnd())); const tl = liveLine(L, t); tl.rec++; tl.rcy += y; left -= y; }
+  }
+  if (ry > 0 && rb) { const rl = liveLine(L, rb); rl.car += Math.max(1, Math.round(ry / 4.5)); rl.ry += ry; }
+  L.st[i].py += py; L.st[i].ry += ry;
+  if (td) {
+    if (rnd() < ps && qb) { liveLine(L, qb).ptd++; const t = pick(tgts); if (t) liveLine(L, t).rctd++; }
+    else if (rb) liveLine(L, rb).rtd++;
+  }
+  const tk = [...(d.lb || []), ...(d.lb || []), ...(d.s || []), ...(d.cb || []), ...(d.dl || [])];
+  for (let k = 0; k < Math.round(yds / 9) + 2; k++) { const p = pick(tk); if (p) liveLine(L, p).tk++; }
+}
+// run drives until the quarter changes (or halftime, or the end)
+function simDrivesUntil(L, stopAtQuarter) {
+  const q0 = L.q; let n = 0; L.autoPat = true;
+  if (L.half) startSecondHalf(L);
+  while (!L.over && n++ < 80) {
+    if (L.pat) { doPat(L, L.pat.side, aiGoesForTwo(L, L.pat.side)); continue; }
+    if (L.ko) { afterScoreAuto(L); continue; }
+    if (L.half) { if (stopAtQuarter) break; startSecondHalf(L); continue; }
+    if (stopAtQuarter && L.q !== q0) break;
+    if (L.q > 4 || L.ot) { liveAuto(L, false); break; }
+    simOneDrive(L);
+  }
+  L.autoPat = false;
+}
+function liveSimQuarter(L) {
+  if (!L || L.over) return;
+  if (L.q > 4 || L.ot) { liveAuto(L, false); return; }
+  simDrivesUntil(L, true);
+  liveFlow(L);
+}
+function liveSimRest(L) { if (!L || L.over) return; simDrivesUntil(L, false); if (!L.over) liveAuto(L, false); }
+
+// ---------- more ways to grow the budget ----------
+// a bigger base for everyone
+function budgetFor(t) {
+  if (t.div) return { total: Math.round((t.div === 2 ? 1.4 + t.pres * 0.042 : 0.85 + t.pres * 0.028) * 10) / 10, fac: 0, travel: 0, nil: 0 };
+  return { total: Math.round((2.5 + t.pres * 0.08) * 10) / 10, fac: 0, travel: 0, nil: 0 };
+}
+// money earned this season lands in next year's budget
+function budBonus() { if (!G.budBonus || G.budBonus.y !== G.year) G.budBonus = { y: G.year, items: [] }; return G.budBonus; }
+function addBonus(label, amt) { if (!isHC() || G.nfl || !amt) return; const b = budBonus(); const ex = b.items.find(x => x[0] === label); if (ex) ex[1] = Math.round((ex[1] + amt) * 100) / 100; else b.items.push([label, Math.round(amt * 100) / 100]); }
+function bonusTotal(y) { const b = G.budBonus; if (!b || b.y !== y) return 0; return Math.round(b.items.reduce((s, x) => s + x[1], 0) * 100) / 100; }
+
+// sellouts: hype from winning, rankings, rivals, big opponents and star players
+function selloutChance(g) {
+  const u = userT(), opp = g.a >= 0 ? T(g.a) : null;
+  let c = 0.25 + (u.pres - 60) / 100 + (u.rk ? 0.25 - u.rk / 100 : 0) + (u.streak > 0 ? u.streak * 0.04 : u.streak * 0.05);
+  if (g.rv) c += 0.3; if (opp && opp.rk) c += 0.2; if (opp && opp.pres >= 80) c += 0.1;
+  const star = starPlayer(); if (star) c += 0.12;
+  c += budLvl("mk") * 0.04;
+  return clamp(c, 0.03, 0.97);
+}
+function starPlayer() {
+  const ps = userT().roster.map(P).filter(p => p && (p.s.g || 0) >= 2);
+  const best = ps.sort((a, b) => heisScore(b) - heisScore(a))[0];
+  if (!best) return null;
+  const all = allPlayersActive().filter(p => (p.s.g || 0) >= 2).sort((a, b) => heisScore(b) - heisScore(a)).slice(0, 10).map(p => p.id);
+  return all.includes(best.id) ? best : null;
+}
+function homeGameMoney(g) {
+  const u = G.userTeam; if (!g || g.h !== u || g.away || g.n || !isHC()) return;
+  if (rnd() < selloutChance(g)) {
+    const amt = u === G.userTeam && userT().div ? 0.02 : 0.08 + userT().pres * 0.0008;
+    addBonus("Sellout crowds", amt); g.sold = 1;
+    const star = starPlayer();
+    addNews(`Sellout crowd${star ? ` turns out to see ${playerName(star)}` : ""}. Extra ticket money goes to next year's budget.`, "win");
+  }
+}
+function seasonMoney() {
+  const u = userT(), c = G.coach;
+  if (!isHC() || G.nfl) return;
+  const scale = u.div ? 0.35 : 1;
+  if (u.w >= 10) addBonus("10-win season", 0.4 * scale);
+  if (u.champ) addBonus("Conference title", 0.5 * scale);
+  const pg = G.sched.filter(g => g.d && (g.k === "bowl" || g.k === "po") && (g.h === u.id || g.a === u.id));
+  const bw = pg.filter(g => (g.h === u.id ? g.hs > g.as : g.as > g.hs)).length;
+  if (pg.length) addBonus("Bowl and playoff payouts", (0.25 + bw * 0.25 + pg.filter(g => g.k === "po").length * 0.4) * scale);
+  if (G.post && G.post.champ === u.id) addBonus("National title", 1.5);
+  const aw = G.awards && G.awards[G.year];
+  if (aw && aw.heisman) aw.heisman.forEach((x, i) => { if (x[5] === u.id) addBonus(i === 0 ? "Heisman winner merch" : "Heisman finalist buzz", i === 0 ? 0.6 : 0.2); });
+  const met = goalList().filter(g => g.met).length; if (met) addBonus("AD goals met", met * 0.25 * scale);
+  const bm = G.bmood == null ? 50 : G.bmood;
+  if (bm >= 70) addBonus("Booster donations", (0.3 + (bm - 70) * 0.02) * scale);
+  if (G.boost && G.boost.y === G.year && G.boost.k === "staff" && G.boost.st === "kept") addBonus("Booster staff fund", 1 * scale);
+}
+function applyBudBonus() {
+  const t = bonusTotal(G.year - 1); if (!t || !G.budget) return;
+  G.budget.total = Math.round((G.budget.total + t) * 10) / 10; G.budget.bonus = t;
+}
+
+// ask the AD for more money (once a year)
+function adAskChance() {
+  const c = G.coach, u = userT(), last = c.seasons[c.seasons.length - 1];
+  let p = 0.15 + (c.sec - 50) / 120 + (last ? (last.w - last.exp) * 0.06 : 0) + ((G.bmood == null ? 50 : G.bmood) - 50) / 250;
+  const gl = G.goals && G.goals.y === G.year - (G.phase === "off" ? 0 : 1) ? G.goals.list : [];
+  p += gl.filter(g => g.met).length * 0.05;
+  return clamp(p, 0.05, 0.9);
+}
+function askAD() {
+  if (!isHC()) return "Only the head coach can ask the AD.";
+  if (G.adAsk === G.year) return "You already asked this year.";
+  G.adAsk = G.year;
+  const u = userT();
+  if (rnd() < adAskChance()) {
+    const amt = Math.round((u.div ? 0.2 + rnd() * 0.3 : 0.5 + rnd() * 1.0) * 10) / 10;
+    G.budget.total = Math.round((G.budget.total + amt) * 10) / 10;
+    mail("Athletic Director", "Budget increase approved", `You made your case. I found another $${amt}M for the football budget.`, "ad");
+    return `The AD approved $${amt}M more.`;
+  }
+  G.coach.sec = clamp(G.coach.sec - 3, 0, 100);
+  mail("Athletic Director", "Budget request denied", "Not this year. Win more and we'll talk.", "ad");
+  return "The AD said no. Your job security dipped a little.";
+}
+
+// ---------- in-game control: call one side only, in-game depth chart, sub rotation ----------
+const SIDES = [["both", "Both sides"], ["off", "Offense only"], ["def", "Defense only"]];
+function liveSide(L) { const s = (L && L.side) || G.liveSide || "both"; return SIDES.some(x => x[0] === s) ? s : "both"; }
+// keep the game moving to the next call you make yourself
+function liveFlow(L) { if (!L || L.over) return; if (L.mode === "key" || liveSide(L) !== "both") liveAuto(L, true); }
+function setLiveSide(v) { G.liveSide = v; if (G.live) { G.live.side = v; liveFlow(G.live); } }
+
+// ---------- in-game depth chart (this game only) ----------
+function gdDepth(L, pos) {
+  const t = userT();
+  if (G.autoDepth === false) cleanDepth(t); else autoDepth(t);
+  const base = (t.depth[pos] || []).slice();
+  const ov = (L.depthOv || {})[pos];
+  if (!ov) return base;
+  const keep = ov.filter(id => base.includes(id));
+  return [...keep, ...base.filter(id => !keep.includes(id))];
+}
+function gdMove(L, pos, id, dir) {
+  const d = gdDepth(L, pos), i = d.indexOf(id); if (i < 0) return;
+  const j = clamp(i + dir, 0, d.length - 1); if (i === j) return;
+  [d[i], d[j]] = [d[j], d[i]];
+  L.depthOv = L.depthOv || {}; L.depthOv[pos] = d; gdRefresh(L);
+  logLive(L, `Lineup change: ${playerName(P(d[Math.min(i, j)]))} moves ${dir < 0 && d[Math.min(i, j)] === id ? "up" : "into"} the ${pos} rotation.`);
+}
+function gdBench(L, id) {
+  L.bench = L.bench || [];
+  const p = P(id); if (!p) return;
+  if (L.bench.includes(id)) { L.bench = L.bench.filter(x => x !== id); logLive(L, `${playerName(p)} is back in the game.`); }
+  else { L.bench.push(id); logLive(L, `${playerName(p)} (${p.pos}) is benched.`); p.mor = clamp(p.mor - 4, 5, 100); }
+  gdRefresh(L);
+}
+function gdRefresh(L) { for (const k in LIVE_R) delete LIVE_R[k]; L.sd = null; }
+// rate the user's team with this game's lineup changes applied
+function withGameDepth(L, t, fn) {
+  const ov = L && L.depthOv && Object.keys(L.depthOv).length, bn = L && L.bench && L.bench.length;
+  if (!ov && !bn) return fn();
+  const saveAuto = G.autoDepth, saveDepth = JSON.parse(JSON.stringify(t.depth)), sits = [];
+  if (G.autoDepth === false) cleanDepth(t); else autoDepth(t);
+  for (const pos in (L.depthOv || {})) { const base = t.depth[pos] || []; const keep = L.depthOv[pos].filter(id => base.includes(id)); t.depth[pos] = [...keep, ...base.filter(id => !keep.includes(id))]; }
+  for (const id of L.bench || []) { const p = P(id); if (p) { sits.push([p, p.sit]); p.sit = 9; } }
+  G.autoDepth = false;
+  try { return fn(); } finally { G.autoDepth = saveAuto; t.depth = saveDepth; for (const [p, s] of sits) p.sit = s; }
+}
+function liveRatings(L) {
+  const k = G.year + ":" + L.gi;
+  if (!LIVE_R[k]) {
+    const g = G.sched[L.gi], ht = T(g.h), at = g.a >= 0 ? T(g.a) : null;
+    const big = g.rv || g.k !== "reg";
+    const rate = t => t.id === G.userTeam ? withGameDepth(L, t, () => teamRating(t, { big })) : teamRating(t, { big });
+    LIVE_R[k] = [rate(ht), at ? rate(at) : g.low != null ? lowRating(LT(g.low)) : fcsRating()];
+    targetOnBack(g, LIVE_R[k][0], LIVE_R[k][1]);
+    if (L.blow) { const R0 = LIVE_R[k][L.me]; R0.off -= 4; R0.def -= 4; R0.ovr -= 4; }
+  }
+  return LIVE_R[k];
+}
+
+// ---------- sub rotation (Strategy tab) ----------
+const ROT_POS = ["RB", "WR", "TE", "OL", "DL", "LB", "CB", "S"];
+const ROT_DEF = { RB: 70, WR: 80, TE: 80, OL: 95, DL: 65, LB: 80, CB: 90, S: 90 };
+const ROT_W = { RB: 0.12, WR: 0.2, TE: 0.08, OL: 0.3, DL: 0.3, LB: 0.25, CB: 0.22, S: 0.18 };
+const ROT_FRESH = { RB: 2, WR: 1, TE: 0.5, OL: 0.5, DL: 3, LB: 1.5, CB: 0.8, S: 0.5 };
+const FATS = [["early", "Sub early"], ["normal", "Normal"], ["late", "Ride the starters"]];
+const BLOWS = [["off", "Never"], ["21", "Up 21+ in the 4th"], ["28", "Up 28+ in the 2nd half"]];
+function rot() { G.rot = G.rot || {}; G.rot.share = G.rot.share || { ...ROT_DEF }; G.rot.fat = G.rot.fat || "normal"; G.rot.blow = G.rot.blow || "off"; return G.rot; }
+function setShare(pos, v) { rot().share[pos] = clamp(Math.round(+v / 5) * 5, 40, 100); }
+// more rotation: fresher legs, but backups play more snaps
+function rotAdjust(t) {
+  const r = rot(); let off = 0, def = 0;
+  const ov = a => a.length ? a.reduce((s, p) => s + p.ovr, 0) / a.length : 40;
+  for (const pos of ROT_POS) {
+    const n = START[pos] || 1, all = starters(t, pos, n * 2);
+    const st = all.slice(0, n), bk = all.slice(n); if (!bk.length) continue;
+    const delta = ((ROT_DEF[pos] || 80) - (r.share[pos] || ROT_DEF[pos])) / 100;
+    const v = delta * ROT_FRESH[pos] - delta * Math.max(0, ov(st) - ov(bk)) * ROT_W[pos];
+    if (["RB", "WR", "TE", "OL"].includes(pos)) off += v; else def += v;
+  }
+  if (r.fat === "early") { off -= 0.3; def -= 0.3; } else if (r.fat === "late") { off += 0.2; def += 0.2; }
+  return { off: clamp(off, -3, 3), def: clamp(def, -3, 3) };
+}
+function fatMult(L, side) { if (side !== L.me) return 1; const f = rot().fat; return f === "early" ? 0.6 : f === "late" ? 1.3 : 1; }
+// pull the starters in a blowout
+function blowCheck(L) {
+  if (L.blow || L.over) return;
+  const b = rot().blow; if (b === "off") return;
+  const lead = L.sc[L.me] - L.sc[1 - L.me];
+  if ((b === "21" && L.q >= 4 && lead >= 21) || (b === "28" && L.q >= 3 && lead >= 28)) {
+    L.blow = true; gdRefresh(L);
+    logLive(L, `${teamNm(L, L.me)} empty the bench. The backups take over.`, "big");
+  }
+}
+// backups who got snaps: morale and a little growth
+function rotWeekly(g, blowout) {
+  const t = userT(), r = rot();
+  for (const pos of ROT_POS) {
+    const n = START[pos] || 1, bk = starters(t, pos, n * 2).slice(n);
+    const share = r.share[pos] || ROT_DEF[pos];
+    for (const p of bk) {
+      p.mor = clamp(p.mor + (100 - share) / 25 + (blowout ? 2 : 0), 5, 100);
+      if (p.yr <= 2 && p.pot - p.ovr > 3 && rnd() < (100 - share) / 600 + (blowout ? 0.12 : 0)) { p.ovr++; recalcAttrs(p, 1); }
+    }
+  }
+}
+
+// ---------- recruit archetypes, attributes and filters ----------
+// boosts: attribute indexes (into ATTR[pos]) that this archetype is strong in. raw: position labels from recruit files
+const ARCHS = {
+  QB: { "Pocket passer": { b: [3, 4, 2], raw: ["PRO", "PRO-QB"] }, "Dual-threat": { b: [0, 5], raw: ["DUAL", "DUAL-QB"] }, "Field general": { b: [2, 4] } },
+  RB: { "Power back": { b: [1, 4] }, "Speed back": { b: [0, 5] }, "All-purpose": { b: [2, 3], raw: ["APB"] }, "Fullback": { b: [1, 3], raw: ["FB"] } },
+  WR: { "Deep threat": { b: [0, 5] }, "Possession": { b: [3, 2] }, "Slot": { b: [1, 4] } },
+  TE: { "Receiving TE": { b: [3, 0] }, "Blocking TE": { b: [4, 5, 1] } },
+  OL: { "Tackle": { b: [4, 1], raw: ["OT", "T"] }, "Interior": { b: [0, 3, 5], raw: ["OG", "OC", "C", "G", "IOL"] } },
+  DL: { "Pass rusher": { b: [0, 4], raw: ["WDE", "EDGE", "DE"] }, "Run stopper": { b: [1, 5], raw: ["SDE"] }, "Interior DL": { b: [1, 3], raw: ["DT", "NT"] } },
+  LB: { "Inside LB": { b: [3, 4, 2], raw: ["ILB", "MLB"] }, "Outside LB": { b: [0, 4], raw: ["OLB"] }, "Coverage LB": { b: [5, 0] } },
+  CB: { "Man cover": { b: [3, 0] }, "Zone cover": { b: [4, 2] }, "Ballhawk": { b: [5, 1] } },
+  S: { "Box safety": { b: [3, 5], raw: ["SS"] }, "Center field": { b: [4, 0], raw: ["FS"] } },
+  K: { "Kicker": { b: [0, 1] } }, P: { "Punter": { b: [0, 1] } },
+  ATH: { "Athlete": { b: [0, 1] } },
+};
+// archetypes each scheme wants
+const SCHEME_ARCH = {
+  "Pro Style": ["Pocket passer", "Field general", "Power back", "Possession", "Receiving TE", "Tackle"],
+  "West Coast": ["Field general", "Pocket passer", "All-purpose", "Possession", "Slot", "Receiving TE"],
+  "Spread": ["Pocket passer", "Dual-threat", "Speed back", "Slot", "Deep threat"],
+  "Air Raid": ["Pocket passer", "Field general", "Slot", "Deep threat", "Possession", "Tackle"],
+  "Run and Shoot": ["Pocket passer", "Field general", "Slot", "Deep threat", "Possession"],
+  "Veer and Shoot": ["Pocket passer", "Deep threat", "Speed back", "Tackle"],
+  "RPO Spread": ["Dual-threat", "All-purpose", "Slot", "Possession"],
+  "Spread Option": ["Dual-threat", "Speed back", "Slot", "Deep threat"],
+  "Pistol": ["Dual-threat", "Power back", "Possession", "Receiving TE"],
+  "Multiple TE": ["Pocket passer", "Power back", "Fullback", "Blocking TE", "Receiving TE", "Interior"],
+  "Power Run": ["Field general", "Power back", "Fullback", "Blocking TE", "Interior", "Tackle"],
+  "Wing-T": ["Field general", "Power back", "Speed back", "Fullback", "Blocking TE", "Interior"],
+  "Option": ["Dual-threat", "Fullback", "Speed back", "Blocking TE", "Interior"],
+  "4-3": ["Pass rusher", "Interior DL", "Inside LB", "Outside LB", "Zone cover", "Box safety"],
+  "4-3 Under": ["Pass rusher", "Run stopper", "Outside LB", "Inside LB", "Box safety"],
+  "Tampa 2": ["Pass rusher", "Coverage LB", "Zone cover", "Center field"],
+  "46 Bear": ["Run stopper", "Interior DL", "Inside LB", "Box safety", "Man cover"],
+  "3-4": ["Run stopper", "Interior DL", "Outside LB", "Inside LB"],
+  "Multiple 3-4": ["Run stopper", "Outside LB", "Inside LB", "Man cover", "Center field"],
+  "4-4": ["Run stopper", "Interior DL", "Inside LB", "Outside LB", "Man cover"],
+  "4-2-5": ["Pass rusher", "Coverage LB", "Man cover", "Box safety", "Center field"],
+  "3-3-5": ["Pass rusher", "Outside LB", "Coverage LB", "Zone cover", "Box safety"],
+  "3-3-5 Tite": ["Interior DL", "Run stopper", "Outside LB", "Box safety", "Zone cover"],
+  "Dime": ["Pass rusher", "Coverage LB", "Man cover", "Ballhawk", "Center field"],
+  "Bend Don't Break": ["Interior DL", "Coverage LB", "Zone cover", "Center field"],
+};
+const OFF_POS = ["QB", "RB", "WR", "TE", "OL"];
+const HTWT = { QB: [74, 215], RB: [70, 205], WR: [73, 185], TE: [76, 240], OL: [77, 295], DL: [76, 270], LB: [74, 225], CB: [71, 180], S: [72, 195], K: [72, 190], P: [74, 200], ATH: [72, 195] };
+function attrPos(r) { return r.pos === "ATH" ? "WR" : r.pos; }
+// give a recruit an archetype and ratings the first time anyone looks
+function ensureRecAttrs(r) {
+  if (r.at && r.arch) return r;
+  const set = ARCHS[r.pos] || ARCHS.ATH, raw = String(r.raw || "").toUpperCase();
+  let arch = Object.keys(set).find(k => (set[k].raw || []).includes(raw));
+  if (!arch) arch = pick(Object.keys(set).filter(k => !(set[k].raw || []).includes("FB") || rnd() < 0.3));
+  r.arch = arch;
+  const ap = attrPos(r), b = (set[arch] || {}).b || [];
+  r.at = genAttrs(ap, r.ovr).map((v, i) => clamp(v + (b.includes(i) ? 7 : -2), 25, 99));
+  r.atN = r.at.map(() => Math.round(gauss() * 3));
+  if (!r.ht || !r.wt) {
+    const [h, w] = HTWT[r.pos] || [73, 210];
+    const big = arch === "Power back" || arch === "Run stopper" || arch === "Blocking TE" || arch === "Interior" || arch === "Fullback";
+    const hi = Math.round(h + gauss() * 1.6 + (arch === "Tackle" ? 1 : 0)), wi = Math.round(w + gauss() * 12 + (big ? 12 : 0) - (arch === "Speed back" || arch === "Slot" ? 10 : 0));
+    if (!r.ht) r.ht = `${Math.floor(hi / 12)}-${hi % 12}`; if (!r.wt) r.wt = String(wi);
+  }
+  return r;
+}
+function htIn(s) { const m = String(s || "").match(/(\d)\D+(\d{1,2})/); return m ? +m[1] * 12 + +m[2] : 0; }
+// what you see: exact once scouted, otherwise a range
+function recAttr(r, i) { ensureRecAttrs(r); const v = r.at[i]; if (r.sc) return { v, lo: v, hi: v }; const m = clamp(v + r.atN[i], 25, 99); return { v: m, lo: clamp(m - 5, 25, 99), hi: clamp(m + 5, 25, 99) }; }
+function fitsScheme(r) {
+  ensureRecAttrs(r); const t = userT();
+  const s = OFF_POS.includes(attrPos(r)) ? t.so : t.sd;
+  if (r.pos === "K" || r.pos === "P") return true;
+  if (r.pos === "ATH") return true;
+  return (SCHEME_ARCH[s] || []).includes(r.arch);
+}
+function rf() { UI.rf = UI.rf || { arch: "", attr: "", min: 0, fit: false, htMin: 0, htMax: 0, wtMin: 0, wtMax: 0 }; return UI.rf; }
+function rfActive() { const f = rf(); return !!(f.arch || (f.attr && f.min) || f.fit || f.htMin || f.htMax || f.wtMin || f.wtMax); }
+function recPass(r) {
+  const f = rf(); if (!rfActive()) return true;
+  ensureRecAttrs(r);
+  if (f.arch && r.arch !== f.arch) return false;
+  if (f.fit && !fitsScheme(r)) return false;
+  if (f.attr && f.min) { const i = (ATTR[attrPos(r)] || []).indexOf(f.attr); if (i < 0) return false; if (recAttr(r, i).v < f.min) return false; }
+  const h = htIn(r.ht), w = parseInt(r.wt) || 0;
+  if (f.htMin && (!h || h < f.htMin)) return false; if (f.htMax && (!h || h > f.htMax)) return false;
+  if (f.wtMin && (!w || w < f.wtMin)) return false; if (f.wtMax && (!w || w > f.wtMax)) return false;
+  return true;
+}
 // ===== UI =====
 const UI = { tab: "home", teamSub: "roster", posF: "All", depthPos: "QB", recSub: "board", recPos: "All", recStars: 0, recState: "", recLimit: 50, seasonSub: "schedule", scoresWk: null, standConf: null, pollType: "ap", more: null, modal: null, ng: null, slot: 1, slots: {}, saving: "" };
 const $app = document.getElementById("app");
@@ -4175,6 +4600,7 @@ function render() {
   document.querySelectorAll(".chips, .seg").forEach((el, i) => { const k = el.className + i; if (UI.hs && UI.hs[k] != null) el.scrollLeft = UI.hs[k]; });
   if (UI.keepScroll) window.scrollTo(0, y); UI.keepScroll = false;
   if (typeof afterRender === "function") afterRender();
+  if (typeof foldCards === "function") foldCards();
 }
 function blockAdvance() { return !!G.nfl || G.phase === "off" && ((G.off.step === "jobs" && (G.off.fired || G.off.staffOut)) || (G.off.step === "train" && real() && isHC() && scholCount(userT()) > 85)); }
 function renderToast() { return UI.toast ? `<div class="toast" role="status">${esc(UI.toast)}</div>` : ""; }
@@ -4349,13 +4775,9 @@ function renderTeam() {
     <p class="dim small">${esc((SCHEMES_O[t.so] || {}).d || "")} ${schemeFitText(t, "o")}</p>
     <label class="lbl" for="sd">Defensive scheme</label><select id="sd" class="inp" data-ch="sd">${Object.keys(SCHEMES_D).map(k => `<option ${t.sd === k ? "selected" : ""}>${k}</option>`).join("")}</select>
     <p class="dim small">${esc((SCHEMES_D[t.sd] || {}).d || "")} ${schemeFitText(t, "d")}</p></section>
+    ${rotationCard(t)}
     <section class="card"><div class="eyebrow">Program</div>${[["Prestige", t.pres], ["Facilities", t.fac], ["Academics", t.acad], ["Home field", Math.round(t.hf * 15)]].map(([l, v]) => `<div class="meter"><span class="small">${l}</span>${bar(v, 100)}<span class="num small">${Math.round(v)}</span></div>`).join("")}</section></div>`;
-  } else {
-    const ps = t.roster.map(P);
-    const top = (k, l) => { const p = [...ps].sort((a, b) => (b.s[k] || 0) - (a.s[k] || 0))[0]; return p && p.s[k] ? `<div class="li"><span class="grow">${l}<br><button class="link" data-a="player" data-v="${p.id}">${esc(playerName(p))}</button></span><span class="num big">${fmt(p.s[k])}</span></div>` : ""; };
-    body = `<section class="card"><div class="eyebrow">${G.year} team leaders</div>${top("py", "Passing yards")}${top("ptd", "Passing TD")}${top("ry", "Rushing yards")}${top("rtd", "Rushing TD")}${top("rcy", "Receiving yards")}${top("rctd", "Receiving TD")}${top("tk", "Tackles")}${top("sk", "Sacks")}${top("di", "Interceptions")}${top("fgm", "Field goals")}</section>
-    <section class="card"><div class="eyebrow">Season</div><div class="kv3"><div><span class="num big">${t.pf}</span><span class="dim small">points for</span></div><div><span class="num big">${t.pa}</span><span class="dim small">points against</span></div><div><span class="num big">${t.w + t.l ? (t.pf / (t.w + t.l)).toFixed(1) : "—"}</span><span class="dim small">per game</span></div></div></section>`;
-  }
+  } else body = renderTeamStats(t);
   return `${seg("teamSub", [["roster", "Roster"], ["depth", "Depth Chart"], ["strategy", "Strategy"], ["stats", "Stats"]])}${body}`;
 }
 function statusTags(p) { let s = captains().includes(p.id) ? ` <span class="tag good">Captain</span>` : ""; if (p.inj) s += ` <span class="tag bad">${p.inj >= 99 ? "Out for season" : "Inj " + p.inj + "w"}</span>`; if (p.sus) s += ` <span class="tag bad">Susp</span>`; if (p.sit) s += ` <span class="tag">Sit-out</span>`; if (p.rsNow) s += ` <span class="tag">Redshirting</span>`; if (p.wo) s += ` <span class="tag dim">Walk-on</span>`; return s; }
@@ -4375,6 +4797,7 @@ function renderRecruit() {
     const q = (UI.recQ || "").trim().toLowerCase();
  const ud = userT().div;
     let list = G.recruits.filter(r => (ud ? r.stars <= 2 : !r.low) && (q ? (r.f + " " + r.l).toLowerCase().includes(q) : true) && (UI.recPos === "All" || r.pos === UI.recPos) && (!UI.recStars || r.stars === UI.recStars) && (!UI.recState || r.st === UI.recState) && (q || !r.sg));
+    list = list.filter(recPass);
     list.sort((a, b) => a.nr - b.nr);
     const total = list.length; list = list.slice(0, UI.recLimit);
     const nd = posNeeds();
@@ -4383,8 +4806,9 @@ function renderRecruit() {
     <p class="dim small">Bold number: how many more at each position you need for next year's roster.</p>
     <div class="row gap"><select class="inp" id="recStars" data-ch="recStars"><option value="0">All stars</option>${(userT().div ? [2, 1] : [5, 4, 3, 2]).map(s => `<option value="${s}" ${UI.recStars === s ? "selected" : ""}>${s} stars</option>`).join("")}</select>
     <select class="inp" id="recState" data-ch="recState"><option value="">All states</option>${[...STATES].sort().map(s => `<option ${UI.recState === s ? "selected" : ""}>${s}</option>`).join("")}</select></div>
+    ${recFilterPanel()}
     <p class="dim small">${total} recruit${total === 1 ? "" : "s"}${q ? ` matching "${esc(UI.recQ.trim())}"` : ""}</p>
-    <div class="list card flush">${list.map(r => `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span> ${r.cm >= 0 ? `<span class="tag ${r.cm === G.userTeam ? "good" : ""}">${esc(T(r.cm).abbr)}${r.sg ? " · signed" : ""}</span>` : ""}</span>${r.sg ? "" : G.board.includes(r.i) ? `<span class="tag">On board</span>` : `<button class="btn sm" data-a="board" data-v="${r.i}" ${G.board.length >= 60 ? "disabled" : ""}>+ Board</button>`}</div>`).join("") || `<p class="dim pad">No recruits match. Check the spelling or clear the position and star filters.</p>`}</div>
+    <div class="list card flush">${list.map(r => `<div class="li"><span class="num dim small">${r.nr}</span><span class="pos">${r.pos}</span><span class="grow"><button class="link" data-a="recruit" data-v="${r.i}">${esc(r.f + " " + r.l)}</button> <span class="dim small">${r.st}${r.juco ? " · JUCO" : ""}</span><br><span class="small">${stars(r.stars)}</span> <span class="tag">${esc(ensureRecAttrs(r).arch)}</span>${rf().attr && rf().min ? ` <span class="small dim">${esc(rf().attr)} ${recAttrTxt(r, rf().attr)}</span>` : ""} ${r.cm >= 0 ? `<span class="tag ${r.cm === G.userTeam ? "good" : ""}">${esc(T(r.cm).abbr)}${r.sg ? " · signed" : ""}</span>` : ""}</span>${r.sg ? "" : G.board.includes(r.i) ? `<span class="tag">On board</span>` : `<button class="btn sm" data-a="board" data-v="${r.i}" ${G.board.length >= 60 ? "disabled" : ""}>+ Board</button>`}</div>`).join("") || `<p class="dim pad">No recruits match. Check the spelling or clear the position and star filters.</p>`}</div>
     ${total > UI.recLimit ? `<button class="btn wide" data-a="moreRec">Show more</button>` : ""}`;
   } else if (UI.recSub === "hist") {
     body = historicTab();
@@ -4532,7 +4956,7 @@ function renderMore() {
     <p class="small">How your players improve each offseason, after Signing Day.</p>
     <div class="seg">${[["auto", "Auto"], ["manual", "Manual"]].map(([k, l]) => `<button class="${(G.progMode || "auto") === k ? "on" : ""}" data-a="progmode" data-v="${k}">${l}</button>`).join("")}</div>
     <p class="dim small">${G.progMode === "manual" ? `Manual: your roster's offseason gains go into a pool of development points. You hand them out player by player on the Player Development step. Drops from age, injuries or laziness still happen on their own. A player can gain up to ${DEV_MAX} in one offseason.` : "Auto: players improve on their own based on potential, work ethic, playing time and your staff. Other teams always progress automatically."}</p></section>`;
-  if (v === "staff") return `${back}${staffCard(G.phase === "off" && G.off.step === "jobs")}<section class="card"><div class="eyebrow">Budget</div><p>$${G.budget.total}M this year. Staff salaries take $${staffCost()}M. You set spending for next season in the offseason, on the Staff & Jobs step.</p>${G.year >= 2021 ? `<p>NIL money left this season: $${fmt(userT().nil || 0)}</p>` : `<p class="dim small">NIL arrives in 2021.</p>`}</section>`;
+  if (v === "staff") return `${back}${staffCard(G.phase === "off" && G.off.step === "jobs")}<section class="card"><div class="eyebrow">Budget</div><p>$${G.budget.total}M this year. Staff salaries take $${staffCost()}M. You set spending for next season in the offseason, on the Staff & Jobs step.</p>${G.year >= 2021 ? `<p>NIL money left this season: $${fmt(userT().nil || 0)}</p>` : `<p class="dim small">NIL arrives in 2021.</p>`}</section>` + (isHC() ? `${(G.budget.bonus ? `<p class="small dim pad">This year's budget includes $${G.budget.bonus}M earned last season.</p>` : "")}<section class="card"><div class="row gap wrap"><button class="btn sm" data-a="askad" ${G.adAsk === G.year ? "disabled" : ""}>${G.adAsk === G.year ? "Asked the AD this year" : `Ask the AD for more money · ${Math.round(adAskChance() * 100)}% chance`}</button></div></section>${bonusCard()}` : "");
   if (v === "upload") return `${back}${renderUpload()}`;
   if (v === "history") return `${back}<section class="card"><div class="eyebrow">National champions</div>${G.history.slice().reverse().map(h => `<div class="li"><span class="num">${h.y}</span><span class="grow"><b>${esc(T(h.champ).name)}</b> <span class="dim small">over ${esc(T(h.runner).abbr)}</span>${h.heis ? `<br><span class="small">Heisman: ${esc(h.heis[0])}, ${h.heis[1]}, ${h.heis[2]}</span>` : ""}</span></div>`).join("") || `<p class="dim">No completed seasons yet.</p>`}</section>
     <section class="card"><div class="eyebrow">${esc(userT().name)} by season</div>${c.seasons.filter(s => s.t === G.userTeam).slice().reverse().map(s => `<div class="li"><span class="num">${s.y}</span><span class="grow">${s.cw}-${s.cl} conf.</span><span class="num">${s.w}-${s.l}</span></div>`).join("") || `<p class="dim">—</p>`}</section>`;
@@ -4557,6 +4981,7 @@ function renderMore() {
     return `${back}<section class="card"><label class="lbl" for="edT">Team</label><select id="edT" class="inp" data-ch="edT">${[...G.teams].sort((a, b) => a.name.localeCompare(b.name)).map(x => `<option value="${x.id}" ${x.id === tid ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select>
     <label class="lbl" for="edTeamName">Team name</label><div class="row gap"><input class="inp" id="edTeamName" value="${esc(t.name)}"><button class="btn" data-a="saveTeamName" data-v="${tid}">Save</button></div>
     <p class="dim small">Tap a player to edit his name, position, year or ratings.</p></section>
+    ${coachEditor(t)}
     <div class="list card flush">${t.roster.map(P).sort((a, b) => POS.indexOf(a.pos) - POS.indexOf(b.pos) || b.ovr - a.ovr).map(p => `<button class="li" data-a="player" data-v="${p.id}" data-edit="1"><span class="pos">${p.pos}</span><span class="grow">${esc(playerName(p))} <span class="dim small">${yrLabel(p)}</span></span>${ovrPill(p.ovr)}</button>`).join("")}</div>`;
   }
   if (v === "saves") return `${back}<section class="card"><div class="eyebrow">This dynasty · Save ${UI.slot}</div><p class="small">Saves to your account after every week, so you can pick it up on any device. ${esc(UI.saving)}</p>
@@ -4593,6 +5018,7 @@ function renderModal() {
   if (m.type === "team") inner = teamSheet(T(m.id));
   if (m.type === "gameday") inner = renderGameday(m);
   if (m.type === "inbox") inner = inboxSheet();
+  if (m.type === "gdepth") inner = gdepthSheet();
   if (m.type === "recruit") inner = recruitSheet(G.recruits[m.id]);
   if (m.type === "confirmStart") inner = `<h3>Start without a recruiting class?</h3><p>You can still upload the ${G.classYear} class any time before Signing Day, but rival schools start recruiting from week 1. Generated recruits are used if nothing is uploaded.</p><div class="row gap"><button class="btn pri" data-a="advance" data-force="1">Start the season</button><button class="btn" data-a="close">Cancel</button></div>`;
   return `<div class="scrim" data-a="close"></div><div class="sheet" role="dialog" aria-modal="true"><button class="sheet-x" data-a="close" aria-label="Close">✕</button>${inner}</div>`;
@@ -4624,7 +5050,7 @@ function playerSheet(p, edit) {
   ${statusTags(p) ? `<p>${statusTags(p)}</p>` : ""}
   <div class="attrs">${ATTR[p.pos].map((a, i) => `<div><span class="dim small">${a}</span><span class="num">${p.at[i]}</span></div>`).join("")}</div>
   <div class="meter"><span class="small">Morale</span>${bar(p.mor, 100)}<span class="num small">${Math.round(p.mor)}</span></div>
-  <p class="small">Personality: <b>${p.pers}</b>${p.city || p.st ? ` · From ${esc([p.city, p.st].filter(Boolean).join(", "))}${p.hs ? ` (${esc(p.hs)})` : ""}` : ""}</p>
+  <p class="small">${p.arch ? `Archetype: <b>${esc(p.arch)}</b> · ` : ""}Personality: <b>${p.pers}</b>${p.city || p.st ? ` · From ${esc([p.city, p.st].filter(Boolean).join(", "))}${p.hs ? ` (${esc(p.hs)})` : ""}` : ""}</p>
   <div class="eyebrow mt">${G.year} season</div>${statRows(p.s)}
   ${(() => { const aw = playerAwards(p); return `<div class="eyebrow mt">Awards</div>${aw.length ? aw.map(([y, nm, big]) => `<div class="li"><span class="num">${y}</span><span class="grow" style="padding-left:12px">${big ? "🏆 " : ""}${esc(nm)}</span></div>`).join("") : `<p class="dim small">No awards yet.</p>`}`; })()}
   ${(p.injh || []).length ? `<div class="eyebrow mt">Injury history</div>${p.injh.slice().reverse().map(([y, w, k]) => `<div class="li"><span class="num">${y}</span><span class="grow small">${w ? "Week " + w + " · " : ""}${k === 99 ? "Out for the season" : "Out " + k + " week" + (k > 1 ? "s" : "")}</span></div>`).join("")}` : ""}
@@ -4665,6 +5091,7 @@ function recruitSheet(r) {
   return `<div class="eyebrow">${G.classYear} recruit · #${r.nr} overall${r.juco ? " · JUCO transfer" : ""}</div><h3>${esc(r.f + " " + r.l)}</h3>
   <p>${stars(r.stars)} <span class="dim small">${r.pos} · ${esc(r.city)}, ${r.st}${r.hs ? " · " + esc(r.hs) : ""}${r.ht ? " · " + esc(r.ht) : ""}${r.wt ? ", " + esc(r.wt) : ""}</span></p>
   <p class="small">${r.sc ? `Scouted: <b>${r.ovr} OVR</b>, potential <b>${r.pot}</b>` : `Projected ${r.ovr - 6}–${r.ovr + 6} OVR. Scout him for 3 hours to see exact ratings.`}</p>
+  ${recAttrGrid(r)}
   <p class="small">${dbKnown(r) ? `Cares most about <b>${r.db}</b>. Your pitch on that: ${Math.round(dealMod(r, userT()) * 100)}% strength.` : `What he cares about most is unknown. Scout him or find it on a call.`}</p>
   ${dbxLine(r)}${r.lie ? `<p class="small bad">You oversold him${r.exposed ? ", and he found out" : ""}.</p>` : ""}${(r.trust || 0) >= 2 ? `<p class="small up">He trusts you.</p>` : ""}
   ${r.real && r.rs ? `<p class="dim small">In real life he signed with ${esc(r.rs)}.</p>` : ""}
@@ -4711,6 +5138,7 @@ function renderGameday(m) {
   <div class="seg wrapseg">${Object.keys(DPLANS).map(k => `<button class="${pl.d === k ? "on" : ""}" data-a="plan" data-k="d" data-v="${k}">${k}</button>`).join("")}</div>
   <p class="small dim">${DPLANS[pl.d]}</p>` : ""}
   <div class="stack mt">
+    ${canPlayGames() && isHC() ? sideSeg() : ""}
     <button class="btn pri" data-a="gdsim">Sim the game</button>
     ${canPlayGames() ? `<div class="row gap"><button class="btn grow" data-a="gdplay" data-v="key">Call key plays</button><button class="btn grow" data-a="gdplay" data-v="all">Call every play</button></div>` : ""}
     <p class="dim small">Key plays: you call 3rd and 4th downs, the red zone, the last 4 minutes of each half and overtime. Your game plan runs the rest. Your plan stays set for next week.</p>
@@ -4809,6 +5237,7 @@ function renderLive() {
     <div class="row between small dim"><span>Drive: ${L.drv.plays} play${L.drv.plays === 1 ? "" : "s"}, ${L.drv.yds} yds</span><span>Your D: ${defFatigueLabel(L, L.me)}</span></div>
     ${last ? `<p class="last ${last.k}">${esc(last.s)}</p>` : ""}</section>
     ${calls}
+    ${liveControls(L)}
     <div class="row gap wrap">${canTimeout(L) && !["half", "pat", "ko"].includes(need) ? `<button class="btn sm grow" data-a="liveto">Timeout (${L.tos[L.me]})</button>` : ""}${L.q <= 4 && !L.ot ? `<button class="btn sm grow" data-a="liveq">${L.half ? "Sim 3rd quarter" : `Sim ${["", "1st", "2nd", "3rd", "4th"][L.q]} quarter`}</button>` : ""}<button class="btn sm grow" data-a="livesim">Sim to the end</button><button class="btn sm grow" data-a="livemode">${L.mode === "all" ? "Key plays only" : "Every play"}</button></div>
     <section class="card"><div class="eyebrow">Play by play</div>${L.log.slice(1, UI.logAll ? 160 : 12).map(logRow).join("")}${L.log.length > 12 ? `<button class="link small" data-a="logall">${UI.logAll ? "Show less" : "Show the whole game"}</button>` : ""}</section>
     <p class="dim small pad">Each result shows your call and theirs. The AI remembers what you like to run, this game and from season to season.</p></div>`;
@@ -4863,7 +5292,9 @@ function budgetCard() {
     ${budgetRow("Facilities upgrade", "fac", "$1.5M each · +4 facilities rating")}
     ${BUD.map(([k, l, c, mx, d]) => budgetRow(l, k, `$${c}M each · ${d} · max ${mx}`)).join("")}
     ${G.year + 1 >= 2021 ? budgetRow("NIL collective", "nilBuy", "$1M each · adds to next season's NIL pool") : ""}
-    <p class="small">Staff salaries $${staffCost()}M · <b>Left $${budgetLeft()}M</b></p></section>`;
+    <p class="small">Staff salaries $${staffCost()}M · <b>Left $${budgetLeft()}M</b>${b.bonus ? ` · includes $${b.bonus}M earned last season` : ""}</p>
+    ${isHC() ? `<div class="row gap wrap mt"><button class="btn sm" data-a="askad" ${G.adAsk === G.year ? "disabled" : ""}>${G.adAsk === G.year ? "Asked the AD this year" : `Ask the AD for more money · ${Math.round(adAskChance() * 100)}% chance`}</button></div>` : ""}</section>
+    ${isHC() ? bonusCard() : ""}`;
 }
 
 // ---------- jobs ----------
@@ -4897,6 +5328,27 @@ function renderCutCard() {
   return `<section class="card ${n > 85 ? "accent" : ""}"><div class="eyebrow">Roster</div><p class="small"><b>${n}</b> scholarship players${n > 85 ? ` · <span class="bad">${n - 85} over the 85 limit</span>` : " of 85"} · ${u.roster.length} total with walk-ons</p>
     <p class="dim small">Open a player and tap Release to cut him. You can cut any time in the offseason. Teammates at his position lose a little morale.</p>
     ${u.roster.map(P).filter(Boolean).sort((a, b) => a.ovr - b.ovr).slice(0, 6).map(p => `<button class="li" data-a="player" data-v="${p.id}"><span class="pos">${p.pos}</span><span class="grow">${esc(playerName(p))} <span class="dim small">${yrLabel(p)}${p.wo ? " · walk-on" : ""}</span></span>${ovrPill(p.ovr)}</button>`).join("")}</section>`;
+}
+
+// money earned this season toward next year's budget
+function bonusCard() {
+  const y = G.phase === "off" ? G.year : G.year; const b = G.budBonus && G.budBonus.y === y ? G.budBonus.items : [];
+  return `<section class="card"><div class="eyebrow">Earned toward next year's budget</div>
+  ${b.length ? b.map(([l, v]) => `<div class="li"><span class="grow small">${esc(l)}</span><span class="num small">+$${v}M</span></div>`).join("") + `<p class="small"><b>Total +$${bonusTotal(y)}M</b></p>` : `<p class="dim small">Nothing yet this season.</p>`}
+  <p class="dim small">Ways to earn more: sellout home crowds (winning, rankings, rivals, big opponents and star players draw fans), 10-win seasons, conference and national titles, bowl and playoff payouts, Heisman buzz, AD goals, happy boosters and booster staff funds. You can also ask the AD once a year.</p></section>`;
+}
+
+// edit any team's coaches (names and ratings)
+function coachEditor(t) {
+  ensureStaff(t);
+  const mine = t.id === G.userTeam;
+  const row = (k, label, c) => c && c.me ? `<div class="li"><span class="pos">${esc(label)}</span><span class="grow small">You (${esc(c.n)}) · rating comes from your level and reputation</span></div>`
+    : `<div class="edrow"><span class="pos">${esc(label)}</span><input class="inp" id="edc_${k}" value="${esc(c ? c.n : "")}" aria-label="${esc(label)} name"><input class="inp num" id="edr_${k}" type="number" min="20" max="99" inputmode="numeric" value="${c ? c.r : ""}" aria-label="${esc(label)} rating"></div>`;
+  return `<section class="card"><div class="eyebrow">Coaching staff</div>
+  ${mine && isHC() ? `<div class="li"><span class="pos">HC</span><span class="grow small">You (${esc(G.coach.name)})</span></div>` : `<div class="edrow"><span class="pos">HC</span><input class="inp" id="edc_hc" value="${esc(t.hc || "")}" aria-label="Head coach name"><span></span></div>`}
+  ${row("oc", "OC", t.oc)}${row("dc", "DC", t.dc)}${Object.keys(POSC).map(k => row(k, POSC[k].join("/"), t[k])).join("")}
+  <button class="btn pri mt" data-a="saveStaff" data-v="${t.id}">Save staff</button>
+  <p class="dim small">Ratings run 20 to 99. Coordinators and position coaches change your team's ratings and player development.</p></section>`;
 }
 
 // ---------- small colleges: screens ----------
@@ -4996,7 +5448,7 @@ function inboxSheet() {
   const box = G.inbox || [];
   return `<div class="eyebrow">Inbox</div><h3>Messages</h3>
   <div class="row gap"><button class="link small" data-a="mailall">Mark all read</button></div>
-  ${box.length ? box.map(m => mailRow(m, UI.mailOpen === m.id || !m.read)).join("") : `<p class="dim">No messages.</p>`}`;
+  ${box.length ? box.map(m => mailRow(m, UI.mailOpen === m.id)).join("") : `<p class="dim">No messages.</p>`}`;
 }
 
 // ---------- captains ----------
@@ -5032,6 +5484,29 @@ function textsCard() {
   return `<section class="card accent"><div class="eyebrow">Texts from recruits</div>${xs.map((x, i) => { const r = G.recruits[x.ri]; if (!r) return ""; return `<div class="txt"><div class="small"><b>${esc(r.f + " " + r.l)}</b> <span class="dim">${r.stars}★ ${r.pos}</span></div><div class="bubble">${esc(x.q)}</div>
   <div class="row gap"><button class="btn sm" data-a="txt" data-v="${i}" data-k="honest">Be honest</button><button class="btn sm" data-a="txt" data-v="${i}" data-k="sell">Oversell it</button></div></div>`; }).join("")}
   <p class="dim small">Honest answers build trust. Overselling wins him over faster, but if it isn't true he may find out, and he'll arrive unhappy if he signs.</p></section>`;
+}
+
+// ---------- collapsible home cards (your choices are remembered) ----------
+function foldKey(sec) {
+  const eb = sec.querySelector(".eyebrow"); if (!eb) return "";
+  return eb.textContent.toLowerCase().split("·")[0].replace(/\d+/g, "").replace(/[^a-z ]/g, "").trim().replace(/\s+/g, "-");
+}
+function foldCards() {
+  if (!G || UI.tab !== "home" || G.live) return;
+  const st = document.querySelector("main > .stack"); if (!st) return;
+  const fold = G.fold || {}; let n = 0;
+  st.querySelectorAll(":scope > section.card").forEach(sec => {
+    const k = foldKey(sec); if (!k || sec.children.length < 2) return;
+    n++;
+    sec.classList.add("foldable"); if (fold[k]) sec.classList.add("folded");
+    const b = document.createElement("button"); b.className = "foldbtn"; b.dataset.a = "fold"; b.dataset.v = k; b.setAttribute("aria-label", (fold[k] ? "Expand " : "Collapse ") + k.replace(/-/g, " "));
+    sec.appendChild(b);
+  });
+  if (n >= 3 && !st.querySelector(".foldbar")) {
+    const bar = document.createElement("div"); bar.className = "foldbar";
+    bar.innerHTML = `<button class="link small" data-a="foldall" data-v="1">Collapse all</button><button class="link small" data-a="foldall" data-v="0">Expand all</button>`;
+    st.prepend(bar);
+  }
 }
 
 // ---------- program UI: goals, camp, offseason extras, NFL, coach profile ----------
@@ -5101,6 +5576,7 @@ function renderProfile() {
   <div class="kv3"><div><span class="num big">${col.reduce((a, s) => a + s.w, 0)}-${col.reduce((a, s) => a + s.l, 0)}</span><span class="dim small">college record</span></div><div><span class="num big">${c.titles || 0}</span><span class="dim small">national titles</span></div><div><span class="num big">${col.filter(s => s.cc).length}</span><span class="dim small">conference titles</span></div></div>
   ${c.nflW || c.nflL ? `<p class="small mt">NFL: ${c.nflW || 0}-${c.nflL || 0}${c.sb ? `, ${c.sb} Super Bowl title${c.sb > 1 ? "s" : ""}` : ""}</p>` : ""}
   <p class="small">${drafted} players drafted (${first} first-rounders) · ${pros} Pro Bowlers${best ? ` · Best season: ${best.y} ${esc(best.tn)}, ${best.w}-${best.l}` : ""}</p></section>
+  ${trophyCase()}
   <section class="card"><div class="eyebrow">Career timeline</div>${stints.slice().reverse().map(s => `<div class="li"><span class="num small">${s.from}${s.to !== s.from ? "–" + String(s.to).slice(2) : ""}</span><span class="grow" style="padding-left:12px"><b>${esc(s.tn)}</b><br><span class="dim small">${esc(s.role)} · ${s.w}-${s.l}${s.cc ? ` · ${s.cc} conf. title${s.cc > 1 ? "s" : ""}` : ""}${s.nc ? ` · ${s.nc} national title${s.nc > 1 ? "s" : ""}` : ""}${s.sb ? ` · ${s.sb} Super Bowl${s.sb > 1 ? "s" : ""}` : ""}</span></span></div>`).join("") || `<p class="dim">Your first season is underway.</p>`}</section>
   ${philCard()}`;
 }
@@ -5141,6 +5617,147 @@ function schemeFitText(t, side) {
   if (v == null) return "";
   const lbl = v >= 0.8 ? "Great fit" : v >= 0.25 ? "Good fit" : v > -0.25 ? "OK fit" : v > -0.8 ? "Poor fit" : "Bad fit";
   return `<b>${lbl} for your roster (${v >= 0 ? "+" : ""}${v.toFixed(1)})</b>`;
+}
+
+// ---------- trophy case ----------
+function trophyCase() {
+  const c = G.coach;
+  // case 1: rivalry trophies, championships, coaching awards
+  const riv = {};
+  for (const [k, h] of Object.entries(G.rivH || {})) for (const x of h.games) {
+    const tid = coachTeamIn(x.y); if (tid < 0 || T(tid).abbr !== x.w) continue;
+    const [a, b] = k.split("-"); const A = byAbbr(a), B = byAbbr(b); if (!A || !B) continue;
+    const [tr, nm] = trophyOf(A.id, B.id); const key = tr || nm;
+    (riv[key] = riv[key] || { tr: !!tr, opp: (T(tid).abbr === a ? B : A).name, ys: [] }).ys.push(x.y);
+  }
+  const champs = [];
+  for (const s of c.seasons.filter(s => !s.nfl)) { if (s.nc) champs.push([s.y, "National championship", s.tn]); if (s.cc) champs.push([s.y, "Conference championship", s.tn]); }
+  for (const b of (c.bowlLog || []).filter(b => b.won)) champs.push([b.y, b.nm + (b.opp ? ` over ${b.opp}` : ""), b.t]);
+  for (const a of (c.awards || []).filter(a => a.title)) champs.push([a.y, a.nm, a.t]);
+  champs.sort((x, y) => y[0] - x[0]);
+  const awards = (c.awards || []).filter(a => !a.title).slice().sort((a, b) => b.y - a.y);
+  // case 2: honors won by players you coached
+  const pl = { nat: [], aa: [], ac: [] };
+  for (const [y, aw] of Object.entries(G.awards || {})) {
+    const tid = coachTeamIn(+y); if (tid < 0) continue;
+    (aw.heisman || []).slice(0, 1).forEach(x => { if (x[5] === tid) pl.nat.push([+y, "Heisman Trophy", x[1], x[2]]); });
+    (aw.list || []).forEach(([nm, x]) => { if (x[5] === tid) pl.nat.push([+y, nm, x[1], x[2]]); });
+    for (const pos in (aw.aa || {})) (aw.aa[pos] || []).forEach(x => { if (x[5] === tid) pl.aa.push([+y, `All-American ${pos}`, x[1], x[2]]); });
+    for (const cf in (aw.ac || {})) for (const pos in aw.ac[cf]) (aw.ac[cf][pos] || []).forEach(x => { if (x[5] === tid) pl.ac.push([+y, `All-${cf} ${pos}`, x[1], x[2]]); });
+  }
+  for (const k in pl) pl[k].sort((a, b) => b[0] - a[0]);
+  const shelf = (items, empty) => items.length ? items.join("") : `<p class="dim small">${empty}</p>`;
+  const plate = (y, title, sub, icon) => `<div class="plate"><span class="pi" aria-hidden="true">${icon}</span><span class="grow"><b class="small">${esc(title)}</b><br><span class="dim small">${esc(sub)}</span></span><span class="num small">${y}</span></div>`;
+  const tog = k => UI["tc_" + k] ? "" : " hidden";
+  return `<section class="card case"><div class="eyebrow">Trophy case · program and coaching</div>
+    <div class="shelf-h">Rivalry trophies</div>${shelf(Object.entries(riv).sort((a, b) => b[1].ys.length - a[1].ys.length).map(([nm, r]) => plate(r.ys.length + "×", nm, `vs ${r.opp} · ${r.ys.sort().join(", ")}`, r.tr ? "🏆" : "⚔")), "No rivalry wins yet.")}
+    <div class="shelf-h">Championships and bowls</div>${shelf(champs.map(([y, t, tn]) => plate(y, t, tn, t.startsWith("National") || t.includes("national") ? "🏆" : t.startsWith("Conference") ? "🥇" : "🏈")), "No titles or bowl wins yet.")}
+    <div class="shelf-h">Coaching awards</div>${shelf(awards.map(a => plate(a.y, a.nm, a.t, "🎖")), "No coaching awards yet.")}</section>
+  <section class="card case"><div class="eyebrow">Trophy case · players you coached</div>
+    <div class="shelf-h">Heisman and national awards · ${pl.nat.length}</div>${shelf(pl.nat.map(([y, nm, n, pos]) => plate(y, nm, `${n}, ${pos}`, nm === "Heisman Trophy" ? "🏆" : "🏅")), "None yet.")}
+    <div class="shelf-h">All-Americans · ${pl.aa.length}</div>${pl.aa.length ? `<button class="link small" data-a="tctog" data-v="aa">${UI.tc_aa ? "Hide" : "Show all"}</button><div${tog("aa")}>${pl.aa.map(([y, nm, n]) => plate(y, nm, n, "⭐")).join("")}</div>` : `<p class="dim small">None yet.</p>`}
+    <div class="shelf-h">All-Conference · ${pl.ac.length}</div>${pl.ac.length ? `<button class="link small" data-a="tctog" data-v="ac">${UI.tc_ac ? "Hide" : "Show all"}</button><div${tog("ac")}>${pl.ac.map(([y, nm, n]) => plate(y, nm, n, "✦")).join("")}</div>` : `<p class="dim small">None yet.</p>`}
+  </section>`;
+}
+
+// ---------- in-game controls ----------
+function sideSeg() {
+  const cur = liveSide(G.live);
+  return `<div class="eyebrow mt">You call</div><div class="seg">${SIDES.map(([k, l]) => `<button class="${cur === k ? "on" : ""}" data-a="lside" data-v="${k}">${l}</button>`).join("")}</div>
+  <p class="dim small">${cur === "off" ? "Your coordinator runs the defense." : cur === "def" ? "Your coordinator runs the offense, extra points and kickoffs." : "You call both sides of the ball."}</p>`;
+}
+function liveControls(L) {
+  if (L.over) return "";
+  return `<section class="card">${isHC() ? sideSeg() : ""}<div class="row gap wrap mt"><button class="btn sm grow" data-a="gdepth">Depth chart</button></div>
+  ${L.blow ? `<p class="small dim">Backups are in.</p>` : ""}${(L.bench || []).length ? `<p class="small dim">Benched: ${L.bench.map(id => P(id) ? esc(P(id).l) : "").join(", ")}</p>` : ""}</section>`;
+}
+function liveStatLine(L, id) {
+  const ln = (L.lines || {})[id]; if (!ln) return "";
+  const b = [];
+  if (ln.att) b.push(`${ln.cmp}/${ln.att}, ${ln.py} yds${ln.int ? `, ${ln.int} INT` : ""}`);
+  if (ln.car) b.push(`${ln.car} car, ${ln.ry} yds`);
+  if (ln.rec) b.push(`${ln.rec} rec, ${ln.rcy} yds`);
+  if (ln.tk) b.push(`${ln.tk} tk`); if (ln.sk) b.push(`${ln.sk} sk`);
+  return b.join(" · ");
+}
+function gdepthSheet() {
+  const L = G.live; if (!L) return "<p>No game in progress.</p>";
+  const pos = UI.gdPos || "QB", ids = gdDepth(L, pos), n = START[pos] || 1, bench = L.bench || [];
+  return `<div class="eyebrow">In-game depth chart</div><h3>${esc(userT().name)}</h3>
+  <p class="dim small">Changes last for this game only. Benched players sit until you put them back in.</p>
+  <div class="chips">${POS.map(p => `<button class="${pos === p ? "on" : ""}" data-a="gdpos" data-v="${p}">${p}</button>`).join("")}</div>
+  <div class="list card flush mt">${ids.map((id, i) => { const p = P(id); if (!p) return ""; const out = bench.includes(id) || !available(p); const line = liveStatLine(L, id);
+    return `<div class="li ${i < n ? "starter" : ""}"><span class="num">${i + 1}</span><span class="grow"><b>${esc(playerName(p))}</b> <span class="dim small">${p.pos}${p.pos !== pos ? " (playing " + pos + ")" : ""} · ${yrLabel(p)}</span>${out ? ` <span class="tag bad">${bench.includes(id) ? "Benched" : "Out"}</span>` : ""}${line ? `<br><span class="small dim">${esc(line)}</span>` : ""}</span>${ovrPill(ovrAt(p, pos))}
+    <span class="gdbtns"><button class="btn sm" data-a="gdmove" data-v="${id}" data-k="-1" ${i ? "" : "disabled"} aria-label="Move up">▲</button><button class="btn sm" data-a="gdmove" data-v="${id}" data-k="1" ${i < ids.length - 1 ? "" : "disabled"} aria-label="Move down">▼</button><button class="btn sm ${bench.includes(id) ? "pri" : ""}" data-a="gdbench" data-v="${id}">${bench.includes(id) ? "Play" : "Bench"}</button></span></div>`; }).join("")}</div>`;
+}
+
+// ---------- rotation (Strategy tab) ----------
+function rotationCard(t) {
+  const r = rot(), ra = rotAdjust(t);
+  return `<section class="card"><div class="eyebrow">Sub rotation</div>
+  <p class="dim small">Snap share for your starters. More rotation keeps legs fresh (big for linemen and running backs) and gives backups morale and growth, but costs you if the backups are much worse.</p>
+  ${ROT_POS.map(p => { const v = r.share[p] || ROT_DEF[p]; return `<div class="rotrow"><span class="pos">${p}</span><input type="range" min="40" max="100" step="5" value="${v}" data-ch="rotshare" data-p="${p}" aria-label="${p} starter snap share"><span class="num small">${v}%</span></div>`; }).join("")}
+  <p class="small">Effect right now: offense ${ra.off >= 0 ? "+" : ""}${ra.off.toFixed(1)}, defense ${ra.def >= 0 ? "+" : ""}${ra.def.toFixed(1)} <button class="link small" data-a="rotreset">Reset</button></p>
+  <div class="eyebrow mt">When players get tired</div><div class="seg">${FATS.map(([k, l]) => `<button class="${r.fat === k ? "on" : ""}" data-a="rotfat" data-v="${k}">${l}</button>`).join("")}</div>
+  <p class="dim small">${r.fat === "early" ? "Fresh legs all game, but backups play more." : r.fat === "late" ? "Your best players stay in. Fatigue hits harder late." : "Standard substitution."}</p>
+  <div class="eyebrow mt">Blowouts</div><div class="seg wrapseg">${BLOWS.map(([k, l]) => `<button class="${r.blow === k ? "on" : ""}" data-a="rotblow" data-v="${k}">${l}</button>`).join("")}</div>
+  <p class="dim small">Pulling starters protects them and gives backups snaps, morale and a chance to grow.</p></section>`;
+}
+
+// ---------- full team stats ----------
+const STAT_CATS = {
+  pass: { l: "Passing", has: s => s.att, cols: [["cmp", "Cmp"], ["att", "Att"], ["py", "Yds"], ["ptd", "TD"], ["int", "Int"]] },
+  rush: { l: "Rushing", has: s => s.car, cols: [["car", "Car"], ["ry", "Yds"], ["avg", "Avg", s => s.car ? (s.ry / s.car).toFixed(1) : "0.0"], ["rtd", "TD"]] },
+  rec: { l: "Receiving", has: s => s.rec, cols: [["rec", "Rec"], ["rcy", "Yds"], ["ypc", "Avg", s => s.rec ? (s.rcy / s.rec).toFixed(1) : "0.0"], ["rctd", "TD"]] },
+  def: { l: "Defense", has: s => s.tk || s.sk || s.di, cols: [["tk", "Tkl"], ["sk", "Sck"], ["di", "Int"]] },
+  kick: { l: "Kicking", has: s => s.fga, cols: [["fgm", "FGM"], ["fga", "FGA"], ["fgp", "Pct", s => s.fga ? Math.round(s.fgm / s.fga * 100) + "%" : "–"]] },
+};
+function careerOf(p) { const s = {}; for (const k in (p.c || {})) s[k] = p.c[k]; for (const k in (p.s || {})) s[k] = (s[k] || 0) + p.s[k]; return s; }
+function renderTeamStats(t) {
+  const car = UI.statC === "career", cat = STAT_CATS[UI.statCat] ? UI.statCat : "pass", C = STAT_CATS[cat];
+  const rows = t.roster.map(P).filter(Boolean).map(p => [p, car ? careerOf(p) : (p.s || {})]).filter(([, s]) => C.has(s));
+  const sk = UI.statSort && C.cols.some(c => c[0] === UI.statSort) ? UI.statSort : C.cols[cat === "pass" ? 2 : cat === "def" ? 0 : 1][0];
+  const val = (s, c) => c[2] ? parseFloat(c[2](s)) || 0 : (s[c[0]] || 0);
+  const col = C.cols.find(c => c[0] === sk);
+  rows.sort((a, b) => val(b[1], col) - val(a[1], col));
+  const ps = t.roster.map(P);
+  const tot = k => ps.reduce((a, p) => a + ((car ? careerOf(p) : p.s || {})[k] || 0), 0);
+  return `<div class="row gap wrap"><div class="seg">${[["season", `${G.year} season`], ["career", "Career"]].map(([k, l]) => `<button class="${(car ? "career" : "season") === k ? "on" : ""}" data-a="statc" data-v="${k}">${l}</button>`).join("")}</div></div>
+  <div class="chips mt">${Object.entries(STAT_CATS).map(([k, c]) => `<button class="${cat === k ? "on" : ""}" data-a="statcat" data-v="${k}">${c.l}</button>`).join("")}</div>
+  <div class="card flush tbl-wrap mt"><table class="tbl stat"><thead><tr><th>Player</th>${C.cols.map(c => `<th><button class="link th ${c[0] === sk ? "on" : ""}" data-a="statsort" data-v="${c[0]}">${c[1]}${c[0] === sk ? " ▾" : ""}</button></th>`).join("")}</tr></thead>
+  <tbody>${rows.length ? rows.map(([p, s]) => `<tr><td><button class="link" data-a="player" data-v="${p.id}">${esc(p.f[0] + ". " + p.l)}</button> <span class="dim small">${p.pos}</span></td>${C.cols.map(c => `<td class="num">${c[2] ? c[2](s) : fmt(s[c[0]] || 0)}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${C.cols.length + 1}" class="dim">No ${C.l.toLowerCase()} stats yet.</td></tr>`}</tbody></table></div>
+  <section class="card mt"><div class="eyebrow">${car ? "Current roster, career totals" : `${G.year} team totals`}</div><div class="kv3"><div><span class="num big">${fmt(tot("py"))}</span><span class="dim small">passing yds</span></div><div><span class="num big">${fmt(tot("ry"))}</span><span class="dim small">rushing yds</span></div><div><span class="num big">${fmt(tot("tk"))}</span><span class="dim small">tackles</span></div></div>
+  ${car ? "" : `<p class="small">Points: ${t.pf} for, ${t.pa} against · Record ${t.w}-${t.l}</p>`}</section>`;
+}
+
+// ---------- recruiting filters ----------
+function recAttrTxt(r, name) { const i = (ATTR[attrPos(r)] || []).indexOf(name); if (i < 0) return "–"; const a = recAttr(r, i); return r.sc ? String(a.v) : `${a.lo}–${a.hi}`; }
+function recAttrGrid(r) {
+  ensureRecAttrs(r); const names = ATTR[attrPos(r)] || [];
+  return `<p class="small">Archetype: <b>${esc(r.arch)}</b>${fitsScheme(r) ? ` <span class="tag good">Fits your scheme</span>` : ""}</p>
+  <div class="attrs">${names.map((n, i) => { const a = recAttr(r, i); return `<div><span class="dim small">${n}</span><span class="num">${r.sc ? a.v : `${a.lo}–${a.hi}`}</span></div>`; }).join("")}</div>
+  ${r.sc ? "" : `<p class="dim small">Ratings shown as a range until you scout him.</p>`}`;
+}
+function recFilterPanel() {
+  const f = rf(), open = UI.rfOpen == null ? rfActive() : UI.rfOpen;
+  const pos = UI.recPos && UI.recPos !== "All" ? UI.recPos : "";
+  const archList = pos ? Object.keys(ARCHS[pos] || {}) : [...new Set(Object.values(ARCHS).flatMap(x => Object.keys(x)))];
+  const attrs = pos ? (ATTR[pos === "ATH" ? "WR" : pos] || []) : [...new Set(Object.values(ATTR).flat())];
+  const hts = []; for (let h = 66; h <= 81; h++) hts.push(h);
+  const htLbl = h => `${Math.floor(h / 12)}-${h % 12}`;
+  return `<div class="row gap wrap"><button class="btn sm ${open ? "on" : ""}" data-a="rfopen">${open ? "Hide filters" : "More filters"}${rfActive() ? " · on" : ""}</button>${rfActive() ? `<button class="link small" data-a="rfclear">Clear filters</button>` : ""}</div>
+  ${open ? `<section class="card rfpanel">
+    <label class="row gap small"><input type="checkbox" data-ch="rffit" ${f.fit ? "checked" : ""}> Fits my schemes (${esc(userT().so)} / ${esc(userT().sd)})</label>
+    <div class="rfgrid">
+      <label class="small">Archetype<select class="inp" data-ch="rfarch"><option value="">Any</option>${archList.map(a => `<option ${f.arch === a ? "selected" : ""}>${esc(a)}</option>`).join("")}</select></label>
+      <label class="small">Attribute<select class="inp" data-ch="rfattr"><option value="">Any</option>${attrs.map(a => `<option ${f.attr === a ? "selected" : ""}>${a}</option>`).join("")}</select></label>
+      <label class="small">Minimum<select class="inp" data-ch="rfmin"><option value="0">Any</option>${[60, 65, 70, 75, 80, 85, 90, 95].map(v => `<option value="${v}" ${f.min === v ? "selected" : ""}>${v}+</option>`).join("")}</select></label>
+      <label class="small">Height from<select class="inp" data-ch="rfhtMin"><option value="0">Any</option>${hts.map(h => `<option value="${h}" ${f.htMin === h ? "selected" : ""}>${htLbl(h)}</option>`).join("")}</select></label>
+      <label class="small">Height to<select class="inp" data-ch="rfhtMax"><option value="0">Any</option>${hts.map(h => `<option value="${h}" ${f.htMax === h ? "selected" : ""}>${htLbl(h)}</option>`).join("")}</select></label>
+      <label class="small">Weight from<select class="inp" data-ch="rfwtMin"><option value="0">Any</option>${[160, 180, 200, 220, 240, 260, 280, 300, 320].map(w => `<option value="${w}" ${f.wtMin === w ? "selected" : ""}>${w}</option>`).join("")}</select></label>
+      <label class="small">Weight to<select class="inp" data-ch="rfwtMax"><option value="0">Any</option>${[180, 200, 220, 240, 260, 280, 300, 320, 360].map(w => `<option value="${w}" ${f.wtMax === w ? "selected" : ""}>${w}</option>`).join("")}</select></label>
+    </div>
+    <p class="dim small">Unscouted players are filtered on their projected ratings (the middle of the range).</p></section>` : ""}`;
 }
 // ===== CONTROLLER, SAVES, BOOT =====
 let DB = null, UID = null, DL = null, saving = false, saveAgain = false, saveTimer = null;
@@ -5236,21 +5853,21 @@ document.addEventListener("click", e => {
     case "close": UI.modal = UI.modal && UI.modal.back ? UI.modal.back : null; UI.keepScroll = true; render(); return;
     case "plan": userPlan()[el.dataset.k] = v; if (G.live) { const RS = liveRatings(G.live); G.live.plans[G.live.me] = myPlan(RS[G.live.me], RS[1 - G.live.me]); } UI.keepScroll = true; render(); saveSoon(); return;
     case "gdsim": UI.gdPass = true; UI.modal = null; doAdvance(UI.gdForce); return;
-    case "gdplay": { const g = G.sched[UI.modal.id]; if (UI.gdForce && !G.recruits.length) useFictionalClass(); startLive(g, v); if (v === "key") liveAuto(G.live, true); UI.modal = null; UI.tab = "home"; UI.logAll = false; render(); window.scrollTo(0, 0); saveSoon(); return; }
+    case "gdplay": { const g = G.sched[UI.modal.id]; if (UI.gdForce && !G.recruits.length) useFictionalClass(); startLive(g, v); G.live.side = G.liveSide || "both"; liveFlow(G.live); UI.modal = null; UI.tab = "home"; UI.logAll = false; render(); window.scrollTo(0, 0); saveSoon(); return; }
     case "skipgd": G.skipGameday = true; UI.gdPass = true; UI.modal = null; toast("Games will sim automatically. Change it in More › Game settings."); doAdvance(UI.gdForce); return;
     case "gdask": G.skipGameday = v === "sim"; UI.keepScroll = true; render(); saveSoon(); return;
     case "diff": G.diff = +v; UI.keepScroll = true; render(); saveSoon(); return;
-    case "call": { const L = G.live; if (!L || L.over) return; livePlay(L, { f: el.dataset.f || "", p: v }); if (L.mode === "key") liveAuto(L, true); render(); saveSoon(); return; }
+    case "call": { const L = G.live; if (!L || L.over) return; livePlay(L, { f: el.dataset.f || "", p: v }); liveFlow(L); render(); saveSoon(); return; }
     case "oform": UI.oform = v; UI.keepScroll = true; render(); return;
     case "dform": UI.dform = v; UI.keepScroll = true; render(); return;
-    case "pat": { const L = G.live; if (!L || !L.pat) return; doPat(L, L.me, v === "two"); if (L.mode === "key") liveAuto(L, true); render(); saveSoon(); return; }
-    case "ko": { const L = G.live; if (!L || !L.ko) return; doKick(L, L.me, v === "onside"); if (L.mode === "key") liveAuto(L, true); render(); saveSoon(); return; }
-    case "half2": { const L = G.live; if (!L) return; startSecondHalf(L); if (L.mode === "key") liveAuto(L, true); render(); window.scrollTo(0, 0); saveSoon(); return; }
+    case "pat": { const L = G.live; if (!L || !L.pat) return; doPat(L, L.me, v === "two"); liveFlow(L); render(); saveSoon(); return; }
+    case "ko": { const L = G.live; if (!L || !L.ko) return; doKick(L, L.me, v === "onside"); liveFlow(L); render(); saveSoon(); return; }
+    case "half2": { const L = G.live; if (!L) return; startSecondHalf(L); liveFlow(L); render(); window.scrollTo(0, 0); saveSoon(); return; }
     case "liveto": { const L = G.live; if (!L) return; callTimeout(L, L.me); UI.keepScroll = true; render(); saveSoon(); return; }
     case "livenext": if (G.live) { liveAuto(G.live, true); if (!liveNeeds(G.live) && !G.live.over) liveAuto(G.live, true); } render(); saveSoon(); return;
     case "liveq": if (G.live) liveSimQuarter(G.live); UI.keepScroll = true; render(); saveSoon(); return;
-    case "livesim": if (G.live) liveAuto(G.live, false); render(); window.scrollTo(0, 0); saveSoon(); return;
-    case "livemode": if (G.live) { G.live.mode = G.live.mode === "all" ? "key" : "all"; if (G.live.mode === "key") liveAuto(G.live, true); } UI.keepScroll = true; render(); saveSoon(); return;
+    case "livesim": if (G.live) liveSimRest(G.live); render(); window.scrollTo(0, 0); saveSoon(); return;
+    case "livemode": if (G.live) { G.live.mode = G.live.mode === "all" ? "key" : "all"; liveFlow(G.live); } UI.keepScroll = true; render(); saveSoon(); return;
     case "logall": UI.logAll = !UI.logAll; UI.keepScroll = true; render(); return;
     case "tolive": UI.tab = "home"; UI.modal = null; render(); window.scrollTo(0, 0); return;
     case "livedone": G.live = null; UI.gdPass = true; doAdvance(false); return;
@@ -5269,6 +5886,23 @@ document.addEventListener("click", e => {
     case "mailall": (G.inbox || []).forEach(m => m.read = 1); UI.keepScroll = true; render(); saveSoon(); return;
     case "capt": { const e = setCaptain(+v, !captains().includes(+v)); if (e) toast(e); UI.keepScroll = true; render(); saveSoon(); return; }
     case "autocapt": autoCaptains(); UI.keepScroll = true; render(); saveSoon(); return;
+    case "askad": toast(askAD()); UI.keepScroll = true; render(); saveSoon(); return;
+    case "fold": { G.fold = G.fold || {}; G.fold[v] = !G.fold[v]; UI.keepScroll = true; render(); saveSoon(); return; }
+    case "foldall": { G.fold = G.fold || {}; const on = v === "1"; document.querySelectorAll("[data-a=fold]").forEach(b => G.fold[b.dataset.v] = on); UI.keepScroll = true; render(); saveSoon(); return; }
+    case "lside": setLiveSide(v); UI.keepScroll = true; render(); saveSoon(); return;
+    case "gdepth": UI.modal = { type: "gdepth" }; UI.gdPos = UI.gdPos || "QB"; render(); return;
+    case "gdpos": UI.gdPos = v; UI.keepScroll = true; render(); return;
+    case "gdmove": { const L = G.live; if (L) gdMove(L, UI.gdPos, +v, +k); UI.keepScroll = true; render(); saveSoon(); return; }
+    case "gdbench": { const L = G.live; if (L) gdBench(L, +v); UI.keepScroll = true; render(); saveSoon(); return; }
+    case "rotfat": rot().fat = v; UI.keepScroll = true; render(); saveSoon(); return;
+    case "rotblow": rot().blow = v; UI.keepScroll = true; render(); saveSoon(); return;
+    case "rotreset": rot().share = { ...ROT_DEF }; UI.keepScroll = true; render(); saveSoon(); return;
+    case "statc": UI.statC = v; UI.keepScroll = true; render(); return;
+    case "statcat": UI.statCat = v; UI.keepScroll = true; render(); return;
+    case "statsort": UI.statSort = v; UI.keepScroll = true; render(); return;
+    case "tctog": UI["tc_" + v] = !UI["tc_" + v]; UI.keepScroll = true; render(); return;
+    case "rfopen": UI.rfOpen = !(UI.rfOpen == null ? rfActive() : UI.rfOpen); UI.keepScroll = true; render(); return;
+    case "rfclear": UI.rf = null; UI.keepScroll = true; render(); return;
     case "camp": { const e = campPick(+v, k); if (e) toast(e); UI.keepScroll = true; render(); saveSoon(); return; }
     case "pbpick": setPbPick(v); UI.keepScroll = true; render(); saveSoon(); return;
     case "phil": { const e = setPhil(v); if (e) toast(e); UI.keepScroll = true; render(); saveSoon(); return; }
@@ -5313,6 +5947,9 @@ document.addEventListener("click", e => {
     case "more": UI.tab = "more"; UI.more = v || null; render(); window.scrollTo(0, 0); return;
     case "recPaste": { const txt = document.getElementById("recPaste").value; if (!txt.trim()) return toast("Paste a CSV first."); return doImport("rec", txt); }
     case "savePlayer": { const p = P(+v); const f = document.getElementById("edF").value.trim(), l = document.getElementById("edL").value.trim(); if (f) p.f = f; p.l = l; const o = clamp(parseInt(document.getElementById("edO").value) || p.ovr, 30, 99); const d = o - p.ovr; p.ovr = o; recalcAttrs(p, d); p.pot = clamp(parseInt(document.getElementById("edP").value) || p.pot, p.ovr, 99); p.yr = +document.getElementById("edY").value; UI.keepScroll = true; render(); toast("Player saved."); saveSoon(); return; }
+    case "saveStaff": { const t = T(+v); ensureStaff(t); const hn = document.getElementById("edc_hc"); if (hn && hn.value.trim() && !(t.id === G.userTeam && isHC())) t.hc = hn.value.trim();
+      for (const k of ["oc", "dc", ...Object.keys(POSC)]) { if (!t[k] || t[k].me) continue; const n = document.getElementById("edc_" + k), r = document.getElementById("edr_" + k); if (n && n.value.trim()) t[k].n = n.value.trim(); if (r && r.value !== "") t[k].r = clamp(Math.round(+r.value), 20, 99); }
+      render(); toast("Coaching staff saved."); saveSoon(); return; }
     case "saveTeamName": { const n = document.getElementById("edTeamName").value.trim(); if (n) T(+v).name = n; render(); toast("Team renamed."); saveSoon(); return; }
     case "saveNow": saveGame(); toast("Saving…"); return;
     case "exportSave": return exportSave();
@@ -5339,6 +5976,11 @@ document.addEventListener("change", e => {
   const t = G ? userT() : null;
   switch (k) {
     case "rbTeam": UI.rbTeam = +el.value; render(); return;
+    case "rffit": rf().fit = el.checked; UI.recLimit = 50; UI.keepScroll = true; render(); return;
+    case "rfarch": rf().arch = el.value; UI.recLimit = 50; UI.keepScroll = true; render(); return;
+    case "rfattr": rf().attr = el.value; UI.recLimit = 50; UI.keepScroll = true; render(); return;
+    case "rfmin": case "rfhtMin": case "rfhtMax": case "rfwtMin": case "rfwtMax": rf()[{ rfmin: "min", rfhtMin: "htMin", rfhtMax: "htMax", rfwtMin: "wtMin", rfwtMax: "wtMax" }[k]] = +el.value; UI.recLimit = 50; UI.keepScroll = true; render(); return;
+    case "rotshare": setShare(el.dataset.p, el.value); UI.keepScroll = true; render(); saveSoon(); return;
     case "ncpick": setNcPick(+el.dataset.i, +el.value); UI.keepScroll = true; render(); saveSoon(); return;
     case "so": t.so = el.value; render(); saveSoon(); return;
     case "sd": t.sd = el.value; render(); saveSoon(); return;
