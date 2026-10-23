@@ -844,13 +844,25 @@ function newGame(o) {
   // coach
   const ut = G.teams[o.team];
   G.userTeam = ut.id;
+  const realHead = ut.hc;
   ut.hc = o.coachName;
   G.coach = { name: o.coachName, arch: o.arch, xp: 0, pts: 0, perks: {}, rep: 45, sec: 60, w: 0, l: 0, seasons: [], contract: { yrs: 5, sal: Math.round(ut.pres * 25 + 400) * 1000 }, titles: 0, ccs: 0, bowls: 0 };
   G.coach.perks[ARCH[o.arch]] = 1; G.coach.role = "HC";
   if (ut.div) { G.coach.rep = ut.div === 2 ? 20 : 12; G.coach.contract = { yrs: 4, sal: Math.round(60000 + ut.pres * 2500) }; LT(ut.lowId).hc = o.coachName; }
+  if (o.role && o.role !== "HC" && ROLES[o.role]) {
+    // start as an assistant: the school keeps its real head coach
+    ut.hc = realHead && realHead !== o.coachName ? realHead : (realHC(ut.abbr, 2009) || marketCoach(2009, new Set(G.teams.map(x => x.hc))));
+    if (ut.div && LT(ut.lowId)) LT(ut.lowId).hc = ut.hc;
+    G.coach.role = o.role; ensureStaff(ut);
+    const coord = ["oc", "dc"].includes(o.role);
+    G.coach.rep = ut.div ? (coord ? 14 : 10) : coord ? 34 : 26;
+    const sal = coord ? Math.round((myRating() - 45) * 0.04 * 10) / 10 : posSal(myRating());
+    ut[o.role] = { n: o.coachName, r: myRating(), sal, me: 1 };
+    G.coach.contract = { yrs: 3, sal: Math.round(sal * 1e6) };
+  }
   G.budget = budgetFor(ut);
   startSeason(true);
-  addNews(`${o.coachName} named head coach at ${ut.name}.`);
+  addNews(G.coach.role === "HC" ? `${o.coachName} named head coach at ${ut.name}.` : `${o.coachName} joins ${ut.name} as ${roleLower(G.coach.role)} under ${ut.hc}.`);
 }
 function genCoord(pres) { const r = clamp(Math.round(55 + pres * 0.25 + gauss() * 6), 45, 92); return { n: fakeCoach(), r, sal: Math.round((r - 45) * 0.04 * 10) / 10 }; }
 function buildRoster(t, keep) {
@@ -1761,7 +1773,7 @@ function runCarousel() {
   for (const m of moves) {
     const t = m.t; t.hc = m.to;
     for (const k of ["oc", "dc", ...Object.keys(POSC)]) { if (t[k] && t[k].me) continue; if (k === "oc" || k === "dc") t[k] = genCoord(t.pres); else if (rnd() < 0.5) t[k] = genPosCoach(t.pres); }
-    if (t.id === u.id && !isHC()) { if (rnd() < 0.45) { G.off.staffOut = true; addNews(`New head coach ${m.to} won't keep you on staff. Find a new job.`, "loss"); } else addNews(`New head coach ${m.to} keeps you on as ${ROLES[role()].toLowerCase()}.`); }
+    if (t.id === u.id && !isHC()) { if (rnd() < 0.45) { G.off.staffOut = true; addNews(`New head coach ${m.to} won't keep you on staff. Find a new job.`, "loss"); } else addNews(`New head coach ${m.to} keeps you on as ${roleLower(role())}.`); }
     if (m.from && !G.teams.some(x => x.hc === m.from) && m.from !== G.coach.name) G.freeCoaches.push(m.from);
     G.freeCoaches = G.freeCoaches.filter(n => n !== m.to);
     // a real hire who's on your staff leaves for the job
@@ -2584,7 +2596,7 @@ function applyJob(i) {
   const j = jobOpenings()[i]; if (!j || j.applied) return;
   j.applied = 1; j.ch = applyChance(j); j.ok = rnd() < j.ch ? 1 : 0;
   if (j.ok && j.k === "HC") { G.offers = G.offers || []; if (!G.offers.includes(j.t)) G.offers.push(j.t); }
-  addNews(j.ok ? `${T(j.t).name} offers you the ${ROLES[j.k].toLowerCase()} job.` : `${T(j.t).name} passes on you for ${ROLES[j.k].toLowerCase()}.`);
+  addNews(j.ok ? `${T(j.t).name} offers you the ${roleLower(j.k)} job.` : `${T(j.t).name} passes on you for ${roleLower(j.k)}.`);
 }
 // leave your job for an assistant spot
 function takeAssistant(tid, k) {
@@ -2602,7 +2614,7 @@ function takeAssistant(tid, k) {
   G.coach.contract = { yrs: 3, sal: Math.round(sal * 1e6) };
   G.coach.sec = 60; G.offers = []; if (G.off) { G.off.fired = false; G.off.staffOut = false; }
   G.board = []; for (const r of G.recruits) delete r.pts[old.id];
-  addNews(`${G.coach.name} joins ${t.name} as ${ROLES[k].toLowerCase()} under ${t.hc}.`);
+  addNews(`${G.coach.name} joins ${t.name} as ${roleLower(k)} under ${t.hc}.`);
 }
 // how an assistant's season is judged
 function assistantSeason() {
@@ -2619,6 +2631,7 @@ function assistantSeason() {
   c.sec = clamp(c.sec + d * 1.5, 0, 100);
   return { ppg, papg };
 }
+function roleLower(k) { const s = ROLES[k] || ""; return /^[A-Z][a-z]/.test(s) ? s[0].toLowerCase() + s.slice(1) : s; }
 
 // ---------- Division II and III ----------
 const DIV_N = { 2: "Division II", 3: "Division III" };
@@ -4635,6 +4648,10 @@ function renderNewGame() {
     <label class="lbl" for="coachName">Coach name</label><input id="coachName" class="inp" value="${esc(ng.name)}" data-ch="ngname" autocomplete="off">
     <div class="eyebrow mt">Coaching background</div>
     <div class="stack">${Object.keys(ARCH).map(a => `<button class="card pickc ${ng.arch === a ? "on" : ""}" data-a="ngarch" data-v="${a}"><div class="b">${a}</div><div class="dim small">${({ Recruiter: "+10 recruiting hours a week. Starts with Silver Tongue.", Developer: "Players develop faster. Starts with Film Room.", Motivator: "Morale stays high. Starts with Pep Talk.", Tactician: "Better game days. Starts with Play Caller." })[a]}</div></button>`).join("")}</div>
+    <div class="eyebrow mt">Starting job</div>
+    <div class="seg wrapseg">${[["HC", "Head coach"], ["oc", "Off. coordinator"], ["dc", "Def. coordinator"], ["pos", "Position coach"]].map(([k, l]) => `<button class="${(k === "pos" ? Object.keys(POSC).includes(ng.role || "") : (ng.role || "HC") === k) ? "on" : ""}" data-a="ngrole" data-v="${k === "pos" ? "qbc" : k}">${l}</button>`).join("")}</div>
+    ${Object.keys(POSC).includes(ng.role || "") ? `<div class="chips mt">${Object.keys(POSC).map(k => `<button class="${ng.role === k ? "on" : ""}" data-a="ngrole" data-v="${k}">${esc(POSC_N[k])}</button>`).join("")}</div>` : ""}
+    <p class="dim small">${(ng.role || "HC") === "HC" ? "Run the whole program from day one." : ["oc", "dc"].includes(ng.role) ? "Call one side of the ball under the school's real head coach. Win and head coaching offers come." : "Coach one position group, develop your players and climb the ladder: coordinator, then head coach."}</p>
     <button class="btn pri wide mt" data-a="ngnext" ${ng.name.trim() ? "" : "disabled"}>Choose a school</button></div>`;
   const tiers = [["easy", "Easy", t => t.pres >= 80], ["normal", "Normal", t => t.pres >= 60 && t.pres < 80], ["hard", "Hard", t => t.pres >= 45 && t.pres < 60], ["vhard", "Very Hard", t => t.pres < 45]];
   tiers.push(["xhard", "Extreme", t => false]);
@@ -4645,7 +4662,7 @@ function renderNewGame() {
     <h2>Pick your school</h2><p class="dim small">Difficulty sets the program's prestige: how well it recruits and what the boosters expect.</p>
     <div class="seg">${tiers.map(([k, l]) => `<button class="${ng.diff === k ? "on" : ""}" data-a="ngdiff" data-v="${k}">${l}</button>`).join("")}</div>
     <div class="list">${list.map(t => `<button class="li ${ng.team === t.i ? "on" : ""}" data-a="ngteam" data-v="${t.i}"><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span><span class="grow"><b>${esc(t.name)}</b><span class="dim small"> ${esc(t.conf)}</span></span><span class="small">${stars(Math.max(1, Math.round((t.pres - 25) / 14)))}</span></button>`).join("")}</div>
-    <div class="stickyfoot"><button class="btn pri wide" data-a="ngstart" ${ng.team == null ? "disabled" : ""}>${ng.team == null ? "Select a school" : "Start at " + esc(TEAM_DATA[ng.team][1])}</button></div></div>`;
+    <div class="stickyfoot"><button class="btn pri wide" data-a="ngstart" ${ng.team == null ? "disabled" : ""}>${ng.team == null ? "Select a school" : `Start ${(ng.role || "HC") === "HC" ? "" : "as " + roleLower(ng.role) + " "}at ` + esc(TEAM_DATA[ng.team][1])}</button></div></div>`;
 }
 
 // ---------- home ----------
@@ -5130,7 +5147,7 @@ function renderGameday(m) {
   ${cmpRow("Passing vs their secondary", mu.passO, ou.cov)}
   ${cmpRow("Their run game vs your front", mu.runD, ou.runO)}
   ${cmpRow("Their passing vs your secondary", mu.cov, ou.passO)}
-  ${isHC() ? "" : `<p class="small mt">You're the ${ROLES[role()].toLowerCase()}. Head coach ${esc(me.hc)} handles ${callsOffense() ? "the defense" : callsDefense() ? "the offense" : "the game plan"}.</p>`}
+  ${isHC() ? "" : `<p class="small mt">You're the ${roleLower(role())}. Head coach ${esc(me.hc)} handles ${callsOffense() ? "the defense" : callsDefense() ? "the offense" : "the game plan"}.</p>`}
   ${callsOffense() ? `<div class="eyebrow mt">Game plan · offense</div>
   <div class="seg wrapseg">${Object.keys(OPLANS).map(k => `<button class="${pl.o === k ? "on" : ""}" data-a="plan" data-k="o" data-v="${k}">${k}</button>`).join("")}</div>
   <p class="small dim">${OPLANS[pl.o]}</p>` : ""}
@@ -5372,7 +5389,7 @@ function renderLowPick(ng, tiers) {
     <div class="seg mt">${[[2, "Division II"], [3, "Division III"]].map(([k, l]) => `<button class="${div === k ? "on" : ""}" data-a="ngldiv" data-v="${k}">${l}</button>`).join("")}</div>
     <select class="inp mt" id="nglconf" data-ch="nglconf" aria-label="Conference"><option value="">All conferences (${all.length} schools)</option>${confs.map(c => `<option ${c === conf ? "selected" : ""}>${esc(c)}</option>`).join("")}</select>
     <div class="list">${list.map(t => `<button class="li ${ng.low === t.id ? "on" : ""}" data-a="nglow" data-v="${t.id}"><span class="grow"><b>${esc(t.name)}</b><span class="dim small"> ${esc(t.conf)} · ${t.st}</span></span><span class="small">${stars(Math.max(1, Math.min(5, Math.round(t.pres / 9))))}</span></button>`).join("")}</div>
-    <div class="stickyfoot"><button class="btn pri wide" data-a="ngstart" ${pickT ? "" : "disabled"}>${pickT ? "Start at " + esc(pickT.name) : "Select a school"}</button></div></div>`;
+    <div class="stickyfoot"><button class="btn pri wide" data-a="ngstart" ${pickT ? "" : "disabled"}>${pickT ? `Start ${(ng.role || "HC") === "HC" ? "" : "as " + roleLower(ng.role) + " "}at ` + esc(pickT.name) : "Select a school"}</button></div></div>`;
 }
 function divSeg() {
   const v = UI.standDiv || (userT().div ? String(userT().div) : "fbs");
@@ -5873,7 +5890,7 @@ document.addEventListener("click", e => {
     case "livedone": G.live = null; UI.gdPass = true; doAdvance(false); return;
     case "pitch2": makePitch(+v, el.dataset.k); UI.keepScroll = true; render(); saveSoon(); return;
     case "applyjob": applyJob(+v); UI.keepScroll = true; render(); saveSoon(); return;
-    case "takeassist": { const j = jobOpenings()[+v]; if (!j || !j.ok) return; if (j.k === "HC") takeJob(j.t); else takeAssistant(j.t, j.k); G.jobs = null; render(); window.scrollTo(0, 0); toast(`You're the new ${ROLES[role()].toLowerCase()} at ${userT().name}.`); saveSoon(); return; }
+    case "takeassist": { const j = jobOpenings()[+v]; if (!j || !j.ok) return; if (j.k === "HC") takeJob(j.t); else takeAssistant(j.t, j.k); G.jobs = null; render(); window.scrollTo(0, 0); toast(`You're the new ${roleLower(role())} at ${userT().name}.`); saveSoon(); return; }
     case "cutask": UI.cutConfirm = +v; UI.keepScroll = true; render(); return;
     case "cutno": UI.cutConfirm = null; UI.keepScroll = true; render(); return;
     case "cut": { const p = P(+v); cutPlayer(p); UI.cutConfirm = null; UI.modal = null; UI.keepScroll = true; render(); toast(`${p.f} ${p.l} released.`); saveSoon(); return; }
@@ -5958,6 +5975,7 @@ document.addEventListener("click", e => {
     case "newgame": UI.slot = +v; UI.ng = { step: 1, name: "", arch: "Recruiter", diff: "normal", team: null }; render(); return;
     case "ngback": if (UI.ng.step === 1) UI.ng = null; else UI.ng.step = 1; render(); return;
     case "ngarch": UI.ng.arch = v; render(); return;
+    case "ngrole": UI.ng.role = v; UI.keepScroll = true; render(); return;
     case "ngnext": UI.ng.step = 2; render(); window.scrollTo(0, 0); return;
     case "ngdiff": UI.ng.diff = v; UI.ng.team = null; render(); return;
     case "ngteam": UI.ng.team = +v; UI.keepScroll = true; render(); return;
@@ -5966,7 +5984,7 @@ document.addEventListener("click", e => {
     case "standDiv": UI.standDiv = v; UI.standLow = ""; render(); return;
     case "applylow": lowApply(+v); UI.keepScroll = true; render(); saveSoon(); return;
     case "takelow": { takeLowJob(+v); G.lowJobs = null; G.jobs = null; render(); window.scrollTo(0, 0); toast(`You're the new head coach at ${userT().name}.`); saveSoon(); return; }
-    case "ngstart": { const ng = UI.ng; $app.innerHTML = `<div class="start"><div class="hero"><div class="eyebrow">Building 2009</div><h1>Setting up 120 programs…</h1></div></div>`; setTimeout(() => { newGame({ team: ng.diff === "xhard" ? 0 : ng.team, low: ng.diff === "xhard" ? ng.low : null, coachName: ng.name.trim(), arch: ng.arch }); UI.ng = null; UI.tab = "home"; render(); window.scrollTo(0, 0); saveGame(); }, 30); return; }
+    case "ngstart": { const ng = UI.ng; $app.innerHTML = `<div class="start"><div class="hero"><div class="eyebrow">Building 2009</div><h1>Setting up 120 programs…</h1></div></div>`; setTimeout(() => { newGame({ team: ng.diff === "xhard" ? 0 : ng.team, low: ng.diff === "xhard" ? ng.low : null, coachName: ng.name.trim(), arch: ng.arch, role: ng.role || "HC" }); UI.ng = null; UI.tab = "home"; render(); window.scrollTo(0, 0); saveGame(); }, 30); return; }
   }
 });
 document.addEventListener("input", e => { const el = e.target;
