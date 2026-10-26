@@ -87,8 +87,8 @@ button.li:disabled { opacity: 1; cursor: default; }
 .li.me { background: color-mix(in srgb, var(--team) 10%, transparent); }
 .li.starter .num:first-child { color: var(--team); }
 .li.on, .pickc.on { outline: 2px solid var(--team); outline-offset: -2px; }
-.pos { font-family: var(--display); font-weight: 600; font-size: .8rem; color: var(--muted); width: 26px; flex: none; text-align: center; }
-.li > .num:first-child { width: 26px; text-align: center; flex: none; }
+.pos { font-family: var(--display); font-weight: 600; font-size: .8rem; color: var(--muted); min-width: 26px; flex: none; text-align: center; white-space: nowrap; }
+.li > .num:first-child { min-width: 26px; text-align: center; flex: none; white-space: nowrap; }
 .li > .num.pk { width: auto; min-width: 46px; text-align: left; }
 .pg { font-family: var(--display); font-weight: 600; color: var(--muted); width: 22px; text-align: center; }
 .rk { font-family: var(--display); font-weight: 600; font-size: .78em; color: var(--muted); margin-right: 3px; }
@@ -168,6 +168,10 @@ textarea.inp { font-family: ui-monospace, Menlo, monospace; font-size: .8rem; }
 .gdbtns .btn { padding: 6px 8px; min-width: 0; }
 .rotrow { display: grid; grid-template-columns: 40px minmax(0, 1fr) 44px; gap: 10px; align-items: center; padding: 4px 0; }
 .rotrow input[type=range] { width: 100%; accent-color: var(--team); }
+.tbl.needs { table-layout: fixed; }
+.tbl.needs th, .tbl.needs td { padding: 8px 2px; text-align: center; }
+.tbl.needs th:first-child, .tbl.needs td:first-child { text-align: left; padding-left: 12px; width: 18%; }
+.tbl th { overflow: hidden; text-overflow: ellipsis; }
 .tbl.stat { table-layout: fixed; }
 .tbl.stat th:first-child, .tbl.stat td:first-child { width: 38%; white-space: normal; overflow-wrap: anywhere; }
 .tbl.stat th, .tbl.stat td { padding: 8px 4px; }
@@ -234,8 +238,9 @@ textarea.inp { font-family: ui-monospace, Menlo, monospace; font-size: .8rem; }
 
 /* recruiting */
 .rec .intr { display: grid; gap: 4px; margin: 10px 0 8px; }
-.ib { display: grid; grid-template-columns: 52px 1fr 40px; align-items: center; gap: 8px; }
-.ib.me span:first-child { font-weight: 700; color: var(--team); }
+.ib { display: grid; grid-template-columns: 76px minmax(0, 1fr) 40px; align-items: center; gap: 8px; }
+.ib > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ib.me span:first-child { font-weight: 700; color: var(--team-hi); }
 .acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .score2 .num { margin-left: 4px; }
 
@@ -5482,6 +5487,7 @@ function advLabel() {
 
 // ---------- render ----------
 function render() {
+  if (typeof autoLogos === "function") autoLogos();
   const y = window.scrollY;
   UI.hs = {}; document.querySelectorAll(".chips, .seg").forEach((el, i) => { UI.hs[el.className + i] = el.scrollLeft; });
   if (!G) { $app.innerHTML = renderStart() + renderToast(); return; }
@@ -6823,8 +6829,8 @@ function needsPlanner() {
     const need = Math.max(0, ROSTER_TGT[pos] - left - commits);
     return { pos, have: all.length, seniors, early, commits, need, tgt: ROSTER_TGT[pos] };
   });
-  return `<section class="card"><div class="eyebrow">${G.classYear} needs planner</div><p class="dim small">Players leaving (seniors, plus early NFL risks) against commits. Fill the red numbers first.</p>
-  <div class="tbl-wrap"><table class="tbl stat"><thead><tr><th>Pos</th><th>Have</th><th>Leaving</th><th>Risk</th><th>Commits</th><th>Need</th></tr></thead><tbody>
+  return `<section class="card"><div class="eyebrow">${G.classYear} needs planner</div><p class="dim small">Leave: seniors graduating. Risk: players who could go pro early. Signed: commits so far. Fill the red numbers first.</p>
+  <div class="tbl-wrap"><table class="tbl needs"><thead><tr><th>Pos</th><th>Have</th><th>Leave</th><th>Risk</th><th>Signed</th><th>Need</th></tr></thead><tbody>
   ${rows.map(r => `<tr><td><button class="link" data-a="needpos" data-v="${r.pos}">${r.pos}</button></td><td class="num">${r.have}</td><td class="num">${r.seniors}</td><td class="num">${r.early || ""}</td><td class="num">${r.commits}</td><td class="num ${r.need ? "bad" : "up"}"><b>${r.need}</b></td></tr>`).join("")}</tbody></table></div>
   <p class="small">Total still needed: <b>${rows.reduce((a, r) => a + r.need, 0)}</b> · scholarships open: <b>${Math.max(0, classCap(G.userTeam))}</b></p></section>`;
 }
@@ -7072,12 +7078,17 @@ function parseTeamsFile(text) {
 function normName(s) { return String(s || "").toLowerCase().replace(/\(fl\)|\bflorida\b(?=\))/g, "").replace(/&/g, "and").replace(/[^a-z0-9]/g, ""); }
 function lsGetJSON(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } }
 function lsSetJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
-function logoStore() { if (!G) return lsGetJSON("cfb_logos") || {}; G.logos = G.logos || lsGetJSON("cfb_logos") || {}; return G.logos; }
+function logoStore() {
+  const ls = lsGetJSON("cfb_logos") || {};
+  if (!G) return ls;
+  if (!G.logos || (!Object.keys(G.logos.t || {}).length && !G.logos.cleared && Object.keys(ls.t || {}).length)) G.logos = ls;
+  return G.logos;
+}
 function importLogos(text, useColors) {
   const { teams, confs } = parseTeamsFile(text);
   if (!teams.length) return { err: "No teams with logos found in that file." };
   const store = { t: {}, c: {}, m: {} };
-  const all = [...G.teams, ...((G.low && G.low.teams) || [])];
+  const all = G ? [...G.teams, ...((G.low && G.low.teams) || [])] : TEAM_DATA.map(d => ({ abbr: d[0], name: d[1] }));
   const byAb = new Map(all.map(t => [String(t.abbr).toUpperCase(), t]));
   const byNm = new Map(all.map(t => [normName(t.name), t]));
   let n = 0, miss = [];
@@ -7087,10 +7098,10 @@ function importLogos(text, useColors) {
     if (!t) { if (o.name) miss.push(o.name); continue; }
     if (url) { store.t[t.abbr] = url; n++; }
     if (o.mascot) store.m[t.abbr] = o.mascot;
-    if (useColors && /^#[0-9a-f]{3,6}$/i.test(o.primary || "")) t.color = o.primary;
+    if (G && useColors && /^#[0-9a-f]{3,6}$/i.test(o.primary || "")) t.color = o.primary;
   }
   for (const c of confs) { const url = String(c.conferenceLogoURL || "").replace(/\\\//g, "/"); if (c.name && url) store.c[c.name] = url; }
-  G.logos = store; lsSetJSON("cfb_logos", store);
+  if (G) G.logos = store; lsSetJSON("cfb_logos", store);
   return { n, miss: miss.slice(0, 12), missN: miss.length, confs: Object.keys(store.c).length };
 }
 function logoUrl(t) { if (!t) return ""; const s = logoStore(); return (s.t || {})[t.abbr] || ""; }
@@ -7103,11 +7114,42 @@ function logosCard() {
   const s = logoStore(), n = Object.keys(s.t || {}).length;
   return `<section class="card"><div class="eyebrow">Team logos</div>
   <p class="small">${n ? `<b>${n}</b> team logos loaded${Object.keys(s.c || {}).length ? ` and ${Object.keys(s.c).length} conference logos` : ""}.` : "Load a teams file (JSON) with a logo link for each team, like the one from your other app."}</p>
+  <label class="lbl" for="logoUrlIn">Link to your teams file</label>
+  <div class="row gap"><input class="inp grow" id="logoUrlIn" type="url" inputmode="url" autocomplete="off" value="${esc(UI.logoLink != null ? UI.logoLink : (lsGetJSON("cfb_logo_link") || DEFAULT_LOGO_LINK))}"><button class="btn pri" data-a="logourl" ${UI.logoBusy ? "disabled" : ""}>${UI.logoBusy ? "Loading…" : "Load"}</button></div>
+  <p class="dim small">Or pick a saved file:</p>
   <input type="file" id="logoFile" accept=".txt,.json" data-ch="logoFile">
   <label class="row gap small mt"><input type="checkbox" id="logoColors" ${UI.logoColors ? "checked" : ""} data-ch="logoColors"> Also use the file's team colors</label>
   ${n ? `<button class="link small mt" data-a="logoclear">Remove logos</button>` : ""}
   ${UI.logoMsg ? `<p class="small mt">${UI.logoMsg}</p>` : ""}
   <p class="dim small">Logos are loaded from the web addresses in your file, so they need an internet connection. The Claude preview blocks images from other websites; logos show in the version you install from GitHub.</p></section>`;
+}
+
+// your teams file on Dropbox; any direct link to a teams file works
+const DEFAULT_LOGO_LINK = "https://dl.dropboxusercontent.com/scl/fi/76m9vmjec9yfchpiiu3q8/CFB-Real-Teams-V2.txt?rlkey=pa2yt5dah6l9zilv3hjr6eo86&st=yl4ya9ep&dl=0";
+// turn share links into direct-download links
+function directLink(u) {
+  u = String(u || "").trim();
+  if (/dropbox\.com/.test(u)) { u = u.replace("://www.dropbox.com/", "://dl.dropboxusercontent.com/").replace("://dropbox.com/", "://dl.dropboxusercontent.com/"); u = /[?&]dl=\d/.test(u) ? u.replace(/([?&])dl=\d/, "$1dl=1") : u + (u.includes("?") ? "&" : "?") + "dl=1"; }
+  const gd = u.match(/drive\.google\.com\/file\/d\/([^/]+)/); if (gd) u = `https://drive.google.com/uc?export=download&id=${gd[1]}`;
+  if (/github\.com\/.+\/blob\//.test(u)) u = u.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/");
+  return u;
+}
+async function loadLogosFromLink(link) {
+  const url = directLink(link);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const text = await res.text();
+  lsSetJSON("cfb_logo_link", link);
+  return importLogos(text, !!UI.logoColors);
+}
+
+// first time the app opens with no logos, try your teams link once (works in the installed version)
+let _logoTried = false;
+function autoLogos() {
+  if (_logoTried) return; _logoTried = true;
+  const ls = lsGetJSON("cfb_logos");
+  if (ls && (Object.keys(ls.t || {}).length || ls.cleared)) return;
+  loadLogosFromLink(lsGetJSON("cfb_logo_link") || DEFAULT_LOGO_LINK).then(r => { if (r && r.n) { try { render(); } catch (e) { } } }).catch(() => { });
 }
 // ===== CONTROLLER, SAVES, BOOT =====
 let DB = null, UID = null, DL = null, saving = false, saveAgain = false, saveTimer = null;
@@ -7275,7 +7317,9 @@ document.addEventListener("click", e => {
     case "simgo": { UI.modal = null; UI.busy = true; render(); setTimeout(() => { let why = ""; try { why = simTo(v); } catch (x) { console.error(x); why = "Something went wrong simulating."; } UI.busy = false; UI.tab = "home"; render(); window.scrollTo(0, 0); saveGame(); toast(why || "Done."); }, 40); return; }
     case "introgo": UI.intro = null; render(); window.scrollTo(0, 0); return;
     case "tabstep": { const i = TABS.findIndex(t => t[0] === UI.tab); const n = TABS[(i + (+v) + TABS.length) % TABS.length][0]; UI.tab = n; render(); window.scrollTo(0, 0); return; }
-    case "logoclear": G.logos = { t: {}, c: {}, m: {} }; lsSetJSON("cfb_logos", G.logos); UI.logoMsg = "Logos removed."; UI.keepScroll = true; render(); saveSoon(); return;
+    case "logoclear": G.logos = { t: {}, c: {}, m: {}, cleared: 1 }; lsSetJSON("cfb_logos", G.logos); UI.logoMsg = "Logos removed."; UI.keepScroll = true; render(); saveSoon(); return;
+    case "logourl": { const inp = document.getElementById("logoUrlIn"); const link = (inp && inp.value || "").trim(); if (!link) { toast("Paste the link first."); return; } UI.logoLink = link; UI.logoBusy = true; UI.logoMsg = ""; UI.keepScroll = true; render();
+      loadLogosFromLink(link).then(r => { UI.logoMsg = r.err ? esc(r.err) : `Loaded <b>${r.n}</b> team logos${r.confs ? ` and ${r.confs} conference logos` : ""}.${r.missN ? ` ${r.missN} teams in the file aren't in this game.` : ""}`; }).catch(e => { console.error(e); UI.logoMsg = `<span class="bad">Couldn't read that link.</span> In the Claude preview, links to other websites are blocked, so load it from the version you install from GitHub. Otherwise check that the link opens the file in a browser.`; }).finally(() => { UI.logoBusy = false; UI.keepScroll = true; render(); saveSoon(); }); return; }
     case "camp": { const e = campPick(+v, k); if (e) toast(e); UI.keepScroll = true; render(); saveSoon(); return; }
     case "pbpick": setPbPick(v); UI.keepScroll = true; render(); saveSoon(); return;
     case "phil": { const e = setPhil(v); if (e) toast(e); UI.keepScroll = true; render(); saveSoon(); return; }
