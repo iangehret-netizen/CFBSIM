@@ -464,6 +464,35 @@ h1, h2, h3 { font-weight: 800; letter-spacing: .02em; }
 .mi-info span { border: 1px solid var(--line); padding: 3px 8px; font-size: .78rem; text-transform: uppercase; font-family: var(--display); letter-spacing: .06em; color: var(--muted); }
 .sheet { background: var(--surface); border-radius: 0; border-top: 3px solid var(--team-hi); }
 .toast { border-radius: 2px; background: var(--team-hi); color: #05070b; font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+
+/* ---------- readability pass: brighter text, softer background ---------- */
+:root { --ink: #ffffff; --muted: #b9c3d3; --line: #2b3546; --surface: #121823; --surface2: #1a2230; }
+body { font-size: 15.5px; font-weight: 500; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+.small { font-size: .86rem; }
+.eyebrow, .tbl th, .cl, .t-lbl, .sbg-sub, .mi-info span, .pip { font-weight: 700; }
+.dim, .t-lbl, .t-cmp, .sbg-sub { color: var(--muted); }
+.li .grow, .li b, .link { color: var(--ink); }
+/* soften the page glow so it sits further back */
+body { background: radial-gradient(120% 50% at 50% -10%, color-mix(in srgb, var(--team) 14%, transparent), transparent 55%), var(--bg); background-attachment: fixed; }
+/* blur and fade the diagonal stripes so they don't fight the words */
+.banner::after, .tile.big::after, .intro::before { filter: blur(1.5px); opacity: .45; }
+/* darker band behind banner and big-tile text */
+.banner { background: linear-gradient(110deg, color-mix(in srgb, var(--team) 85%, #000) 0%, color-mix(in srgb, var(--team) 55%, #000) 55%, #05070b 100%); }
+.tile.big { background: linear-gradient(115deg, color-mix(in srgb, var(--team) 40%, #05070b) 0%, #0b0f16 50%, color-mix(in srgb, var(--oc, #444) 32%, #05070b) 100%); }
+.tile.big::before { z-index: 1; }
+/* drop shadows so light text lifts off color */
+.bn-name, .bn-eye, .bn-sub, .t-opp, .t-team b, .t-num, .mi-t b, .sbg-sc, .sbg-ab, .t-chip, .mi-ab { text-shadow: 0 1px 2px rgba(0,0,0,.75), 0 0 1px rgba(0,0,0,.6); }
+.bn-eye, .bn-sub { opacity: 1; }
+.card { background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, var(--team) 6%), var(--surface)); }
+/* frosted bars: whatever scrolls underneath turns to a soft blur */
+.ctabs { background: rgba(8,11,17,.82); -webkit-backdrop-filter: blur(14px) saturate(120%); backdrop-filter: blur(14px) saturate(120%); }
+.actbar { background: rgba(8,11,17,.9); -webkit-backdrop-filter: blur(14px) saturate(120%); backdrop-filter: blur(14px) saturate(120%); border-top: 1px solid var(--line); }
+.scrim { background: rgba(5,8,14,.6); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.ctab { color: #c6cfdc; }
+.ctab.on { color: #fff; }
+.seg button { color: #c6cfdc; }
+.ovr.low { color: var(--ink); }
+.tag { color: #d3dae5; }
 </style>
 <div id="app"></div>
 
