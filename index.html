@@ -2058,7 +2058,8 @@ function takeJob(tid) {
   if (!(G.off && G.off.fired)) buyoutOnLeave();
   for (const k of ["oc", "dc", ...Object.keys(POSC)]) if (old[k] && !old[k].me) treeAdd(old[k].n, k, old.name);
   const Y = G.year + 1, bumped = t.hc;
-  if (!isHC()) { const r = role(); old[r] = ["oc", "dc"].includes(r) ? genCoord(old.pres) : genPosCoach(old.pres); G.coach.role = "HC"; G.userTeam = tid; t.hc = G.coach.name; G.carousel = (G.carousel || []).filter(x => x.id !== tid); G.carousel.unshift({ id: tid, from: bumped, to: G.coach.name }); G.coach.contract = { yrs: 5, sal: Math.round(t.pres * 25 + 400) * 1000 }; G.coach.sec = 60; G.offers = []; G.off.fired = false; G.off.staffOut = false; G.board = []; for (const r2 of G.recruits) delete r2.pts[old.id]; addNews(`${G.coach.name} leaves ${old.name} to become head coach at ${t.name}.`); return; }
+  if (!isHC()) { const r = role(); old[r] = ["oc", "dc"].includes(r) ? genCoord(old.pres) : genPosCoach(old.pres); moveRecruits(old.id, tid, false, true); G.coach.role = "HC"; G.userTeam = tid; t.hc = G.coach.name; G.carousel = (G.carousel || []).filter(x => x.id !== tid); G.carousel.unshift({ id: tid, from: bumped, to: G.coach.name }); G.coach.contract = { yrs: 5, sal: Math.round(t.pres * 25 + 400) * 1000 }; G.coach.sec = 60; G.offers = []; G.off.fired = false; G.off.staffOut = false; G.board = []; for (const r2 of G.recruits) delete r2.pts[old.id]; addNews(`${G.coach.name} leaves ${old.name} to become head coach at ${t.name}.`); return; }
+  moveRecruits(old.id, tid, true, true);
   G.userTeam = tid; t.hc = G.coach.name;
   // the school you left gets its real hire if he's free, otherwise the coach you just bumped
   const taken = new Set(G.teams.filter(x => x.id !== old.id).map(x => x.hc));
@@ -2814,6 +2815,7 @@ function takeAssistant(tid, k) {
     old.hc = real && real !== "?" && !taken.has(real) ? real : marketCoach(Y, taken);
     addNews(`${old.name} hires ${old.hc} to replace ${G.coach.name}.`);
   } else old[oldRole] = ["oc", "dc"].includes(oldRole) ? genCoord(old.pres) : genPosCoach(old.pres);
+  moveRecruits(old.id, tid, wasHC, false);
   G.userTeam = tid; G.coach.role = k;
   const sal = ["oc", "dc"].includes(k) ? Math.round((myRating() - 45) * 0.04 * 10) / 10 : posSal(myRating());
   t[k] = { n: G.coach.name, r: myRating(), sal, me: 1 };
@@ -3031,6 +3033,7 @@ function takeLowJob(lowId) {
   if (isHC()) { if (!old.div) { const taken = new Set(G.teams.filter(x => x.id !== old.id).map(x => x.hc)); const real = realHC(old.abbr, G.year + 1); old.hc = real && real !== "?" && !taken.has(real) ? real : marketCoach(G.year + 1, taken); } else { old.hc = fakeCoach(); LT(old.lowId).hc = old.hc; } }
   else { const r = role(); old[r] = ["oc", "dc"].includes(r) ? genCoord(old.pres) : genPosCoach(old.pres); }
   const t = materializeLow(lowId);
+  moveRecruits(old.id, t.id, isHC(), true);
   G.userTeam = t.id; t.hc = G.coach.name; lt.hc = G.coach.name; G.coach.role = "HC";
   G.coach.contract = { yrs: 4, sal: Math.round(60000 + lt.pres * 2500) }; G.coach.sec = 60; G.offers = []; G.lowOffers = [];
   if (G.off) { G.off.fired = false; G.off.staffOut = false; }
@@ -5484,6 +5487,60 @@ function simTo(tg) {
   G.skipGameday = keep;
   return why;
 }
+
+// ---------- recruits when you change jobs ----------
+// Commits belong to the school, not to you. When you move, you inherit your new school's class.
+// A few of your old school's commits reopen (some follow you, some go elsewhere),
+// and a few of your new school's commits reopen because the coach changed.
+const MOVE_ODDS = {
+  oldOpen: 0.12,      // an unsigned commit at the school you left reopens
+  oldOpenSigned: 0.04,// a signed one asks out of his letter
+  follow: 0.45,       // a reopened commit follows you to your new school
+  newOpen: 0.08,      // an unsigned commit at your new school reopens
+  newOpenSigned: 0.02
+};
+function moveRecruits(oldId, newId, wasHC, willBeHC) {
+  if (!G.recruits || !G.recruits.length || oldId === newId) return null;
+  const oldT = oldId != null && oldId >= 0 ? T(oldId) : null, newT = T(newId);
+  // an assistant changing jobs shakes things up less than a head coach
+  const outW = wasHC ? 1 : 0.4, inW = willBeHC ? 1 : 0.3;
+  // following you down a level, or to a much weaker program, is rare
+  const gap = oldT ? newT.pres - oldT.pres : 0;
+  const followP = oldT ? clamp(MOVE_ODDS.follow + gap * 0.01, 0.05, 0.75) * (newT.div && !oldT.div ? 0.15 : 1) : 0;
+  const cnt = {}; for (const r of G.recruits) if (r.cm >= 0) cnt[r.cm] = (cnt[r.cm] || 0) + 1;
+  const cap = classCap(newId);
+  const res = { from: oldT ? oldT.name : "", to: newT.name, followed: [], elsewhere: [], lost: [], kept: 0 };
+  const nm = r => `${r.stars}★ ${r.pos} ${r.f} ${r.l}`;
+  for (const r of G.recruits) {
+    // your offers and promises were made for your old school
+    delete r.of; delete r.lock;
+    if (oldT && r.cm === oldId) {
+      const p = (r.sg ? MOVE_ODDS.oldOpenSigned : MOVE_ODDS.oldOpen) * outW * (r.stars >= 4 ? 1.25 : 1);
+      if (rnd() >= p) continue;
+      cnt[oldId]--; r.sg = 0;
+      if (rnd() < followP && (cnt[newId] || 0) < cap + 2) { r.cm = newId; cnt[newId] = (cnt[newId] || 0) + 1; r.sg = 0; res.followed.push(nm(r)); }
+      else { r.cm = -1; if (r.pts) delete r.pts[oldId]; res.elsewhere.push(nm(r)); }
+    } else if (r.cm === newId) {
+      const p = (r.sg ? MOVE_ODDS.newOpenSigned : MOVE_ODDS.newOpen) * inW;
+      if (rnd() < p) { cnt[newId]--; r.cm = -1; r.sg = 0; if (r.pts) delete r.pts[newId]; res.lost.push(nm(r)); }
+      else res.kept++;
+    }
+  }
+  const parts = [];
+  if (res.kept + res.lost.length) parts.push(`You inherit ${newT.name}'s class: ${res.kept} commit${res.kept === 1 ? "" : "s"} stayed${res.lost.length ? `, ${res.lost.length} reopened after the coaching change` : ""}.`);
+  if (res.followed.length) parts.push(`${res.followed.length} ${res.from} commit${res.followed.length === 1 ? "" : "s"} flipped to follow you.`);
+  if (res.elsewhere.length) parts.push(`${res.elsewhere.length} more ${res.from} commit${res.elsewhere.length === 1 ? "" : "s"} reopened and will look elsewhere.`);
+  if (parts.length) addNews(parts.join(" "));
+  const body = [
+    `Your new school's commits are now your class. Commits at ${res.from || "your old school"} stay there unless they reopen.`,
+    res.followed.length ? `Followed you: ${res.followed.join(", ")}.` : "",
+    res.lost.length ? `Reopened at ${newT.name}: ${res.lost.join(", ")}. You can still recruit them.` : "",
+    res.elsewhere.length ? `Reopened at ${res.from}, now open to anyone: ${res.elsewhere.join(", ")}.` : ""
+  ].filter(Boolean).join("\n\n");
+  if (typeof mail === "function") mail("Recruiting office", `Your recruiting class at ${newT.name}`, body, "rec");
+  G.moveRecap = res;
+  return res;
+}
 // ===== UI =====
 const UI = { tab: "home", teamSub: "roster", posF: "All", depthPos: "QB", recSub: "board", recPos: "All", recStars: 0, recState: "", recLimit: 50, seasonSub: "schedule", scoresWk: null, standConf: null, pollType: "ap", more: null, modal: null, ng: null, slot: 1, slots: {}, saving: "" };
 const $app = document.getElementById("app");
@@ -5491,7 +5548,7 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&a
 const stars = n => "★".repeat(n) + `<span class="dim">${"★".repeat(Math.max(0, 5 - n))}</span>`;
 const recStr = t => `${t.w}-${t.l}`;
 function tname(id, short) { if (id < 0) return "FCS"; const t = T(id); return (t.rk ? `<span class="rk">${t.rk}</span>` : "") + esc(short ? t.abbr : t.name); }
-function chip(t) { return `<span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span>`; }
+function chip(t) { return `${chip(t)}`; }
 function lum(hex) { const n = parseInt(hex.slice(1), 16); const c = [n >> 16, (n >> 8) & 255, n & 255].map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; }
 function setTeamColor() { if (!G) return; const c = userT().color; const r = document.documentElement.style; r.setProperty("--team", c); r.setProperty("--on-team", lum(c) > 0.4 ? "#10151f" : "#ffffff"); r.setProperty("--team-hi", teamHi(c)); }
 function toast(msg) { UI.toast = msg; render(); clearTimeout(UI.tt); UI.tt = setTimeout(() => { UI.toast = null; render(); }, 2600); }
@@ -5590,7 +5647,7 @@ function renderNewGame() {
   return `<div class="start"><button class="link" data-a="ngback">‹ Back</button>
     <h2>Pick your school</h2><p class="dim small">Difficulty sets the program's prestige: how well it recruits and what the boosters expect.</p>
     <div class="seg">${tiers.map(([k, l]) => `<button class="${ng.diff === k ? "on" : ""}" data-a="ngdiff" data-v="${k}">${l}</button>`).join("")}</div>
-    <div class="list">${list.map(t => `<button class="li ${ng.team === t.i ? "on" : ""}" data-a="ngteam" data-v="${t.i}"><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span><span class="grow"><b>${esc(t.name)}</b><span class="dim small"> ${esc(t.conf)}</span></span><span class="small">${stars(Math.max(1, Math.round((t.pres - 25) / 14)))}</span></button>`).join("")}</div>
+    <div class="list">${list.map(t => `<button class="li ${ng.team === t.i ? "on" : ""}" data-a="ngteam" data-v="${t.i}">${chip(t)}<span class="grow"><b>${esc(t.name)}</b><span class="dim small"> ${esc(t.conf)}</span></span><span class="small">${stars(Math.max(1, Math.round((t.pres - 25) / 14)))}</span></button>`).join("")}</div>
     <div class="stickyfoot"><button class="btn pri wide" data-a="ngstart" ${ng.team == null ? "disabled" : ""}>${ng.team == null ? "Select a school" : `Start ${(ng.role || "HC") === "HC" ? "" : "as " + roleLower(ng.role) + " "}at ` + esc(TEAM_DATA[ng.team][1])}</button></div></div>`;
 }
 
@@ -5607,7 +5664,7 @@ function renderHome() {
       parts.push(`<section class="card game">
         <div class="eyebrow">Week ${g.wk} · ${g.nm ? esc(g.nm) + " · " : ""}${g.n ? "Neutral site" : g.h === u.id && !g.away ? "Home" : "Away"}${g.rv && opp >= 0 ? " · " + esc(trophyOf(g.h, g.a)[0] || trophyOf(g.h, g.a)[1]) : ""}${g.cg ? " · Conference" : ""}</div>
         <div class="vs"><div class="side">${chip(u)}<b>${esc(u.name)}</b><span class="dim small">${recStr(u)}</span></div><div class="at">${g.h === u.id && !g.away ? "vs" : "at"}</div>
-        <div class="side">${ot ? chip(ot) : lt ? `<span class="tchip" style="--c:${lt.color}">${esc(lt.abbr)}</span>` : `<span class="tchip" style="--c:#777">FCS</span>`}<b>${ot ? tname(opp) : esc(g.fcs)}</b><span class="dim small">${ot ? recStr(ot) : lt ? `${lt.w}-${lt.l} · ${esc(lt.conf)}` : "FCS"}</span></div></div>
+        <div class="side">${ot ? chip(ot) : lt ? `${chip(lt)}` : `${fcsChip(g.fcs)}`}<b>${ot ? tname(opp) : esc(g.fcs)}</b><span class="dim small">${ot ? recStr(ot) : lt ? `${lt.w}-${lt.l} · ${esc(lt.conf)}` : "FCS"}</span></div></div>
         <div class="cmp">${[["Offense", ur.off, or.off], ["Defense", ur.def, or.def]].map(([l, a, b]) => `<div class="cmprow"><span class="num">${Math.round(a)}</span><span class="cl">${l}</span><span class="num">${Math.round(b)}</span></div>`).join("")}</div>
       </section>`);
     } else if (G.phase === "reg") parts.push(`<section class="card"><div class="eyebrow">Week ${G.week}</div><p>Bye week. Use the extra time for recruiting.</p></section>`);
@@ -6350,19 +6407,19 @@ function lowStandings() {
   const st = c.includes("Independent") ? G.low.teams.filter(t => t.conf === c).sort((a, b) => b.w - a.w) : lowConfStandings(c, div);
   const po = G.low.po[div];
   return `${divSeg()}<select class="inp mt" id="standLow" data-ch="standLow" aria-label="Conference">${confs.map(x => `<option ${x === c ? "selected" : ""}>${esc(x)}</option>`).join("")}</select>
-    <div class="card flush tbl-wrap mt"><table class="tbl fit"><thead><tr><th>Team</th><th>Conf</th><th>All</th><th>PF</th><th>PA</th></tr></thead><tbody>${st.map(t => `<tr class="${t.id === me ? "me" : ""}"><td><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span> ${esc(t.name)}${t.champ ? " <span class='tag good'>Champ</span>" : ""}${po && po.seeds.includes(t.id) ? ` <span class="tag">#${po.seeds.indexOf(t.id) + 1} seed</span>` : ""}</td><td class="num">${t.cw}-${t.cl}</td><td class="num">${t.w}-${t.l}</td><td class="num">${t.pf}</td><td class="num">${t.pa}</td></tr>`).join("")}</tbody></table></div>
+    <div class="card flush tbl-wrap mt"><table class="tbl fit"><thead><tr><th>Team</th><th>Conf</th><th>All</th><th>PF</th><th>PA</th></tr></thead><tbody>${st.map(t => `<tr class="${t.id === me ? "me" : ""}"><td>${chip(t)} ${esc(t.name)}${t.champ ? " <span class='tag good'>Champ</span>" : ""}${po && po.seeds.includes(t.id) ? ` <span class="tag">#${po.seeds.indexOf(t.id) + 1} seed</span>` : ""}</td><td class="num">${t.cw}-${t.cl}</td><td class="num">${t.w}-${t.l}</td><td class="num">${t.pf}</td><td class="num">${t.pa}</td></tr>`).join("")}</tbody></table></div>
     ${G.low.champ[div] != null ? `<section class="card mt"><div class="eyebrow">${DIV_N[div]} national champion</div><p><b>${esc(LT(G.low.champ[div]).name)}</b></p></section>` : ""}`;
 }
 function lowPolls2() {
   const div = +UI.pollType; const me = userLowId();
-  return `${seg("pollType", [["ap", "AP Poll"], ["coaches", "Coaches"], ["2", "D-II"], ["3", "D-III"]])}<div class="list card flush">${(G.low.rank[div] || []).map((id, i) => { const t = LT(id); return `<div class="li ${id === me ? "me" : ""}"><span class="num">${i + 1}</span><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span><span class="grow">${esc(t.name)} <span class="dim small">${esc(t.conf)}</span></span><span class="num">${t.w}-${t.l}</span></div>`; }).join("")}</div>`;
+  return `${seg("pollType", [["ap", "AP Poll"], ["coaches", "Coaches"], ["2", "D-II"], ["3", "D-III"]])}<div class="list card flush">${(G.low.rank[div] || []).map((id, i) => { const t = LT(id); return `<div class="li ${id === me ? "me" : ""}"><span class="num">${i + 1}</span>${chip(t)}<span class="grow">${esc(t.name)} <span class="dim small">${esc(t.conf)}</span></span><span class="num">${t.w}-${t.l}</span></div>`; }).join("")}</div>`;
 }
 function lowJobsCards() {
   if (!G.low) return "";
   const offers = (G.lowOffers || []).map(LT).filter(Boolean);
   const jobs = lowOpenings();
-  return `<section class="card"><div class="eyebrow">Small-college offers</div>${offers.length ? offers.map(t => `<div class="li"><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span><span class="grow"><b>${esc(t.name)}</b> <span class="dim small">${DIV_N[t.div]} · ${esc(t.conf)} · ${t.w}-${t.l}</span></span><button class="btn sm pri" data-a="takelow" data-v="${t.id}">Accept</button></div>`).join("") : `<p class="dim small">No small-college offers this year.</p>`}</section>
-    <section class="card"><div class="eyebrow">Small-college openings</div>${jobs.map((j, i) => { const t = LT(j.low); const res = j.applied ? (j.ok ? `<button class="btn sm pri" data-a="takelow" data-v="${t.id}">Accept</button>` : `<span class="tag bad">Passed</span>`) : `<button class="btn sm" data-a="applylow" data-v="${i}">Apply · ${Math.round(lowApplyChance(j) * 100)}%</button>`; return `<div class="li"><span class="tchip" style="--c:${t.color}">${esc(t.abbr)}</span><span class="grow"><b>Head coach</b><br><span class="small">${esc(t.name)} <span class="dim">· ${DIV_N[t.div]} · ${esc(t.conf)}</span></span></span>${res}</div>`; }).join("")}</section>`;
+  return `<section class="card"><div class="eyebrow">Small-college offers</div>${offers.length ? offers.map(t => `<div class="li">${chip(t)}<span class="grow"><b>${esc(t.name)}</b> <span class="dim small">${DIV_N[t.div]} · ${esc(t.conf)} · ${t.w}-${t.l}</span></span><button class="btn sm pri" data-a="takelow" data-v="${t.id}">Accept</button></div>`).join("") : `<p class="dim small">No small-college offers this year.</p>`}</section>
+    <section class="card"><div class="eyebrow">Small-college openings</div>${jobs.map((j, i) => { const t = LT(j.low); const res = j.applied ? (j.ok ? `<button class="btn sm pri" data-a="takelow" data-v="${t.id}">Accept</button>` : `<span class="tag bad">Passed</span>`) : `<button class="btn sm" data-a="applylow" data-v="${i}">Apply · ${Math.round(lowApplyChance(j) * 100)}%</button>`; return `<div class="li">${chip(t)}<span class="grow"><b>Head coach</b><br><span class="small">${esc(t.name)} <span class="dim">· ${DIV_N[t.div]} · ${esc(t.conf)}</span></span></span>${res}</div>`; }).join("")}</section>`;
 }
 
 // ---------- weekly prep card (home) ----------
@@ -7116,7 +7173,10 @@ function logoStore() {
 function importLogos(text, useColors) {
   const { teams, confs } = parseTeamsFile(text);
   if (!teams.length) return { err: "No teams with logos found in that file." };
-  const store = { t: {}, c: {}, m: {} };
+  // add to what's already loaded instead of wiping it, so logos from an earlier file stay
+  const prev = logoStore() || {};
+  const store = prev.cleared ? { t: {}, c: {}, m: {} } : { t: { ...(prev.t || {}) }, c: { ...(prev.c || {}) }, m: { ...(prev.m || {}) } };
+  const fcsNames = new Set((typeof FCS !== "undefined" ? FCS : []).map(normName));
   const all = G ? [...G.teams, ...((G.low && G.low.teams) || [])] : TEAM_DATA.map(d => ({ abbr: d[0], name: d[1] }));
   const byAb = new Map(all.map(t => [String(t.abbr).toUpperCase(), t]));
   const byNm = new Map(all.map(t => [normName(t.name), t]));
@@ -7124,8 +7184,8 @@ function importLogos(text, useColors) {
   for (const o of teams) {
     const url = String(o.logoURL || "").replace(/\\\//g, "/").trim();
     const t = byNm.get(normName(o.name)) || byAb.get(String(o.abbreviation || "").toUpperCase());
-    if (!t) { if (o.name) miss.push(o.name); continue; }
-    if (url) { store.t[t.abbr] = url; n++; }
+    if (!t) { if (o.name && !fcsNames.has(normName(o.name))) miss.push(o.name); continue; }
+    if (url) { const had = store.t[t.abbr] || ""; if (!(had.startsWith("data:") && !url.startsWith("data:"))) store.t[t.abbr] = url; n++; }
     if (o.mascot) store.m[t.abbr] = o.mascot;
     if (G && useColors && /^#[0-9a-f]{3,6}$/i.test(o.primary || "")) t.color = o.primary;
   }
@@ -7133,22 +7193,28 @@ function importLogos(text, useColors) {
   if (G) G.logos = store; lsSetJSON("cfb_logos", store);
   return { n, miss: miss.slice(0, 12), missN: miss.length, confs: Object.keys(store.c).length };
 }
-function logoUrl(t) { if (!t) return ""; const s = logoStore(); return (s.t || {})[t.abbr] || ""; }
+const ESPN_LOGO = id => id ? `https://a.espncdn.com/i/teamlogos/ncaa/500/${id}.png` : "";
+// FBS teams look up by abbreviation; FCS, D-II and D-III schools look up by name
+function builtinLogoByName(name) { return typeof BUILTIN_LOGO_NAMES !== "undefined" ? ESPN_LOGO(BUILTIN_LOGO_NAMES[name]) : ""; }
+function builtinLogo(t) { if (!t) return ""; if (t.div) return builtinLogoByName(t.name); return typeof BUILTIN_LOGO_IDS !== "undefined" ? ESPN_LOGO(BUILTIN_LOGO_IDS[t.abbr]) : ""; }
+// your own teams file wins; any school it doesn't cover uses the built-in link
+function logoUrl(t) { if (!t) return ""; const s = logoStore(); return (s.t || {})[t.abbr] || (s.cleared ? "" : builtinLogo(t)); }
 function confLogo(name) { const s = logoStore(); return (s.c || {})[name] || ""; }
 function mascotOf(t) { const s = logoStore(); return (s.m || {})[t.abbr] || ""; }
 // the image sits on top of the team-colored chip; if it can't load, the abbreviation shows instead
 function logoImg(t) { const u = logoUrl(t); return u ? `<img class="tlogo" src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onload="this.parentNode.classList.add('haslogo')" onerror="this.remove()">` : ""; }
+function fcsChip(name) { const s = logoStore(), u = s.cleared ? "" : builtinLogoByName(name); return `<span class="tchip" style="--c:#777">${u ? `<img class="tlogo" src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onload="this.parentNode.classList.add('haslogo')" onerror="this.remove()">` : ""}<span class="tab-t">FCS</span></span>`; }
 function chip(t) { return `<span class="tchip" style="--c:${t.color}">${logoImg(t)}<span class="tab-t">${esc(t.abbr)}</span></span>`; }
 function logosCard() {
   const s = logoStore(), n = Object.keys(s.t || {}).length;
   return `<section class="card"><div class="eyebrow">Team logos</div>
-  <p class="small">${n ? `<b>${n}</b> team logos loaded${Object.keys(s.c || {}).length ? ` and ${Object.keys(s.c).length} conference logos` : ""}.` : "Load a teams file (JSON) with a logo link for each team, like the one from your other app."}</p>
+  <p class="small">${s.cleared ? "Logos are turned off." : `All 120 FBS schools and most FCS, D-II and D-III schools have logos built in.${n ? ` Your teams file covers <b>${n}</b> of them${Object.keys(s.c || {}).length ? ` plus ${Object.keys(s.c).length} conference logos` : ""} and is used first.` : ""}`}</p>
   <label class="lbl" for="logoUrlIn">Link to your teams file</label>
   <div class="row gap"><input class="inp grow" id="logoUrlIn" type="url" inputmode="url" autocomplete="off" value="${esc(UI.logoLink != null ? UI.logoLink : (lsGetJSON("cfb_logo_link") || DEFAULT_LOGO_LINK))}"><button class="btn pri" data-a="logourl" ${UI.logoBusy ? "disabled" : ""}>${UI.logoBusy ? "Loading…" : "Load"}</button></div>
   <p class="dim small">Or pick a saved file:</p>
   <input type="file" id="logoFile" accept=".txt,.json" data-ch="logoFile">
   <label class="row gap small mt"><input type="checkbox" id="logoColors" ${UI.logoColors ? "checked" : ""} data-ch="logoColors"> Also use the file's team colors</label>
-  ${n ? `<button class="link small mt" data-a="logoclear">Remove logos</button>` : ""}
+  ${s.cleared ? `<button class="link small mt" data-a="logoon">Turn logos back on</button>` : `<button class="link small mt" data-a="logoclear">Turn off all logos</button>`}
   ${UI.logoMsg ? `<p class="small mt">${UI.logoMsg}</p>` : ""}
   <p class="dim small">Logos are loaded from the web addresses in your file, so they need an internet connection. The Claude preview blocks images from other websites; logos show in the version you install from GitHub.</p></section>`;
 }
@@ -7180,6 +7246,9 @@ function autoLogos() {
   if (ls && (Object.keys(ls.t || {}).length || ls.cleared)) return;
   loadLogosFromLink(lsGetJSON("cfb_logo_link") || DEFAULT_LOGO_LINK).then(r => { if (r && r.n) { try { render(); } catch (e) { } } }).catch(() => { });
 }
+// built-in logo links (ESPN team ids) for every FBS school; your own teams file overrides these
+const BUILTIN_LOGO_IDS = {"FLA":57,"UGA":61,"TENN":2633,"SCAR":2579,"UK":96,"VAN":238,"ALA":333,"LSU":99,"MISS":145,"AUB":2,"ARK":8,"MSST":344,"NEB":158,"MIZ":142,"KU":2305,"KSU":2306,"COLO":38,"ISU":66,"TEX":251,"OU":201,"OKST":197,"TTU":2641,"TAMU":245,"BAY":239,"OSU":194,"PSU":213,"IOWA":2294,"WIS":275,"MSU":127,"MICH":130,"NW":77,"MINN":135,"PUR":2509,"ILL":356,"IND":84,"ORE":2483,"USC":30,"STAN":24,"ORST":204,"ARIZ":12,"CAL":25,"UCLA":26,"WASH":264,"ASU":9,"WSU":265,"CLEM":228,"BC":103,"FSU":52,"WAKE":154,"NCST":152,"UMD":120,"GT":59,"VT":259,"MIA":2390,"UNC":153,"UVA":258,"DUKE":150,"CIN":2132,"PITT":221,"WVU":277,"RUTG":164,"USF":58,"UCONN":41,"LOU":97,"SYR":183,"TCU":2628,"BYU":252,"UTAH":254,"AFA":2005,"WYO":2751,"SDSU":21,"CSU":36,"UNLV":2439,"UNM":167,"BSU":68,"NEV":2440,"FRES":278,"LT":2348,"IDHO":70,"USU":328,"HAW":62,"SJSU":23,"NMSU":166,"ECU":151,"MRSH":276,"USM":2572,"UCF":2116,"UAB":5,"MEM":235,"HOU":248,"SMU":2567,"TLSA":202,"UTEP":2638,"RICE":242,"TULN":2655,"OHIO":195,"TEM":218,"KENT":2309,"BGSU":189,"BUFF":2084,"M-OH":193,"AKR":2006,"CMU":2117,"NIU":2459,"TOL":2649,"WMU":2711,"BALL":2050,"EMU":2199,"TROY":2653,"MTSU":2393,"ULL":309,"ULM":2433,"ARST":2032,"FIU":2229,"FAU":2226,"UNT":249,"WKU":98,"ND":87,"NAVY":2426,"ARMY":349};
+const BUILTIN_LOGO_NAMES = {"Elizabeth City State":2207,"Fayetteville State":2220,"Johnson C. Smith":2304,"Lincoln (PA)":2339,"Livingstone":2940,"Shaw":2551,"Indianapolis":2292,"Kentucky Wesleyan":2316,"Missouri S&T":2402,"Quincy":2825,"Ashland":308,"Ferris State":2222,"Findlay":2224,"Grand Valley State":125,"Hillsdale":2273,"Michigan Tech":2392,"Northern Michigan":128,"Northwood":2886,"Saginaw Valley State":129,"Central Washington":2120,"Humboldt State":2278,"Dixie State":3101,"Arkansas Tech":2033,"Arkansas-Monticello":2028,"Delta State":2170,"Harding":2264,"Henderson State":2271,"North Alabama":2453,"Ouachita Baptist":2888,"Southern Arkansas":2568,"West Georgia":2698,"Abilene Christian":2000,"Angelo State":2025,"Central Oklahoma":2122,"East Central":2191,"Eastern New Mexico":2201,"Midwestern State":2395,"Northeastern State":196,"Southeastern Oklahoma State":199,"Tarleton State":2627,"Texas A&M-Commerce":2837,"Central Missouri":2118,"Emporia State":2214,"Fort Hays State":2231,"Lincoln (MO)":2876,"Missouri Southern":2403,"Missouri Western":137,"Nebraska-Omaha":2437,"Northwest Missouri State":138,"Pittsburg State":90,"American International":2022,"Assumption":2038,"Bentley":2060,"C.W. Post":2089,"Merrimack":2771,"New Haven":2441,"Pace":2487,"Southern Connecticut State":2583,"Stonehill":284,"Augustana (SD)":2043,"Bemidji State":132,"Concordia-St. Paul":3066,"Minnesota-Crookston":2772,"Minnesota-Duluth":134,"Minnesota State":2364,"Minnesota State Moorhead":2817,"Northern State":425,"Bloomsburg":2071,"California (PA)":2858,"Cheyney":2129,"Clarion":2134,"East Stroudsburg":2188,"Edinboro":2205,"Gannon":367,"Indiana (PA)":2291,"Kutztown":2315,"Lock Haven":209,"Mercyhurst":2385,"Millersville":210,"Shippensburg":2559,"Slippery Rock":215,"Adams State":2001,"Chadron State":2123,"Colorado Mines":2146,"CSU-Pueblo":2570,"Fort Lewis":2237,"Mesa State":11,"Nebraska-Kearney":2438,"New Mexico Highlands":2424,"Carson-Newman":2105,"Catawba":2107,"Lenoir-Rhyne":2331,"Mars Hill":2369,"Newberry":2444,"Albany State":2013,"Benedict":490,"Clark Atlanta":2805,"Fort Valley State":2232,"Kentucky State":2310,"Miles":2396,"Morehouse":60,"Charleston (WV)":2128,"Concord":2148,"Fairmont State":2986,"Glenville State":2249,"Shepherd":2974,"Incarnate Word":2916,"Ohio Dominican":2477,"North Greenville":2822,"Seton Hill":611,"Lake Erie":437,"Austin College":2045,"East Texas Baptist":2194,"Hardin-Simmons":2810,"Howard Payne":2758,"Louisiana College":309,"Mary Hardin-Baylor":2371,"McMurry":241,"Mississippi College":2401,"Salisbury":2532,"Frostburg State":341,"Morrisville State":3110,"Dickinson":2175,"Franklin & Marshall":2234,"Gettysburg":2248,"Johns Hopkins":118,"Juniata":246,"McDaniel":2700,"Moravian":323,"Muhlenberg":2422,"Augustana (IL)":2042,"Carthage":2106,"Elmhurst":72,"Illinois Wesleyan":306,"Millikin":74,"North Central (IL)":3071,"North Park":75,"Norwich":2467,"Anna Maria":15,"Becker":479,"Castleton":293,"Gallaudet":417,"Husson":2280,"Mount Ida":481,"Alfred":365,"Hartwick":173,"Ithaca":175,"Anderson (IN)":2023,"Bluffton":2074,"Defiance":190,"Earlham":2189,"Franklin":2233,"Hanover":2262,"Manchester":2362,"Mount St. Joseph":2419,"Rose-Hulman":86,"Buena Vista":63,"Central (IA)":2964,"Coe":2141,"Dubuque":49,"Loras":263,"Luther":67,"Simpson":2564,"Wartburg":2685,"Hobart":174,"Rensselaer":2528,"Rochester":184,"Susquehanna":216,"Adrian":2003,"Albion":2790,"Alma":2800,"Hope":2812,"Kalamazoo":126,"Olivet":354,"Albright":2015,"Delaware Valley":2808,"Fairleigh Dickinson-Florham":2221,"King's (PA)":247,"Lebanon Valley":388,"Lycoming":2354,"Beloit":266,"Carroll (WI)":32,"Cornell (IA)":2155,"Grinnell":65,"Illinois College":356,"Lake Forest":262,"Lawrence":268,"Monmouth (IL)":2919,"Ripon":2891,"St. Norbert":2832,"Augsburg":124,"Bethel (MN)":2802,"Carleton":2101,"Concordia-Moorhead":2152,"Gustavus Adolphus":2968,"Hamline":162,"St. John's (MN)":2600,"St. Olaf":133,"St. Thomas (MN)":2900,"Bridgewater State":18,"Coast Guard":2557,"Curry":40,"Endicott":452,"Fitchburg State":114,"Framingham State":2967,"Maine Maritime":274,"Massachusetts Maritime":110,"Nichols":2884,"Plymouth State":2972,"Salve Regina":2776,"Amherst":7,"Bates":121,"Bowdoin":340,"Colby":33,"Hamilton":348,"Middlebury":2394,"Trinity (CT)":2977,"Tufts":112,"Wesleyan (CT)":336,"Williams":2731,"Brockport":2781,"Buffalo State":2085,"Montclair State":2818,"Rowan":2827,"TCNJ":2442,"Allegheny":2018,"Denison":2171,"Hiram":2274,"Kenyon":352,"Oberlin":391,"Ohio Wesleyan":2980,"Wabash":89,"Wittenberg":2746,"Aurora":2044,"Benedictine (IL)":2283,"Concordia (IL)":2151,"Concordia (WI)":409,"Maranatha Baptist":421,"Rockford":2524,"Lewis & Clark":2333,"Linfield":203,"Pacific (OR)":205,"Pacific Lutheran":2486,"Puget Sound":2508,"Baldwin-Wallace":188,"Capital":424,"Heidelberg":191,"John Carroll":2302,"Marietta":317,"Mount Union":426,"Muskingum":332,"Ohio Northern":427,"Otterbein":359,"Bridgewater (VA)":2079,"Emory & Henry":2213,"Guilford":2258,"Hampden-Sydney":297,"Randolph-Macon":2516,"Bethany (WV)":2062,"Grove City":146,"Thomas More":2646,"Washington & Jefferson":2686,"Cal Lutheran":2094,"Chapman":411,"Claremont-Mudd-Scripps":17,"La Verne":2318,"Occidental":2475,"Pomona-Pitzer":2923,"Redlands":29,"Birmingham-Southern":3,"Centre":2121,"DePauw":83,"Millsaps":2398,"Rhodes":2519,"Sewanee":2553,"Carnegie Mellon":2102,"Case Western Reserve":2963,"Chicago":80,"Crown":509,"Greenville":2257,"Martin Luther":446,"Minnesota-Morris":2399,"Northwestern (MN)":583,"Averett":2047,"Christopher Newport":3112,"Ferrum":366,"Greensboro":2256,"Huntingdon":2938,"LaGrange":548,"Maryville (TN)":2373,"Methodist":291,"North Carolina Wesleyan":286,"Shenandoah":2828,"UW-River Falls":2723,"UW-Stevens Point":2743,"UW-Stout":2744,"UW-Whitewater":2745,"Appalachian State":2026,"Montana":149,"James Madison":256,"Villanova":222,"Richmond":257,"Delaware":48,"Furman":231,"Wofford":2747,"Chattanooga":236,"Elon":2210,"Georgia Southern":290,"Sam Houston State":2534,"McNeese State":2377,"Northern Iowa":2460,"South Dakota State":2571,"Eastern Washington":331,"Weber State":2692,"UC Davis":302,"Portland State":2502,"Liberty":2335,"Coastal Carolina":324,"Samford":2535,"Jacksonville State":55,"Murray State":93,"Tennessee Tech":2635,"Howard":47,"Florida A&M":50,"Southern":2582,"Grambling State":2755,"Youngstown State":2754,"Western Illinois":2710,"Illinois State":2287,"Stephen F. Austin":2617,"Central Arkansas":2110,"The Citadel":2643,"William & Mary":2729,"Maine":311,"New Hampshire":160,"Towson":119,"Northwestern State":2466};
 // ===== CONTROLLER, SAVES, BOOT =====
 let DB = null, UID = null, DL = null, saving = false, saveAgain = false, saveTimer = null;
 const CHUNK = 190000;
@@ -7346,7 +7415,8 @@ document.addEventListener("click", e => {
     case "simgo": { UI.modal = null; UI.busy = true; render(); setTimeout(() => { let why = ""; try { why = simTo(v); } catch (x) { console.error(x); why = "Something went wrong simulating."; } UI.busy = false; UI.tab = "home"; render(); window.scrollTo(0, 0); saveGame(); toast(why || "Done."); }, 40); return; }
     case "introgo": UI.intro = null; render(); window.scrollTo(0, 0); return;
     case "tabstep": { const i = TABS.findIndex(t => t[0] === UI.tab); const n = TABS[(i + (+v) + TABS.length) % TABS.length][0]; UI.tab = n; render(); window.scrollTo(0, 0); return; }
-    case "logoclear": G.logos = { t: {}, c: {}, m: {}, cleared: 1 }; lsSetJSON("cfb_logos", G.logos); UI.logoMsg = "Logos removed."; UI.keepScroll = true; render(); saveSoon(); return;
+    case "logoclear": G.logos = { t: {}, c: {}, m: {}, cleared: 1 }; lsSetJSON("cfb_logos", G.logos); UI.logoMsg = "Logos turned off."; UI.keepScroll = true; render(); saveSoon(); return;
+    case "logoon": G.logos = { t: {}, c: {}, m: {} }; lsSetJSON("cfb_logos", G.logos); _logoTried = false; UI.logoMsg = "Logos back on."; UI.keepScroll = true; autoLogos(); render(); saveSoon(); return;
     case "logourl": { const inp = document.getElementById("logoUrlIn"); const link = (inp && inp.value || "").trim(); if (!link) { toast("Paste the link first."); return; } UI.logoLink = link; UI.logoBusy = true; UI.logoMsg = ""; UI.keepScroll = true; render();
       loadLogosFromLink(link).then(r => { UI.logoMsg = r.err ? esc(r.err) : `Loaded <b>${r.n}</b> team logos${r.confs ? ` and ${r.confs} conference logos` : ""}.${r.missN ? ` ${r.missN} teams in the file aren't in this game.` : ""}`; }).catch(e => { console.error(e); UI.logoMsg = `<span class="bad">Couldn't read that link.</span> In the Claude preview, links to other websites are blocked, so load it from the version you install from GitHub. Otherwise check that the link opens the file in a browser.`; }).finally(() => { UI.logoBusy = false; UI.keepScroll = true; render(); saveSoon(); }); return; }
     case "camp": { const e = campPick(+v, k); if (e) toast(e); UI.keepScroll = true; render(); saveSoon(); return; }

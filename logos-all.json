@@ -1,0 +1,5632 @@
+{
+ "name": "CFB Dynasty logo links - all divisions",
+ "note": "Logo links for FBS, FCS, Division II and Division III schools. Each logoURL points to where the logo is already hosted online (ESPN). inGame=true means the school is in CFB Dynasty. 'noLogoYet' lists in-game schools without a link so far.",
+ "counts": {
+  "withLogo": 638,
+  "inGameWithLogo": 457,
+  "inGameWithoutLogo": 79
+ },
+ "teams": [
+  {
+   "name": "Florida",
+   "abbreviation": "FLA",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 57,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/57.png"
+  },
+  {
+   "name": "Georgia",
+   "abbreviation": "UGA",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 61,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png"
+  },
+  {
+   "name": "Tennessee",
+   "abbreviation": "TENN",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 2633,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png"
+  },
+  {
+   "name": "South Carolina",
+   "abbreviation": "SCAR",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 2579,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2579.png"
+  },
+  {
+   "name": "Kentucky",
+   "abbreviation": "UK",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 96,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png"
+  },
+  {
+   "name": "Vanderbilt",
+   "abbreviation": "VAN",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 238,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/238.png"
+  },
+  {
+   "name": "Alabama",
+   "abbreviation": "ALA",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 333,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png"
+  },
+  {
+   "name": "LSU",
+   "abbreviation": "LSU",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 99,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png"
+  },
+  {
+   "name": "Ole Miss",
+   "abbreviation": "MISS",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 145,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png"
+  },
+  {
+   "name": "Auburn",
+   "abbreviation": "AUB",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 2,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2.png"
+  },
+  {
+   "name": "Arkansas",
+   "abbreviation": "ARK",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 8,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/8.png"
+  },
+  {
+   "name": "Mississippi State",
+   "abbreviation": "MSST",
+   "division": "FBS",
+   "conference": "SEC",
+   "inGame": true,
+   "espnId": 344,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/344.png"
+  },
+  {
+   "name": "Nebraska",
+   "abbreviation": "NEB",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 158,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/158.png"
+  },
+  {
+   "name": "Missouri",
+   "abbreviation": "MIZ",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 142,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png"
+  },
+  {
+   "name": "Kansas",
+   "abbreviation": "KU",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 2305,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png"
+  },
+  {
+   "name": "Kansas State",
+   "abbreviation": "KSU",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 2306,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png"
+  },
+  {
+   "name": "Colorado",
+   "abbreviation": "COLO",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 38,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png"
+  },
+  {
+   "name": "Iowa State",
+   "abbreviation": "ISU",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 66,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/66.png"
+  },
+  {
+   "name": "Texas",
+   "abbreviation": "TEX",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 251,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
+  },
+  {
+   "name": "Oklahoma",
+   "abbreviation": "OU",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 201,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png"
+  },
+  {
+   "name": "Oklahoma State",
+   "abbreviation": "OKST",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 197,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+  },
+  {
+   "name": "Texas Tech",
+   "abbreviation": "TTU",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 2641,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
+  },
+  {
+   "name": "Texas A&M",
+   "abbreviation": "TAMU",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 245,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png"
+  },
+  {
+   "name": "Baylor",
+   "abbreviation": "BAY",
+   "division": "FBS",
+   "conference": "Big 12",
+   "inGame": true,
+   "espnId": 239,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/239.png"
+  },
+  {
+   "name": "Ohio State",
+   "abbreviation": "OSU",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 194,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png"
+  },
+  {
+   "name": "Penn State",
+   "abbreviation": "PSU",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 213,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png"
+  },
+  {
+   "name": "Iowa",
+   "abbreviation": "IOWA",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 2294,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png"
+  },
+  {
+   "name": "Wisconsin",
+   "abbreviation": "WIS",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 275,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/275.png"
+  },
+  {
+   "name": "Michigan State",
+   "abbreviation": "MSU",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 127,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/127.png"
+  },
+  {
+   "name": "Michigan",
+   "abbreviation": "MICH",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 130,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png"
+  },
+  {
+   "name": "Northwestern",
+   "abbreviation": "NW",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 77,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/77.png"
+  },
+  {
+   "name": "Minnesota",
+   "abbreviation": "MINN",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 135,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/135.png"
+  },
+  {
+   "name": "Purdue",
+   "abbreviation": "PUR",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 2509,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2509.png"
+  },
+  {
+   "name": "Illinois",
+   "abbreviation": "ILL",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 356,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/356.png"
+  },
+  {
+   "name": "Indiana",
+   "abbreviation": "IND",
+   "division": "FBS",
+   "conference": "Big Ten",
+   "inGame": true,
+   "espnId": 84,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png"
+  },
+  {
+   "name": "Oregon",
+   "abbreviation": "ORE",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 2483,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png"
+  },
+  {
+   "name": "USC",
+   "abbreviation": "USC",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 30,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png"
+  },
+  {
+   "name": "Stanford",
+   "abbreviation": "STAN",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 24,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/24.png"
+  },
+  {
+   "name": "Oregon State",
+   "abbreviation": "ORST",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 204,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/204.png"
+  },
+  {
+   "name": "Arizona",
+   "abbreviation": "ARIZ",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 12,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png"
+  },
+  {
+   "name": "California",
+   "abbreviation": "CAL",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 25,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/25.png"
+  },
+  {
+   "name": "UCLA",
+   "abbreviation": "UCLA",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 26,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/26.png"
+  },
+  {
+   "name": "Washington",
+   "abbreviation": "WASH",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 264,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png"
+  },
+  {
+   "name": "Arizona State",
+   "abbreviation": "ASU",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 9,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png"
+  },
+  {
+   "name": "Washington State",
+   "abbreviation": "WSU",
+   "division": "FBS",
+   "conference": "Pac-10",
+   "inGame": true,
+   "espnId": 265,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/265.png"
+  },
+  {
+   "name": "Clemson",
+   "abbreviation": "CLEM",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 228,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png"
+  },
+  {
+   "name": "Boston College",
+   "abbreviation": "BC",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 103,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/103.png"
+  },
+  {
+   "name": "Florida State",
+   "abbreviation": "FSU",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 52,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png"
+  },
+  {
+   "name": "Wake Forest",
+   "abbreviation": "WAKE",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 154,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/154.png"
+  },
+  {
+   "name": "NC State",
+   "abbreviation": "NCST",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 152,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png"
+  },
+  {
+   "name": "Maryland",
+   "abbreviation": "UMD",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 120,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/120.png"
+  },
+  {
+   "name": "Georgia Tech",
+   "abbreviation": "GT",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 59,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/59.png"
+  },
+  {
+   "name": "Virginia Tech",
+   "abbreviation": "VT",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 259,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/259.png"
+  },
+  {
+   "name": "Miami",
+   "abbreviation": "MIA",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 2390,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png"
+  },
+  {
+   "name": "North Carolina",
+   "abbreviation": "UNC",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 153,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/153.png"
+  },
+  {
+   "name": "Virginia",
+   "abbreviation": "UVA",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 258,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png"
+  },
+  {
+   "name": "Duke",
+   "abbreviation": "DUKE",
+   "division": "FBS",
+   "conference": "ACC",
+   "inGame": true,
+   "espnId": 150,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/150.png"
+  },
+  {
+   "name": "Cincinnati",
+   "abbreviation": "CIN",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 2132,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png"
+  },
+  {
+   "name": "Pittsburgh",
+   "abbreviation": "PITT",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 221,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/221.png"
+  },
+  {
+   "name": "West Virginia",
+   "abbreviation": "WVU",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 277,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png"
+  },
+  {
+   "name": "Rutgers",
+   "abbreviation": "RUTG",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 164,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/164.png"
+  },
+  {
+   "name": "South Florida",
+   "abbreviation": "USF",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 58,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/58.png"
+  },
+  {
+   "name": "Connecticut",
+   "abbreviation": "UCONN",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 41,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/41.png"
+  },
+  {
+   "name": "Louisville",
+   "abbreviation": "LOU",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 97,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png"
+  },
+  {
+   "name": "Syracuse",
+   "abbreviation": "SYR",
+   "division": "FBS",
+   "conference": "Big East",
+   "inGame": true,
+   "espnId": 183,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/183.png"
+  },
+  {
+   "name": "TCU",
+   "abbreviation": "TCU",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 2628,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png"
+  },
+  {
+   "name": "BYU",
+   "abbreviation": "BYU",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 252,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png"
+  },
+  {
+   "name": "Utah",
+   "abbreviation": "UTAH",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 254,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png"
+  },
+  {
+   "name": "Air Force",
+   "abbreviation": "AFA",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 2005,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2005.png"
+  },
+  {
+   "name": "Wyoming",
+   "abbreviation": "WYO",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 2751,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png"
+  },
+  {
+   "name": "San Diego State",
+   "abbreviation": "SDSU",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 21,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/21.png"
+  },
+  {
+   "name": "Colorado State",
+   "abbreviation": "CSU",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 36,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/36.png"
+  },
+  {
+   "name": "UNLV",
+   "abbreviation": "UNLV",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 2439,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png"
+  },
+  {
+   "name": "New Mexico",
+   "abbreviation": "UNM",
+   "division": "FBS",
+   "conference": "MWC",
+   "inGame": true,
+   "espnId": 167,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/167.png"
+  },
+  {
+   "name": "Boise State",
+   "abbreviation": "BSU",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 68,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png"
+  },
+  {
+   "name": "Nevada",
+   "abbreviation": "NEV",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 2440,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2440.png"
+  },
+  {
+   "name": "Fresno State",
+   "abbreviation": "FRES",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 278,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/278.png"
+  },
+  {
+   "name": "Louisiana Tech",
+   "abbreviation": "LT",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 2348,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2348.png"
+  },
+  {
+   "name": "Idaho",
+   "abbreviation": "IDHO",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 70,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/70.png"
+  },
+  {
+   "name": "Utah State",
+   "abbreviation": "USU",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 328,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/328.png"
+  },
+  {
+   "name": "Hawaii",
+   "abbreviation": "HAW",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 62,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/62.png"
+  },
+  {
+   "name": "San Jose State",
+   "abbreviation": "SJSU",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 23,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/23.png"
+  },
+  {
+   "name": "New Mexico State",
+   "abbreviation": "NMSU",
+   "division": "FBS",
+   "conference": "WAC",
+   "inGame": true,
+   "espnId": 166,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/166.png"
+  },
+  {
+   "name": "East Carolina",
+   "abbreviation": "ECU",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 151,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/151.png"
+  },
+  {
+   "name": "Marshall",
+   "abbreviation": "MRSH",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 276,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/276.png"
+  },
+  {
+   "name": "Southern Miss",
+   "abbreviation": "USM",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 2572,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2572.png"
+  },
+  {
+   "name": "UCF",
+   "abbreviation": "UCF",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 2116,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2116.png"
+  },
+  {
+   "name": "UAB",
+   "abbreviation": "UAB",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 5,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/5.png"
+  },
+  {
+   "name": "Memphis",
+   "abbreviation": "MEM",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 235,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/235.png"
+  },
+  {
+   "name": "Houston",
+   "abbreviation": "HOU",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 248,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+  },
+  {
+   "name": "SMU",
+   "abbreviation": "SMU",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 2567,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png"
+  },
+  {
+   "name": "Tulsa",
+   "abbreviation": "TLSA",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 202,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/202.png"
+  },
+  {
+   "name": "UTEP",
+   "abbreviation": "UTEP",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 2638,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2638.png"
+  },
+  {
+   "name": "Rice",
+   "abbreviation": "RICE",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 242,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/242.png"
+  },
+  {
+   "name": "Tulane",
+   "abbreviation": "TULN",
+   "division": "FBS",
+   "conference": "C-USA",
+   "inGame": true,
+   "espnId": 2655,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2655.png"
+  },
+  {
+   "name": "Ohio",
+   "abbreviation": "OHIO",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 195,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/195.png"
+  },
+  {
+   "name": "Temple",
+   "abbreviation": "TEM",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 218,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/218.png"
+  },
+  {
+   "name": "Kent State",
+   "abbreviation": "KENT",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2309,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2309.png"
+  },
+  {
+   "name": "Bowling Green",
+   "abbreviation": "BGSU",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 189,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/189.png"
+  },
+  {
+   "name": "Buffalo",
+   "abbreviation": "BUFF",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2084,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2084.png"
+  },
+  {
+   "name": "Miami (OH)",
+   "abbreviation": "M-OH",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 193,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/193.png"
+  },
+  {
+   "name": "Akron",
+   "abbreviation": "AKR",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2006,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2006.png"
+  },
+  {
+   "name": "Central Michigan",
+   "abbreviation": "CMU",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2117,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2117.png"
+  },
+  {
+   "name": "Northern Illinois",
+   "abbreviation": "NIU",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2459,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2459.png"
+  },
+  {
+   "name": "Toledo",
+   "abbreviation": "TOL",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2649,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2649.png"
+  },
+  {
+   "name": "Western Michigan",
+   "abbreviation": "WMU",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2711,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2711.png"
+  },
+  {
+   "name": "Ball State",
+   "abbreviation": "BALL",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2050,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2050.png"
+  },
+  {
+   "name": "Eastern Michigan",
+   "abbreviation": "EMU",
+   "division": "FBS",
+   "conference": "MAC",
+   "inGame": true,
+   "espnId": 2199,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2199.png"
+  },
+  {
+   "name": "Troy",
+   "abbreviation": "TROY",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 2653,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2653.png"
+  },
+  {
+   "name": "Middle Tennessee",
+   "abbreviation": "MTSU",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 2393,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2393.png"
+  },
+  {
+   "name": "UL Lafayette",
+   "abbreviation": "ULL",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 309,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/309.png"
+  },
+  {
+   "name": "UL Monroe",
+   "abbreviation": "ULM",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 2433,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2433.png"
+  },
+  {
+   "name": "Arkansas State",
+   "abbreviation": "ARST",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 2032,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2032.png"
+  },
+  {
+   "name": "FIU",
+   "abbreviation": "FIU",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 2229,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png"
+  },
+  {
+   "name": "FAU",
+   "abbreviation": "FAU",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 2226,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2226.png"
+  },
+  {
+   "name": "North Texas",
+   "abbreviation": "UNT",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 249,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/249.png"
+  },
+  {
+   "name": "Western Kentucky",
+   "abbreviation": "WKU",
+   "division": "FBS",
+   "conference": "Sun Belt",
+   "inGame": true,
+   "espnId": 98,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/98.png"
+  },
+  {
+   "name": "Notre Dame",
+   "abbreviation": "ND",
+   "division": "FBS",
+   "conference": "Independent",
+   "inGame": true,
+   "espnId": 87,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png"
+  },
+  {
+   "name": "Navy",
+   "abbreviation": "NAVY",
+   "division": "FBS",
+   "conference": "Independent",
+   "inGame": true,
+   "espnId": 2426,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png"
+  },
+  {
+   "name": "Army",
+   "abbreviation": "ARMY",
+   "division": "FBS",
+   "conference": "Independent",
+   "inGame": true,
+   "espnId": 349,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/349.png"
+  },
+  {
+   "name": "Elizabeth City State",
+   "division": "Division II",
+   "conference": "CIAA",
+   "inGame": true,
+   "espnId": 2207,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2207.png"
+  },
+  {
+   "name": "Fayetteville State",
+   "division": "Division II",
+   "conference": "CIAA",
+   "inGame": true,
+   "espnId": 2220,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2220.png"
+  },
+  {
+   "name": "Johnson C. Smith",
+   "division": "Division II",
+   "conference": "CIAA",
+   "inGame": true,
+   "espnId": 2304,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2304.png"
+  },
+  {
+   "name": "Lincoln (PA)",
+   "division": "Division II",
+   "conference": "CIAA",
+   "inGame": true,
+   "espnId": 2339,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2339.png"
+  },
+  {
+   "name": "Livingstone",
+   "division": "Division II",
+   "conference": "CIAA",
+   "inGame": true,
+   "espnId": 2940,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2940.png"
+  },
+  {
+   "name": "Shaw",
+   "division": "Division II",
+   "conference": "CIAA",
+   "inGame": true,
+   "espnId": 2551,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2551.png"
+  },
+  {
+   "name": "Indianapolis",
+   "division": "Division II",
+   "conference": "GLFC",
+   "inGame": true,
+   "espnId": 2292,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2292.png"
+  },
+  {
+   "name": "Kentucky Wesleyan",
+   "division": "Division II",
+   "conference": "GLFC",
+   "inGame": true,
+   "espnId": 2316,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2316.png"
+  },
+  {
+   "name": "Missouri S&T",
+   "division": "Division II",
+   "conference": "GLFC",
+   "inGame": true,
+   "espnId": 2402,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2402.png"
+  },
+  {
+   "name": "Quincy",
+   "division": "Division II",
+   "conference": "GLFC",
+   "inGame": true,
+   "espnId": 2825,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2825.png"
+  },
+  {
+   "name": "Ashland",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 308,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/308.png"
+  },
+  {
+   "name": "Ferris State",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 2222,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2222.png"
+  },
+  {
+   "name": "Findlay",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 2224,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2224.png"
+  },
+  {
+   "name": "Grand Valley State",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 125,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/125.png"
+  },
+  {
+   "name": "Hillsdale",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 2273,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2273.png"
+  },
+  {
+   "name": "Michigan Tech",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 2392,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2392.png"
+  },
+  {
+   "name": "Northern Michigan",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 128,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/128.png"
+  },
+  {
+   "name": "Northwood",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 2886,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2886.png"
+  },
+  {
+   "name": "Saginaw Valley State",
+   "division": "Division II",
+   "conference": "GLIAC",
+   "inGame": true,
+   "espnId": 129,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/129.png"
+  },
+  {
+   "name": "Central Washington",
+   "division": "Division II",
+   "conference": "GNAC",
+   "inGame": true,
+   "espnId": 2120,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2120.png"
+  },
+  {
+   "name": "Humboldt State",
+   "division": "Division II",
+   "conference": "GNAC",
+   "inGame": true,
+   "espnId": 2278,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2278.png"
+  },
+  {
+   "name": "Dixie State",
+   "division": "Division II",
+   "conference": "GNAC",
+   "inGame": true,
+   "espnId": 3101,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png"
+  },
+  {
+   "name": "Arkansas Tech",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2033,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2033.png"
+  },
+  {
+   "name": "Arkansas-Monticello",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2028,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2028.png"
+  },
+  {
+   "name": "Delta State",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2170,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2170.png"
+  },
+  {
+   "name": "Harding",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2264,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2264.png"
+  },
+  {
+   "name": "Henderson State",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2271,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2271.png"
+  },
+  {
+   "name": "North Alabama",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2453,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2453.png"
+  },
+  {
+   "name": "Ouachita Baptist",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2888,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2888.png"
+  },
+  {
+   "name": "Southern Arkansas",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2568,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2568.png"
+  },
+  {
+   "name": "West Georgia",
+   "division": "Division II",
+   "conference": "Gulf South",
+   "inGame": true,
+   "espnId": 2698,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2698.png"
+  },
+  {
+   "name": "Abilene Christian",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2000,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2000.png"
+  },
+  {
+   "name": "Angelo State",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2025,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2025.png"
+  },
+  {
+   "name": "Central Oklahoma",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2122,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2122.png"
+  },
+  {
+   "name": "East Central",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2191,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2191.png"
+  },
+  {
+   "name": "Eastern New Mexico",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2201,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2201.png"
+  },
+  {
+   "name": "Midwestern State",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2395,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2395.png"
+  },
+  {
+   "name": "Northeastern State",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 196,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/196.png"
+  },
+  {
+   "name": "Southeastern Oklahoma State",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 199,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/199.png"
+  },
+  {
+   "name": "Tarleton State",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2627,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2627.png"
+  },
+  {
+   "name": "Texas A&M-Commerce",
+   "division": "Division II",
+   "conference": "Lone Star",
+   "inGame": true,
+   "espnId": 2837,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2837.png"
+  },
+  {
+   "name": "Central Missouri",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 2118,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2118.png"
+  },
+  {
+   "name": "Emporia State",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 2214,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2214.png"
+  },
+  {
+   "name": "Fort Hays State",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 2231,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2231.png"
+  },
+  {
+   "name": "Lincoln (MO)",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 2876,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2876.png"
+  },
+  {
+   "name": "Missouri Southern",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 2403,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2403.png"
+  },
+  {
+   "name": "Missouri Western",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 137,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/137.png"
+  },
+  {
+   "name": "Nebraska-Omaha",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 2437,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2437.png"
+  },
+  {
+   "name": "Northwest Missouri State",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 138,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/138.png"
+  },
+  {
+   "name": "Pittsburg State",
+   "division": "Division II",
+   "conference": "MIAA",
+   "inGame": true,
+   "espnId": 90,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/90.png"
+  },
+  {
+   "name": "American International",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2022,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2022.png"
+  },
+  {
+   "name": "Assumption",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2038,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2038.png"
+  },
+  {
+   "name": "Bentley",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2060,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2060.png"
+  },
+  {
+   "name": "C.W. Post",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2089,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2089.png"
+  },
+  {
+   "name": "Merrimack",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2771,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2771.png"
+  },
+  {
+   "name": "New Haven",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2441,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2441.png"
+  },
+  {
+   "name": "Pace",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2487,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2487.png"
+  },
+  {
+   "name": "Southern Connecticut State",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 2583,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2583.png"
+  },
+  {
+   "name": "Stonehill",
+   "division": "Division II",
+   "conference": "NE-10",
+   "inGame": true,
+   "espnId": 284,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/284.png"
+  },
+  {
+   "name": "Augustana (SD)",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 2043,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2043.png"
+  },
+  {
+   "name": "Bemidji State",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 132,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/132.png"
+  },
+  {
+   "name": "Concordia-St. Paul",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 3066,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3066.png"
+  },
+  {
+   "name": "Minnesota-Crookston",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 2772,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2772.png"
+  },
+  {
+   "name": "Minnesota-Duluth",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 134,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/134.png"
+  },
+  {
+   "name": "Minnesota State",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 2364,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2364.png"
+  },
+  {
+   "name": "Minnesota State Moorhead",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 2817,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2817.png"
+  },
+  {
+   "name": "Northern State",
+   "division": "Division II",
+   "conference": "NSIC",
+   "inGame": true,
+   "espnId": 425,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/425.png"
+  },
+  {
+   "name": "Bloomsburg",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2071,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2071.png"
+  },
+  {
+   "name": "California (PA)",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2858,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2858.png"
+  },
+  {
+   "name": "Cheyney",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2129,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2129.png"
+  },
+  {
+   "name": "Clarion",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2134,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2134.png"
+  },
+  {
+   "name": "East Stroudsburg",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2188,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2188.png"
+  },
+  {
+   "name": "Edinboro",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2205,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2205.png"
+  },
+  {
+   "name": "Gannon",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 367,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/367.png"
+  },
+  {
+   "name": "Indiana (PA)",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2291,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2291.png"
+  },
+  {
+   "name": "Kutztown",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2315,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2315.png"
+  },
+  {
+   "name": "Lock Haven",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 209,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/209.png"
+  },
+  {
+   "name": "Mercyhurst",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2385,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2385.png"
+  },
+  {
+   "name": "Millersville",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 210,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/210.png"
+  },
+  {
+   "name": "Shippensburg",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 2559,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2559.png"
+  },
+  {
+   "name": "Slippery Rock",
+   "division": "Division II",
+   "conference": "PSAC",
+   "inGame": true,
+   "espnId": 215,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/215.png"
+  },
+  {
+   "name": "Adams State",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2001,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2001.png"
+  },
+  {
+   "name": "Chadron State",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2123,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2123.png"
+  },
+  {
+   "name": "Colorado Mines",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2146,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2146.png"
+  },
+  {
+   "name": "CSU-Pueblo",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2570,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2570.png"
+  },
+  {
+   "name": "Fort Lewis",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2237,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2237.png"
+  },
+  {
+   "name": "Mesa State",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 11,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/11.png"
+  },
+  {
+   "name": "Nebraska-Kearney",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2438,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2438.png"
+  },
+  {
+   "name": "New Mexico Highlands",
+   "division": "Division II",
+   "conference": "RMAC",
+   "inGame": true,
+   "espnId": 2424,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2424.png"
+  },
+  {
+   "name": "Carson-Newman",
+   "division": "Division II",
+   "conference": "South Atlantic",
+   "inGame": true,
+   "espnId": 2105,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2105.png"
+  },
+  {
+   "name": "Catawba",
+   "division": "Division II",
+   "conference": "South Atlantic",
+   "inGame": true,
+   "espnId": 2107,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2107.png"
+  },
+  {
+   "name": "Lenoir-Rhyne",
+   "division": "Division II",
+   "conference": "South Atlantic",
+   "inGame": true,
+   "espnId": 2331,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2331.png"
+  },
+  {
+   "name": "Mars Hill",
+   "division": "Division II",
+   "conference": "South Atlantic",
+   "inGame": true,
+   "espnId": 2369,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2369.png"
+  },
+  {
+   "name": "Newberry",
+   "division": "Division II",
+   "conference": "South Atlantic",
+   "inGame": true,
+   "espnId": 2444,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2444.png"
+  },
+  {
+   "name": "Albany State",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 2013,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2013.png"
+  },
+  {
+   "name": "Benedict",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 490,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/490.png"
+  },
+  {
+   "name": "Clark Atlanta",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 2805,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2805.png"
+  },
+  {
+   "name": "Fort Valley State",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 2232,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2232.png"
+  },
+  {
+   "name": "Kentucky State",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 2310,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2310.png"
+  },
+  {
+   "name": "Miles",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 2396,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2396.png"
+  },
+  {
+   "name": "Morehouse",
+   "division": "Division II",
+   "conference": "SIAC",
+   "inGame": true,
+   "espnId": 60,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/60.png"
+  },
+  {
+   "name": "Charleston (WV)",
+   "division": "Division II",
+   "conference": "WVIAC",
+   "inGame": true,
+   "espnId": 2128,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2128.png"
+  },
+  {
+   "name": "Concord",
+   "division": "Division II",
+   "conference": "WVIAC",
+   "inGame": true,
+   "espnId": 2148,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2148.png"
+  },
+  {
+   "name": "Fairmont State",
+   "division": "Division II",
+   "conference": "WVIAC",
+   "inGame": true,
+   "espnId": 2986,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2986.png"
+  },
+  {
+   "name": "Glenville State",
+   "division": "Division II",
+   "conference": "WVIAC",
+   "inGame": true,
+   "espnId": 2249,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2249.png"
+  },
+  {
+   "name": "Shepherd",
+   "division": "Division II",
+   "conference": "WVIAC",
+   "inGame": true,
+   "espnId": 2974,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2974.png"
+  },
+  {
+   "name": "Incarnate Word",
+   "division": "Division II",
+   "conference": "D-II Independent",
+   "inGame": true,
+   "espnId": 2916,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2916.png"
+  },
+  {
+   "name": "Ohio Dominican",
+   "division": "Division II",
+   "conference": "D-II Independent",
+   "inGame": true,
+   "espnId": 2477,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2477.png"
+  },
+  {
+   "name": "North Greenville",
+   "division": "Division II",
+   "conference": "D-II Independent",
+   "inGame": true,
+   "espnId": 2822,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2822.png"
+  },
+  {
+   "name": "Seton Hill",
+   "division": "Division II",
+   "conference": "D-II Independent",
+   "inGame": true,
+   "espnId": 611,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/611.png"
+  },
+  {
+   "name": "Lake Erie",
+   "division": "Division II",
+   "conference": "D-II Independent",
+   "inGame": true,
+   "espnId": 437,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/437.png"
+  },
+  {
+   "name": "Austin College",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 2045,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2045.png"
+  },
+  {
+   "name": "East Texas Baptist",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 2194,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2194.png"
+  },
+  {
+   "name": "Hardin-Simmons",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 2810,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2810.png"
+  },
+  {
+   "name": "Howard Payne",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 2758,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2758.png"
+  },
+  {
+   "name": "Louisiana College",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 309,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/309.png"
+  },
+  {
+   "name": "Mary Hardin-Baylor",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 2371,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2371.png"
+  },
+  {
+   "name": "McMurry",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 241,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/241.png"
+  },
+  {
+   "name": "Mississippi College",
+   "division": "Division III",
+   "conference": "ASC",
+   "inGame": true,
+   "espnId": 2401,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2401.png"
+  },
+  {
+   "name": "Salisbury",
+   "division": "Division III",
+   "conference": "ACFC",
+   "inGame": true,
+   "espnId": 2532,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2532.png"
+  },
+  {
+   "name": "Frostburg State",
+   "division": "Division III",
+   "conference": "ACFC",
+   "inGame": true,
+   "espnId": 341,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/341.png"
+  },
+  {
+   "name": "Morrisville State",
+   "division": "Division III",
+   "conference": "ACFC",
+   "inGame": true,
+   "espnId": 3110,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3110.png"
+  },
+  {
+   "name": "Dickinson",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 2175,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2175.png"
+  },
+  {
+   "name": "Franklin & Marshall",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 2234,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2234.png"
+  },
+  {
+   "name": "Gettysburg",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 2248,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2248.png"
+  },
+  {
+   "name": "Johns Hopkins",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 118,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/118.png"
+  },
+  {
+   "name": "Juniata",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 246,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/246.png"
+  },
+  {
+   "name": "McDaniel",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 2700,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2700.png"
+  },
+  {
+   "name": "Moravian",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 323,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/323.png"
+  },
+  {
+   "name": "Muhlenberg",
+   "division": "Division III",
+   "conference": "Centennial",
+   "inGame": true,
+   "espnId": 2422,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2422.png"
+  },
+  {
+   "name": "Augustana (IL)",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 2042,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2042.png"
+  },
+  {
+   "name": "Carthage",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 2106,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2106.png"
+  },
+  {
+   "name": "Elmhurst",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 72,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/72.png"
+  },
+  {
+   "name": "Illinois Wesleyan",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 306,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/306.png"
+  },
+  {
+   "name": "Millikin",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 74,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/74.png"
+  },
+  {
+   "name": "North Central (IL)",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 3071,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3071.png"
+  },
+  {
+   "name": "North Park",
+   "division": "Division III",
+   "conference": "CCIW",
+   "inGame": true,
+   "espnId": 75,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/75.png"
+  },
+  {
+   "name": "Norwich",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 2467,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2467.png"
+  },
+  {
+   "name": "Anna Maria",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 15,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/15.png"
+  },
+  {
+   "name": "Becker",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 479,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/479.png"
+  },
+  {
+   "name": "Castleton",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 293,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/293.png"
+  },
+  {
+   "name": "Gallaudet",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 417,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/417.png"
+  },
+  {
+   "name": "Husson",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 2280,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2280.png"
+  },
+  {
+   "name": "Mount Ida",
+   "division": "Division III",
+   "conference": "ECFC",
+   "inGame": true,
+   "espnId": 481,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/481.png"
+  },
+  {
+   "name": "Alfred",
+   "division": "Division III",
+   "conference": "Empire 8",
+   "inGame": true,
+   "espnId": 365,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/365.png"
+  },
+  {
+   "name": "Hartwick",
+   "division": "Division III",
+   "conference": "Empire 8",
+   "inGame": true,
+   "espnId": 173,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/173.png"
+  },
+  {
+   "name": "Ithaca",
+   "division": "Division III",
+   "conference": "Empire 8",
+   "inGame": true,
+   "espnId": 175,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/175.png"
+  },
+  {
+   "name": "Anderson (IN)",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2023,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2023.png"
+  },
+  {
+   "name": "Bluffton",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2074,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2074.png"
+  },
+  {
+   "name": "Defiance",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 190,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/190.png"
+  },
+  {
+   "name": "Earlham",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2189,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2189.png"
+  },
+  {
+   "name": "Franklin",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2233,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2233.png"
+  },
+  {
+   "name": "Hanover",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2262,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2262.png"
+  },
+  {
+   "name": "Manchester",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2362,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2362.png"
+  },
+  {
+   "name": "Mount St. Joseph",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 2419,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2419.png"
+  },
+  {
+   "name": "Rose-Hulman",
+   "division": "Division III",
+   "conference": "HCAC",
+   "inGame": true,
+   "espnId": 86,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/86.png"
+  },
+  {
+   "name": "Buena Vista",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 63,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/63.png"
+  },
+  {
+   "name": "Central (IA)",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 2964,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2964.png"
+  },
+  {
+   "name": "Coe",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 2141,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2141.png"
+  },
+  {
+   "name": "Dubuque",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 49,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/49.png"
+  },
+  {
+   "name": "Loras",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 263,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/263.png"
+  },
+  {
+   "name": "Luther",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 67,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/67.png"
+  },
+  {
+   "name": "Simpson",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 2564,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2564.png"
+  },
+  {
+   "name": "Wartburg",
+   "division": "Division III",
+   "conference": "IIAC",
+   "inGame": true,
+   "espnId": 2685,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2685.png"
+  },
+  {
+   "name": "Hobart",
+   "division": "Division III",
+   "conference": "Liberty League",
+   "inGame": true,
+   "espnId": 174,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/174.png"
+  },
+  {
+   "name": "Rensselaer",
+   "division": "Division III",
+   "conference": "Liberty League",
+   "inGame": true,
+   "espnId": 2528,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2528.png"
+  },
+  {
+   "name": "Rochester",
+   "division": "Division III",
+   "conference": "Liberty League",
+   "inGame": true,
+   "espnId": 184,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/184.png"
+  },
+  {
+   "name": "Susquehanna",
+   "division": "Division III",
+   "conference": "Liberty League",
+   "inGame": true,
+   "espnId": 216,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/216.png"
+  },
+  {
+   "name": "Adrian",
+   "division": "Division III",
+   "conference": "MIAA (MI)",
+   "inGame": true,
+   "espnId": 2003,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2003.png"
+  },
+  {
+   "name": "Albion",
+   "division": "Division III",
+   "conference": "MIAA (MI)",
+   "inGame": true,
+   "espnId": 2790,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2790.png"
+  },
+  {
+   "name": "Alma",
+   "division": "Division III",
+   "conference": "MIAA (MI)",
+   "inGame": true,
+   "espnId": 2800,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2800.png"
+  },
+  {
+   "name": "Hope",
+   "division": "Division III",
+   "conference": "MIAA (MI)",
+   "inGame": true,
+   "espnId": 2812,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2812.png"
+  },
+  {
+   "name": "Kalamazoo",
+   "division": "Division III",
+   "conference": "MIAA (MI)",
+   "inGame": true,
+   "espnId": 126,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/126.png"
+  },
+  {
+   "name": "Olivet",
+   "division": "Division III",
+   "conference": "MIAA (MI)",
+   "inGame": true,
+   "espnId": 354,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/354.png"
+  },
+  {
+   "name": "Albright",
+   "division": "Division III",
+   "conference": "Middle Atlantic",
+   "inGame": true,
+   "espnId": 2015,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2015.png"
+  },
+  {
+   "name": "Delaware Valley",
+   "division": "Division III",
+   "conference": "Middle Atlantic",
+   "inGame": true,
+   "espnId": 2808,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2808.png"
+  },
+  {
+   "name": "Fairleigh Dickinson-Florham",
+   "division": "Division III",
+   "conference": "Middle Atlantic",
+   "inGame": true,
+   "espnId": 2221,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2221.png"
+  },
+  {
+   "name": "King's (PA)",
+   "division": "Division III",
+   "conference": "Middle Atlantic",
+   "inGame": true,
+   "espnId": 247,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/247.png"
+  },
+  {
+   "name": "Lebanon Valley",
+   "division": "Division III",
+   "conference": "Middle Atlantic",
+   "inGame": true,
+   "espnId": 388,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/388.png"
+  },
+  {
+   "name": "Lycoming",
+   "division": "Division III",
+   "conference": "Middle Atlantic",
+   "inGame": true,
+   "espnId": 2354,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2354.png"
+  },
+  {
+   "name": "Beloit",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 266,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/266.png"
+  },
+  {
+   "name": "Carroll (WI)",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 32,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/32.png"
+  },
+  {
+   "name": "Cornell (IA)",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 2155,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2155.png"
+  },
+  {
+   "name": "Grinnell",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 65,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/65.png"
+  },
+  {
+   "name": "Illinois College",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 356,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/356.png"
+  },
+  {
+   "name": "Lake Forest",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 262,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/262.png"
+  },
+  {
+   "name": "Lawrence",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 268,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/268.png"
+  },
+  {
+   "name": "Monmouth (IL)",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 2919,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2919.png"
+  },
+  {
+   "name": "Ripon",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 2891,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2891.png"
+  },
+  {
+   "name": "St. Norbert",
+   "division": "Division III",
+   "conference": "Midwest",
+   "inGame": true,
+   "espnId": 2832,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2832.png"
+  },
+  {
+   "name": "Augsburg",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 124,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/124.png"
+  },
+  {
+   "name": "Bethel (MN)",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 2802,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2802.png"
+  },
+  {
+   "name": "Carleton",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 2101,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2101.png"
+  },
+  {
+   "name": "Concordia-Moorhead",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 2152,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2152.png"
+  },
+  {
+   "name": "Gustavus Adolphus",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 2968,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2968.png"
+  },
+  {
+   "name": "Hamline",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 162,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/162.png"
+  },
+  {
+   "name": "St. John's (MN)",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 2600,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2600.png"
+  },
+  {
+   "name": "St. Olaf",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 133,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/133.png"
+  },
+  {
+   "name": "St. Thomas (MN)",
+   "division": "Division III",
+   "conference": "MIAC",
+   "inGame": true,
+   "espnId": 2900,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2900.png"
+  },
+  {
+   "name": "Bridgewater State",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 18,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/18.png"
+  },
+  {
+   "name": "Coast Guard",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 2557,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2557.png"
+  },
+  {
+   "name": "Curry",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 40,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/40.png"
+  },
+  {
+   "name": "Endicott",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 452,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/452.png"
+  },
+  {
+   "name": "Fitchburg State",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 114,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/114.png"
+  },
+  {
+   "name": "Framingham State",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 2967,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2967.png"
+  },
+  {
+   "name": "Maine Maritime",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 274,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/274.png"
+  },
+  {
+   "name": "Massachusetts Maritime",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 110,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/110.png"
+  },
+  {
+   "name": "Nichols",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 2884,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2884.png"
+  },
+  {
+   "name": "Plymouth State",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 2972,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2972.png"
+  },
+  {
+   "name": "Salve Regina",
+   "division": "Division III",
+   "conference": "NEFC",
+   "inGame": true,
+   "espnId": 2776,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2776.png"
+  },
+  {
+   "name": "Amherst",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 7,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/7.png"
+  },
+  {
+   "name": "Bates",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 121,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/121.png"
+  },
+  {
+   "name": "Bowdoin",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 340,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/340.png"
+  },
+  {
+   "name": "Colby",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 33,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/33.png"
+  },
+  {
+   "name": "Hamilton",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 348,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/348.png"
+  },
+  {
+   "name": "Middlebury",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 2394,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2394.png"
+  },
+  {
+   "name": "Trinity (CT)",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 2977,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2977.png"
+  },
+  {
+   "name": "Tufts",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 112,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/112.png"
+  },
+  {
+   "name": "Wesleyan (CT)",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 336,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/336.png"
+  },
+  {
+   "name": "Williams",
+   "division": "Division III",
+   "conference": "NESCAC",
+   "inGame": true,
+   "espnId": 2731,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2731.png"
+  },
+  {
+   "name": "Brockport",
+   "division": "Division III",
+   "conference": "NJAC",
+   "inGame": true,
+   "espnId": 2781,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2781.png"
+  },
+  {
+   "name": "Buffalo State",
+   "division": "Division III",
+   "conference": "NJAC",
+   "inGame": true,
+   "espnId": 2085,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2085.png"
+  },
+  {
+   "name": "Montclair State",
+   "division": "Division III",
+   "conference": "NJAC",
+   "inGame": true,
+   "espnId": 2818,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2818.png"
+  },
+  {
+   "name": "Rowan",
+   "division": "Division III",
+   "conference": "NJAC",
+   "inGame": true,
+   "espnId": 2827,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2827.png"
+  },
+  {
+   "name": "TCNJ",
+   "division": "Division III",
+   "conference": "NJAC",
+   "inGame": true,
+   "espnId": 2442,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2442.png"
+  },
+  {
+   "name": "Allegheny",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 2018,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2018.png"
+  },
+  {
+   "name": "Denison",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 2171,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2171.png"
+  },
+  {
+   "name": "Hiram",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 2274,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2274.png"
+  },
+  {
+   "name": "Kenyon",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 352,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/352.png"
+  },
+  {
+   "name": "Oberlin",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 391,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/391.png"
+  },
+  {
+   "name": "Ohio Wesleyan",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 2980,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2980.png"
+  },
+  {
+   "name": "Wabash",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 89,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/89.png"
+  },
+  {
+   "name": "Wittenberg",
+   "division": "Division III",
+   "conference": "NCAC",
+   "inGame": true,
+   "espnId": 2746,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2746.png"
+  },
+  {
+   "name": "Aurora",
+   "division": "Division III",
+   "conference": "NACC",
+   "inGame": true,
+   "espnId": 2044,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2044.png"
+  },
+  {
+   "name": "Benedictine (IL)",
+   "division": "Division III",
+   "conference": "NACC",
+   "inGame": true,
+   "espnId": 2283,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2283.png"
+  },
+  {
+   "name": "Concordia (IL)",
+   "division": "Division III",
+   "conference": "NACC",
+   "inGame": true,
+   "espnId": 2151,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2151.png"
+  },
+  {
+   "name": "Concordia (WI)",
+   "division": "Division III",
+   "conference": "NACC",
+   "inGame": true,
+   "espnId": 409,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/409.png"
+  },
+  {
+   "name": "Maranatha Baptist",
+   "division": "Division III",
+   "conference": "NACC",
+   "inGame": true,
+   "espnId": 421,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/421.png"
+  },
+  {
+   "name": "Rockford",
+   "division": "Division III",
+   "conference": "NACC",
+   "inGame": true,
+   "espnId": 2524,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2524.png"
+  },
+  {
+   "name": "Lewis & Clark",
+   "division": "Division III",
+   "conference": "Northwest",
+   "inGame": true,
+   "espnId": 2333,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2333.png"
+  },
+  {
+   "name": "Linfield",
+   "division": "Division III",
+   "conference": "Northwest",
+   "inGame": true,
+   "espnId": 203,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/203.png"
+  },
+  {
+   "name": "Pacific (OR)",
+   "division": "Division III",
+   "conference": "Northwest",
+   "inGame": true,
+   "espnId": 205,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/205.png"
+  },
+  {
+   "name": "Pacific Lutheran",
+   "division": "Division III",
+   "conference": "Northwest",
+   "inGame": true,
+   "espnId": 2486,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2486.png"
+  },
+  {
+   "name": "Puget Sound",
+   "division": "Division III",
+   "conference": "Northwest",
+   "inGame": true,
+   "espnId": 2508,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2508.png"
+  },
+  {
+   "name": "Baldwin-Wallace",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 188,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/188.png"
+  },
+  {
+   "name": "Capital",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 424,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/424.png"
+  },
+  {
+   "name": "Heidelberg",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 191,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/191.png"
+  },
+  {
+   "name": "John Carroll",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 2302,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2302.png"
+  },
+  {
+   "name": "Marietta",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 317,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/317.png"
+  },
+  {
+   "name": "Mount Union",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 426,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/426.png"
+  },
+  {
+   "name": "Muskingum",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 332,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/332.png"
+  },
+  {
+   "name": "Ohio Northern",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 427,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/427.png"
+  },
+  {
+   "name": "Otterbein",
+   "division": "Division III",
+   "conference": "OAC",
+   "inGame": true,
+   "espnId": 359,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/359.png"
+  },
+  {
+   "name": "Bridgewater (VA)",
+   "division": "Division III",
+   "conference": "ODAC",
+   "inGame": true,
+   "espnId": 2079,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2079.png"
+  },
+  {
+   "name": "Emory & Henry",
+   "division": "Division III",
+   "conference": "ODAC",
+   "inGame": true,
+   "espnId": 2213,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2213.png"
+  },
+  {
+   "name": "Guilford",
+   "division": "Division III",
+   "conference": "ODAC",
+   "inGame": true,
+   "espnId": 2258,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2258.png"
+  },
+  {
+   "name": "Hampden-Sydney",
+   "division": "Division III",
+   "conference": "ODAC",
+   "inGame": true,
+   "espnId": 297,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/297.png"
+  },
+  {
+   "name": "Randolph-Macon",
+   "division": "Division III",
+   "conference": "ODAC",
+   "inGame": true,
+   "espnId": 2516,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2516.png"
+  },
+  {
+   "name": "Bethany (WV)",
+   "division": "Division III",
+   "conference": "PAC",
+   "inGame": true,
+   "espnId": 2062,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2062.png"
+  },
+  {
+   "name": "Grove City",
+   "division": "Division III",
+   "conference": "PAC",
+   "inGame": true,
+   "espnId": 146,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/146.png"
+  },
+  {
+   "name": "Thomas More",
+   "division": "Division III",
+   "conference": "PAC",
+   "inGame": true,
+   "espnId": 2646,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2646.png"
+  },
+  {
+   "name": "Washington & Jefferson",
+   "division": "Division III",
+   "conference": "PAC",
+   "inGame": true,
+   "espnId": 2686,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2686.png"
+  },
+  {
+   "name": "Cal Lutheran",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 2094,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2094.png"
+  },
+  {
+   "name": "Chapman",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 411,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/411.png"
+  },
+  {
+   "name": "Claremont-Mudd-Scripps",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 17,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/17.png"
+  },
+  {
+   "name": "La Verne",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 2318,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2318.png"
+  },
+  {
+   "name": "Occidental",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 2475,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2475.png"
+  },
+  {
+   "name": "Pomona-Pitzer",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 2923,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2923.png"
+  },
+  {
+   "name": "Redlands",
+   "division": "Division III",
+   "conference": "SCIAC",
+   "inGame": true,
+   "espnId": 29,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/29.png"
+  },
+  {
+   "name": "Birmingham-Southern",
+   "division": "Division III",
+   "conference": "SCAC",
+   "inGame": true,
+   "espnId": 3,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3.png"
+  },
+  {
+   "name": "Centre",
+   "division": "Division III",
+   "conference": "SCAC",
+   "inGame": true,
+   "espnId": 2121,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2121.png"
+  },
+  {
+   "name": "DePauw",
+   "division": "Division III",
+   "conference": "SCAC",
+   "inGame": true,
+   "espnId": 83,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/83.png"
+  },
+  {
+   "name": "Millsaps",
+   "division": "Division III",
+   "conference": "SCAC",
+   "inGame": true,
+   "espnId": 2398,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2398.png"
+  },
+  {
+   "name": "Rhodes",
+   "division": "Division III",
+   "conference": "SCAC",
+   "inGame": true,
+   "espnId": 2519,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2519.png"
+  },
+  {
+   "name": "Sewanee",
+   "division": "Division III",
+   "conference": "SCAC",
+   "inGame": true,
+   "espnId": 2553,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2553.png"
+  },
+  {
+   "name": "Carnegie Mellon",
+   "division": "Division III",
+   "conference": "UAA",
+   "inGame": true,
+   "espnId": 2102,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2102.png"
+  },
+  {
+   "name": "Case Western Reserve",
+   "division": "Division III",
+   "conference": "UAA",
+   "inGame": true,
+   "espnId": 2963,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2963.png"
+  },
+  {
+   "name": "Chicago",
+   "division": "Division III",
+   "conference": "UAA",
+   "inGame": true,
+   "espnId": 80,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/80.png"
+  },
+  {
+   "name": "Crown",
+   "division": "Division III",
+   "conference": "UMAC",
+   "inGame": true,
+   "espnId": 509,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/509.png"
+  },
+  {
+   "name": "Greenville",
+   "division": "Division III",
+   "conference": "UMAC",
+   "inGame": true,
+   "espnId": 2257,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2257.png"
+  },
+  {
+   "name": "Martin Luther",
+   "division": "Division III",
+   "conference": "UMAC",
+   "inGame": true,
+   "espnId": 446,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/446.png"
+  },
+  {
+   "name": "Minnesota-Morris",
+   "division": "Division III",
+   "conference": "UMAC",
+   "inGame": true,
+   "espnId": 2399,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2399.png"
+  },
+  {
+   "name": "Northwestern (MN)",
+   "division": "Division III",
+   "conference": "UMAC",
+   "inGame": true,
+   "espnId": 583,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/583.png"
+  },
+  {
+   "name": "Averett",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 2047,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2047.png"
+  },
+  {
+   "name": "Christopher Newport",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 3112,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3112.png"
+  },
+  {
+   "name": "Ferrum",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 366,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/366.png"
+  },
+  {
+   "name": "Greensboro",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 2256,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2256.png"
+  },
+  {
+   "name": "Huntingdon",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 2938,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2938.png"
+  },
+  {
+   "name": "LaGrange",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 548,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/548.png"
+  },
+  {
+   "name": "Maryville (TN)",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 2373,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2373.png"
+  },
+  {
+   "name": "Methodist",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 291,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/291.png"
+  },
+  {
+   "name": "North Carolina Wesleyan",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 286,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/286.png"
+  },
+  {
+   "name": "Shenandoah",
+   "division": "Division III",
+   "conference": "USA South",
+   "inGame": true,
+   "espnId": 2828,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2828.png"
+  },
+  {
+   "name": "UW-River Falls",
+   "division": "Division III",
+   "conference": "WIAC",
+   "inGame": true,
+   "espnId": 2723,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2723.png"
+  },
+  {
+   "name": "UW-Stevens Point",
+   "division": "Division III",
+   "conference": "WIAC",
+   "inGame": true,
+   "espnId": 2743,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2743.png"
+  },
+  {
+   "name": "UW-Stout",
+   "division": "Division III",
+   "conference": "WIAC",
+   "inGame": true,
+   "espnId": 2744,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2744.png"
+  },
+  {
+   "name": "UW-Whitewater",
+   "division": "Division III",
+   "conference": "WIAC",
+   "inGame": true,
+   "espnId": 2745,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2745.png"
+  },
+  {
+   "name": "Appalachian State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2026,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png"
+  },
+  {
+   "name": "Montana",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 149,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/149.png"
+  },
+  {
+   "name": "James Madison",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 256,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/256.png"
+  },
+  {
+   "name": "Villanova",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 222,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/222.png"
+  },
+  {
+   "name": "Richmond",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 257,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/257.png"
+  },
+  {
+   "name": "Delaware",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 48,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/48.png"
+  },
+  {
+   "name": "Furman",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 231,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/231.png"
+  },
+  {
+   "name": "Wofford",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2747,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2747.png"
+  },
+  {
+   "name": "Chattanooga",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 236,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/236.png"
+  },
+  {
+   "name": "Elon",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2210,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2210.png"
+  },
+  {
+   "name": "Georgia Southern",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 290,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/290.png"
+  },
+  {
+   "name": "Sam Houston State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2534,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png"
+  },
+  {
+   "name": "McNeese State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2377,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2377.png"
+  },
+  {
+   "name": "Northern Iowa",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2460,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2460.png"
+  },
+  {
+   "name": "South Dakota State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2571,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2571.png"
+  },
+  {
+   "name": "Eastern Washington",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 331,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/331.png"
+  },
+  {
+   "name": "Weber State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2692,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2692.png"
+  },
+  {
+   "name": "UC Davis",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 302,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/302.png"
+  },
+  {
+   "name": "Portland State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2502,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2502.png"
+  },
+  {
+   "name": "Liberty",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2335,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2335.png"
+  },
+  {
+   "name": "Coastal Carolina",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 324,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/324.png"
+  },
+  {
+   "name": "Samford",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2535,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2535.png"
+  },
+  {
+   "name": "Jacksonville State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 55,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/55.png"
+  },
+  {
+   "name": "Murray State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 93,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/93.png"
+  },
+  {
+   "name": "Tennessee Tech",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2635,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2635.png"
+  },
+  {
+   "name": "Howard",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 47,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/47.png"
+  },
+  {
+   "name": "Florida A&M",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 50,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/50.png"
+  },
+  {
+   "name": "Southern",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2582,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2582.png"
+  },
+  {
+   "name": "Grambling State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2755,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2755.png"
+  },
+  {
+   "name": "Youngstown State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2754,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2754.png"
+  },
+  {
+   "name": "Western Illinois",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2710,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2710.png"
+  },
+  {
+   "name": "Illinois State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2287,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2287.png"
+  },
+  {
+   "name": "Stephen F. Austin",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2617,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2617.png"
+  },
+  {
+   "name": "Central Arkansas",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2110,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2110.png"
+  },
+  {
+   "name": "The Citadel",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2643,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2643.png"
+  },
+  {
+   "name": "William & Mary",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2729,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png"
+  },
+  {
+   "name": "Maine",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 311,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/311.png"
+  },
+  {
+   "name": "New Hampshire",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 160,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/160.png"
+  },
+  {
+   "name": "Towson",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 119,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/119.png"
+  },
+  {
+   "name": "Northwestern State",
+   "division": "FCS",
+   "conference": "",
+   "inGame": true,
+   "espnId": 2466,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2466.png"
+  },
+  {
+   "name": "Alabama A&M",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2010,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2010.png"
+  },
+  {
+   "name": "Alabama State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2011,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2011.png"
+  },
+  {
+   "name": "Albany",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 399,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/399.png"
+  },
+  {
+   "name": "Alcorn State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2016,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2016.png"
+  },
+  {
+   "name": "Alderson-Broaddus",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2017,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2017.png"
+  },
+  {
+   "name": "Alfred State College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3162,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3162.png"
+  },
+  {
+   "name": "Apprentice School",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3111,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3111.png"
+  },
+  {
+   "name": "Arizona Christian",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 108358,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/108358.png"
+  },
+  {
+   "name": "Arkansas-Pine Bluff",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2029,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2029.png"
+  },
+  {
+   "name": "Austin Peay",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2046,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2046.png"
+  },
+  {
+   "name": "Ave Maria",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3178,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3178.png"
+  },
+  {
+   "name": "Avila College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2048,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2048.png"
+  },
+  {
+   "name": "Azusa Pacific",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2049,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2049.png"
+  },
+  {
+   "name": "Bacone College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 487,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/487.png"
+  },
+  {
+   "name": "Baker University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 488,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/488.png"
+  },
+  {
+   "name": "Benedictine College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 16111,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/16111.png"
+  },
+  {
+   "name": "Berry College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2757,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2757.png"
+  },
+  {
+   "name": "Bethany (KS)",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 492,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/492.png"
+  },
+  {
+   "name": "Bethel (TN)",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2064,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2064.png"
+  },
+  {
+   "name": "Bethune-Cookman",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2065,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2065.png"
+  },
+  {
+   "name": "Blackburn",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2070,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2070.png"
+  },
+  {
+   "name": "Black Hills State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2069,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2069.png"
+  },
+  {
+   "name": "Bluefield College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 495,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/495.png"
+  },
+  {
+   "name": "Brevard College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2913,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2913.png"
+  },
+  {
+   "name": "Brit Columbia",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2080,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2080.png"
+  },
+  {
+   "name": "Brown",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 225,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/225.png"
+  },
+  {
+   "name": "Bryant",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2803,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2803.png"
+  },
+  {
+   "name": "Bucknell",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2083,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2083.png"
+  },
+  {
+   "name": "Butler",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2086,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2086.png"
+  },
+  {
+   "name": "Cal Poly",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 13,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/13.png"
+  },
+  {
+   "name": "Campbell",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2097,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2097.png"
+  },
+  {
+   "name": "Catholic University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2108,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2108.png"
+  },
+  {
+   "name": "Central Connecticut",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2115,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2115.png"
+  },
+  {
+   "name": "Central Methodist",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2860,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2860.png"
+  },
+  {
+   "name": "Central State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2119,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2119.png"
+  },
+  {
+   "name": "Charleston Southern",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2127,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2127.png"
+  },
+  {
+   "name": "Charlotte",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2429,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2429.png"
+  },
+  {
+   "name": "Colgate",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2142,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2142.png"
+  },
+  {
+   "name": "College of Faith",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3211,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3211.png"
+  },
+  {
+   "name": "College of Faith - Charlotte",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3253,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3253.png"
+  },
+  {
+   "name": "College of Idaho",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 108382,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/108382.png"
+  },
+  {
+   "name": "Colorado College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2144,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2144.png"
+  },
+  {
+   "name": "Columbia",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 171,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/171.png"
+  },
+  {
+   "name": "Concordia (AL)",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3099,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3099.png"
+  },
+  {
+   "name": "Concordia College (MI)",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2985,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2985.png"
+  },
+  {
+   "name": "Cornell",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 172,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/172.png"
+  },
+  {
+   "name": "Culver-Stockton",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 510,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/510.png"
+  },
+  {
+   "name": "Cumberland",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2161,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2161.png"
+  },
+  {
+   "name": "Cumberland College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 511,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/511.png"
+  },
+  {
+   "name": "Dakota State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 512,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/512.png"
+  },
+  {
+   "name": "Dakota Wesleyan",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 513,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/513.png"
+  },
+  {
+   "name": "Dartmouth",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 159,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/159.png"
+  },
+  {
+   "name": "Davidson",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2166,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2166.png"
+  },
+  {
+   "name": "Dayton",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2168,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2168.png"
+  },
+  {
+   "name": "Delaware State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2169,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2169.png"
+  },
+  {
+   "name": "Dickinson State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 316,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/316.png"
+  },
+  {
+   "name": "Drake",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2181,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2181.png"
+  },
+  {
+   "name": "Duquesne",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2184,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2184.png"
+  },
+  {
+   "name": "Eastern Illinois",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2197,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2197.png"
+  },
+  {
+   "name": "Eastern Kentucky",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2198,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2198.png"
+  },
+  {
+   "name": "Eastern Oregon",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2202,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2202.png"
+  },
+  {
+   "name": "East Tennessee State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2193,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2193.png"
+  },
+  {
+   "name": "Erie Community College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3236,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3236.png"
+  },
+  {
+   "name": "Eureka College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 101,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/101.png"
+  },
+  {
+   "name": "Evangel",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2865,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2865.png"
+  },
+  {
+   "name": "Faulkner",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2219,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2219.png"
+  },
+  {
+   "name": "Florida Tech",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 53,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/53.png"
+  },
+  {
+   "name": "Fordham",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2230,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2230.png"
+  },
+  {
+   "name": "Gardner-Webb",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2241,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2241.png"
+  },
+  {
+   "name": "Geneva College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2242,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2242.png"
+  },
+  {
+   "name": "George Fox University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 415,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/415.png"
+  },
+  {
+   "name": "George Mason",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2244,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2244.png"
+  },
+  {
+   "name": "Georgetown",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 46,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/46.png"
+  },
+  {
+   "name": "Georgia State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2247,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2247.png"
+  },
+  {
+   "name": "Graceland University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 530,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/530.png"
+  },
+  {
+   "name": "Hampton",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2261,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2261.png"
+  },
+  {
+   "name": "Harvard",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 108,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/108.png"
+  },
+  {
+   "name": "Haskell Indian Nations",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 535,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/535.png"
+  },
+  {
+   "name": "Hendrix College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 418,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/418.png"
+  },
+  {
+   "name": "Holland College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 108354,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/108354.png"
+  },
+  {
+   "name": "Holy Cross",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 107,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/107.png"
+  },
+  {
+   "name": "Houston Baptist",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2277,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2277.png"
+  },
+  {
+   "name": "Idaho State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 304,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/304.png"
+  },
+  {
+   "name": "Illinois College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2286,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2286.png"
+  },
+  {
+   "name": "Indiana State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 282,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/282.png"
+  },
+  {
+   "name": "Iowa Wesleyan",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2295,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2295.png"
+  },
+  {
+   "name": "Jackson State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2296,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2296.png"
+  },
+  {
+   "name": "Jacksonville",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 294,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/294.png"
+  },
+  {
+   "name": "Jamestown",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2939,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2939.png"
+  },
+  {
+   "name": "Kansas Wesleyan University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 547,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/547.png"
+  },
+  {
+   "name": "Kennesaw State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 338,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/338.png"
+  },
+  {
+   "name": "Lafayette",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 322,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/322.png"
+  },
+  {
+   "name": "Lamar",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2320,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2320.png"
+  },
+  {
+   "name": "Lambuth",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2321,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2321.png"
+  },
+  {
+   "name": "Langston",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2324,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2324.png"
+  },
+  {
+   "name": "Lehigh",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2329,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2329.png"
+  },
+  {
+   "name": "Limestone",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2336,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2336.png"
+  },
+  {
+   "name": "Lindenwood",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2815,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2815.png"
+  },
+  {
+   "name": "Lindenwood Belleville",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3209,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3209.png"
+  },
+  {
+   "name": "Lindsey Wilson",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2877,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2877.png"
+  },
+  {
+   "name": "Louisiana College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2347,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2347.png"
+  },
+  {
+   "name": "Macalester",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2359,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2359.png"
+  },
+  {
+   "name": "MacMurray College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 273,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/273.png"
+  },
+  {
+   "name": "Malone",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 556,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/556.png"
+  },
+  {
+   "name": "Manitoba",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2770,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2770.png"
+  },
+  {
+   "name": "Mansfield",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2365,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2365.png"
+  },
+  {
+   "name": "Marian",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2366,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2366.png"
+  },
+  {
+   "name": "Marist",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2368,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2368.png"
+  },
+  {
+   "name": "Mayville State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 561,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/561.png"
+  },
+  {
+   "name": "Menlo",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2381,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2381.png"
+  },
+  {
+   "name": "Mercer",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2382,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2382.png"
+  },
+  {
+   "name": "Merchant Marine",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2383,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2383.png"
+  },
+  {
+   "name": "Midland University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 565,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/565.png"
+  },
+  {
+   "name": "Minot State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 568,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/568.png"
+  },
+  {
+   "name": "Misericordia",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2969,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2969.png"
+  },
+  {
+   "name": "Mississippi Valley State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2400,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2400.png"
+  },
+  {
+   "name": "Missouri Baptist",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2880,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2880.png"
+  },
+  {
+   "name": "Missouri State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2623,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2623.png"
+  },
+  {
+   "name": "Monmouth",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2405,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2405.png"
+  },
+  {
+   "name": "Montana State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 147,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/147.png"
+  },
+  {
+   "name": "Montana-Western",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2701,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2701.png"
+  },
+  {
+   "name": "Monterrey Tech",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3100,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3100.png"
+  },
+  {
+   "name": "Morehead State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2413,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2413.png"
+  },
+  {
+   "name": "Morgan State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2415,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2415.png"
+  },
+  {
+   "name": "Morningside",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2416,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2416.png"
+  },
+  {
+   "name": "Nicholls",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2447,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2447.png"
+  },
+  {
+   "name": "Norfolk State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2450,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2450.png"
+  },
+  {
+   "name": "North Carolina A&T",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2448,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2448.png"
+  },
+  {
+   "name": "North Carolina Central",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2428,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2428.png"
+  },
+  {
+   "name": "North Dakota",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 155,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/155.png"
+  },
+  {
+   "name": "North Dakota State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2449,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2449.png"
+  },
+  {
+   "name": "Northern Arizona",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2464,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2464.png"
+  },
+  {
+   "name": "Northern Colorado",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2458,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2458.png"
+  },
+  {
+   "name": "Northwestern Oklahoma State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2823,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2823.png"
+  },
+  {
+   "name": "Notre Dame College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 587,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/587.png"
+  },
+  {
+   "name": "Ohio Midwestern College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 108398,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/108398.png"
+  },
+  {
+   "name": "Ohio State Newark",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3161,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3161.png"
+  },
+  {
+   "name": "Oklahoma Baptist",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 319,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/319.png"
+  },
+  {
+   "name": "OK Panhandle St",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2824,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2824.png"
+  },
+  {
+   "name": "Old Dominion",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 295,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/295.png"
+  },
+  {
+   "name": "Pennsylvania",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 219,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/219.png"
+  },
+  {
+   "name": "Pikeville",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 95,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/95.png"
+  },
+  {
+   "name": "Point University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3179,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3179.png"
+  },
+  {
+   "name": "Prairie View",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2504,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2504.png"
+  },
+  {
+   "name": "Presbyterian College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2506,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2506.png"
+  },
+  {
+   "name": "Presentation College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 597,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/597.png"
+  },
+  {
+   "name": "Princeton",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 163,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/163.png"
+  },
+  {
+   "name": "Principia College",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 363,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/363.png"
+  },
+  {
+   "name": "Reinhardt",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2890,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2890.png"
+  },
+  {
+   "name": "Rhode Island",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 227,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/227.png"
+  },
+  {
+   "name": "Robert Morris",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2523,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2523.png"
+  },
+  {
+   "name": "Robert Morris (IL)",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 599,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/599.png"
+  },
+  {
+   "name": "Sacramento State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 16,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/16.png"
+  },
+  {
+   "name": "Sacred Heart",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2529,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2529.png"
+  },
+  {
+   "name": "San Diego",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 301,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/301.png"
+  },
+  {
+   "name": "Savannah State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2542,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2542.png"
+  },
+  {
+   "name": "Shepherd Tech",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 3181,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/3181.png"
+  },
+  {
+   "name": "Siena Heights",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2562,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2562.png"
+  },
+  {
+   "name": "Simon Fraser",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2829,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2829.png"
+  },
+  {
+   "name": "South Alabama",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 6,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/6.png"
+  },
+  {
+   "name": "South Carolina State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2569,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2569.png"
+  },
+  {
+   "name": "South Dakota",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 233,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/233.png"
+  },
+  {
+   "name": "South Dakota Mines",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 613,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/613.png"
+  },
+  {
+   "name": "Southeastern Louisiana",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2545,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2545.png"
+  },
+  {
+   "name": "Southeastern University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 267,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/267.png"
+  },
+  {
+   "name": "Southeast Missouri State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2546,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2546.png"
+  },
+  {
+   "name": "Southern Illinois",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 79,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/79.png"
+  },
+  {
+   "name": "Southern Utah",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 253,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/253.png"
+  },
+  {
+   "name": "Stony Brook",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2619,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2619.png"
+  },
+  {
+   "name": "Chicago State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2130,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2130.png"
+  },
+  {
+   "name": "Yale",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 43,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/43.png"
+  },
+  {
+   "name": "Long Island University",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2341,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2341.png"
+  },
+  {
+   "name": "Wagner",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2681,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2681.png"
+  },
+  {
+   "name": "UT Martin",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2630,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png"
+  },
+  {
+   "name": "Tennessee State",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2634,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2634.png"
+  },
+  {
+   "name": "Valparaiso",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2674,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2674.png"
+  },
+  {
+   "name": "Stetson",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 56,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/56.png"
+  },
+  {
+   "name": "Western Carolina",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2717,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2717.png"
+  },
+  {
+   "name": "VMI",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 2678,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/2678.png"
+  },
+  {
+   "name": "UT Rio Grande Valley",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 292,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/292.png"
+  },
+  {
+   "name": "West Florida",
+   "division": "",
+   "conference": "",
+   "inGame": false,
+   "espnId": 110242,
+   "logoURL": "https://a.espncdn.com/i/teamlogos/ncaa/500/110242.png"
+  }
+ ],
+ "noLogoYet": [
+  {
+   "name": "Bowie State",
+   "division": "Division II",
+   "conference": "CIAA"
+  },
+  {
+   "name": "Chowan",
+   "division": "Division II",
+   "conference": "CIAA"
+  },
+  {
+   "name": "Saint Augustine's",
+   "division": "Division II",
+   "conference": "CIAA"
+  },
+  {
+   "name": "Virginia State",
+   "division": "Division II",
+   "conference": "CIAA"
+  },
+  {
+   "name": "Virginia Union",
+   "division": "Division II",
+   "conference": "CIAA"
+  },
+  {
+   "name": "Winston-Salem State",
+   "division": "Division II",
+   "conference": "CIAA"
+  },
+  {
+   "name": "Saint Joseph's (IN)",
+   "division": "Division II",
+   "conference": "GLFC"
+  },
+  {
+   "name": "Tiffin",
+   "division": "Division II",
+   "conference": "GLIAC"
+  },
+  {
+   "name": "Wayne State (MI)",
+   "division": "Division II",
+   "conference": "GLIAC"
+  },
+  {
+   "name": "Western Oregon",
+   "division": "Division II",
+   "conference": "GNAC"
+  },
+  {
+   "name": "Valdosta State",
+   "division": "Division II",
+   "conference": "Gulf South"
+  },
+  {
+   "name": "West Alabama",
+   "division": "Division II",
+   "conference": "Gulf South"
+  },
+  {
+   "name": "Southwestern Oklahoma State",
+   "division": "Division II",
+   "conference": "Lone Star"
+  },
+  {
+   "name": "Texas A&M-Kingsville",
+   "division": "Division II",
+   "conference": "Lone Star"
+  },
+  {
+   "name": "West Texas A&M",
+   "division": "Division II",
+   "conference": "Lone Star"
+  },
+  {
+   "name": "Southwest Baptist",
+   "division": "Division II",
+   "conference": "MIAA"
+  },
+  {
+   "name": "Truman",
+   "division": "Division II",
+   "conference": "MIAA"
+  },
+  {
+   "name": "Washburn",
+   "division": "Division II",
+   "conference": "MIAA"
+  },
+  {
+   "name": "Saint Anselm",
+   "division": "Division II",
+   "conference": "NE-10"
+  },
+  {
+   "name": "Mary",
+   "division": "Division II",
+   "conference": "NSIC"
+  },
+  {
+   "name": "Southwest Minnesota State",
+   "division": "Division II",
+   "conference": "NSIC"
+  },
+  {
+   "name": "Upper Iowa",
+   "division": "Division II",
+   "conference": "NSIC"
+  },
+  {
+   "name": "Wayne State (NE)",
+   "division": "Division II",
+   "conference": "NSIC"
+  },
+  {
+   "name": "Winona State",
+   "division": "Division II",
+   "conference": "NSIC"
+  },
+  {
+   "name": "West Chester",
+   "division": "Division II",
+   "conference": "PSAC"
+  },
+  {
+   "name": "Western New Mexico",
+   "division": "Division II",
+   "conference": "RMAC"
+  },
+  {
+   "name": "Western State",
+   "division": "Division II",
+   "conference": "RMAC"
+  },
+  {
+   "name": "Tusculum",
+   "division": "Division II",
+   "conference": "South Atlantic"
+  },
+  {
+   "name": "Wingate",
+   "division": "Division II",
+   "conference": "South Atlantic"
+  },
+  {
+   "name": "Lane",
+   "division": "Division II",
+   "conference": "SIAC"
+  },
+  {
+   "name": "Stillman",
+   "division": "Division II",
+   "conference": "SIAC"
+  },
+  {
+   "name": "Tuskegee",
+   "division": "Division II",
+   "conference": "SIAC"
+  },
+  {
+   "name": "West Liberty",
+   "division": "Division II",
+   "conference": "WVIAC"
+  },
+  {
+   "name": "West Virginia State",
+   "division": "Division II",
+   "conference": "WVIAC"
+  },
+  {
+   "name": "West Virginia Wesleyan",
+   "division": "Division II",
+   "conference": "WVIAC"
+  },
+  {
+   "name": "UNC Pembroke",
+   "division": "Division II",
+   "conference": "D-II Independent"
+  },
+  {
+   "name": "Urbana",
+   "division": "Division II",
+   "conference": "D-II Independent"
+  },
+  {
+   "name": "Sul Ross State",
+   "division": "Division III",
+   "conference": "ASC"
+  },
+  {
+   "name": "Texas Lutheran",
+   "division": "Division III",
+   "conference": "ASC"
+  },
+  {
+   "name": "Wesley",
+   "division": "Division III",
+   "conference": "ACFC"
+  },
+  {
+   "name": "Ursinus",
+   "division": "Division III",
+   "conference": "Centennial"
+  },
+  {
+   "name": "Wheaton (IL)",
+   "division": "Division III",
+   "conference": "CCIW"
+  },
+  {
+   "name": "SUNY Maritime",
+   "division": "Division III",
+   "conference": "ECFC"
+  },
+  {
+   "name": "St. John Fisher",
+   "division": "Division III",
+   "conference": "Empire 8"
+  },
+  {
+   "name": "Springfield",
+   "division": "Division III",
+   "conference": "Empire 8"
+  },
+  {
+   "name": "Utica",
+   "division": "Division III",
+   "conference": "Empire 8"
+  },
+  {
+   "name": "St. Lawrence",
+   "division": "Division III",
+   "conference": "Liberty League"
+  },
+  {
+   "name": "Union (NY)",
+   "division": "Division III",
+   "conference": "Liberty League"
+  },
+  {
+   "name": "WPI",
+   "division": "Division III",
+   "conference": "Liberty League"
+  },
+  {
+   "name": "Trine",
+   "division": "Division III",
+   "conference": "MIAA (MI)"
+  },
+  {
+   "name": "Widener",
+   "division": "Division III",
+   "conference": "Middle Atlantic"
+  },
+  {
+   "name": "Wilkes",
+   "division": "Division III",
+   "conference": "Middle Atlantic"
+  },
+  {
+   "name": "Knox",
+   "division": "Division III",
+   "conference": "Midwest"
+  },
+  {
+   "name": "MIT",
+   "division": "Division III",
+   "conference": "NEFC"
+  },
+  {
+   "name": "Westfield State",
+   "division": "Division III",
+   "conference": "NEFC"
+  },
+  {
+   "name": "Western New England",
+   "division": "Division III",
+   "conference": "NEFC"
+  },
+  {
+   "name": "Worcester State",
+   "division": "Division III",
+   "conference": "NEFC"
+  },
+  {
+   "name": "Cortland",
+   "division": "Division III",
+   "conference": "NJAC"
+  },
+  {
+   "name": "Kean",
+   "division": "Division III",
+   "conference": "NJAC"
+  },
+  {
+   "name": "William Paterson",
+   "division": "Division III",
+   "conference": "NJAC"
+  },
+  {
+   "name": "Wooster",
+   "division": "Division III",
+   "conference": "NCAC"
+  },
+  {
+   "name": "Lakeland",
+   "division": "Division III",
+   "conference": "NACC"
+  },
+  {
+   "name": "Wisconsin Lutheran",
+   "division": "Division III",
+   "conference": "NACC"
+  },
+  {
+   "name": "Whitworth",
+   "division": "Division III",
+   "conference": "Northwest"
+  },
+  {
+   "name": "Willamette",
+   "division": "Division III",
+   "conference": "Northwest"
+  },
+  {
+   "name": "Wilmington (OH)",
+   "division": "Division III",
+   "conference": "OAC"
+  },
+  {
+   "name": "Washington & Lee",
+   "division": "Division III",
+   "conference": "ODAC"
+  },
+  {
+   "name": "Saint Vincent",
+   "division": "Division III",
+   "conference": "PAC"
+  },
+  {
+   "name": "Thiel",
+   "division": "Division III",
+   "conference": "PAC"
+  },
+  {
+   "name": "Waynesburg",
+   "division": "Division III",
+   "conference": "PAC"
+  },
+  {
+   "name": "Westminster (PA)",
+   "division": "Division III",
+   "conference": "PAC"
+  },
+  {
+   "name": "Whittier",
+   "division": "Division III",
+   "conference": "SCIAC"
+  },
+  {
+   "name": "Trinity (TX)",
+   "division": "Division III",
+   "conference": "SCAC"
+  },
+  {
+   "name": "Washington (MO)",
+   "division": "Division III",
+   "conference": "UAA"
+  },
+  {
+   "name": "Westminster (MO)",
+   "division": "Division III",
+   "conference": "UMAC"
+  },
+  {
+   "name": "UW-Eau Claire",
+   "division": "Division III",
+   "conference": "WIAC"
+  },
+  {
+   "name": "UW-La Crosse",
+   "division": "Division III",
+   "conference": "WIAC"
+  },
+  {
+   "name": "UW-Oshkosh",
+   "division": "Division III",
+   "conference": "WIAC"
+  },
+  {
+   "name": "UW-Platteville",
+   "division": "Division III",
+   "conference": "WIAC"
+  }
+ ]
+}
